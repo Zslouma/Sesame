@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<views:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+             xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Core"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             x:Class="Syracuse.UI.Views.SearchDetailsView"
+             xmlns:local="clr-namespace:Syracuse.UI"
+             x:TypeArguments="viewModels:SearchDetailsViewModel"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+
+    <ContentPage.Content>
+        <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
+            <SwipeView IsEnabled ="{Binding IsSwipeEnable}"  SwipeStarted="OnSwipeEvent" SwipeEnded="OnSwipeEvent" SwipeChanging="OnSwipeEvent">
+                <SwipeView.TopItems >
+                    <SwipeItems >
+                        <SwipeItem BackgroundColor="{d:DynamicResource AppBackgroundColor}" Text="Return"/>
+                    </SwipeItems>
+                </SwipeView.TopItems>
+
+                <Grid>
+                    <StackLayout VerticalOptions="FillAndExpand" Orientation="Vertical" Padding="15, 0, 15, 0">
+                        <CarouselView 
+                        x:Name="carouselView" 
+                        ItemsSource="{Binding ItemsSource}" 
+                        CurrentItem="{Binding CurrentItem}"
+                        Position="{Binding Position}" 
+                        IsScrollAnimated ="False"
+                        CurrentItemChanged="carouselView_CurrentItemChanged" 
+                        PositionChanged="carouselView_PositionChanged"
+                        RemainingItemsThreshold="5"
+                        RemainingItemsThresholdReached="OnCarouselViewRemainingItemsThresholdReached"
+                        HorizontalScrollBarVisibility="Never">
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate >
+                                    <ScrollView x:Name="scrollView"  VerticalScrollBarVisibility="Never" Scrolled="OnScrollEvent">
+                                        <Frame>
+                                            <StackLayout Orientation="Vertical">
+                                                <StackLayout  Orientation="Horizontal">
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto" />
+                                                            <RowDefinition Height="*" />
+                                                        </Grid.RowDefinitions>
+
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="100" />
+                                                            <ColumnDefinition  Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <StackLayout  Orientation="Vertical">
+                                                            <Image Grid.Row="0" Grid.Column="0"  Margin="5" HeightRequest="120" WidthRequest="90" Source="{Binding FieldList.Image}"/>
+                                                            <Image  Grid.Row="1" Grid.Column="0"  HeightRequest="30" WidthRequest="100" Source="{Binding DisplayValues.Star}" VerticalOptions="Start"></Image>
+                                                        </StackLayout>
+                                                        <StackLayout Grid.Row="0" Grid.Column="1" Padding="10">
+                                                            <material:MaterialLabel FontSize="Large" Text="{Binding FieldList.CroppedTitle}"/>
+                                                            <material:MaterialLabel FontSize="Default" Text="{Binding DisplayValues.AuthorDate}"/>
+                                                        </StackLayout>
+                                                        <StackLayout Grid.Row="1" Grid.ColumnSpan="2"  Orientation="Vertical">
+                                                            <!--<Label FontSize="Default" Text="{Binding FieldList.Language[0]}" FontAttributes="Bold" TextColor="Black"/>
+                                            <Label FontSize="Default" Text="{Binding FieldList.Funds[0]}" FontAttributes="Bold" TextColor="Black"/>
+                                            <Label FontSize="Default" Text="{Binding FieldList.Ean[0]}" FontAttributes="Bold" TextColor="Black"/>-->
+                                                            <material:MaterialLabel FontSize="Default" Text="{Binding DisplayValues.Desc}" TextType="Html" TextColor="Black"/>
+                                                        </StackLayout>
+                                                    </Grid>
+                                                </StackLayout>
+
+
+                                                <StackLayout IsVisible="{Binding DisplayValues.SeekForHoldings}"  BackgroundColor="#bfbfbf" Padding="10">
+                                                    <material:MaterialLabel FontSize="Large" Text="{x:Static local:AppResource.Copies}" TextColor="White"/>
+                                                </StackLayout>
+                                                <ListView 
+                                                ItemsSource="{Binding DisplayValues.Library.Dataa.Holdings}" 
+                                                IsVisible="{Binding DisplayValues.Library.success}"
+                                                SeparatorVisibility="None"
+                                                VerticalScrollBarVisibility="Never"
+                                                RowHeight="180"
+                                                IsPullToRefreshEnabled="False">
+                                                    <ListView.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <ViewCell>
+                                                                <StackLayout Padding="5"  BackgroundColor="#f0f0f0">
+                                                                    <Grid>
+                                                                        <Grid.RowDefinitions>
+                                                                            <RowDefinition Height="Auto" />
+                                                                            <RowDefinition Height="*" />
+                                                                            <RowDefinition Height="*" />
+                                                                        </Grid.RowDefinitions>
+
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="10" />
+                                                                            <ColumnDefinition  Width="*" />
+                                                                        </Grid.ColumnDefinitions>
+
+                                                                        <BoxView BackgroundColor="{Binding StatusColor}" Grid.Row="0" Grid.Column="0" />
+                                                                        <StackLayout  Grid.Row="0" Grid.Column="1">
+
+                                                                            <Label TextColor="Gray" Text="{Binding Site}" />
+                                                                            <Label TextColor="Gray" Text="{Binding BookingTooltip}" />
+                                                                            <Label TextColor="Gray" Text="{Binding Statut}"/>
+                                                                            <Button x:Name="PressMeButton" TextColor="#59a0ec" BackgroundColor="white" Text="Réserver" BindingContext="{Binding .}" Clicked="PressMeButton_Clicked"/>
+                                                                        </StackLayout>
+                                                                    </Grid>
+                                                                </StackLayout>
+                                                            </ViewCell>
+                                                        </DataTemplate>
+                                                    </ListView.ItemTemplate>
+                                                </ListView>
+                                            </StackLayout>
+                                        </Frame>
+                                    </ScrollView>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                        <Label x:Name="IndexPage" IsVisible="{Binding IsPositionVisible}" HorizontalOptions="Center" Margin="0,0,0,15" Text="{Binding DisplayPosition}"></Label>
+                    </StackLayout>
+                    <AbsoluteLayout IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
+                        <ActivityIndicator IsRunning="True"  AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
+                    </AbsoluteLayout>
+                </Grid>
+            </SwipeView>
+        </yummy:PancakeView>
+    </ContentPage.Content>
+</views:MvxContentPage>

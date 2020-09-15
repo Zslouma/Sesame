@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxTabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+            xmlns:views1="clr-namespace:Syracuse.UI.Views;assembly=Syracuse.UI"
+            xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Core"
+            x:TypeArguments="viewModels:MyAccountViewModel"
+            xmlns:common="clr-namespace:Syracuse.UI.Views.Templates"
+            xmlns:local="clr-namespace:Syracuse.UI"
+            x:Class="Syracuse.UI.Views.MyAccountView">
+    <NavigationPage.TitleView >
+        <common:SearchBarTemplate />
+    </NavigationPage.TitleView>
+    <!--Pages can be added as references or inline-->
+    <TabbedPage.BarTextColor>
+        <Color x:Uid="colorPrimary">#ffffff</Color>
+    </TabbedPage.BarTextColor>
+    <TabbedPage.SelectedItem>
+        <Color x:Uid="colorPrimary">#ffffff</Color>
+    </TabbedPage.SelectedItem>
+
+    <TabbedPage.Children>
+        <views1:AccountInfoView
+            IconImageSource="exchange-alt-solid"
+            Title="{x:Static local:AppResource.Synthesis}"
+            BindingContext="{Binding AccountInfoViewModel}"/>
+        <views1:DisplayCardView 
+            IconImageSource="barcode-solid" 
+            Title="{x:Static local:AppResource.Card}" 
+            BindingContext="{Binding DisplayCardViewModel}" />
+        <!--<views1:OtherAccountView IconImageSource="exchange-alt-solid" Title="{x:Static local:AppResource.Accounts}" BindingContext="{Binding OtherAccountViewModel}"></views1:OtherAccountView>-->
+    </TabbedPage.Children>
+</views:MvxTabbedPage>

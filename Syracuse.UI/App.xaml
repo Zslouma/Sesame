@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Syracuse.UI.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="CustomBlue">#59a0ec</Color>
+            <Color x:Key="AppBackgroundColor">#6574CF</Color>
+            <Color x:Key="AppDarkBackgroundColor">#6569DF</Color>
+            <Color x:Key="AppLigthBackgroundColor">#727fd7</Color>
+            <Color x:Key="AppSecondaryBackgroundColor">#FFFFFF</Color>
+            <Color x:Key="ButtonColor">#6574CF</Color>
+            <Color x:Key="ButtonSecondaryColor">#FFFFFF</Color>
+            <Color x:Key="NavigationBarColor">#6574CF</Color>
+            <Color x:Key="NavigationBarTextColor">#FFFFFF</Color>
+            <Color x:Key="DarkTextColor">#000000</Color>
+            <Color x:Key="PurpleTextColor">#6574CF</Color>
+            <Color x:Key="GreyTextColor">#8F9BB3</Color>
+            <Color x:Key="LigthGreyTextColor">#8f9bb3</Color>
+            <Color x:Key="WhiteTextColor">#FFFFFF</Color>
+
+            <OnPlatform x:Key="OpenSans"
+                 x:TypeArguments="x:String">
+                <On Platform="iOS, Android">OpenSans</On>
+                <On Platform="UWP">OpenSans</On>
+            </OnPlatform>
+            
+            <OnPlatform x:Key="FontSize"
+            x:TypeArguments="x:Double">
+                <On Platform="iOS">18</On>
+                <On Platform="Android, UWP">20</On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="FontSizeTitle"
+            x:TypeArguments="x:Double">
+                <On Platform="iOS">22</On>
+                <On Platform="Android, UWP">24</On>
+            </OnPlatform>
+
+
+            <Style TargetType="{x:Type NavigationPage}">
+                <Setter Property="BarBackgroundColor"
+                    Value="{StaticResource NavigationBarColor}" />
+                <Setter Property="BackgroundColor"
+                    Value="{StaticResource NavigationBarColor}" />
+                <Setter Property="BarTextColor"
+                    Value="{StaticResource NavigationBarTextColor}" />
+            </Style>
+
+            <Style TargetType="{x:Type ContentPage}"
+               ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor"
+                    Value="{StaticResource AppBackgroundColor}" />
+            </Style>
+            
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
+                <Setter Property="FontSize" Value="{StaticResource FontSize}"/>
+            </Style>
+
+            <Style TargetType="{x:Type Picker}">
+                <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
+                <Setter Property="FontSize" Value="{StaticResource FontSize}"/>
+            </Style>
+
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
+                <Setter Property="FontSize" Value="{StaticResource FontSize}"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+            
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

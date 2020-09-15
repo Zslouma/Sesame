@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage IconImageSource="hamburger.png"
+                      xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                      xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Core"
+                      xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
+                      x:Class="Syracuse.UI.Views.MenuView"
+                      x:TypeArguments="viewModels:MenuViewModel"
+                      x:Name="MainContent">
+    <ContentPage.Content>
+        <StackLayout  HeightRequest="40">
+            <StackLayout.IsVisible>
+                <OnPlatform x:TypeArguments="x:Boolean">
+                    <On Platform="Android, iOS"
+                        Value="True" />
+                </OnPlatform>
+            </StackLayout.IsVisible>
+            <!-- -->
+            <ListView x:Name="Items"
+                      ItemsSource="{Binding MenuItemList}"
+                      IsPullToRefreshEnabled="False"
+                      SeparatorVisibility="None"
+                      BackgroundColor="{DynamicResource AppLigthBackgroundColor}">
+                <ListView.Header>
+                    <StackLayout Orientation="Vertical" BackgroundColor="{DynamicResource AppBackgroundColor}"  Margin="0,0,0,15">
+                        <StackLayout Orientation="Vertical"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center"
+                                     MinimumHeightRequest="30"
+                                     Margin="5,5,5,15">
+                            <material:MaterialLabel 
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                Text="{Binding DisplayName}"
+                                FontSize="{DynamicResource FontSizeTitle}"
+                                FontFamily="{DynamicResource OpenSans}"
+                                HorizontalTextAlignment="Center" 
+                                FontAttributes="Bold"
+                                TextColor="White"/>
+                            <Label Text="{Binding Library}" 
+                                   HorizontalTextAlignment="Center" 
+                                   TextColor="LightGray" 
+                                   FontSize="Small"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                </ListView.Header>
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="15, 0, 15, 0" >
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding BindingContext.DataContext.ShowDetailPageCommand, Source={x:Reference MainContent}}"
+                                        CommandParameter="{Binding Text}">
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>
+                                <material:MaterialIcon Source="{Binding IconImageSource}" TintColor="White" />
+                                <material:MaterialLabel 
+                                    VerticalOptions="Center"
+                                    Margin="15, 0"
+                                    Text="{Binding Text}"
+                                    FontSize="{DynamicResource FontSize}"
+                                    FontFamily="{DynamicResource OpenSans}"
+                                    FontAttributes="Bold"
+                                    TextColor="WhiteSmoke"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</views:MvxContentPage>

@@ -1,0 +1,100 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28917.182
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Syracuse.Core", "Syracuse.Core\Syracuse.Core.csproj", "{315E8081-CB23-4A5C-89C1-444A76B8377D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Syracuse.UI", "Syracuse.UI\Syracuse.UI.csproj", "{5A598E2F-CCDE-41F5-9540-FD0108BFF3F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syracuse.Droid", "Syracus.Droid\Syracuse.Droid.csproj", "{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syracuse.iOS", "Syracuse.iOS\Syracuse.iOS.csproj", "{68EA287F-16E8-4490-AC05-BD2F14D898EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|iPhone = Debug|iPhone
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|Any CPU = Release|Any CPU
+		Release|iPhone = Release|iPhone
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{315E8081-CB23-4A5C-89C1-444A76B8377D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{315E8081-CB23-4A5C-89C1-444A76B8377D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{315E8081-CB23-4A5C-89C1-444A76B8377D}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{315E8081-CB23-4A5C-89C1-444A76B8377D}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{315E8081-CB23-4A5C-89C1-444A76B8377D}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{315E8081-CB23-4A5C-89C1-444A76B8377D}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{315E8081-CB23-4A5C-89C1-444A76B8377D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{315E8081-CB23-4A5C-89C1-444A76B8377D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{315E8081-CB23-4A5C-89C1-444A76B8377D}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{315E8081-CB23-4A5C-89C1-444A76B8377D}.Release|iPhone.Build.0 = Release|Any CPU
+		{315E8081-CB23-4A5C-89C1-444A76B8377D}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{315E8081-CB23-4A5C-89C1-444A76B8377D}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{5A598E2F-CCDE-41F5-9540-FD0108BFF3F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A598E2F-CCDE-41F5-9540-FD0108BFF3F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A598E2F-CCDE-41F5-9540-FD0108BFF3F7}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{5A598E2F-CCDE-41F5-9540-FD0108BFF3F7}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{5A598E2F-CCDE-41F5-9540-FD0108BFF3F7}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{5A598E2F-CCDE-41F5-9540-FD0108BFF3F7}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{5A598E2F-CCDE-41F5-9540-FD0108BFF3F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A598E2F-CCDE-41F5-9540-FD0108BFF3F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A598E2F-CCDE-41F5-9540-FD0108BFF3F7}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{5A598E2F-CCDE-41F5-9540-FD0108BFF3F7}.Release|iPhone.Build.0 = Release|Any CPU
+		{5A598E2F-CCDE-41F5-9540-FD0108BFF3F7}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{5A598E2F-CCDE-41F5-9540-FD0108BFF3F7}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}.Debug|iPhone.Deploy.0 = Debug|Any CPU
+		{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}.Debug|iPhoneSimulator.Deploy.0 = Debug|Any CPU
+		{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}.Release|iPhone.Build.0 = Release|Any CPU
+		{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}.Release|iPhone.Deploy.0 = Release|Any CPU
+		{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
+		{68EA287F-16E8-4490-AC05-BD2F14D898EE}.Debug|Any CPU.ActiveCfg = Debug|iPhone
+		{68EA287F-16E8-4490-AC05-BD2F14D898EE}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{68EA287F-16E8-4490-AC05-BD2F14D898EE}.Debug|iPhone.Build.0 = Debug|iPhone
+		{68EA287F-16E8-4490-AC05-BD2F14D898EE}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{68EA287F-16E8-4490-AC05-BD2F14D898EE}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{68EA287F-16E8-4490-AC05-BD2F14D898EE}.Release|Any CPU.ActiveCfg = Release|iPhone
+		{68EA287F-16E8-4490-AC05-BD2F14D898EE}.Release|iPhone.ActiveCfg = Release|iPhone
+		{68EA287F-16E8-4490-AC05-BD2F14D898EE}.Release|iPhone.Build.0 = Release|iPhone
+		{68EA287F-16E8-4490-AC05-BD2F14D898EE}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{68EA287F-16E8-4490-AC05-BD2F14D898EE}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B97D2422-BB61-4568-83A0-567CE7FEB4D8}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs02:8080/tfs/archimed
+		SccProjectUniqueName0 = Syracuse.Core\\Syracuse.Core.csproj
+		SccProjectName0 = Syracuse.Core
+		SccLocalPath0 = Syracuse.Core
+		SccProjectUniqueName1 = Syracuse.UI\\Syracuse.UI.csproj
+		SccProjectName1 = Syracuse.UI
+		SccLocalPath1 = Syracuse.UI
+		SccLocalPath2 = .
+		SccProjectUniqueName3 = Syracus.Droid\\Syracuse.Droid.csproj
+		SccProjectName3 = Syracus.Droid
+		SccLocalPath3 = Syracus.Droid
+		SccProjectUniqueName4 = Syracuse.iOS\\Syracuse.iOS.csproj
+		SccProjectName4 = Syracuse.iOS
+		SccLocalPath4 = Syracuse.iOS
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>My account</value>
+  </data>
+  <data name="AccountInfoCountAvailableBooking" xml:space="preserve">
+    <value>{0} is on hold</value>
+  </data>
+  <data name="AccountInfoCountAvailableBookings" xml:space="preserve">
+    <value>{0} are on hold</value>
+  </data>
+  <data name="AccountInfoCountLateLoan" xml:space="preserve">
+    <value>{0} is late</value>
+  </data>
+  <data name="AccountInfoCountLateLoans" xml:space="preserve">
+    <value>{0} are late</value>
+  </data>
+  <data name="AccountInfoCountOfBookings" xml:space="preserve">
+    <value>You have reserved {0} documents</value>
+  </data>
+  <data name="AccountInfoCountOfLoans" xml:space="preserve">
+    <value>You borrowed {0} documents</value>
+  </data>
+  <data name="AccountInfoReturnDateLoan" xml:space="preserve">
+    <value>{0} is to be returned on {1}</value>
+  </data>
+  <data name="AccountInfoReturnDateLoans" xml:space="preserve">
+    <value>{0} are to be returned on {1}</value>
+  </data>
+  <data name="Bookings" xml:space="preserve">
+    <value>My bookings</value>
+  </data>
+  <data name="ButtonValidation" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Disconect" xml:space="preserve">
+    <value>Disconect</value>
+  </data>
+  <data name="DisconectAuthorization" xml:space="preserve">
+    <value>To add a new account we will have to end the current session do you want to continue?</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ErrorOccurred" xml:space="preserve">
+    <value>An error has occurred</value>
+  </data>
+  <data name="FailBookingRequest" xml:space="preserve">
+    <value>Your reservation request has failed</value>
+  </data>
+  <data name="FailExtendLoan" xml:space="preserve">
+    <value>Renewal Impossible</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Library" xml:space="preserve">
+    <value>My library</value>
+  </data>
+  <data name="Loans" xml:space="preserve">
+    <value>My loans</value>
+  </data>
+  <data name="MissingField" xml:space="preserve">
+    <value>Please fill in this field</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="OtherAccount" xml:space="preserve">
+    <value>All my accounts</value>
+  </data>
+  <data name="Scan" xml:space="preserve">
+    <value>Scan</value>
+  </data>
+  <data name="SearchViewResultCount" xml:space="preserve">
+    <value>{0} results</value>
+  </data>
+  <data name="SearchViewResultNull" xml:space="preserve">
+    <value>0 result</value>
+  </data>
+  <data name="SortOptionAutorASC" xml:space="preserve">
+    <value>A to Z (Author)</value>
+  </data>
+  <data name="SortOptionAutorDESC" xml:space="preserve">
+    <value>Z to A (Author)</value>
+  </data>
+  <data name="SortOptionTimeASC" xml:space="preserve">
+    <value>most recent</value>
+  </data>
+  <data name="SortOptionTimeDESC" xml:space="preserve">
+    <value>less recent</value>
+  </data>
+  <data name="SortOptionTitleASC" xml:space="preserve">
+    <value>A to Z (Title)</value>
+  </data>
+  <data name="SortOptionTitleDESC" xml:space="preserve">
+    <value>Z to A (Title)</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="SuccessBookingRequest" xml:space="preserve">
+    <value>Your reservation request was successful</value>
+  </data>
+  <data name="SuccessCancelBooking" xml:space="preserve">
+    <value>Cancellation was successful for the title {0}</value>
+  </data>
+  <data name="SuccessExtendLoan" xml:space="preserve">
+    <value>The extension has been made for the title {0}</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+</root>

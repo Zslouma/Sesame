@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                      xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Core"
+                      xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
+                      xmlns:common="clr-namespace:Syracuse.UI.Views.Templates"
+                      x:TypeArguments="viewModels:OtherAccountViewModel"
+                      x:Class="Syracuse.UI.Views.OtherAccountView"
+                      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+    <NavigationPage.TitleView >
+        <common:SearchBarTemplate />
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
+            <ListView x:Name="otherAccountList" 
+                          CachingStrategy="RecycleElement"
+                          ItemsSource="{Binding OtherAccount}"
+                          SeparatorVisibility="Default"
+                          RowHeight="150"
+                          VerticalScrollBarVisibility="Never"
+                          IsPullToRefreshEnabled="False" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame Padding="0, 5, 0, 5">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="0.3*" />
+                                            <RowDefinition Height="0.85*" />
+                                        </Grid.RowDefinitions>
+                                        <Button Text="X"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="Start"
+                                        Grid.Row="0"
+                                        FontSize="Small"
+                                        BackgroundColor="White"
+                                        Command="{Binding BindingContext.RemoveItemCommand,Source={x:Reference otherAccountList}}"
+                                        CommandParameter="{Binding .}"
+                                        />
+                                        <StackLayout Grid.Row="1" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Orientation="Vertical">
+
+                                            <Label
+                                                HorizontalTextAlignment="Center"
+                                                TextColor="Black" Text="{Binding DisplayName}"
+                                                FontAttributes="Bold" FontSize="Medium"/>
+                                            <Label
+                                                HorizontalTextAlignment="Center"
+                                                TextColor="Black" Text="{Binding Username}"
+                                                FontAttributes="None" FontSize="Default"></Label>
+                                            <Label
+                                                HorizontalTextAlignment="Center"
+                                                TextColor="LightGray" Text="{Binding Library}"
+                                                FontAttributes="None" FontSize="Default"></Label>
+                                        </StackLayout>
+
+                                    </Grid>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Footer>
+
+                    <StackLayout  Padding="0, 5, 0, 5" HeightRequest="100" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Orientation="Vertical">
+
+                        <ImageButton VerticalOptions="CenterAndExpand"  Source="add.png" BackgroundColor="White" Clicked="AddAccount_Clicked"></ImageButton>
+
+                    </StackLayout>
+
+                    </ListView.Footer>
+                </ListView>
+        </yummy:PancakeView>
+    </ContentPage.Content>
+</views:MvxContentPage>

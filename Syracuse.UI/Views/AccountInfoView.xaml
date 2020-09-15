@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                      xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Core"
+                      xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
+                      x:TypeArguments="viewModels:AccountInfoViewModel"
+                      x:Class="Syracuse.UI.Views.AccountInfoView"
+                      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+
+
+    <ContentPage.Content>
+        <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
+            <Grid>
+        <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="0.2*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label Text="{Binding SummaryAccount.DisplayName}"
+                   TextColor="{d:DynamicResource DarkTextColor}"
+                   FontSize="{d:DynamicResource FontSizeTitle}"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   Grid.Row="0"
+                   Grid.Column="0" />
+            <StackLayout
+                Grid.Row="1"
+                Grid.Column="0">
+                <yummy:PancakeView Margin="15,5" Padding="10" CornerRadius="30" Border="{yummy:BorderMarkup Color=LightGray, Thickness=1}">
+                    <StackLayout 
+                        HorizontalOptions="Center"
+                        x:Name="InfoList">  
+                        <Label FontAttributes="Bold" Text="{Binding TotalBorrowedDocuments}"></Label>
+                        <Label Margin="0, 0, 0, 5" TextColor="Red" Text="{Binding LateBorrowedDocuments}"></Label>
+                    </StackLayout>
+                </yummy:PancakeView>
+                <yummy:PancakeView Margin="15,5" Padding="10" CornerRadius="30" Border="{yummy:BorderMarkup Color=LightGray, Thickness=1}">
+                    <StackLayout HorizontalOptions="Center">
+                        <Label FontAttributes="Bold" Text="{Binding TotalBookingDocuments}"></Label>
+                        <Label Margin="0, 0, 0, 5" TextColor="Green" Text="{Binding AvailableBookingDocuments}"></Label>
+                    </StackLayout>
+                </yummy:PancakeView>
+            </StackLayout>
+            
+        </Grid>
+        </ScrollView>
+                <AbsoluteLayout IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
+                    <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
+                </AbsoluteLayout>
+            </Grid>
+        </yummy:PancakeView>
+    </ContentPage.Content>
+    
+</views:MvxContentPage>

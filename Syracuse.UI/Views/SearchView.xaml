@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<views:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                     xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                     xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Core"
+                     xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+                     x:TypeArguments="viewModels:SearchViewModel"
+                     x:Class="Syracuse.UI.Views.SearchView"
+                     xmlns:local="clr-namespace:Syracuse.UI"
+                     xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+
+    <NavigationPage.TitleView xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+        <AbsoluteLayout>
+            <yummy:PancakeView  CornerRadius="15" VerticalOptions="Center" BackgroundColor="{DynamicResource AppSecondaryBackgroundColor}">
+                <SearchBar x:Name="SearchBar"
+                       TextChanged="SearchBar_OnTextChanged"
+                       HeightRequest="35"
+                       AbsoluteLayout.LayoutBounds="1,0.4,-1,-1"
+                       AbsoluteLayout.LayoutFlags="PositionProportional"
+                       SearchCommand="{Binding SearchCommand}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}" 
+                       HorizontalOptions="FillAndExpand">
+                    <SearchBar.TextColor>
+                        <OnPlatform x:TypeArguments="Color">
+                            <OnPlatform.iOS>
+                                Black
+                            </OnPlatform.iOS>
+                            <OnPlatform.Android>
+                                Black
+                            </OnPlatform.Android>
+                            <OnPlatform.WinPhone>
+                                Black
+                            </OnPlatform.WinPhone>
+                        </OnPlatform>
+                    </SearchBar.TextColor>
+                </SearchBar>
+            </yummy:PancakeView>
+        </AbsoluteLayout>
+
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+
+        <Grid>
+            <StackLayout Orientation="Vertical">
+                <StackLayout>
+                    <ListView x:Name="searchHistoryList"
+                          IsVisible="False"
+                          CachingStrategy="RecycleElement" BackgroundColor="White" ItemTapped="ListView_OnItemTapped" AbsoluteLayout.LayoutFlags="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextCell Text="{Binding .}" TextColor="#FF464859"></TextCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+                <Grid Padding="0, 0, 0, 0"   >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackLayout Grid.Row="0" Grid.Column="0">
+                        <Button x:Name="SortButton" Text="{x:Static local:AppResource.SortOption}"  Clicked="SortButton_Clicked" BackgroundColor="Transparent" TextColor="{DynamicResource WhiteTextColor}" FontAttributes="None" />
+                        <BoxView x:Name="SortButtonUnderline" IsVisible="false" BackgroundColor="White" HeightRequest="1" Margin="0,-8,0,0" />
+                    </StackLayout>
+                    <StackLayout  Grid.Row="0" Grid.Column="2">
+                        <Button x:Name="FacetteButton" Text="{x:Static local:AppResource.FilterOption}"  Clicked="FacetteButton_Clicked" BackgroundColor="Transparent" TextColor="{DynamicResource WhiteTextColor}" FontAttributes="None"/>
+                        <BoxView x:Name="FacetteButtonUnderline" IsVisible="false" BackgroundColor="White" HeightRequest="1" Margin="0,-8,0,0" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="1" Grid.Column="2">
+                        <Button x:Name="SearchButton" Text="{x:Static local:AppResource.Validate}"  Clicked="SearchButton_Clicked"  BackgroundColor="Transparent" TextColor="{DynamicResource WhiteTextColor}" FontAttributes="None"/>
+                        <BoxView x:Name="SearchButtonUnderline" IsVisible="false" BackgroundColor="White" HeightRequest="1" Margin="0,-8,0,0" />
+                    </StackLayout>
+                    <StackLayout  Grid.Row="1" Grid.Column="0">
+                        <Button x:Name="DeleteButton" Text="{x:Static local:AppResource.Delete}" Clicked="DeleteButton_Clicked" BackgroundColor="Transparent" TextColor="{DynamicResource WhiteTextColor}" FontAttributes="None"/>
+                        <BoxView x:Name="DeleteButtonUnderline" IsVisible="false" BackgroundColor="White" HeightRequest="1" Margin="0,-8,0,0" />
+                    </StackLayout>
+                </Grid>
+                <yummy:PancakeView  Padding="15, 15, 15, 0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{DynamicResource AppSecondaryBackgroundColor}">
+                    <StackLayout>
+                    <Grid Padding="0, 0, 0, 0" Margin="0"  MinimumHeightRequest="400">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                            <ListView ItemsSource="{Binding ExpandedFacetteList}" BackgroundColor="White" IsGroupingEnabled="True" GroupDisplayBinding="{Binding Name}" x:Name="FacetteItemList"  Grid.Row="2" Grid.ColumnSpan="3">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid Padding="5" VerticalOptions="Center">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="0.1*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label FontSize="15" Text="{Binding value}" Grid.Column="0" />
+                                                <BoxView Color="Green" Margin="5" WidthRequest="12" HeightRequest="12" Grid.Column="1" IsVisible="{Binding IsSelected}"/>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                                <ListView.GroupHeaderTemplate>
+                                    <DataTemplate>
+                                        <ViewCell >
+                                            <Grid Padding="5" BackgroundColor="White" VerticalOptions="Center">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="0.1*" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="{Binding Name}" Grid.Column="1"/>
+                                                <ImageButton x:Name="HeaderButton" Source="{Binding StateIcon}" BorderColor="Transparent" BackgroundColor="Transparent" Clicked="HeaderButton_Clicked" CommandParameter="{Binding .}" ></ImageButton>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.GroupHeaderTemplate>
+                            </ListView>
+                            <!--<ListView ItemsSource="{Binding Itemss}" ms:MultiSelectListView.IsMultiSelect="{Binding EnableMultiSelect}" x:Name="FacetteItemList"
+                      Grid.Row="2" Grid.ColumnSpan="3">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ms:SelectableViewCell>
+                                        <ms:SelectableViewCell.CheckView>
+                                            <BoxView Color="Green" WidthRequest="12" HeightRequest="12" />
+                                        </ms:SelectableViewCell.CheckView>
+                                        <ms:SelectableViewCell.DataView>
+                                            <Label FontAttributes="{Binding font}" FontSize="15" Text="{Binding value}" />
+                                        </ms:SelectableViewCell.DataView>
+                                    </ms:SelectableViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>-->
+                    </Grid>
+                        <Picker x:Name="SortPicker"  HorizontalOptions="FillAndExpand" Grid.Column="2" ItemsSource="{Binding SortsName}" SelectedIndex="{Binding SortNamee}" Title="{x:Static local:AppResource.SortOption}" TextColor="{DynamicResource PurpleTextColor}" TitleColor="{DynamicResource PurpleTextColor}" FontAttributes="Bold"></Picker>
+                    <Label TextColor="Black" Text="{Binding ResultCount}" Grid.Column="3"/>
+                    <ListView x:Name="resultsList" 
+                          CachingStrategy="RecycleElement"
+                          ItemsSource="{Binding Results}"
+                          SeparatorVisibility="None"
+                          RowHeight="170"
+                          VerticalScrollBarVisibility="Never"
+                          IsPullToRefreshEnabled="False">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Orientation="Horizontal" Padding="7, 0, 7, 0">
+                                            <Image VerticalOptions="Center" Source="{Binding FieldList.Image}" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent" Margin="5"/>
+                                            <StackLayout VerticalOptions="Center" Orientation="Vertical">
+                                                <Label TextColor="Black" Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="Medium"/>
+                                                <Label TextColor="Gray" Text="{Binding FieldList.shortDesc}" MaxLines="2" FontSize="Small"/>
+                                                <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                                    <BoxView VerticalOptions="Center" WidthRequest="5"  BackgroundColor="{Binding Resource.ColorStatus}"/>
+                                                    <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="CenterAndExpand" FontSize="Medium" Text="{Binding Resource.TextStatus}"/>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.Footer>
+                                <material:MaterialButton Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}"></material:MaterialButton>
+                        </ListView.Footer>
+                    </ListView>
+                    </StackLayout>
+                </yummy:PancakeView>
+            </StackLayout>
+            <AbsoluteLayout IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
+                <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
+            </AbsoluteLayout>
+        </Grid>
+    </ContentPage.Content>
+</views:MvxContentPage>

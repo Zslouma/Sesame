@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                     xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Core"
+                     xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
+                     x:Name="LoanViewPage"
+                      xmlns:local="clr-namespace:Syracuse.UI"
+                     xmlns:common="clr-namespace:Syracuse.UI.Views.Templates"
+                     x:TypeArguments="viewModels:LoansViewModel"
+                     x:Class="Syracuse.UI.Views.LoansView"
+                     xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+
+    <NavigationPage.TitleView >
+        <common:SearchBarTemplate />
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <yummy:PancakeView Margin="0,30,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
+            <Grid>
+                <StackLayout VerticalOptions="Center" IsVisible="{Binding NotCurrentLoan}">
+                    <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize = "20" Text="{x:Static local:AppResource.NotCurrentLoan}" />
+                </StackLayout>
+                <StackLayout Padding="5,10" IsVisible="{Binding ReversNotCurrentLoan}">
+                    <ListView x:Name="LoansList" 
+                      CachingStrategy="RecycleElement"
+                      ItemsSource="{Binding Results}" 
+                      SeparatorVisibility="None"
+                      RowHeight="160"
+                      VerticalScrollBarVisibility="Never"
+                      IsPullToRefreshEnabled="False">
+                        <ListView.ItemTemplate>
+                            <DataTemplate >
+                                <ViewCell>
+                                    <Frame HasShadow="True" Padding="0, 5, 0, 5">
+                                        <StackLayout 
+                                             VerticalOptions="Start"
+                                             Orientation="Horizontal"
+                                             BackgroundColor="White"
+                                             Padding="5, 0, 5, 0"
+                                             x:Name="Item">
+                                            <Image Source="{Binding ThumbnailUrl}"
+                                                HeightRequest="120"
+                                                WidthRequest="90" Margin="5"/>
+
+                                            <StackLayout Padding="0, 15, 0, 0"
+                                                 VerticalOptions="Start"
+                                                 Orientation="Vertical"
+                                                 HorizontalOptions="FillAndExpand">
+                                                <Label MaxLines="2" 
+                                                    TextColor="{d:DynamicResource DarkTextColor}"
+                                                    Text="{Binding Title}"
+                                                    FontAttributes="Bold"
+                                                    />
+                                                <Label
+                                                    MaxLines="1"
+                                                    TextColor="{Binding dateColor}"
+                                                    Text="{Binding WhenBack_String}"
+                                                    FontSize="Small"/>
+                                                
+                                                <StackLayout IsVisible="{Binding CanRenew}">
+                                                    <material:MaterialButton
+                                                          Padding="0"
+                                                          CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                                          BindingContext="{Binding Source={x:Reference LoansList}, Path=BindingContext}"
+                                                          Command="{Binding RenewLoanCommand}"
+                                                          BackgroundColor="{Binding Source={x:Reference Item}, Path=BindingContext.buttonColor}"
+                                                          Text="{x:Static local:AppResource.Extend}"/>
+                                                </StackLayout>
+                                                
+                                            </StackLayout>
+                                            
+                                        </StackLayout>
+                                        
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+                
+                <AbsoluteLayout IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
+                    <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
+                </AbsoluteLayout>
+            </Grid>
+        </yummy:PancakeView>
+    </ContentPage.Content>
+</views:MvxContentPage>
