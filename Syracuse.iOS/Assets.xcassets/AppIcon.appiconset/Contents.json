@@ -4,127 +4,242 @@
       "scale": "2x",
       "size": "20x20",
       "idiom": "iphone",
-      "filename": "Vignette app IOS 40x40.png"
+      "filename": "Icon40-1.png"
     },
     {
       "scale": "3x",
       "size": "20x20",
       "idiom": "iphone",
-      "filename": "Vignette app IOS 60x60.png"
+      "filename": "Icon60-1.png"
     },
     {
       "scale": "2x",
       "size": "29x29",
       "idiom": "iphone",
-      "filename": "Vignette app IOS 58x58.png"
+      "filename": "Icon58-1.png"
     },
     {
       "scale": "3x",
       "size": "29x29",
       "idiom": "iphone",
-      "filename": "Vignette app IOS 87x87.png"
+      "filename": "Icon87.png"
     },
     {
       "scale": "2x",
       "size": "40x40",
       "idiom": "iphone",
-      "filename": "Vignette app IOS 80x80.png"
+      "filename": "Icon80-1.png"
     },
     {
       "scale": "3x",
       "size": "40x40",
       "idiom": "iphone",
-      "filename": "Vignette app IOS 120x120.png"
+      "filename": "Icon120-1.png"
     },
     {
       "scale": "2x",
       "size": "60x60",
       "idiom": "iphone",
-      "filename": "Vignette app IOS 120x1201.png"
+      "filename": "Icon120.png"
     },
     {
       "scale": "3x",
       "size": "60x60",
       "idiom": "iphone",
-      "filename": "Vignette app IOS 180x180.png"
+      "filename": "Icon180-1.png"
     },
     {
       "scale": "1x",
       "size": "20x20",
       "idiom": "ipad",
-      "filename": "Vignette app IOS 20x20.png"
+      "filename": "Icon20-1.png"
     },
     {
       "scale": "2x",
       "size": "20x20",
       "idiom": "ipad",
-      "filename": "Vignette app IOS 40x401.png"
+      "filename": "Icon40.png"
     },
     {
       "scale": "1x",
       "size": "29x29",
       "idiom": "ipad",
-      "filename": "Vignette app IOS 29x29.png"
+      "filename": "Icon29-1.png"
     },
     {
       "scale": "2x",
       "size": "29x29",
       "idiom": "ipad",
-      "filename": "Vignette app IOS 58x581.png"
+      "filename": "Icon58.png"
     },
     {
       "scale": "1x",
       "size": "40x40",
       "idiom": "ipad",
-      "filename": "Vignette app IOS 40x402.png"
+      "filename": "Icon40-2.png"
     },
     {
       "scale": "2x",
       "size": "40x40",
       "idiom": "ipad",
-      "filename": "Vignette app IOS 80x801.png"
+      "filename": "Icon80.png"
     },
     {
       "scale": "2x",
       "size": "83.5x83.5",
       "idiom": "ipad",
-      "filename": "Vignette app IOS 167x167.png"
+      "filename": "Icon167-1.png"
     },
     {
       "scale": "1x",
       "size": "76x76",
       "idiom": "ipad",
-      "filename": "Vignette app IOS 76x76.png"
+      "filename": "Icon76-1.png"
     },
     {
       "scale": "2x",
       "size": "76x76",
       "idiom": "ipad",
-      "filename": "Vignette app IOS 152x152.png"
+      "filename": "Icon152-1.png"
     },
     {
       "scale": "1x",
       "size": "1024x1024",
       "idiom": "ios-marketing",
-      "filename": "Vignette app IOS 1024x1024.png"
+      "filename": "Icon1024-1.png"
     },
     {
       "scale": "2x",
       "size": "60x60",
-      "idiom": "car",
-      "filename": "Vignette app IOS 120x1202.png"
+      "idiom": "car"
     },
     {
       "scale": "3x",
       "size": "60x60",
-      "idiom": "car",
-      "filename": "Vignette app IOS 180x1801.png"
+      "idiom": "car"
+    },
+    {
+      "role": "notificationCenter",
+      "subtype": "38mm",
+      "scale": "2x",
+      "size": "24x24",
+      "idiom": "watch"
+    },
+    {
+      "role": "notificationCenter",
+      "subtype": "42mm",
+      "scale": "2x",
+      "size": "27.5x27.5",
+      "idiom": "watch"
+    },
+    {
+      "role": "companionSettings",
+      "scale": "2x",
+      "size": "29x29",
+      "idiom": "watch"
+    },
+    {
+      "role": "companionSettings",
+      "scale": "3x",
+      "size": "29x29",
+      "idiom": "watch"
+    },
+    {
+      "role": "appLauncher",
+      "subtype": "38mm",
+      "scale": "2x",
+      "size": "40x40",
+      "idiom": "watch"
+    },
+    {
+      "role": "appLauncher",
+      "subtype": "40mm",
+      "scale": "2x",
+      "size": "44x44",
+      "idiom": "watch"
+    },
+    {
+      "role": "appLauncher",
+      "subtype": "44mm",
+      "scale": "2x",
+      "size": "50x50",
+      "idiom": "watch"
+    },
+    {
+      "role": "quickLook",
+      "subtype": "38mm",
+      "scale": "2x",
+      "size": "86x86",
+      "idiom": "watch"
+    },
+    {
+      "role": "quickLook",
+      "subtype": "42mm",
+      "scale": "2x",
+      "size": "98x98",
+      "idiom": "watch"
+    },
+    {
+      "role": "quickLook",
+      "subtype": "44mm",
+      "scale": "2x",
+      "size": "108x108",
+      "idiom": "watch"
     },
     {
       "scale": "1x",
       "size": "1024x1024",
-      "idiom": "watch-marketing",
-      "filename": "Vignette app IOS 1024x10241.png"
+      "idiom": "watch-marketing"
+    },
+    {
+      "scale": "1x",
+      "size": "16x16",
+      "idiom": "mac"
+    },
+    {
+      "scale": "2x",
+      "size": "16x16",
+      "idiom": "mac"
+    },
+    {
+      "scale": "1x",
+      "size": "32x32",
+      "idiom": "mac"
+    },
+    {
+      "scale": "2x",
+      "size": "32x32",
+      "idiom": "mac"
+    },
+    {
+      "scale": "1x",
+      "size": "128x128",
+      "idiom": "mac"
+    },
+    {
+      "scale": "2x",
+      "size": "128x128",
+      "idiom": "mac"
+    },
+    {
+      "scale": "1x",
+      "size": "256x256",
+      "idiom": "mac"
+    },
+    {
+      "scale": "2x",
+      "size": "256x256",
+      "idiom": "mac"
+    },
+    {
+      "scale": "1x",
+      "size": "512x512",
+      "idiom": "mac"
+    },
+    {
+      "scale": "2x",
+      "size": "512x512",
+      "idiom": "mac"
     }
   ],
   "properties": {},
