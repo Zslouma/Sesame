@@ -45,10 +45,15 @@
     <item name="windowActionModeOverlay">true</item>
     <item name="android:colorActivatedHighlight">@android:color/transparent</item>
     <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+    <item  name="alertDialogTheme">@style/DialogUplatform</item>
   </style>
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
     <item name="colorAccent">#FFFFFF</item>
   </style>
 
+  <style name="DialogUplatform" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <item name="colorAccent">#000000</item>
+  </style>
+  
 </resources>
