@@ -99,8 +99,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 this.TotalBorrowedDocuments = String.Format(ApplicationResource.AccountInfoCountOfLoans, SummaryAccount.LoansTotalCount);
                 this.LateBorrowedDocuments =
-                    (this.SummaryAccount.LoansLateCount > 1) ? String.Format(ApplicationResource.AccountInfoCountLateLoans, SummaryAccount.LoansTotalCount)
-                    : String.Format(ApplicationResource.AccountInfoCountLateLoan, SummaryAccount.LoansTotalCount);
+                    (this.SummaryAccount.LoansLateCount > 1) ? String.Format(ApplicationResource.AccountInfoCountLateLoans, SummaryAccount.LoansLateCount)
+                    : String.Format(ApplicationResource.AccountInfoCountLateLoan, SummaryAccount.LoansLateCount);
                 if (SummaryAccount.LoansNotLateCount > 0)
                 {
                     var documents = new List<string>();
