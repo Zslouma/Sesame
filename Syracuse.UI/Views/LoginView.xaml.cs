@@ -11,12 +11,12 @@ namespace Syracuse.UI.Views
         {
             InitializeComponent();
 
-            this.ScannButton.Pressed += async (sender, e) =>
-            {
-                var scanner = new ZxingScannerView();
-                scanner.OnScanResult += Handle_OnScanResult;
-                await this.Navigation.PushAsync(scanner);
-            };
+            //this.ScannButton.Pressed += async (sender, e) =>
+            //{
+            //    var scanner = new ZxingScannerView();
+            //    scanner.OnScanResult += Handle_OnScanResult;
+            //    await this.Navigation.PushAsync(scanner);
+            //};
             UserNameInput.Focused += Handle_Focus;
             UserNameInput.Unfocused += Handle_Unfocused;
 
