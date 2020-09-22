@@ -3,12 +3,12 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-            xmlns:views1="clr-namespace:Syracuse.UI.Views;assembly=Syracuse.UI"
+            xmlns:views1="clr-namespace:Syracuse.Mobitheque.UI.Views;assembly=Syracuse.Mobitheque.UI"
             xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Core"
             x:TypeArguments="viewModels:MyAccountViewModel"
-            xmlns:common="clr-namespace:Syracuse.UI.Views.Templates"
-            xmlns:local="clr-namespace:Syracuse.UI"
-            x:Class="Syracuse.UI.Views.MyAccountView">
+            xmlns:common="clr-namespace:Syracuse.Mobitheque.UI.Views.Templates"
+            xmlns:local="clr-namespace:Syracuse.Mobitheque.UI"
+            x:Class="Syracuse.Mobitheque.UI.Views.MyAccountView">
     <NavigationPage.TitleView >
         <common:SearchBarTemplate />
     </NavigationPage.TitleView>

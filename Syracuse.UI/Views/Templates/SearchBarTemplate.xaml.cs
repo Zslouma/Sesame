@@ -7,7 +7,7 @@ using Xamarin.Forms;
 using System.Collections.ObjectModel;
 
 
-namespace Syracuse.UI.Views.Templates
+namespace Syracuse.Mobitheque.UI.Views.Templates
 {
     [MvxMasterDetailPagePresentation(Position = MasterDetailPosition.Detail, NoHistory = true, Title = "Accueil")]
     public partial class SearchBarTemplate : MvxContentView<SearchBarViewModel>

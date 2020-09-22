@@ -4,7 +4,7 @@ using Syracuse.Mobitheque.Core.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Syracuse.UI.Views
+namespace Syracuse.Mobitheque.UI.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     [MvxMasterDetailPagePresentation(Position = MasterDetailPosition.Master, WrapInNavigationPage = false, Title = "Menu")]

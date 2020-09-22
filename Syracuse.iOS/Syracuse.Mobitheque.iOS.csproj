@@ -214,13 +214,13 @@
     </ImageAsset>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Syracuse.Core\Syracuse.Core.csproj">
+    <ProjectReference Include="..\Syracuse.Core\Syracuse.Mobitheque.Core.csproj">
       <Project>{315e8081-cb23-4a5c-89c1-444a76b8377d}</Project>
-      <Name>Syracuse.Core</Name>
+      <Name>Syracuse.Mobitheque.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Syracuse.UI\Syracuse.UI.csproj">
+    <ProjectReference Include="..\Syracuse.UI\Syracuse.Mobitheque.UI.csproj">
       <Project>{5a598e2f-ccde-41f5-9540-fd0108bff3f7}</Project>
-      <Name>Syracuse.UI</Name>
+      <Name>Syracuse.Mobitheque.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

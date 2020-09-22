@@ -5,5 +5,5 @@
                       xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
                       xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Core"
                       xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
-                      x:Class="Syracuse.UI.Views.LoginNavigationView">
+                      x:Class="Syracuse.Mobitheque.UI.Views.LoginNavigationView">
 </views:MvxNavigationPage>

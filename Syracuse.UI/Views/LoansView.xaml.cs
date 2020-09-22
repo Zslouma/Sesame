@@ -2,7 +2,7 @@
 using MvvmCross.Forms.Views;
 using Syracuse.Mobitheque.Core.ViewModels;
 
-namespace Syracuse.UI.Views
+namespace Syracuse.Mobitheque.UI.Views
 {
     [MvxMasterDetailPagePresentation(Position = MasterDetailPosition.Detail, NoHistory = true, Title = "Mes emprunts")]
     public partial class LoansView : MvxContentPage<LoansViewModel>

@@ -65,7 +65,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 new MenuItem() { Text = ApplicationResource.Scan, IconImageSource = "borrowing" },
                 new MenuItem() { Text = ApplicationResource.Library, IconImageSource = "library" },
                 new MenuItem() { Text = ApplicationResource.About, IconImageSource = "library" },
-                new MenuItem() { Text = ApplicationResource.Disconect, IconImageSource = "library" },
+                new MenuItem() { Text = ApplicationResource.Disconnect, IconImageSource = "library" },
             };
 
             this.requestService = requestService;
@@ -109,7 +109,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 _ = this.navigationService.Navigate<MyAccountViewModel>();
             else if (name == ApplicationResource.OtherAccount)
                 _ = this.navigationService.Navigate<OtherAccountViewModel>();
-            else if (name == ApplicationResource.Disconect) {
+            else if (name == ApplicationResource.Disconnect) {
                 var user = await App.Database.GetActiveUser();
                 user.Active = false;
                 await App.Database.SaveItemAsync(user);

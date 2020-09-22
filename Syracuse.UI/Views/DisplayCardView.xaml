@@ -9,7 +9,7 @@
                       x:TypeArguments="viewModels:DisplayCardViewModel"
                       xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
                       xmlns:zxcm="clr-namespace:ZXing.Common;assembly=zxing.portable"
-                      x:Class="Syracuse.UI.Views.DisplayCardView"
+                      x:Class="Syracuse.Mobitheque.UI.Views.DisplayCardView"
                       xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
     <ContentPage.Content>
         <yummy:PancakeView Margin="15" CornerRadius="10" VerticalOptions="FillAndExpand" BackgroundColor="{DynamicResource AppSecondaryBackgroundColor}">

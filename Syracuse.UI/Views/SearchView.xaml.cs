@@ -8,7 +8,7 @@ using Xamarin.Forms;
 using MvvmCross.Binding.Extensions;
 using System.Threading.Tasks;
 
-namespace Syracuse.UI.Views
+namespace Syracuse.Mobitheque.UI.Views
 {
     [MvxMasterDetailPagePresentation(Position = MasterDetailPosition.Detail, NoHistory = true, Title = "Recherche")]
     public partial class SearchView : MvxContentPage<SearchViewModel>

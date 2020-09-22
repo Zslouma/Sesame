@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Syracuse.UI.Views.BrandSelectView">
+             x:Class="Syracuse.Mobitheque.UI.Views.BrandSelectView">
   <ContentView.Content>
       <StackLayout>
           <Label Text="Hello Xamarin.Forms!" />

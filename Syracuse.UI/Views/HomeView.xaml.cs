@@ -4,7 +4,7 @@ using Syracuse.Mobitheque.Core.Models;
 using Syracuse.Mobitheque.Core.ViewModels;
 using Xamarin.Forms;
 
-namespace Syracuse.UI.Views
+namespace Syracuse.Mobitheque.UI.Views
 {
     [MvxMasterDetailPagePresentation(Position = MasterDetailPosition.Detail, NoHistory = true, Title = "Accueil")]
     public partial class HomeView : MvxContentPage<HomeViewModel>

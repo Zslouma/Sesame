@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using ZXing;
 
-namespace Syracuse.UI.Views
+namespace Syracuse.Mobitheque.UI.Views
 {
     [MvxContentPagePresentation()]
      public partial class LoginView : ContentPage

@@ -6,8 +6,8 @@
                      xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Core"
                      xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
                      x:TypeArguments="viewModels:SearchViewModel"
-                     x:Class="Syracuse.UI.Views.SearchView"
-                     xmlns:local="clr-namespace:Syracuse.UI"
+                     x:Class="Syracuse.Mobitheque.UI.Views.SearchView"
+                     xmlns:local="clr-namespace:Syracuse.Mobitheque.UI"
                      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
 
     <NavigationPage.TitleView xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">

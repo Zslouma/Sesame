@@ -3,7 +3,7 @@ using MvvmCross.Forms.Views;
 using Syracuse.Mobitheque.Core.ViewModels;
 using Xamarin.Forms.Xaml;
 
-namespace Syracuse.UI.Views
+namespace Syracuse.Mobitheque.UI.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     [MvxContentPagePresentation(NoHistory = true)]

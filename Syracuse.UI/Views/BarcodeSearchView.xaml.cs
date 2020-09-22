@@ -3,7 +3,7 @@ using Syracuse.Mobitheque.Core.ViewModels;
 using Xamarin.Forms;
 using ZXing;
 
-namespace Syracuse.UI.Views
+namespace Syracuse.Mobitheque.UI.Views
 {
     public partial class BarcodeSearchView : MvxNavigationPage<BarcodeSearchModel>
     {

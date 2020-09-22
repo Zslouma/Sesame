@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Syracuse.UI {
+namespace Syracuse.Mobitheque.UI {
     using System;
     using System.Reflection;
     
@@ -30,7 +30,7 @@ namespace Syracuse.UI {
         public static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Syracuse.UI.AppResource.fr", typeof(AppResource_fr).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Syracuse.Mobitheque.UI.AppResource.fr", typeof(AppResource_fr).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

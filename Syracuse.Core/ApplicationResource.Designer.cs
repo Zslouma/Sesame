@@ -39,7 +39,7 @@ namespace Syracuse.Mobitheque.Core {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Syracuse.Core.ApplicationResource", typeof(ApplicationResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Syracuse.Mobitheque.Core.ApplicationResource", typeof(ApplicationResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -169,20 +169,20 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disconect.
-        /// </summary>
-        public static string Disconect {
-            get {
-                return ResourceManager.GetString("Disconect", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to To add a new account we will have to end the current session do you want to continue?.
         /// </summary>
         public static string DisconectAuthorization {
             get {
                 return ResourceManager.GetString("DisconectAuthorization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disconnect.
+        /// </summary>
+        public static string Disconnect {
+            get {
+                return ResourceManager.GetString("Disconnect", resourceCulture);
             }
         }
         

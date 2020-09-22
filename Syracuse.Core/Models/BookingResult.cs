@@ -51,7 +51,7 @@ namespace Syracuse.Mobitheque.Core.Models
         public string BookingDateString {
             get
             {
-                String ret = "Le " + this.BookingDate.ToString(System.Globalization.CultureInfo.CurrentCulture);
+                String ret = "Le " + this.BookingDate.ToString(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern);
                 return ret;
             }
         }

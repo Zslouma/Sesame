@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace Syracuse.iOS
+namespace Syracuse.Mobitheque.iOS
 {
     public class Application
     {

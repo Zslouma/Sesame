@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Syracuse.Core\Syracuse.Core.csproj" />
+    <ProjectReference Include="..\Syracuse.Core\Syracuse.Mobitheque.Core.csproj" />
   </ItemGroup>
   
   <ItemGroup>

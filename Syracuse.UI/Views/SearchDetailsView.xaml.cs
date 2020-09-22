@@ -5,7 +5,7 @@ using Syracuse.Mobitheque.Core.Models;
 using System;
 using Xamarin.Forms;
 
-namespace Syracuse.UI.Views
+namespace Syracuse.Mobitheque.UI.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SearchDetailsView : MvxContentPage<SearchDetailsViewModel>

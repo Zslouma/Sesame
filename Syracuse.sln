@@ -2,13 +2,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28917.182
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Syracuse.Core", "Syracuse.Core\Syracuse.Core.csproj", "{315E8081-CB23-4A5C-89C1-444A76B8377D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Syracuse.Mobitheque.Core", "Syracuse.Core\Syracuse.Mobitheque.Core.csproj", "{315E8081-CB23-4A5C-89C1-444A76B8377D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Syracuse.UI", "Syracuse.UI\Syracuse.UI.csproj", "{5A598E2F-CCDE-41F5-9540-FD0108BFF3F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Syracuse.Mobitheque.UI", "Syracuse.UI\Syracuse.Mobitheque.UI.csproj", "{5A598E2F-CCDE-41F5-9540-FD0108BFF3F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syracuse.Droid", "Syracus.Droid\Syracuse.Droid.csproj", "{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syracuse.Mobitheque.Droid", "Syracus.Droid\Syracuse.Mobitheque.Droid.csproj", "{972251C8-8E1E-4563-8AF5-EF1E8C6140E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syracuse.iOS", "Syracuse.iOS\Syracuse.iOS.csproj", "{68EA287F-16E8-4490-AC05-BD2F14D898EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syracuse.Mobitheque.iOS", "Syracuse.iOS\Syracuse.Mobitheque.iOS.csproj", "{68EA287F-16E8-4490-AC05-BD2F14D898EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,23 +78,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B97D2422-BB61-4568-83A0-567CE7FEB4D8}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs02:8080/tfs/archimed
-		SccProjectUniqueName0 = Syracuse.Core\\Syracuse.Core.csproj
-		SccProjectName0 = Syracuse.Core
-		SccLocalPath0 = Syracuse.Core
-		SccProjectUniqueName1 = Syracuse.UI\\Syracuse.UI.csproj
-		SccProjectName1 = Syracuse.UI
-		SccLocalPath1 = Syracuse.UI
-		SccLocalPath2 = .
-		SccProjectUniqueName3 = Syracus.Droid\\Syracuse.Droid.csproj
-		SccProjectName3 = Syracus.Droid
-		SccLocalPath3 = Syracus.Droid
-		SccProjectUniqueName4 = Syracuse.iOS\\Syracuse.iOS.csproj
-		SccProjectName4 = Syracuse.iOS
-		SccLocalPath4 = Syracuse.iOS
 	EndGlobalSection
 EndGlobal

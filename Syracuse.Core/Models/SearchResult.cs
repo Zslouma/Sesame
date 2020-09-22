@@ -230,7 +230,7 @@ namespace Syracuse.Mobitheque.Core.Models
         public String DateTime_String
         { get
             {
-                String ret = "Le " + this.DateStart_idx[0].Date.ToString(System.Globalization.CultureInfo.CurrentCulture);
+                String ret = "Le " + this.DateStart_idx[0].Date.ToString(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern);
                 return ret;
             }
         }

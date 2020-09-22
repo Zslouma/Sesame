@@ -7,10 +7,10 @@
                      xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Core"
                      xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
                      x:Name="LoanViewPage"
-                      xmlns:local="clr-namespace:Syracuse.UI"
-                     xmlns:common="clr-namespace:Syracuse.UI.Views.Templates"
+                      xmlns:local="clr-namespace:Syracuse.Mobitheque.UI"
+                     xmlns:common="clr-namespace:Syracuse.Mobitheque.UI.Views.Templates"
                      x:TypeArguments="viewModels:LoansViewModel"
-                     x:Class="Syracuse.UI.Views.LoansView"
+                     x:Class="Syracuse.Mobitheque.UI.Views.LoansView"
                      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
 
     <NavigationPage.TitleView >

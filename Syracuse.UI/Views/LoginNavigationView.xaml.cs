@@ -2,7 +2,7 @@
 using MvvmCross.Forms.Views;
 using Syracuse.Mobitheque.Core.ViewModels;
 
-namespace Syracuse.UI.Views
+namespace Syracuse.Mobitheque.UI.Views
 {
      [MvxContentPagePresentation()]
     public partial class LoginNavigationView : MvxNavigationPage<LoginViewModel>

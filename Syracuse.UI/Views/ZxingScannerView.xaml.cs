@@ -2,7 +2,7 @@
 using ZXing;
 using ZXing.Net.Mobile.Forms;
 
-namespace Syracuse.UI.Views
+namespace Syracuse.Mobitheque.UI.Views
 {
     [MvxContentPagePresentation(NoHistory = true)]
     public partial class ZxingScannerView : ZXingScannerPage

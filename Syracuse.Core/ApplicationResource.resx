@@ -153,11 +153,11 @@
   <data name="ButtonValidation" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="Disconect" xml:space="preserve">
-    <value>Disconect</value>
-  </data>
   <data name="DisconectAuthorization" xml:space="preserve">
     <value>To add a new account we will have to end the current session do you want to continue?</value>
+  </data>
+  <data name="Disconnect" xml:space="preserve">
+    <value>Disconnect</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>

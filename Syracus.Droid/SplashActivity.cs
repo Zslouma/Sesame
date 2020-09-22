@@ -4,7 +4,7 @@ using Android.Content;
 using Android.OS;
 using Android.Support.V7.App;
 
-namespace Syracuse.Droid
+namespace Syracuse.Mobitheque.Droid
 {
     [Activity(Theme = "@style/MyTheme.Splash", MainLauncher = true, Icon = "@drawable/logo", NoHistory = true)]
     public class SplashActivity : AppCompatActivity

@@ -6,9 +6,9 @@
                       xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
                       xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Core"
                       xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
-                      xmlns:common="clr-namespace:Syracuse.UI.Views.Templates"
+                      xmlns:common="clr-namespace:Syracuse.Mobitheque.UI.Views.Templates"
                       x:TypeArguments="viewModels:OtherAccountViewModel"
-                      x:Class="Syracuse.UI.Views.OtherAccountView"
+                      x:Class="Syracuse.Mobitheque.UI.Views.OtherAccountView"
                       xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
     <NavigationPage.TitleView >
         <common:SearchBarTemplate />

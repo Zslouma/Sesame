@@ -1,9 +1,9 @@
-﻿using Syracuse.UI.Views;
+﻿using Syracuse.Mobitheque.UI.Views;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace Syracuse.UI
+namespace Syracuse.Mobitheque.UI
 {
     public partial class App : Application
     {

@@ -4,7 +4,7 @@ using MvvmCross.Forms.Platforms.Android.Core;
 using Android.Content.PM;
 using Android.OS;
 
-namespace Syracuse.Droid
+namespace Syracuse.Mobitheque.Droid
 {
     [Activity(Label = "Syracus.Droid",
               Theme = "@style/MainTheme",
