@@ -157,7 +157,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         public override Task Initialize()
         {
-            this.ManageDepartments().Wait();
+            this.ManageDepartments();
             return base.Initialize();
         }
         private async Task ManageDepartments()

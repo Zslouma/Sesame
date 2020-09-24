@@ -154,7 +154,7 @@
     <value>Prolonger</value>
   </data>
   <data name="FilterOption" xml:space="preserve">
-    <value>option de filtre</value>
+    <value>Filtrer</value>
   </data>
   <data name="LibraryTitle" xml:space="preserve">
     <value>Bibliothèque</value>
@@ -184,7 +184,7 @@
     <value>Recherche...</value>
   </data>
   <data name="SortOption" xml:space="preserve">
-    <value>Option de tri</value>
+    <value>Trier</value>
   </data>
   <data name="Submit" xml:space="preserve">
     <value>Valider</value>
