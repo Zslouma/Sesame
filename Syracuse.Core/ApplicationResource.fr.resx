@@ -136,7 +136,7 @@
     <value>{0} sont en retard</value>
   </data>
   <data name="AccountInfoCountOfBookings" xml:space="preserve">
-    <value>You have reserved {0} documents</value>
+    <value>Vous avez réservé  {0} documents</value>
   </data>
   <data name="AccountInfoCountOfLoans" xml:space="preserve">
     <value>Vous avez emprunté {0} documents</value>

@@ -29,6 +29,5 @@
             IconImageSource="barcode-solid" 
             Title="{x:Static local:AppResource.Card}" 
             BindingContext="{Binding DisplayCardViewModel}" />
-        <!--<views1:OtherAccountView IconImageSource="exchange-alt-solid" Title="{x:Static local:AppResource.Accounts}" BindingContext="{Binding OtherAccountViewModel}"></views1:OtherAccountView>-->
     </TabbedPage.Children>
 </views:MvxTabbedPage>
