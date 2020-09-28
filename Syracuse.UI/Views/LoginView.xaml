@@ -53,7 +53,7 @@
                             HasError="{Binding UserNameIsError}"
                             ErrorText="{Binding UserNameErrorString}"
                             TextColor="{DynamicResource WhiteTextColor}"
-
+                            TintColor="{DynamicResource WhiteTextColor}"
                             BackgroundColor="Transparent"
                             UnderlineColor="White"/>
                         </yummy:PancakeView>
@@ -73,6 +73,7 @@
                         HasError="{Binding PasswordIsError}"
                         ErrorText="{Binding PasswordErrorString}"
                         TextColor="{DynamicResource WhiteTextColor}"
+                        TintColor="{DynamicResource WhiteTextColor}"
                         BackgroundColor="Transparent"/>
                     </yummy:PancakeView>
                     
