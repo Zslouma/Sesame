@@ -8,11 +8,11 @@
 		<true/>
 	</dict>
 	<key>CFBundleDisplayName</key>
-	<string>Syracuse.Mobitheque.iOS</string>
+	<string>Mobitheque</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2</string>
+	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1.2.18</string>
+	<string>1.0.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
@@ -40,7 +40,7 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>CFBundleName</key>
-	<string>Syracuse.Mobitheque.iOS</string>
+	<string>Mobitheque.iOS</string>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 	<key>NSCameraUsageDescription</key>
@@ -48,7 +48,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>fr</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.syracuse.Archimed.Mobitheque.IOS</string>
+	<string>com.Archimed.Mobitheque.IOS</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Please allow access to data</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
