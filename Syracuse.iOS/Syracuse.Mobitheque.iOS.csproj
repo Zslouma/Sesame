@@ -89,6 +89,7 @@
     <BundleResource Include="Resources\allaccounts.png" />
     <BundleResource Include="Resources\previous.png" />
     <BundleResource Include="Resources\following.png" />
+    <BundleResource Include="Resources\GreenCheck.png" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Entitlements.plist" />

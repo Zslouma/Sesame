@@ -102,10 +102,11 @@
                                             <Grid Padding="5" VerticalOptions="Center">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="0.1*" />
-                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="0.8*" />
+                                                    <ColumnDefinition Width="0.1*" />
                                                 </Grid.ColumnDefinitions>
-                                                <Label FontSize="15" Text="{Binding value}" Grid.Column="0" />
-                                                <BoxView Color="Green" Margin="5" WidthRequest="12" HeightRequest="12" Grid.Column="1" IsVisible="{Binding IsSelected}"/>
+                                                <Label VerticalOptions="Center" FontSize="15" Text="{Binding value}" Grid.Column="1" />
+                                                <Image VerticalOptions="Center" Source="GreenCheck.png" WidthRequest="12" HeightRequest="12" Grid.Column="2" IsVisible="{Binding IsSelected}"/>
                                             </Grid>
                                         </ViewCell>
                                     </DataTemplate>
@@ -118,28 +119,14 @@
                                                     <ColumnDefinition Width="0.1*" />
                                                     <ColumnDefinition Width="*" />
                                                 </Grid.ColumnDefinitions>
-                                                <Label Text="{Binding Name}" Grid.Column="1"/>
-                                                <ImageButton x:Name="HeaderButton" Source="{Binding StateIcon}" BorderColor="Transparent" BackgroundColor="Transparent" Clicked="HeaderButton_Clicked" CommandParameter="{Binding .}" ></ImageButton>
+                                                <Label VerticalOptions="Center" Text="{Binding Name}" Grid.Column="1"/>
+                                                <ImageButton x:Name="HeaderButton" VerticalOptions="Center" Source="{Binding StateIcon}" BorderColor="Transparent" BackgroundColor="Transparent" Clicked="HeaderButton_Clicked" CommandParameter="{Binding .}" ></ImageButton>
                                             </Grid>
                                         </ViewCell>
                                     </DataTemplate>
                                 </ListView.GroupHeaderTemplate>
                             </ListView>
-                            <!--<ListView ItemsSource="{Binding Itemss}" ms:MultiSelectListView.IsMultiSelect="{Binding EnableMultiSelect}" x:Name="FacetteItemList"
-                      Grid.Row="2" Grid.ColumnSpan="3">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <ms:SelectableViewCell>
-                                        <ms:SelectableViewCell.CheckView>
-                                            <BoxView Color="Green" WidthRequest="12" HeightRequest="12" />
-                                        </ms:SelectableViewCell.CheckView>
-                                        <ms:SelectableViewCell.DataView>
-                                            <Label FontAttributes="{Binding font}" FontSize="15" Text="{Binding value}" />
-                                        </ms:SelectableViewCell.DataView>
-                                    </ms:SelectableViewCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>-->
+
                     </Grid>
                         <Picker x:Name="SortPicker"  HorizontalOptions="FillAndExpand" Grid.Column="2" ItemsSource="{Binding SortsName}" SelectedIndex="{Binding SortNamee}" Title="{x:Static local:AppResource.SortOption}" TextColor="{DynamicResource PurpleTextColor}" TitleColor="{DynamicResource PurpleTextColor}" FontAttributes="Bold"></Picker>
                     <Label TextColor="Black" Text="{Binding ResultCount}" Grid.Column="3"/>

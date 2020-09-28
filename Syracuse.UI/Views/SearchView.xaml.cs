@@ -256,7 +256,7 @@ namespace Syracuse.Mobitheque.UI.Views
         {
             if(this.ViewModel.SelectedItems.Count() > 0)
             {
-                Task.Run(() => this.ViewModel.RemoveSelectedCommand());
+                this.ViewModel.RemoveSelectedCommand();
                 this.UpdateItemList();
                 SearchButton.IsVisible = true;
             }

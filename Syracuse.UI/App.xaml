@@ -18,6 +18,7 @@
             <Color x:Key="GreyTextColor">#8F9BB3</Color>
             <Color x:Key="LigthGreyTextColor">#8f9bb3</Color>
             <Color x:Key="WhiteTextColor">#FFFFFF</Color>
+            <Color x:Key="ActivityIndicatorColor">#FFFFFF</Color>
 
             <OnPlatform x:Key="OpenSans"
                  x:TypeArguments="x:String">
@@ -68,7 +69,7 @@
                 <Setter Property="FontSize" Value="{StaticResource FontSize}"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
             </Style>
-            
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
