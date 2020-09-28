@@ -4,7 +4,7 @@
                       xmlns:d="http://xamarin.com/schemas/2014/forms/design"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-                      xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Core"
+                      xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
                       xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
                       xmlns:common="clr-namespace:Syracuse.Mobitheque.UI.Views.Templates"
                       x:TypeArguments="viewModels:OtherAccountViewModel"

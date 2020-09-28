@@ -42,7 +42,8 @@
                         <yummy:PancakeView VerticalOptions="Center"  Grid.ColumnSpan="2"
                             Grid.Row="1" CornerRadius="10" Border="{yummy:BorderMarkup Color=White, Thickness=1}">
                             <material:MaterialTextField
-                           
+                            FloatingPlaceholderColor="{DynamicResource WhiteTextColor}"
+                            PlaceholderColor="{DynamicResource WhiteTextColor}"
                             Placeholder="{x:Static local:AppResource.AccountTitle}"
                             InputType="Default"
                             x:Name="UserNameInput"
@@ -52,8 +53,7 @@
                             HasError="{Binding UserNameIsError}"
                             ErrorText="{Binding UserNameErrorString}"
                             TextColor="{DynamicResource WhiteTextColor}"
-                            FloatingPlaceholderColor="{DynamicResource WhiteTextColor}"
-                            PlaceholderColor="{DynamicResource WhiteTextColor}"
+                            TintColor="{DynamicResource WhiteTextColor}"
                             BackgroundColor="Transparent"
                             UnderlineColor="White"/>
                         </yummy:PancakeView>
@@ -62,6 +62,8 @@
 
                     <yummy:PancakeView VerticalOptions="Center" CornerRadius="10" Border="{yummy:BorderMarkup Color=White, Thickness=1}" Margin="0, 0, 0, 12" >
                     <material:MaterialTextField 
+                        FloatingPlaceholderColor="{DynamicResource WhiteTextColor}"
+                        PlaceholderColor="{DynamicResource WhiteTextColor}"
                         Placeholder="{x:Static local:AppResource.Password}"
                         InputType="Password"
                         x:Name="PasswordInput"
@@ -71,8 +73,7 @@
                         HasError="{Binding PasswordIsError}"
                         ErrorText="{Binding PasswordErrorString}"
                         TextColor="{DynamicResource WhiteTextColor}"
-                        FloatingPlaceholderColor="{DynamicResource WhiteTextColor}"
-                        PlaceholderColor="{DynamicResource WhiteTextColor}"
+                        TintColor="{DynamicResource WhiteTextColor}"
                         BackgroundColor="Transparent"/>
                     </yummy:PancakeView>
                     
