@@ -151,27 +151,69 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 40x40-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 60x60-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 58x58-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 87x87-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 80x80-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 120x120-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 120x120.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 180x180-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 20x20-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 40x40.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 29x29-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 58x58.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 40x40-2.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 80x80.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 76x76-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 152x152-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 167x167-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 1024x1024-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 120x120-2.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 180x180.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 1024x1024.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 40x40-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 60x60-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 58x58-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 87x87-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 80x80-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 120x120-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 120x120.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 180x180-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 20x20-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 40x40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 29x29-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 58x58.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 40x40-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 80x80.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 76x76-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 152x152-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 167x167-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 1024x1024-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 120x120-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 180x180.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 1024x1024.png">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Syracuse.Core\Syracuse.Mobitheque.Core.csproj">
