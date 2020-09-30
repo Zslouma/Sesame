@@ -6,7 +6,7 @@ using Android.OS;
 
 namespace Syracuse.Mobitheque.Droid
 {
-    [Activity(Label = "Syracus.Droid",
+    [Activity(Label = "Mobitheque.Droid",
               Theme = "@style/MainTheme",
               ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, 
               LaunchMode = LaunchMode.SingleTop)]
