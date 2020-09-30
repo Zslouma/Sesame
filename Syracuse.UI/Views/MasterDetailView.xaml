@@ -4,5 +4,6 @@
              x:Class="Syracuse.Mobitheque.UI.Views.MasterDetailView"
              xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
              xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
+             MasterBehavior="Popover"
              x:TypeArguments="viewModels:MasterDetailViewModel">
 </views:MvxMasterDetailPage>

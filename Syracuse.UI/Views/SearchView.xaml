@@ -11,16 +11,16 @@
                      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
 
     <NavigationPage.TitleView xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
-        <AbsoluteLayout>
-            <yummy:PancakeView  CornerRadius="15" VerticalOptions="Center" BackgroundColor="{DynamicResource AppSecondaryBackgroundColor}">
-                <SearchBar x:Name="SearchBar"
-                       TextChanged="SearchBar_OnTextChanged"
-                       HeightRequest="35"
-                       AbsoluteLayout.LayoutBounds="1,0.4,-1,-1"
-                       AbsoluteLayout.LayoutFlags="PositionProportional"
-                       SearchCommand="{Binding SearchCommand}"
-                       SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}" 
-                       HorizontalOptions="FillAndExpand">
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <yummy:PancakeView CornerRadius="15" VerticalOptions="Center"  HorizontalOptions="Fill" Margin="0,0,15,0"  BackgroundColor="{DynamicResource AppSecondaryBackgroundColor}">
+                <SearchBar 
+                        x:Name="SearchBar"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Center"
+                        HeightRequest="35"
+                        Placeholder="{x:Static local:AppResource.Search}"
+                        SearchCommand="{Binding SearchCommand}" 
+                        SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}">
                     <SearchBar.TextColor>
                         <OnPlatform x:TypeArguments="Color">
                             <OnPlatform.iOS>
@@ -36,7 +36,7 @@
                     </SearchBar.TextColor>
                 </SearchBar>
             </yummy:PancakeView>
-        </AbsoluteLayout>
+        </StackLayout>
 
     </NavigationPage.TitleView>
     <ContentPage.Content>
