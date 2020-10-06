@@ -7,16 +7,17 @@ namespace Syracuse.Mobitheque.UI.Views
     [MvxContentPagePresentation()]
      public partial class LoginView : ContentPage
      {
+        public ZxingScannerView scanner;
         public LoginView()
         {
             InitializeComponent();
 
-            //this.ScannButton.Pressed += async (sender, e) =>
-            //{
-            //    var scanner = new ZxingScannerView();
-            //    scanner.OnScanResult += Handle_OnScanResult;
-            //    await this.Navigation.PushAsync(scanner);
-            //};
+            this.ScannButton.Pressed += async (sender, e) =>
+            {
+                this.scanner = new ZxingScannerView();
+                scanner.OnScanResult += Handle_OnScanResult;
+                await this.Navigation.PushAsync(scanner);
+            };
             UserNameInput.Focused += Handle_Focus;
             UserNameInput.Unfocused += Handle_Unfocused;
 
@@ -40,10 +41,12 @@ namespace Syracuse.Mobitheque.UI.Views
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
-                await DisplayAlert("Scanned result", result.Text, "OK");
+                await this.Navigation.PopAsync();
+                this.UserNameInput.Unfocus();
+                this.UserNameInput.Focus();
                 this.UserNameInput.Text = result.Text;
-                await Navigation.PopAsync();
             });
+            
             //Nothing to do here.
         }
 

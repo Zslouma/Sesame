@@ -14,11 +14,7 @@ namespace Syracuse.Mobitheque.UI.Views
             ZxingScannerView scanner = new ZxingScannerView();
             scanner.OnScanResult += (Result r) =>
             {
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await DisplayAlert("Scanned result", r.Text, "OK");
                     this.ViewModel.Result = r.Text;
-                });
             };
             this.PushAsync(scanner);
         }
