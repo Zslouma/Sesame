@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
@@ -64,42 +65,45 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         private async Task RenewLoan(Loans loans)
         {
-            if (!loans.CanRenew)
+            bool answer = await DisplayAlert(ApplicationResource.Warning, String.Format(ApplicationResource.RenewChoice, loans.Title), ApplicationResource.Yes, ApplicationResource.No);
+            if (answer)
             {
-                this.DisplayAlert(ApplicationResource.FailExtendLoan, loans.CannotRenewReason, ApplicationResource.ButtonValidation);
-                return;
-            }
-            this.IsBusy = true;
-            LoansOption[] loanOptions = { new LoansOption { HoldingId = loans.HoldingId, Id = loans.Id, RecordId = loans.RecordId } };
-
-            LoanOptions opt = new LoanOptions()
-            {
-                serviceCode = "SYRACUSE",
-                loans = loanOptions,
-            };
-
-            RenewLoanResult res = await this.requestService.RenewLoans(opt);
-            if (res == null)
-            {
-                this.DisplayAlert(ApplicationResource.Error, ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
-            } 
-            else if (!res.Success)
-            {
-                this.DisplayAlert(ApplicationResource.Error, res.Errors[0].Msg, ApplicationResource.ButtonValidation);
-            }
-            else
-            {
-                if (res.D.SuccessCount > 0)
+                if (!loans.CanRenew)
                 {
-                    this.DisplayAlert(ApplicationResource.Success, String.Format(ApplicationResource.SuccessExtendLoan, loans.Title), ApplicationResource.ButtonValidation);
+                    this.DisplayAlert(ApplicationResource.FailExtendLoan, loans.CannotRenewReason, ApplicationResource.ButtonValidation);
+                    return;
+                }
+                this.IsBusy = true;
+                LoansOption[] loanOptions = { new LoansOption { HoldingId = loans.HoldingId, Id = loans.Id, RecordId = loans.RecordId } };
+
+                LoanOptions opt = new LoanOptions()
+                {
+                    serviceCode = "SYRACUSE",
+                    loans = loanOptions,
+                };
+
+                RenewLoanResult res = await this.requestService.RenewLoans(opt);
+                if (res == null)
+                {
+                    this.DisplayAlert(ApplicationResource.Error, ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
+                }
+                else if (!res.Success)
+                {
+                    this.DisplayAlert(ApplicationResource.Error, res.Errors[0].Msg, ApplicationResource.ButtonValidation);
                 }
                 else
                 {
-                    this.DisplayAlert(ApplicationResource.Error, res.D.Errors[0].Value, ApplicationResource.ButtonValidation);
+                    if (res.D.SuccessCount > 0)
+                    {
+                        this.DisplayAlert(ApplicationResource.Success, String.Format(ApplicationResource.SuccessExtendLoan, loans.Title), ApplicationResource.ButtonValidation);
+                    }
+                    else
+                    {
+                        this.DisplayAlert(ApplicationResource.Error, res.D.Errors[0].Value, ApplicationResource.ButtonValidation);
+                    }
                 }
+                await this.refreshLoans();
             }
-            await this.refreshLoans();
-
 
 
         }

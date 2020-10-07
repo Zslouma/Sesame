@@ -151,6 +151,17 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Would you like to cancel the following booking:
+        ///{0}
+        ///This act is final!.
+        /// </summary>
+        public static string BookingCancelChoice {
+            get {
+                return ResourceManager.GetString("BookingCancelChoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to My bookings.
         /// </summary>
         public static string Bookings {
@@ -223,6 +234,15 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Voulez-vous confirmer votre reservation à {0}.
+        /// </summary>
+        public static string HoldingChoice {
+            get {
+                return ResourceManager.GetString("HoldingChoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string Home {
@@ -273,6 +293,16 @@ namespace Syracuse.Mobitheque.Core {
         public static string OtherAccount {
             get {
                 return ResourceManager.GetString("OtherAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Would you like to extend this copy?
+        ///{0}.
+        /// </summary>
+        public static string RenewChoice {
+            get {
+                return ResourceManager.GetString("RenewChoice", resourceCulture);
             }
         }
         

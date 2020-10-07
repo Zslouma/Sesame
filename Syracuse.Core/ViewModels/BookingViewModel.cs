@@ -62,37 +62,41 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         private async Task CancelBooking(Booking booking)
         {
-            this.IsBusy = true;
-            BookingOption[] bookingOption = { new BookingOption { HoldingId = booking.HoldingId, Id = booking.Id, RecordId = booking.RecordId } };
+            bool answer = await DisplayAlert(ApplicationResource.Warning, String.Format(ApplicationResource.BookingCancelChoice, booking.Title), ApplicationResource.Yes, ApplicationResource.No);
+            if (answer)
+            {
+                this.IsBusy = true;
+                BookingOption[] bookingOption = { new BookingOption { HoldingId = booking.HoldingId, Id = booking.Id, RecordId = booking.RecordId } };
 
-            BookingOptions opt = new BookingOptions()
-            {
-                serviceCode = "SYRACUSE",
-                bookings = bookingOption,
-            };
-
-            CancelBookingResult res = await this.requestService.CancelBooking(opt);
-            if (res == null)
-            {
-                this.DisplayAlert(ApplicationResource.Error, ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
-                return;
-            }
-            else if (!res.Success)
-            {
-                this.DisplayAlert(ApplicationResource.Error, res.Errors[0].Msg, ApplicationResource.ButtonValidation);
-            }
-            else
-            {
-                if (res.D.SuccessCount > 0)
+                BookingOptions opt = new BookingOptions()
                 {
-                    this.DisplayAlert(ApplicationResource.Success, String.Format(ApplicationResource.SuccessCancelBooking, booking.Title), ApplicationResource.ButtonValidation);
+                    serviceCode = "SYRACUSE",
+                    bookings = bookingOption,
+                };
+
+                CancelBookingResult res = await this.requestService.CancelBooking(opt);
+                if (res == null)
+                {
+                    this.DisplayAlert(ApplicationResource.Error, ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
+                    return;
+                }
+                else if (!res.Success)
+                {
+                    this.DisplayAlert(ApplicationResource.Error, res.Errors[0].Msg, ApplicationResource.ButtonValidation);
                 }
                 else
                 {
-                    this.DisplayAlert(ApplicationResource.Error, res.D.Errors[0].Value, ApplicationResource.ButtonValidation);
+                    if (res.D.SuccessCount > 0)
+                    {
+                        this.DisplayAlert(ApplicationResource.Success, String.Format(ApplicationResource.SuccessCancelBooking, booking.Title), ApplicationResource.ButtonValidation);
+                    }
+                    else
+                    {
+                        this.DisplayAlert(ApplicationResource.Error, res.D.Errors[0].Value, ApplicationResource.ButtonValidation);
+                    }
                 }
+                await refreshBooking();
             }
-            await refreshBooking();
         }
 
         public BookingViewModel(IRequestService requestService, IMvxNavigationService navigationService)

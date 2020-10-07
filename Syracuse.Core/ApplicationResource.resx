@@ -147,6 +147,11 @@
   <data name="AccountInfoReturnDateLoans" xml:space="preserve">
     <value>{0} are to be returned on {1}</value>
   </data>
+  <data name="BookingCancelChoice" xml:space="preserve">
+    <value>Would you like to cancel the following booking:
+{0}
+This act is final!</value>
+  </data>
   <data name="Bookings" xml:space="preserve">
     <value>My bookings</value>
   </data>
@@ -171,6 +176,9 @@
   <data name="FailExtendLoan" xml:space="preserve">
     <value>Renewal Impossible</value>
   </data>
+  <data name="HoldingChoice" xml:space="preserve">
+    <value>Voulez-vous confirmer votre reservation à {0}</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
@@ -188,6 +196,10 @@
   </data>
   <data name="OtherAccount" xml:space="preserve">
     <value>All my accounts</value>
+  </data>
+  <data name="RenewChoice" xml:space="preserve">
+    <value>Would you like to extend this copy?
+{0}</value>
   </data>
   <data name="Scan" xml:space="preserve">
     <value>Scan</value>

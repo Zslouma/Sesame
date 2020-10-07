@@ -59,9 +59,6 @@
                                                             <material:MaterialLabel FontSize="Default" Text="{Binding DisplayValues.AuthorDate}"/>
                                                         </StackLayout>
                                                         <StackLayout Grid.Row="1" Grid.ColumnSpan="2"  Orientation="Vertical">
-                                                            <!--<Label FontSize="Default" Text="{Binding FieldList.Language[0]}" FontAttributes="Bold" TextColor="Black"/>
-                                            <Label FontSize="Default" Text="{Binding FieldList.Funds[0]}" FontAttributes="Bold" TextColor="Black"/>
-                                            <Label FontSize="Default" Text="{Binding FieldList.Ean[0]}" FontAttributes="Bold" TextColor="Black"/>-->
                                                             <material:MaterialLabel FontSize="Default" Text="{Binding DisplayValues.Desc}" TextType="Html" TextColor="Black"/>
                                                         </StackLayout>
                                                     </Grid>
@@ -72,12 +69,12 @@
                                                     <material:MaterialLabel FontSize="Large" Text="{x:Static local:AppResource.Copies}" TextColor="White"/>
                                                 </StackLayout>
                                                 <ListView 
-                                                ItemsSource="{Binding DisplayValues.Library.Dataa.Holdings}" 
-                                                IsVisible="{Binding DisplayValues.Library.success}"
-                                                SeparatorVisibility="None"
-                                                VerticalScrollBarVisibility="Never"
-                                                RowHeight="180"
-                                                IsPullToRefreshEnabled="False">
+                                                    ItemsSource="{Binding DisplayValues.Library.Dataa.Holdings}" 
+                                                    IsVisible="{Binding DisplayValues.Library.success}"
+                                                    SeparatorVisibility="None"
+                                                    VerticalScrollBarVisibility="Never"
+                                                    RowHeight="180"
+                                                    IsPullToRefreshEnabled="False">
                                                     <ListView.ItemTemplate>
                                                         <DataTemplate>
                                                             <ViewCell>
@@ -100,7 +97,7 @@
                                                                             <Label TextColor="Gray" Text="{Binding Site}" />
                                                                             <Label TextColor="Gray" Text="{Binding BookingTooltip}" />
                                                                             <Label TextColor="Gray" Text="{Binding Statut}"/>
-                                                                            <Button x:Name="PressMeButton" TextColor="#59a0ec" BackgroundColor="white" Text="Réserver" BindingContext="{Binding .}" Clicked="PressMeButton_Clicked"/>
+                                                                            <Button x:Name="HoldingButton" TextColor="#59a0ec" BackgroundColor="white" Text="Réserver" BindingContext="{Binding .}" Clicked="HoldingButton_Clicked"/>
                                                                         </StackLayout>
                                                                     </Grid>
                                                                 </StackLayout>
