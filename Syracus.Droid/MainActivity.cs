@@ -8,7 +8,8 @@ namespace Syracuse.Mobitheque.Droid
 {
     [Activity(Label = "Mobitheque.Droid",
               Theme = "@style/MainTheme",
-              ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, 
+              ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
+              ScreenOrientation = ScreenOrientation.Portrait,
               LaunchMode = LaunchMode.SingleTop)]
     public class MainActivity : MvxFormsAppCompatActivity<MvxFormsAndroidSetup<Mobitheque.Core.App, UI.App>, Mobitheque.Core.App, UI.App>
     {
