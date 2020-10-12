@@ -49,6 +49,16 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 SetProperty(ref this.library, value);
             }
         }
+        private bool isKm = false;
+
+        public bool IsKm
+        {
+            get => this.isKm;
+            set
+            {
+                SetProperty(ref this.isKm, value);
+            }
+        }
 
 
         public MenuViewModel(IMvxNavigationService navigationService,
@@ -69,16 +79,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             };
 
             this.requestService = requestService;
-            this.ShowDetailPageCommand = new MvxAsyncCommand<string>(this.ShowDetailPageAsync);
         }
-
-
         public override async void Prepare()
         {
 
             CookiesSave user = App.Database?.GetActiveUser()?.Result;
             if (user != null)
             {
+                this.IsKm = user.IsKm;
                 this.Library = user.Library;
                 if (string.IsNullOrEmpty(user?.DisplayName))
                 {
@@ -91,7 +99,24 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 {
                     this.DisplayName = user.DisplayName;
                 }
+                if (this.IsKm)
+                {
+                    this.menuItemList = new ObservableCollection<MenuItem>()
+                    {
+                        new MenuItem() { Text = ApplicationResource.Home, IconImageSource = "home" },
+                        new MenuItem() { Text = ApplicationResource.Account, IconImageSource = "profile" },
+                        new MenuItem() { Text = ApplicationResource.OtherAccount, IconImageSource = "allaccounts" },
+                        new MenuItem() { Text = ApplicationResource.Scan, IconImageSource = "borrowing" },
+                        new MenuItem() { Text = ApplicationResource.Library, IconImageSource = "library" },
+                        new MenuItem() { Text = ApplicationResource.About, IconImageSource = "library" },
+                        new MenuItem() { Text = ApplicationResource.Disconnect, IconImageSource = "library" },
+                    };
+                   
+                }
             }
+            await this.RaiseAllPropertiesChanged();
+            this.ShowDetailPageCommand = new MvxAsyncCommand<string>(this.ShowDetailPageAsync);
+            
         }
 
 

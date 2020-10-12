@@ -29,6 +29,8 @@ namespace Syracuse.Mobitheque.Core.Models
 
         public bool RememberMe { get; set; }
 
+        public bool IsKm { get; set; }
+
         public string BuildingInfos { get; set; }
     }
 }

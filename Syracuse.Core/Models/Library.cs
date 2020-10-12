@@ -24,6 +24,8 @@ namespace Syracuse.Mobitheque.Core.Models
         public string EventsScenarioCode { get; set; }
         [JsonProperty("remember_me")]
         public bool RememberMe { get; set; }
+        [JsonProperty("is_km")]
+        public bool IsKm { get; set; }
         [JsonProperty("library_informations")]
         public List<LibraryInformations> BuildingInformations { get; set; }
     }

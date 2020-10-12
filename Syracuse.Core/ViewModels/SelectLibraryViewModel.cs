@@ -87,6 +87,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             opt.EventsScenarioCode = this.librariesSelected[this.librariesPickerIndex].Config.EventsScenarioCode;
             opt.SearchScenarioCode = this.librariesSelected[this.librariesPickerIndex].Config.SearchScenarioCode;
             opt.RememberMe = this.librariesSelected[this.librariesPickerIndex].Config.RememberMe;
+            opt.IsKm = this.librariesSelected[this.librariesPickerIndex].Config.IsKm;
             opt.BuildingInfos = JsonConvert.SerializeObject(this.librariesSelected[this.librariesPickerIndex].Config.BuildingInformations);
 
             await this.navigationService.Navigate<LoginViewModel, CookiesSave>(opt);

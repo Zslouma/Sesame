@@ -252,7 +252,7 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to My library.
+        ///   Looks up a localized string similar to My establishment.
         /// </summary>
         public static string Library {
             get {

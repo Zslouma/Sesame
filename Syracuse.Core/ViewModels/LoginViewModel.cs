@@ -156,6 +156,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 item.SearchScenarioCode = department.SearchScenarioCode;
                 item.EventsScenarioCode = department.EventsScenarioCode;
                 item.RememberMe = department.RememberMe;
+                item.IsKm = department.IsKm;
                 item.BuildingInfos = department.BuildingInfos;
                 await App.Database.SaveItemAsync(item);
                 this.requestService.LoadCookies(JsonConvert.DeserializeObject<Cookie[]>(item.Cookies));

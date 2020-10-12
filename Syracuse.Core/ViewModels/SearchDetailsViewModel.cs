@@ -42,12 +42,12 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             get => this.desc;
             set { SetProperty(ref this.desc, value); }
         }
-        private bool seekForHoldings;
-        public bool SeekForHoldings
-        {
-            get => this.seekForHoldings;
-            set { SetProperty(ref this.seekForHoldings, value); }
-        }
+        //private bool seekForHoldings;
+        //public bool SeekForHoldings
+        //{
+        //    get => this.seekForHoldings;
+        //    set { SetProperty(ref this.seekForHoldings, (value && this.ReversIsKm)); }
+        //}
         private ObservableCollection<Result> itemsSource;
         public ObservableCollection<Result> ItemsSource
         {
@@ -150,6 +150,13 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
         }
 
+        private bool reversIsKm = false;
+        public bool ReversIsKm
+        {
+            get => this.reversIsKm;
+            set { SetProperty(ref this.reversIsKm, value); }
+        }
+
 
 
         private MvxAsyncCommand<string> searchCommand;
@@ -176,6 +183,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         async public override void Prepare(SearchDetailsParameters parameter)
         {
             this.IsBusy = true;
+            await this.CanHolding();
             this.Results = new List<Result>();
             int finalPosition = 0;
             this.SearchOptions = parameter.searchOptions;
@@ -203,9 +211,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                          resultTempo.DisplayValues.AuthorDate = string.Format("{0}", author);
                     else
                         resultTempo.DisplayValues.AuthorDate = "";
-                    resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings;
+                    resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
                     await PerformSearch(resultTempo.FieldList.Identifier[0]);
                     resultTempo.DisplayValues.Library = this.Library;
+                    resultTempo.DisplayValues.Library.success = resultTempo.DisplayValues.Library.success && resultTempo.DisplayValues.SeekForHoldings;
                     if (i == 1)
                     {
                         if (resultTempo == parameterTempo[0].D.Results[0])
@@ -226,6 +235,12 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
             this.IsBusy = false;
             this.IsPositionVisible = true;
+        }
+
+        public async Task CanHolding()
+        {
+            var user = await App.Database.GetActiveUser();
+            this.ReversIsKm = !user.IsKm;
         }
 
         public async Task NavigationBack()
@@ -262,9 +277,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     resultTempo.DisplayValues.AuthorDate = string.Format("{0}", author);
                 else
                     resultTempo.DisplayValues.AuthorDate = "";
-                resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings;
+                resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
                 await PerformSearch(resultTempo.FieldList.Identifier[0]);
                 resultTempo.DisplayValues.Library = this.Library;
+                resultTempo.DisplayValues.Library.success = resultTempo.DisplayValues.Library.success && resultTempo.DisplayValues.SeekForHoldings;
                 this.ItemsSource.Add(resultTempo);
             }
         }
