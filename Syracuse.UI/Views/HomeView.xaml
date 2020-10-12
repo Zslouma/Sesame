@@ -34,7 +34,7 @@
                     </Grid>
                     <Label Margin="10" HorizontalTextAlignment="Start" Text="{x:Static local:AppResource.NotCurrentEvent}" IsVisible="{Binding NotCurrentEvent}" />
                     <ListView x:Name="resultsList"
-                      IsVisible="{Binding NotCurrentEventReverse}"
+                      IsVisible="{Binding IsEvent}"
                       CachingStrategy="RecycleElement"
                       ItemsSource="{Binding Results}" 
                       SeparatorVisibility="Default"
@@ -46,9 +46,9 @@
                                 <ViewCell>
                                     <Frame HasShadow="True" Padding="0, 5, 0, 5">
                                         <StackLayout Orientation="Vertical" BackgroundColor="White" Padding="5, 0, 5, 0">
-                                            <Image VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Aspect="AspectFill" Source="{Binding FieldList.ThumbLarge[0]}" HeightRequest="90" Margin="5"/>
+                                            <Image VerticalOptions="Fill" HorizontalOptions="Fill" Aspect="AspectFill" Source="{Binding FieldList.Image}" HeightRequest="90" Margin="5"/>
                                             <StackLayout Padding="0, 5, 0, 0"  Orientation="Vertical" >
-                                                <Label Text="{Binding FieldList.Title[0]}" FontAttributes="Bold" FontSize="{d:DynamicResource FontSizeTitle}" TextColor="{d:DynamicResource DarkTextColor}"/>
+                                                <Label Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="{d:DynamicResource FontSizeTitle}" TextColor="{d:DynamicResource DarkTextColor}"/>
                                                 <Label Text="{Binding FieldList.SubjectTopicFirstUpper}" FontAttributes="Bold" FontSize="Medium" TextColor="{d:DynamicResource LigthGreyTextColor}" ></Label>
                                                 <Label Text="{Binding FieldList.DateTime_String}" FontSize="Small" TextColor="{d:DynamicResource DarkTextColor}"/>
                                             </StackLayout>
@@ -57,6 +57,36 @@
                                 </ViewCell>
                             </DataTemplate>
 
+                        </ListView.ItemTemplate>
+                        <ListView.Footer>
+                            <material:MaterialButton Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}"></material:MaterialButton>
+                        </ListView.Footer>
+                    </ListView>
+
+                    <ListView x:Name="resultsList2" 
+                          IsVisible="{Binding ReverseIsEvent}"
+                          CachingStrategy="RecycleElement"
+                          ItemsSource="{Binding Results}"
+                          SeparatorVisibility="None"
+                          RowHeight="170"
+                          VerticalScrollBarVisibility="Never"
+                          IsPullToRefreshEnabled="False">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal" Padding="7, 0, 7, 0">
+                                        <Image VerticalOptions="Center" Source="{Binding FieldList.Image}" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent" Margin="5"/>
+                                        <StackLayout VerticalOptions="Center" Orientation="Vertical">
+                                            <Label TextColor="Black" Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="Medium"/>
+                                            <Label TextColor="Gray" Text="{Binding FieldList.shortDesc}" MaxLines="2" FontSize="Small"/>
+                                            <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                                <BoxView VerticalOptions="Center" WidthRequest="5"  BackgroundColor="{Binding Resource.ColorStatus}"/>
+                                                <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="CenterAndExpand" FontSize="Medium" Text="{Binding Resource.TextStatus}"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
                         </ListView.ItemTemplate>
                         <ListView.Footer>
                             <material:MaterialButton Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}"></material:MaterialButton>

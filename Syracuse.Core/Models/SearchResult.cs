@@ -227,11 +227,20 @@ namespace Syracuse.Mobitheque.Core.Models
 
         public DateTime[] DateStart_idx { get; set; }
 
-        public String DateTime_String
+        public string DateTime_String
         { get
             {
-                String ret = "Le " + this.DateStart_idx[0].Date.ToString(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern);
+                string ret;
+                if (this.DateStart_idx != null)
+                {
+                    ret = this.DateStart_idx[0].Date.ToString(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern);
+                }
+                else
+                {
+                    ret = "";
+                }
                 return ret;
+
             }
         }
 
@@ -242,7 +251,15 @@ namespace Syracuse.Mobitheque.Core.Models
         public String[] SubjectTopic_exact { get; set; }
 
         public String SubjectTopicFirstUpper { get {
-                return SubjectTopic_exact[0].ToUpper();
+                if (SubjectTopic_exact != null)
+                {
+                    return SubjectTopic_exact[0].ToUpper();
+                }
+                else
+                {
+                    return "";
+                }
+                
             } }
 
         public String[] Identifier { get; set; } 

@@ -86,6 +86,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             opt.LibraryUrl = this.librariesSelected[this.librariesPickerIndex].Config.BaseUri;
             opt.EventsScenarioCode = this.librariesSelected[this.librariesPickerIndex].Config.EventsScenarioCode;
             opt.SearchScenarioCode = this.librariesSelected[this.librariesPickerIndex].Config.SearchScenarioCode;
+            opt.IsEvent = this.librariesSelected[this.librariesPickerIndex].Config.IsEvent;
             opt.RememberMe = this.librariesSelected[this.librariesPickerIndex].Config.RememberMe;
             opt.IsKm = this.librariesSelected[this.librariesPickerIndex].Config.IsKm;
             opt.BuildingInfos = JsonConvert.SerializeObject(this.librariesSelected[this.librariesPickerIndex].Config.BuildingInformations);

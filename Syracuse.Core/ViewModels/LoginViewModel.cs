@@ -155,6 +155,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 item.Department = department.Department;
                 item.SearchScenarioCode = department.SearchScenarioCode;
                 item.EventsScenarioCode = department.EventsScenarioCode;
+                item.IsEvent = department.IsEvent;
                 item.RememberMe = department.RememberMe;
                 item.IsKm = department.IsKm;
                 item.BuildingInfos = department.BuildingInfos;

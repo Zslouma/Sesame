@@ -57,6 +57,27 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
         }
 
+        private bool isEvent = false;
+        public bool IsEvent
+        {
+            get => this.isEvent;
+            set
+            {
+                this.ReverseIsEvent = !value;
+                SetProperty(ref this.isEvent, value && NotCurrentEventReverse);
+            }
+        }
+
+        private bool reverseIsEvent = false;
+        public bool ReverseIsEvent
+        {
+            get => this.reverseIsEvent;
+            set
+            {
+                SetProperty(ref this.reverseIsEvent, value && NotCurrentEventReverse);
+            }
+        }
+
         private bool isBusy = true;
         public bool IsBusy
         {
@@ -137,9 +158,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         public async override Task Initialize()
         {
             this.IsBusy = true;
-            this.Library = (await App.Database.GetActiveUser()).Library;
-            this.EventsScenarioCode = (await App.Database.GetActiveUser()).EventsScenarioCode;
-            this.SearchScenarioCode = (await App.Database.GetActiveUser()).SearchScenarioCode;
+            var user = await App.Database.GetActiveUser();
+            this.Library = user.Library;
+            this.EventsScenarioCode = user.EventsScenarioCode;
+            this.SearchScenarioCode = user.SearchScenarioCode;
             this.Results = await this.loadPage();
             if (this.results.Length == 0)
             {
@@ -149,6 +171,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 this.NotCurrentEvent = false;
             }
+            this.IsEvent = user.IsEvent;
             await base.Initialize();
         }
 
