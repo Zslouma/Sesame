@@ -14,7 +14,8 @@ namespace Syracuse.Mobitheque.UI.Views
         {
             InitializeComponent();
 
-            this.resultsList.ItemTapped += ResultsList_ItemTapped;
+            this.resultsListEvent.ItemTapped += ResultsList_ItemTapped;
+            this.resultsListDocument.ItemTapped += ResultsList_ItemTapped;
         }
 
         protected override void OnBindingContextChanged()
