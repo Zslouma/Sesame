@@ -62,15 +62,15 @@
                             <material:MaterialButton Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}"></material:MaterialButton>
                         </ListView.Footer>
                     </ListView>
-
                     <ListView x:Name="resultsListDocument" 
-                          IsVisible="{Binding ReverseIsEvent}"
-                          CachingStrategy="RecycleElement"
-                          ItemsSource="{Binding Results}"
-                          SeparatorVisibility="None"
-                          RowHeight="170"
-                          VerticalScrollBarVisibility="Never"
-                          IsPullToRefreshEnabled="False">
+                              IsVisible="{Binding ReverseIsEvent}"
+                              CachingStrategy="RecycleElement"
+                              ItemsSource="{Binding Results}"
+                              SeparatorVisibility="Default"
+                              RowHeight="170"
+                              SelectionMode="None"
+                              VerticalScrollBarVisibility="Never"
+                              IsPullToRefreshEnabled="False">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -92,7 +92,6 @@
                             <material:MaterialButton Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}"></material:MaterialButton>
                         </ListView.Footer>
                     </ListView>
-
                 </StackLayout>
                 <AbsoluteLayout IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
                     <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
