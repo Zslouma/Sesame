@@ -164,7 +164,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
             else
             {
-                b.Active = true;
                 b.Username = this.username;
                 b.Active = true;
                 b.Cookies = JsonConvert.SerializeObject(this.requestService.GetCookies().ToArray());
@@ -173,7 +172,9 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 b.Department = department.Department;
                 b.SearchScenarioCode = department.SearchScenarioCode;
                 b.EventsScenarioCode = department.EventsScenarioCode;
+                b.IsEvent = department.IsEvent;
                 b.RememberMe = department.RememberMe;
+                b.IsKm = department.IsKm;
                 b.BuildingInfos = department.BuildingInfos;
                 await App.Database.SaveItemAsync(b);
                 this.requestService.LoadCookies(JsonConvert.DeserializeObject<Cookie[]>(b.Cookies));
