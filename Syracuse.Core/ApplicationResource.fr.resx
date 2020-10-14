@@ -147,6 +147,9 @@
   <data name="AccountInfoReturnDateLoans" xml:space="preserve">
     <value>{0} sont à rendre le {1}</value>
   </data>
+  <data name="AccountSwitchSuccess" xml:space="preserve">
+    <value>Vous êtes connecté en tant que {0}</value>
+  </data>
   <data name="BookingCancelChoice" xml:space="preserve">
     <value>Souhaitez-vous annuler la réservation suivante:
 {0}

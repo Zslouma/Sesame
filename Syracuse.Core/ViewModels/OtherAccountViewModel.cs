@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Threading.Tasks;
@@ -56,6 +57,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             itemTapped.Active = true;
             await App.Database.SaveItemAsync(itemTapped);
             this.requestService.LoadCookies(a);
+            this.DisplayAlert(ApplicationResource.Success, String.Format(ApplicationResource.AccountSwitchSuccess, itemTapped.DisplayName), ApplicationResource.ButtonValidation);
             await this.navigationService.Navigate<MasterDetailViewModel>();
         }
         private async Task ExecuteRemoveItemCommand(object sender)

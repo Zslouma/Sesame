@@ -33,5 +33,11 @@ namespace Syracuse.Mobitheque.UI.Views
                await this.ViewModel.Disconnect(true);
             }
         }
+        protected override void OnBindingContextChanged()
+        {
+            (this.DataContext as OtherAccountViewModel).OnDisplayAlert += OtherAccountView_OnDisplayAlert;
+            base.OnBindingContextChanged();
+        }
+        private void OtherAccountView_OnDisplayAlert(string title, string message, string button) => this.DisplayAlert(title, message, button);
     }
 }

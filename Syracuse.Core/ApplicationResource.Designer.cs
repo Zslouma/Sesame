@@ -151,6 +151,15 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You are logged in as {0}.
+        /// </summary>
+        public static string AccountSwitchSuccess {
+            get {
+                return ResourceManager.GetString("AccountSwitchSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Would you like to cancel the following booking:
         ///{0}
         ///This act is final!.
