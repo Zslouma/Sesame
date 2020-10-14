@@ -151,6 +151,15 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Consult online.
+        /// </summary>
+        public static string DigitalDocumentLink {
+            get {
+                return ResourceManager.GetString("DigitalDocumentLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error: we were unable to contact your Library&apos;s information..
         /// </summary>
         public static string ErrorLibraryWebSite {

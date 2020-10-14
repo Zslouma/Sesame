@@ -147,6 +147,9 @@
   <data name="DepartmentTitle" xml:space="preserve">
     <value>Département</value>
   </data>
+  <data name="DigitalDocumentLink" xml:space="preserve">
+    <value>Consulter en ligne</value>
+  </data>
   <data name="ErrorLibraryWebSite" xml:space="preserve">
     <value>Erreur: nous ne somme pas parvenis à contacter les informations de votre Bibliothéque</value>
   </data>

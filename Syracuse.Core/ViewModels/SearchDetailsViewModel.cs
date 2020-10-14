@@ -229,7 +229,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.ItemsSource = new ObservableCollection<Result>(this.Results);
             this.CurrentItem = this.Results.Skip(finalPosition).FirstOrDefault();
             this.Position = finalPosition;
-            if (this.Position >= (this.ItemsSource.Count() - 5))
+            if (this.Position >= (this.ItemsSource.Count() - 5) && int.Parse(this.NbrResults) > this.ItemsSource.Count)
             {
                 await LoadMore();
             }
@@ -331,6 +331,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 BaseName = BaseName
                 
             };
+
             PlaceReservationResult res = await this.requestService.PlaceReservation(new PlaceReservationOptions() { HoldingItem = options });
             if (res == null)
             {

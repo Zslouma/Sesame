@@ -134,6 +134,7 @@
                           CachingStrategy="RecycleElement"
                           ItemsSource="{Binding Results}"
                           SeparatorVisibility="None"
+                          SelectionMode="None"
                           RowHeight="170"
                           VerticalScrollBarVisibility="Never"
                           IsPullToRefreshEnabled="False">

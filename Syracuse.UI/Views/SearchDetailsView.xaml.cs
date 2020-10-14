@@ -4,8 +4,11 @@ using Xamarin.Forms.Xaml;
 using Syracuse.Mobitheque.Core.Models;
 using System;
 using Xamarin.Forms;
+using System.Windows.Input;
+using Xamarin.Essentials;
 using System.Threading.Tasks;
 using Syracuse.Mobitheque.Core;
+
 
 namespace Syracuse.Mobitheque.UI.Views
 {
@@ -30,11 +33,19 @@ namespace Syracuse.Mobitheque.UI.Views
         private async void OnCarouselViewRemainingItemsThresholdReached(object sender, EventArgs e)
         {
             Console.WriteLine("OnCarouselViewRemainingItemsThresholdReached:");
-            if (!this.ViewModel.InLoadMore)
+            if (int.Parse(this.ViewModel.NbrResults) > this.ViewModel.ItemsSource.Count)
             {
-                await this.ViewModel.LoadMore();
-            }
             
+                if (!this.ViewModel.InLoadMore)
+                {
+                    await this.ViewModel.LoadMore();
+                }
+            }
+            else
+            {
+                carouselView.RemainingItemsThresholdReached -= OnCarouselViewRemainingItemsThresholdReached;
+            }
+
         }
         private void OnScrollEvent(object sender, ScrolledEventArgs e) {
 
@@ -82,6 +93,11 @@ namespace Syracuse.Mobitheque.UI.Views
             }
 
         }
+        private async void OpenBrowser_OnClicked(object sender, EventArgs e)
+        {
+            string url = ((Button)sender).CommandParameter as string;
+            await Browser.OpenAsync(new Uri(url), BrowserLaunchMode.SystemPreferred);
+        }
 
         private async void HoldingButton_Clicked(object sender, EventArgs e)
         {
@@ -99,6 +115,14 @@ namespace Syracuse.Mobitheque.UI.Views
             (this.DataContext as SearchDetailsViewModel).OnDisplayAlertMult += SearchDetailsView_OnDisplayAlertMult;
             base.OnBindingContextChanged();
         }
+
+
+        void OpenBrowser(string url)
+        {
+            Device.OpenUri(new Uri(url));
+        }
+
+
         private void SearchDetailsView_OnDisplayAlert(string title, string message, string button) => this.DisplayAlert(title, message, button);
         private Task<bool> SearchDetailsView_OnDisplayAlertMult(string title, string message, string buttonYes, string buttonNo)
         {

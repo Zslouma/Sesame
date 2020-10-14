@@ -108,6 +108,13 @@ namespace Syracuse.Mobitheque.UI {
                 return ResourceManager.GetString("DepartmentTitle", resourceCulture);
             }
         }
+        public static string DigitalDocumentLink
+        {
+            get
+            {
+                return ResourceManager.GetString("DigitalDocumentLink", resourceCulture);
+            }
+        }
 
         public static string ErrorLibraryWebSite
         {

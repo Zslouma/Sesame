@@ -63,8 +63,31 @@
                                                         </StackLayout>
                                                     </Grid>
                                                 </StackLayout>
-
-
+                                                <StackLayout IsVisible="{Binding HasPrimaryDocs}"  BackgroundColor="#bfbfbf" Padding="10">
+                                                    <material:MaterialLabel FontSize="Large" Text="{x:Static local:AppResource.Copies}" TextColor="White"/>
+                                                </StackLayout>
+                                                <StackLayout IsVisible="{Binding HasPrimaryDocs}">
+                                                    <ListView 
+                                                    ItemsSource="{Binding PrimaryDocs}" 
+                                                    SeparatorVisibility="None"
+                                                    VerticalScrollBarVisibility="Never"
+                                                    VerticalOptions="FillAndExpand"
+                                                    RowHeight="180">
+                                                        <ListView.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <ViewCell>
+                                                                    <StackLayout Padding="5"  BackgroundColor="#f0f0f0">
+                                                                        <Button Text="{Binding Label}"
+                                                                                TextColor="Blue"
+                                                                                BackgroundColor="Transparent"
+                                                                                CommandParameter="{Binding Link}"
+                                                                                Clicked="OpenBrowser_OnClicked"></Button>
+                                                                    </StackLayout>
+                                                                </ViewCell>
+                                                            </DataTemplate>
+                                                        </ListView.ItemTemplate>
+                                                    </ListView>
+                                                </StackLayout>
                                                 <StackLayout IsVisible="{Binding DisplayValues.SeekForHoldings}"  BackgroundColor="#bfbfbf" Padding="10">
                                                     <material:MaterialLabel FontSize="Large" Text="{x:Static local:AppResource.Copies}" TextColor="White"/>
                                                 </StackLayout>
@@ -73,6 +96,7 @@
                                                     IsVisible="{Binding DisplayValues.Library.success}"
                                                     SeparatorVisibility="None"
                                                     VerticalScrollBarVisibility="Never"
+                                                    VerticalOptions="FillAndExpand"
                                                     RowHeight="180"
                                                     IsPullToRefreshEnabled="False">
                                                     <ListView.ItemTemplate>

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 
 namespace Syracuse.Mobitheque.Core.Models
@@ -289,11 +291,20 @@ namespace Syracuse.Mobitheque.Core.Models
         [JsonProperty("GroupedResults")]
         public object[] GroupedResults { get; set; }
 
+        [JsonProperty("HasDigitalReady")]
+        public bool HasDigitalReady { get; set; }
+
+        [JsonProperty("HasPrimaryDocs")]
+        public bool HasPrimaryDocs { get; set; }
+
         [JsonProperty("HighLights")]
         public Suggestions HighLights { get; set; }
 
         [JsonProperty("LinkedResultsTwin")]
         public LinkedResultsTwin LinkedResultsTwin { get; set; }
+
+        [JsonProperty("PrimaryDocs")]
+        public PrimaryDocs[] PrimaryDocs { get; set; }
 
         [JsonProperty("Resource")]
         public Resource Resource { get; set; }
@@ -325,6 +336,22 @@ namespace Syracuse.Mobitheque.Core.Models
 
         [JsonProperty("Notices")]
         public object[] Notices { get; set; }
+    }
+
+    public partial class PrimaryDocs
+    {
+        [JsonProperty("GlyphClass")]
+        public string GlyphClass { get; set; }
+
+        [JsonProperty("Label")]
+        public string Label { get; set; }
+
+        [JsonProperty("Link")]
+        public string Link { get; set; }
+
+        [JsonProperty("ResourceKey")]
+        public string ResourceKey { get; set; }
+
     }
 
     public partial class Resource
