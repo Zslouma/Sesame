@@ -147,7 +147,7 @@
                                                 <Label TextColor="Black" Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="Medium"/>
                                                 <Label TextColor="Gray" Text="{Binding FieldList.shortDesc}" MaxLines="2" FontSize="Small"/>
                                                 <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal">
-                                                    <Frame VerticalOptions="Center" WidthRequest="12" HeightRequest="12"  CornerRadius="20"   Margin="0" Padding="0" BackgroundColor="{Binding Resource.ColorStatus}"/>
+                                                    <Frame VerticalOptions="Center" WidthRequest="12" HeightRequest="12"  CornerRadius="6" HasShadow="False" BorderColor="Transparent" Margin="0" Padding="0" BackgroundColor="{Binding Resource.ColorStatus}"/>
                                                     <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="Center" FontSize="Medium" Text="{Binding Resource.TextStatus}"/>
                                                 </StackLayout>
                                             </StackLayout>
