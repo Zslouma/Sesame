@@ -39,8 +39,26 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             get { return this.expandedFacetteList; }
             set { this.expandedFacetteList = value; }
         }
-        public List<FacetteValue> SelectedItems { get; set; } = new List<FacetteValue>();
 
+        private List<FacetteValue> oldSelectedItems = new List<FacetteValue>();
+        public List<FacetteValue> OldSelectedItems
+        {
+            get => this.oldSelectedItems;
+            set
+            {
+                SetProperty(ref this.oldSelectedItems, value);
+            }
+        }
+
+        private List<FacetteValue> selectedItems = new List<FacetteValue>();
+        public List<FacetteValue> SelectedItems
+        { 
+            get => this.selectedItems;
+            set
+            {
+                SetProperty(ref this.selectedItems, value);
+            }
+        }
         private bool isBusy = true;
         public bool IsBusy
         {
@@ -361,9 +379,33 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.Results = this.Results.Concat(res).ToArray();
             await this.GetRedirectURL();
         }
-
-       
-
+        public bool Equals(List<FacetteValue> NewItems, List<FacetteValue> OldItem)
+        {
+            if (NewItems.Count != OldItem.Count)
+            {
+                return false;
+            }
+            else
+            {
+                if (NewItems.Count == 0 && OldItem.Count == 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    bool equal = true;
+                    foreach (var item in NewItems)
+                    {
+                        if (!OldItem.Contains(item))
+                        {
+                            equal = false;
+                            break;
+                        }
+                    }
+                    return equal;
+                }
+            }
+        }
         private async Task<Result[]> loadPage()
         {
             this.IsBusy = true;

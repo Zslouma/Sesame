@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using MvvmCross.Binding.Extensions;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Syracuse.Mobitheque.UI.Views
 {
@@ -93,7 +94,24 @@ namespace Syracuse.Mobitheque.UI.Views
         private async void FacetteItemList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             await this.ViewModel.OnCheckSelection(e.Item as FacetteValue);
-             SearchButton.IsVisible = true;             
+            if (this.ViewModel.SelectedItems.Count() > 0)
+            {
+                DeleteButton.IsVisible = true;
+            }
+            else
+            {
+                DeleteButton.IsVisible = false;
+            }
+            if (!this.ViewModel.Equals(this.ViewModel.SelectedItems, this.ViewModel.OldSelectedItems))
+            {
+                SearchButton.IsVisible = true;
+
+            }
+            else
+            {
+                SearchButton.IsVisible = false;
+            }
+                       
             this.UpdateItemList();
         }
 
@@ -182,13 +200,18 @@ namespace Syracuse.Mobitheque.UI.Views
             this.UpdateItemList();
         }
 
+        
+
         private void FacetteButton_Clicked(object sender, EventArgs e)
         {
+            SortButton.FontAttributes = FontAttributes.None;
+            SortButtonUnderline.IsVisible = false;
+            SortPicker.IsVisible = false;
             FacetteItemList.IsVisible   = !FacetteItemList.IsVisible;
-            DeleteButton.IsVisible      = !DeleteButton.IsVisible;
-            if (this.ViewModel.SelectedItems.Count() > 0)
+            if (FacetteItemList.IsVisible)
             {
-                if (FacetteItemList.IsVisible)
+                
+                if (!this.ViewModel.Equals(this.ViewModel.SelectedItems, this.ViewModel.OldSelectedItems))
                 {
                     SearchButton.IsVisible = true;
                 }
@@ -196,11 +219,22 @@ namespace Syracuse.Mobitheque.UI.Views
                 {
                     SearchButton.IsVisible = false;
                 }
-                
-            }else
+
+                if (this.ViewModel.SelectedItems.Count() > 0)
+                {
+                    DeleteButton.IsVisible = true;
+                }
+                else
+                {
+                    DeleteButton.IsVisible = false;
+                }
+            }
+            else
             {
                 SearchButton.IsVisible = false;
+                DeleteButton.IsVisible = false;
             }
+            
             if (FacetteButton.FontAttributes == FontAttributes.Bold)
             {
                 FacetteButton.FontAttributes = FontAttributes.None;
@@ -220,7 +254,6 @@ namespace Syracuse.Mobitheque.UI.Views
             FacetteItemList.IsVisible   = false;
             DeleteButton.IsVisible      = false;
             SearchButton.IsVisible      = false;
-
             Task.Run( async () => await this.ViewModel.PerformSearch());
             FacetteButton.FontAttributes = FontAttributes.None;
             FacetteButtonUnderline.IsVisible = false;
@@ -234,10 +267,17 @@ namespace Syracuse.Mobitheque.UI.Views
                 SearchButtonUnderline.IsVisible = true;
                 SearchButton.FontAttributes = FontAttributes.Bold;
             }
+            this.ViewModel.OldSelectedItems = new List<FacetteValue>(this.ViewModel.SelectedItems);
             this.UpdateItemList();
         }
         private void SortButton_Clicked(object sender, EventArgs e)
         {
+
+            FacetteItemList.IsVisible = false;
+            FacetteButton.FontAttributes = FontAttributes.None;
+            FacetteButtonUnderline.IsVisible = false;
+            SearchButton.IsVisible = false;
+            DeleteButton.IsVisible = false;
             SortPicker.IsVisible = !SortPicker.IsVisible;
             SearchButton.FontAttributes = FontAttributes.None;
             SearchButtonUnderline.IsVisible = false;
