@@ -69,15 +69,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 SetProperty(ref this.position, value); 
             }
         }
-        private bool isSwipeEnable = true;
-        public bool IsSwipeEnable
-        {
-            get => this.isSwipeEnable;
-            set
-            {
-                SetProperty(ref this.isSwipeEnable, value);
-            }
-        }
         private string displayPosition = "";
         public string DisplayPosition
         {

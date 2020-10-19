@@ -47,52 +47,6 @@ namespace Syracuse.Mobitheque.UI.Views
             }
 
         }
-        private void OnScrollEvent(object sender, ScrolledEventArgs e) {
-
-            Console.WriteLine($"ScrollX: {e.ScrollX}, ScrollY: {e.ScrollY}");
-            if (e.ScrollY == 0)
-            {
-                Console.WriteLine($"IsSwipeEnable: IsSwipeEnable, ScrollY: {e.ScrollY}");
-                this.ViewModel.IsSwipeEnable = true;
-                this.ViewModel.RaiseAllPropertiesChanged();
-            }
-            else
-            {
-                this.ViewModel.IsSwipeEnable = false;
-                this.ViewModel.RaiseAllPropertiesChanged();
-            }
-        }
-
-        private async void OnSwipeEvent(object sender, SwipeStartedEventArgs e)
-        {
-            Console.WriteLine($"Swipe Direction: {e.SwipeDirection}");
-            if (this.ViewModel.IsSwipeEnable)
-            {
-                await this.Navigation.PopAsync();
-            }
-
-        }
-
-
-        private async void OnSwipeEvent(object sender, SwipeChangingEventArgs e)
-        {
-            Console.WriteLine($"Swipe Direction: {e.SwipeDirection}");
-            if (this.ViewModel.IsSwipeEnable)
-            {
-               await this.Navigation.PopAsync();
-            }
-
-        }
-
-        private async void OnSwipeEvent(object sender, SwipeEndedEventArgs e)
-        {
-            Console.WriteLine($"Swipe Direction: {e.SwipeDirection}");
-            if (this.ViewModel.IsSwipeEnable)
-            {
-                await this.Navigation.PopAsync();
-            }
-
-        }
         private async void OpenBrowser_OnClicked(object sender, EventArgs e)
         {
             string url = ((Button)sender).CommandParameter as string;
@@ -115,13 +69,6 @@ namespace Syracuse.Mobitheque.UI.Views
             (this.DataContext as SearchDetailsViewModel).OnDisplayAlertMult += SearchDetailsView_OnDisplayAlertMult;
             base.OnBindingContextChanged();
         }
-
-
-        void OpenBrowser(string url)
-        {
-            Device.OpenUri(new Uri(url));
-        }
-
 
         private void SearchDetailsView_OnDisplayAlert(string title, string message, string button) => this.DisplayAlert(title, message, button);
         private Task<bool> SearchDetailsView_OnDisplayAlertMult(string title, string message, string buttonYes, string buttonNo)

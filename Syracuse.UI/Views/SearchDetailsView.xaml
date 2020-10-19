@@ -14,16 +14,9 @@
 
     <ContentPage.Content>
         <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
-            <SwipeView IsEnabled ="{Binding IsSwipeEnable}"  SwipeStarted="OnSwipeEvent" SwipeEnded="OnSwipeEvent" SwipeChanging="OnSwipeEvent">
-                <SwipeView.TopItems >
-                    <SwipeItems >
-                        <SwipeItem BackgroundColor="{d:DynamicResource AppBackgroundColor}" Text="Return"/>
-                    </SwipeItems>
-                </SwipeView.TopItems>
-
-                <Grid>
-                    <StackLayout VerticalOptions="FillAndExpand" Orientation="Vertical" Padding="15, 0, 15, 0">
-                        <CarouselView 
+            <Grid>
+                <StackLayout VerticalOptions="FillAndExpand" Orientation="Vertical" Padding="15, 0, 15, 0">
+                    <CarouselView 
                         x:Name="carouselView" 
                         ItemsSource="{Binding ItemsSource}" 
                         CurrentItem="{Binding CurrentItem}"
@@ -34,113 +27,102 @@
                         RemainingItemsThreshold="5"
                         RemainingItemsThresholdReached="OnCarouselViewRemainingItemsThresholdReached"
                         HorizontalScrollBarVisibility="Never">
-                            <CarouselView.ItemTemplate>
-                                <DataTemplate >
-                                    <ScrollView x:Name="scrollView"  VerticalScrollBarVisibility="Never" Scrolled="OnScrollEvent">
-                                        <Frame>
-                                            <StackLayout Orientation="Vertical">
-                                                <StackLayout  Orientation="Horizontal">
-                                                    <Grid>
-                                                        <Grid.RowDefinitions>
-                                                            <RowDefinition Height="Auto" />
-                                                            <RowDefinition Height="*" />
-                                                        </Grid.RowDefinitions>
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate >
+                                <ScrollView x:Name="scrollView"  VerticalScrollBarVisibility="Never">
+                                    <Frame>
+                                        <StackLayout Orientation="Vertical">
+                                            <StackLayout  Orientation="Horizontal">
+                                                <Grid>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="*" />
+                                                    </Grid.RowDefinitions>
 
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="100" />
-                                                            <ColumnDefinition  Width="*" />
-                                                        </Grid.ColumnDefinitions>
-                                                        <StackLayout  Orientation="Vertical">
-                                                            <Image Grid.Row="0" Grid.Column="0"  Margin="5" HeightRequest="120" WidthRequest="90" Source="{Binding FieldList.Image}"/>
-                                                            <Image  Grid.Row="1" Grid.Column="0"  HeightRequest="30" WidthRequest="100" Source="{Binding DisplayValues.Star}" VerticalOptions="Start"></Image>
-                                                        </StackLayout>
-                                                        <StackLayout Grid.Row="0" Grid.Column="1" Padding="10">
-                                                            <material:MaterialLabel FontSize="Large" Text="{Binding FieldList.CroppedTitle}"/>
-                                                            <material:MaterialLabel FontSize="Default" Text="{Binding DisplayValues.AuthorDate}"/>
-                                                        </StackLayout>
-                                                        <StackLayout Grid.Row="1" Grid.ColumnSpan="2"  Orientation="Vertical">
-                                                            <material:MaterialLabel FontSize="Default" Text="{Binding DisplayValues.Desc}" TextType="Html" TextColor="Black"/>
-                                                        </StackLayout>
-                                                    </Grid>
-                                                </StackLayout>
-                                                <StackLayout IsVisible="{Binding HasPrimaryDocs}"  BackgroundColor="#bfbfbf" Padding="10">
-                                                    <material:MaterialLabel FontSize="Large" Text="{x:Static local:AppResource.DigitalDocumentLink}" TextColor="White"/>
-                                                </StackLayout>
-                                                <StackLayout IsVisible="{Binding HasPrimaryDocs}">
-                                                    <ListView 
-                                                    ItemsSource="{Binding PrimaryDocs}" 
-                                                    SeparatorVisibility="None"
-                                                    VerticalScrollBarVisibility="Never"
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="100" />
+                                                        <ColumnDefinition  Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackLayout  Orientation="Vertical">
+                                                        <Image Grid.Row="0" Grid.Column="0"  Margin="5" HeightRequest="120" WidthRequest="90" Source="{Binding FieldList.Image}"/>
+                                                        <Image  Grid.Row="1" Grid.Column="0"  HeightRequest="30" WidthRequest="100" Source="{Binding DisplayValues.Star}" VerticalOptions="Start"></Image>
+                                                    </StackLayout>
+                                                    <StackLayout Grid.Row="0" Grid.Column="1" Padding="10">
+                                                        <material:MaterialLabel FontSize="Large" Text="{Binding FieldList.CroppedTitle}"/>
+                                                        <material:MaterialLabel FontSize="Default" Text="{Binding DisplayValues.AuthorDate}"/>
+                                                    </StackLayout>
+                                                    <StackLayout Grid.Row="1" Grid.ColumnSpan="2"  Orientation="Vertical">
+                                                        <material:MaterialLabel FontSize="Default" Text="{Binding DisplayValues.Desc}" TextType="Html" TextColor="Black"/>
+                                                    </StackLayout>
+                                                </Grid>
+                                            </StackLayout>
+                                            <StackLayout IsVisible="{Binding HasPrimaryDocs}"  BackgroundColor="#bfbfbf" Padding="10">
+                                                <material:MaterialLabel FontSize="Large" Text="{x:Static local:AppResource.DigitalDocumentLink}" TextColor="White"/>
+                                            </StackLayout>
+                                            <StackLayout IsVisible="{Binding HasPrimaryDocs}">
+                                                <StackLayout
+                                                    BindableLayout.ItemsSource="{Binding PrimaryDocs}" 
                                                     VerticalOptions="FillAndExpand">
-                                                        <ListView.ItemTemplate>
-                                                            <DataTemplate>
-                                                                <ViewCell>
-                                                                    <StackLayout Padding="5"  BackgroundColor="#f0f0f0">
-                                                                        <Button Text="{Binding Label}"
+                                                    <BindableLayout.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <StackLayout Padding="5"  BackgroundColor="#f0f0f0">
+                                                                <Button Text="{Binding Label}"
                                                                                 TextColor="Blue"
                                                                                 BackgroundColor="Transparent"
                                                                                 CommandParameter="{Binding Link}"
                                                                                 Clicked="OpenBrowser_OnClicked"></Button>
-                                                                    </StackLayout>
-                                                                </ViewCell>
-                                                            </DataTemplate>
-                                                        </ListView.ItemTemplate>
-                                                    </ListView>
-                                                </StackLayout>
-                                                <StackLayout IsVisible="{Binding DisplayValues.SeekForHoldings}"  BackgroundColor="#bfbfbf" Padding="10">
-                                                    <material:MaterialLabel FontSize="Large" Text="{x:Static local:AppResource.Copies}" TextColor="White"/>
-                                                </StackLayout>
-                                                <ListView 
-                                                    ItemsSource="{Binding DisplayValues.Library.Dataa.Holdings}" 
-                                                    IsVisible="{Binding DisplayValues.Library.success}"
-                                                    SeparatorVisibility="None"
-                                                    VerticalScrollBarVisibility="Never"
-                                                    VerticalOptions="FillAndExpand"
-                                                    RowHeight="180"
-                                                    IsPullToRefreshEnabled="False">
-                                                    <ListView.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <ViewCell>
-                                                                <StackLayout Padding="5"  BackgroundColor="#f0f0f0">
-                                                                    <Grid>
-                                                                        <Grid.RowDefinitions>
-                                                                            <RowDefinition Height="Auto" />
-                                                                            <RowDefinition Height="*" />
-                                                                            <RowDefinition Height="*" />
-                                                                        </Grid.RowDefinitions>
-
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="10" />
-                                                                            <ColumnDefinition  Width="*" />
-                                                                        </Grid.ColumnDefinitions>
-
-                                                                        <BoxView BackgroundColor="{Binding StatusColor}" Grid.Row="0" Grid.Column="0" />
-                                                                        <StackLayout  Grid.Row="0" Grid.Column="1">
-
-                                                                            <Label TextColor="Gray" Text="{Binding Site}" />
-                                                                            <Label TextColor="Gray" Text="{Binding BookingTooltip}" />
-                                                                            <Label TextColor="Gray" Text="{Binding Statut}"/>
-                                                                            <Button x:Name="HoldingButton" TextColor="#59a0ec" BackgroundColor="white" Text="Réserver" BindingContext="{Binding .}" Clicked="HoldingButton_Clicked"/>
-                                                                        </StackLayout>
-                                                                    </Grid>
-                                                                </StackLayout>
-                                                            </ViewCell>
+                                                            </StackLayout>
                                                         </DataTemplate>
-                                                    </ListView.ItemTemplate>
-                                                </ListView>
+                                                    </BindableLayout.ItemTemplate>
+                                                </StackLayout>
                                             </StackLayout>
-                                        </Frame>
-                                    </ScrollView>
-                                </DataTemplate>
-                            </CarouselView.ItemTemplate>
-                        </CarouselView>
-                        <Label x:Name="IndexPage" IsVisible="{Binding IsPositionVisible}" HorizontalOptions="Center" Margin="0,0,0,15" Text="{Binding DisplayPosition}"></Label>
-                    </StackLayout>
-                    <AbsoluteLayout IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
-                        <ActivityIndicator IsRunning="True"  AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
-                    </AbsoluteLayout>
-                </Grid>
-            </SwipeView>
+                                            <StackLayout IsVisible="{Binding DisplayValues.SeekForHoldings}"  BackgroundColor="#bfbfbf" Padding="10">
+                                                <material:MaterialLabel FontSize="Large" Text="{x:Static local:AppResource.Copies}" TextColor="White"/>
+                                            </StackLayout>
+                                            <StackLayout
+                                                    BindableLayout.ItemsSource="{Binding DisplayValues.Library.Dataa.Holdings}" 
+                                                    IsVisible="{Binding DisplayValues.Library.success}"
+                                                    VerticalOptions="FillAndExpand">
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackLayout Padding="5"  BackgroundColor="#f0f0f0" HeightRequest="180">
+                                                            <Grid>
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="Auto" />
+                                                                    <RowDefinition Height="*" />
+                                                                    <RowDefinition Height="*" />
+                                                                </Grid.RowDefinitions>
+
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="10" />
+                                                                    <ColumnDefinition  Width="*" />
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <BoxView BackgroundColor="{Binding StatusColor}" Grid.Row="0" Grid.Column="0" />
+                                                                <StackLayout  Grid.Row="0" Grid.Column="1">
+
+                                                                    <Label TextColor="Gray" Text="{Binding Site}" />
+                                                                    <Label TextColor="Gray" Text="{Binding BookingTooltip}" />
+                                                                    <Label TextColor="Gray" Text="{Binding Statut}"/>
+                                                                    <Button x:Name="HoldingButton" TextColor="#59a0ec" BackgroundColor="white" Text="Réserver" BindingContext="{Binding .}" Clicked="HoldingButton_Clicked"/>
+                                                                </StackLayout>
+                                                            </Grid>
+                                                        </StackLayout>
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Frame>
+                                </ScrollView>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                    <Label x:Name="IndexPage" IsVisible="{Binding IsPositionVisible}" HorizontalOptions="Center" Margin="0,0,0,15" Text="{Binding DisplayPosition}"></Label>
+                </StackLayout>
+                <AbsoluteLayout IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
+                    <ActivityIndicator IsRunning="True"  AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
+                </AbsoluteLayout>
+            </Grid>
         </yummy:PancakeView>
     </ContentPage.Content>
 </views:MvxContentPage>
