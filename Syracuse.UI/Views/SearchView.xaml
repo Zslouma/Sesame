@@ -8,7 +8,8 @@
                      x:TypeArguments="viewModels:SearchViewModel"
                      x:Class="Syracuse.Mobitheque.UI.Views.SearchView"
                      xmlns:local="clr-namespace:Syracuse.Mobitheque.UI"
-                     xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+                     xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core">
 
     <NavigationPage.TitleView xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
@@ -128,7 +129,7 @@
                             </ListView>
 
                     </Grid>
-                        <Picker x:Name="SortPicker"  HorizontalOptions="FillAndExpand" Grid.Column="2" ItemsSource="{Binding SortsName}" SelectedIndex="{Binding SortNamee}" Title="{x:Static local:AppResource.SortOption}" TextColor="{DynamicResource PurpleTextColor}" TitleColor="{DynamicResource PurpleTextColor}" FontAttributes="Bold"></Picker>
+                        <Picker x:Name="SortPicker"  HorizontalOptions="FillAndExpand" Grid.Column="2" ItemsSource="{Binding SortsName}" SelectedIndex="{Binding SortNamee}" Title="{x:Static local:AppResource.SortOption}" TextColor="{DynamicResource PurpleTextColor}" TitleColor="{DynamicResource PurpleTextColor}" FontAttributes="Bold" ios:Picker.UpdateMode="WhenFinished"></Picker>
                     <Label TextColor="Black" Text="{Binding ResultCount}" Grid.Column="3"/>
                     <ListView x:Name="resultsList" 
                           CachingStrategy="RecycleElement"

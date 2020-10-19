@@ -291,6 +291,10 @@ namespace Syracuse.Mobitheque.UI.Views
                 SortButton.FontAttributes = FontAttributes.Bold;
                 SortButtonUnderline.IsVisible = true;
             }
+            if (SortPicker.IsVisible)
+            {
+                SortPicker.Focus();
+            }
         }
         private void DeleteButton_Clicked(object sender, EventArgs e)
         {
