@@ -187,7 +187,7 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Library.
+        ///   Looks up a localized string similar to Establishment.
         /// </summary>
         public static string LibraryTitle {
             get {

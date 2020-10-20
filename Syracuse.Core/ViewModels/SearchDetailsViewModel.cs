@@ -134,10 +134,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set
             {
                 SetProperty(ref this.isPositionVisible, value);
-                if (value)
-                {
-                    this.TimeVisibility(this.Position);
-                }
+                //if (value)
+                //{
+                //    this.TimeVisibility(this.Position);
+                //}
             }
         }
 
@@ -169,7 +169,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             else if (star == 3) return "https://upload.wikimedia.org/wikipedia/commons/2/2f/Star_rating_3_of_5.png";
             else if (star == 4) return "https://upload.wikimedia.org/wikipedia/commons/f/fa/Star_rating_4_of_5.png";
             else if (star == 5) return "https://upload.wikimedia.org/wikipedia/commons/1/17/Star_rating_5_of_5.png";
-            return "https://upload.wikimedia.org/wikipedia/commons/4/4a/Star_rating_0_of_5.png";
+            return null;
         }
         async public override void Prepare(SearchDetailsParameters parameter)
         {
@@ -194,6 +194,13 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     if (resultTempo.Resource.Desc != null)
                         resultTempo.DisplayValues.Desc = resultTempo.Resource.Desc;
                     resultTempo.DisplayValues.Star = this.setStar(resultTempo.Resource.AvNt);
+                    if (resultTempo.DisplayValues.Star == null)
+                    {
+                        resultTempo.DisplayValues.DisplayStar = false;
+                    }
+                    else { 
+                        resultTempo.DisplayValues.DisplayStar = true; 
+                    }
                     if (author != "" && date != "")
                         resultTempo.DisplayValues.AuthorDate = string.Format("{0} - {1}", author, date);
                     else if (author == "" && date != "")
@@ -260,6 +267,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 if (resultTempo.Resource.Desc != null)
                     resultTempo.DisplayValues.Desc = resultTempo.Resource.Desc;
                 resultTempo.DisplayValues.Star = this.setStar(resultTempo.Resource.AvNt);
+                if (resultTempo.DisplayValues.Star == null)
+                {
+                    resultTempo.DisplayValues.DisplayStar = false;
+                }
+                else
+                {
+                    resultTempo.DisplayValues.DisplayStar = true;
+                }
                 if (author != "" && date != "")
                     resultTempo.DisplayValues.AuthorDate = string.Format("{0} - {1}", author, date);
                 else if (author == "" && date != "")

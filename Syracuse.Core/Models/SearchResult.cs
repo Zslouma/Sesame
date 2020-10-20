@@ -273,6 +273,8 @@ namespace Syracuse.Mobitheque.Core.Models
 
         public string Star { get; set; }
 
+        public bool DisplayStar { get; set; }
+
         public string Desc { get; set; }
 
         public bool SeekForHoldings { get; set; }
