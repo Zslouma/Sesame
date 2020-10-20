@@ -69,6 +69,16 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
         }
 
+        private bool displayLoadMore = true;
+        public bool DisplayLoadMore
+        {
+            get => this.displayLoadMore;
+            set
+            {
+                SetProperty(ref this.displayLoadMore, value);
+            }
+        }
+
         #endregion
 
         #region getterSetter
@@ -351,6 +361,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             parameter[1] = new SearchResult();
             parameter[1].D = new D();
             parameter[1].D.Results = this.Results;
+            
             SearchOptions searchOptions = new SearchOptions();
             searchOptions.Query = new SearchOptionsDetails()
             {
@@ -370,14 +381,26 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         }
 
         #endregion
-
+        private void CanLoadMore()
+        {
+            if (this.Results.Count() < this.ResultCountInt)
+            {
+                this.DisplayLoadMore = true;
+            }
+            else
+            {
+                this.DisplayLoadMore = false;
+            }
+        }
         private async Task getNextPage()
         {
             this.IsBusy = true;
             this.page += 1;
             Result[] res = await loadPage();
             this.Results = this.Results.Concat(res).ToArray();
+            this.CanLoadMore();
             await this.GetRedirectURL();
+            this.IsBusy = false;
         }
         public bool Equals(List<FacetteValue> NewItems, List<FacetteValue> OldItem)
         {
@@ -408,7 +431,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         }
         private async Task<Result[]> loadPage()
         {
-            this.IsBusy = true;
             SearchOptions optionsTempo = new SearchOptions();
             optionsTempo.Query = new SearchOptionsDetails()
             {
@@ -423,7 +445,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 return new Result[0];
             }
-            this.IsBusy = false;
             return search?.D?.Results;
         }
 
@@ -641,6 +662,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 this.ResultCount = ApplicationResource.SearchViewResultNull;
             }
+            this.CanLoadMore();
             await RaisePropertyChanged(nameof(this.Itemss));
             await RaisePropertyChanged();
             this.IsBusy = false;

@@ -42,8 +42,8 @@
     </NavigationPage.TitleView>
     <ContentPage.Content>
 
-        <Grid>
-            <StackLayout Orientation="Vertical" >
+        <Grid VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand">
                 <StackLayout>
                     <ListView x:Name="searchHistoryList"
                           IsVisible="False"
@@ -137,6 +137,7 @@
                           SeparatorVisibility="None"
                           SelectionMode="None"
                           RowHeight="170"
+                          Margin="0,0,0,20"
                           VerticalScrollBarVisibility="Never"
                           IsPullToRefreshEnabled="False">
                         <ListView.ItemTemplate>
@@ -157,7 +158,7 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                         <ListView.Footer>
-                                <material:MaterialButton Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}"></material:MaterialButton>
+                                <material:MaterialButton VerticalOptions="Center" Margin="5" IsVisible="{Binding DisplayLoadMore}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}"></material:MaterialButton>
                         </ListView.Footer>
                     </ListView>
                     </StackLayout>
