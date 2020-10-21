@@ -1,3 +1,4 @@
+using MvvmCross.Binding.Extensions;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using Syracuse.Mobitheque.Core.Models;
@@ -6,6 +7,7 @@ using Syracuse.Mobitheque.Core.ViewModels.Sorts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using XF.Material.Forms.Models;
@@ -26,6 +28,13 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set
             {
                 SetProperty(ref this.results, value);
+                if (this.Results.Count() < this.NbrResults)
+                {
+                    this.DisplayLoadMore = true;
+                }
+                else {
+                    this.DisplayLoadMore = false;
+                }
             }
         }
         private bool notCurrentEvent = false;
@@ -47,6 +56,17 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 SetProperty(ref this.nbrResults, value);
             }
         }
+
+        private bool displayLoadMore = true;
+        public bool DisplayLoadMore
+        {
+            get => this.displayLoadMore;
+            set
+            {
+                SetProperty(ref this.displayLoadMore, value);
+            }
+        }
+
         private bool notCurrentEventReverse = false;
         public bool NotCurrentEventReverse
         {

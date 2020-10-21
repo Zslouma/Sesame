@@ -151,6 +151,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set
             {
                 SetProperty(ref this.results, value);
+                if (this.Results.Count() < this.ResultCountInt)
+                {
+                    this.DisplayLoadMore = true;
+                }
+                else
+                {
+                    this.DisplayLoadMore = false;
+                }
             }
         }
 
@@ -381,24 +389,12 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         }
 
         #endregion
-        private void CanLoadMore()
-        {
-            if (this.Results.Count() < this.ResultCountInt)
-            {
-                this.DisplayLoadMore = true;
-            }
-            else
-            {
-                this.DisplayLoadMore = false;
-            }
-        }
         private async Task getNextPage()
         {
             this.IsBusy = true;
             this.page += 1;
             Result[] res = await loadPage();
             this.Results = this.Results.Concat(res).ToArray();
-            this.CanLoadMore();
             await this.GetRedirectURL();
             this.IsBusy = false;
         }
@@ -662,7 +658,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 this.ResultCount = ApplicationResource.SearchViewResultNull;
             }
-            this.CanLoadMore();
             await RaisePropertyChanged(nameof(this.Itemss));
             await RaisePropertyChanged();
             this.IsBusy = false;

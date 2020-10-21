@@ -17,9 +17,10 @@
 
     <ContentPage.Content>
         <yummy:PancakeView Margin="0,30,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
-            <Grid>
+            <Grid VerticalOptions="FillAndExpand">
                 <StackLayout Orientation="Vertical" 
-                     Padding="15, 15, 15, 0">
+                             VerticalOptions="FillAndExpand"
+                             Padding="15, 15, 15, 0">
                     <Grid Padding="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -38,6 +39,7 @@
                       CachingStrategy="RecycleElement"
                       ItemsSource="{Binding Results}" 
                       SeparatorVisibility="Default"
+                      Margin="0,0,0,20"
                       RowHeight="235" 
                       VerticalScrollBarVisibility="Never"
                       IsPullToRefreshEnabled="False">
@@ -59,7 +61,7 @@
 
                         </ListView.ItemTemplate>
                         <ListView.Footer>
-                            <material:MaterialButton Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}"></material:MaterialButton>
+                            <material:MaterialButton IsVisible="{Binding DisplayLoadMore}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}" VerticalOptions="Center"></material:MaterialButton>
                         </ListView.Footer>
                     </ListView>
                     <ListView x:Name="resultsListDocument" 
@@ -68,6 +70,7 @@
                               ItemsSource="{Binding Results}"
                               SeparatorVisibility="Default"
                               RowHeight="170"
+                              Margin="0,0,0,20"
                               SelectionMode="None"
                               VerticalScrollBarVisibility="Never"
                               IsPullToRefreshEnabled="False">
@@ -89,7 +92,7 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                         <ListView.Footer>
-                            <material:MaterialButton Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}"></material:MaterialButton>
+                            <material:MaterialButton IsVisible="{Binding DisplayLoadMore}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}" VerticalOptions="Center"></material:MaterialButton>
                         </ListView.Footer>
                     </ListView>
                 </StackLayout>
