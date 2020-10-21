@@ -131,6 +131,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set
             {
                 SetProperty(ref this.resultCountInt, value);
+                if (this.Results.Count() < this.ResultCountInt)
+                {
+                    this.DisplayLoadMore = true;
+                }
+                else
+                {
+                    this.DisplayLoadMore = false;
+                }
             }
         }
 
