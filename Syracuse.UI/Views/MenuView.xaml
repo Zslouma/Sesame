@@ -7,7 +7,8 @@
                       xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
                       x:Class="Syracuse.Mobitheque.UI.Views.MenuView"
                       x:TypeArguments="viewModels:MenuViewModel"
-                      x:Name="MainContent">
+                      x:Name="MainContent"
+                      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
     <ContentPage.Content>
         <StackLayout  HeightRequest="40">
             <StackLayout.IsVisible>
@@ -23,12 +24,12 @@
                       SeparatorVisibility="None"
                       BackgroundColor="{DynamicResource AppLigthBackgroundColor}">
                 <ListView.Header>
-                    <StackLayout Orientation="Vertical" BackgroundColor="{DynamicResource AppBackgroundColor}"  Margin="0,0,0,15">
+                    <StackLayout Orientation="Vertical"  Margin="0,0,0,15">
                         <StackLayout Orientation="Vertical"
                                      HorizontalOptions="Center"
                                      VerticalOptions="Center"
                                      MinimumHeightRequest="30"
-                                     Margin="5,5,5,15">
+                                     Margin="5,5,5,20">
                             <material:MaterialLabel 
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"
