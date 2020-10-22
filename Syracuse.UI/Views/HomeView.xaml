@@ -51,7 +51,14 @@
                                             <Image VerticalOptions="Fill" HorizontalOptions="Fill" Aspect="AspectFill" Source="{Binding FieldList.Image}" HeightRequest="90" Margin="5"/>
                                             <StackLayout Padding="0, 5, 0, 0"  Orientation="Vertical" >
                                                 <Label Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="{d:DynamicResource FontSizeTitle}" TextColor="{d:DynamicResource DarkTextColor}"/>
-                                                <Label Text="{Binding FieldList.SubjectTopicFirstUpper}" FontAttributes="Bold" FontSize="Medium" TextColor="{d:DynamicResource LigthGreyTextColor}" ></Label>
+                                                <Grid HorizontalOptions="Fill">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="0.5*" />
+                                                        <ColumnDefinition Width="0.5*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Label Grid.Column="0" Text="{Binding FieldList.SubjectTopicFirstUpper}" FontAttributes="Bold" FontSize="Medium" TextColor="{d:DynamicResource LigthGreyTextColor}" ></Label>
+                                                    <Label Grid.Column="1" Text="BibA" FontSize="Medium" TextColor="{d:DynamicResource LigthGreyTextColor}" ></Label>
+                                                </Grid>
                                                 <Label Text="{Binding FieldList.DateTime_String}" FontSize="Small" TextColor="{d:DynamicResource DarkTextColor}"/>
                                             </StackLayout>
                                         </StackLayout>
