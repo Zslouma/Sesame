@@ -161,6 +161,12 @@ This act is final!</value>
   <data name="ButtonValidation" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="DateToDate" xml:space="preserve">
+    <value>from {0} to {1} from {2} to {3}</value>
+  </data>
+  <data name="DateToDateShort" xml:space="preserve">
+    <value>{0} from {1}  to {2}</value>
+  </data>
   <data name="DisconectAuthorization" xml:space="preserve">
     <value>To add a new account we will have to end the current session do you want to continue?</value>
   </data>
@@ -235,7 +241,7 @@ This act is final!</value>
     <value>Success</value>
   </data>
   <data name="SuccessBookingRequest" xml:space="preserve">
-    <value>Your reservation request was successful</value>
+    <value>The document will be made available to you shortly.</value>
   </data>
   <data name="SuccessCancelBooking" xml:space="preserve">
     <value>Cancellation was successful for the title {0}</value>

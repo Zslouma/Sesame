@@ -189,6 +189,24 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to from {0} to {1} from {2} to {3}.
+        /// </summary>
+        public static string DateToDate {
+            get {
+                return ResourceManager.GetString("DateToDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} from {1}  to {2}.
+        /// </summary>
+        public static string DateToDateShort {
+            get {
+                return ResourceManager.GetString("DateToDateShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To add a new account we will have to end the current session do you want to continue?.
         /// </summary>
         public static string DisconectAuthorization {
@@ -406,7 +424,7 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your reservation request was successful.
+        ///   Looks up a localized string similar to The document will be made available to you shortly..
         /// </summary>
         public static string SuccessBookingRequest {
             get {

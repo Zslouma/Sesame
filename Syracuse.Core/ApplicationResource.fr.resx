@@ -161,6 +161,12 @@ Cet acte est définitif!</value>
   <data name="ButtonValidation" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="DateToDate" xml:space="preserve">
+    <value>Du {0} au {1} de {2} à {3}</value>
+  </data>
+  <data name="DateToDateShort" xml:space="preserve">
+    <value>{0} de {1}  à {2}</value>
+  </data>
   <data name="DisconectAuthorization" xml:space="preserve">
     <value>Pour ajouter un nouveau compte nous allons devoir mettre un terme à la session actuelle voulez-vous continuer?</value>
   </data>
@@ -180,7 +186,7 @@ Cet acte est définitif!</value>
     <value>Renouvelement impossible</value>
   </data>
   <data name="HoldingChoice" xml:space="preserve">
-    <value>Voulez-vous confirmer votre reservation à {0}</value>
+    <value>Voulez-vous confirmer votre réservation à {0}</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Accueil</value>
@@ -235,7 +241,7 @@ Cet acte est définitif!</value>
     <value>Succès</value>
   </data>
   <data name="SuccessBookingRequest" xml:space="preserve">
-    <value>Votre demande de réservation a réussi</value>
+    <value>Le document vous sera mis à disposition prochainement</value>
   </data>
   <data name="SuccessCancelBooking" xml:space="preserve">
     <value>L'annulation a été réussie pour le titre {0}</value>

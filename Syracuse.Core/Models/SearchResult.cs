@@ -226,16 +226,34 @@ namespace Syracuse.Mobitheque.Core.Models
 
             }
         }
-
-        public DateTime[] DateStart_idx { get; set; }
-
+        [JsonProperty("SubjectLocation")]
+        public string[] SubjectLocation { get; set; }
+        [JsonProperty("DateStart_idx")]
+        public string[] DateStart_idx { get; set; }
+        [JsonProperty("DateEnd_idx")]
+        public string[] DateEnd_idx { get; set; }
         public string DateTime_String
         { get
             {
                 string ret;
+                DateTime DateTimeStart = DateTime.ParseExact(DateStart_idx[0], "yyyy-MM-ddTHH:mm:ss", null);
+                DateTime DateTimeEnd = DateTime.ParseExact(DateEnd_idx[0], "yyyy-MM-ddTHH:mm:ss", null);
                 if (this.DateStart_idx != null)
                 {
-                    ret = this.DateStart_idx[0].Date.ToString(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern);
+                    string DateStart = DateTimeStart.Date.ToString(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern);
+                    string HoursStart = DateTimeStart.ToString(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern);
+                    string DateEnd = DateTimeEnd.Date.ToString(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern);
+                    string HoursEnd = DateTimeEnd.ToString(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern);
+
+                    if (DateTimeStart.Date != DateTimeEnd.Date)
+                    {
+                        
+                        ret = String.Format(ApplicationResource.DateToDate, DateStart, DateEnd, HoursStart, HoursEnd);
+                    }
+                    else
+                    {
+                        ret = String.Format(ApplicationResource.DateToDateShort, DateStart, HoursStart, HoursEnd);
+                    }
                 }
                 else
                 {

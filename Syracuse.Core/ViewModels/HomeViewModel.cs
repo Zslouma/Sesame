@@ -182,7 +182,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.Library = user.Library;
             this.EventsScenarioCode = user.EventsScenarioCode;
             this.SearchScenarioCode = user.SearchScenarioCode;
-            this.Results = await this.loadPage();
+            
+            this.Results = await this.loadPage(user.IsEvent);
             if (this.results.Length == 0)
             {
                 this.NotCurrentEvent = true;
@@ -192,6 +193,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 this.NotCurrentEvent = false;
             }
             this.IsEvent = user.IsEvent;
+
             await base.Initialize();
         }
 
@@ -200,20 +202,33 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
             this.page += 1;
 
-            Result[] res = await loadPage();
+            Result[] res = await loadPage(this.IsEvent);
             this.Results = this.Results.Concat(res).ToArray();
         }
 
-        private async Task<Result[]> loadPage()
+        private async Task<Result[]> loadPage(bool IsSortField)
         {
             this.IsBusy = true;
             SearchOptions options = new SearchOptions();
-            options.Query = new SearchOptionsDetails()
+            if (IsSortField)
             {
-                ScenarioCode = this.eventsScenarioCode,
-                Page = this.page,
-            };
+                options.Query = new SearchOptionsDetails()
+                {
+                    ScenarioCode = this.eventsScenarioCode,
+                    Page = this.page,
+                    SortField = "DateStart_sort",
+                    SortOrder = 1,
 
+                };
+            }
+            else
+            {
+                options.Query = new SearchOptionsDetails()
+                {
+                    ScenarioCode = this.eventsScenarioCode,
+                    Page = this.page,
+                };
+            }
             SearchResult search = await this.requestService.Search(options);
             if (search != null && !search.Success)
             {
