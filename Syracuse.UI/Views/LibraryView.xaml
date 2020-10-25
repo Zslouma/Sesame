@@ -6,7 +6,7 @@
             xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
             xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
             xmlns:common="clr-namespace:Syracuse.Mobitheque.UI.Views.Templates" 
-            xmlns:local="clr-namespace:Syracuse.Mobitheque.UI"
+            xmlns:core="clr-namespace:Syracuse.Mobitheque.Core;assembly=Syracuse.Mobitheque.Core"
             x:Name="LibraryViewPage"
             x:TypeArguments="viewModels:LibraryViewModel"
             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
@@ -16,46 +16,50 @@
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <yummy:PancakeView  x:Name="pancakeView" Margin="0,30,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
-            <CarouselView 
+            <StackLayout>
+
+                <Label HorizontalTextAlignment="Center" Text="{x:Static core:ApplicationResource.Library}" FontAttributes="Bold" ></Label>
+                <CarouselView 
                         x:Name="carouselView" 
                         ItemsSource="{Binding ItemsSource}" 
                         IsScrollAnimated ="False"
                         IsSwipeEnabled="False"
                         RemainingItemsThreshold="5"
                         HorizontalScrollBarVisibility="Never">
-                <CarouselView.ItemTemplate>
-                    <DataTemplate>
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
 
-                        <Grid Padding="5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0,2*" />
-                                <ColumnDefinition Width="0,6*" />
-                                <ColumnDefinition Width="0,2*" />
-                            </Grid.ColumnDefinitions>
-                            
-                            <StackLayout  HorizontalOptions="Center" VerticalOptions="Center"  Grid.Row="0" Grid.Column="0">
-                                <ImageButton  VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding Path=BindingContext.HeaderVisibility, Source={x:Reference Name=pancakeView}}" Source="previous.png" BackgroundColor="Transparent" Clicked="Back_Clicked" ></ImageButton>
-                            </StackLayout>
-                            <Label IsVisible="{Binding Path=BindingContext.HeaderVisibility, Source={x:Reference Name=pancakeView}}" x:Name="labelLoadinFg" Text="{Binding BuildingName}" VerticalOptions="Center"  HorizontalOptions="CenterAndExpand"  Grid.Row="0" Grid.Column="1"/>
-                            <StackLayout  HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0" Grid.Column="2">
-                                <ImageButton  VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding Path=BindingContext.HeaderVisibility, Source={x:Reference Name=pancakeView}}" Source="following.png" BackgroundColor="Transparent"  Clicked="Next_Clicked" ></ImageButton>
-                            </StackLayout>
-                            <AbsoluteLayout Grid.Row="1" Grid.ColumnSpan="3" IsVisible="{Binding DisplayNavigationError}" BackgroundColor="White">
-                                <Label Text="{x:Static local:AppResource.ErrorLibraryWebSite}" AbsoluteLayout.LayoutFlags="PositionProportional"  AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
-                            </AbsoluteLayout>
-                            <WebView  Source="{Binding Url}" Grid.Row="1" Grid.ColumnSpan="3" Navigated="WebViewNavigated" Navigating="WebViewNavigating" BackgroundColor="Transparent"  />
-                            <AbsoluteLayout x:Name="AbsoluteIndicatorVisibility" IsVisible="{Binding Path=BindingContext.AbsoluteIndicatorVisibility, Source={x:Reference Name=pancakeView}}"  VerticalOptions="FillAndExpand" Grid.Row="1" Grid.ColumnSpan="3"  >
-                                <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="Gray" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
-                            </AbsoluteLayout>
-                        </Grid>
+                            <Grid Padding="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0,2*" />
+                                    <ColumnDefinition Width="0,6*" />
+                                    <ColumnDefinition Width="0,2*" />
+                                </Grid.ColumnDefinitions>
 
-                    </DataTemplate>
-                </CarouselView.ItemTemplate>
-            </CarouselView>
+                                <StackLayout  HorizontalOptions="Center" VerticalOptions="Center"  Grid.Row="0" Grid.Column="0">
+                                    <ImageButton  VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding Path=BindingContext.HeaderVisibility, Source={x:Reference Name=pancakeView}}" Source="previous.png" BackgroundColor="Transparent" Clicked="Back_Clicked" ></ImageButton>
+                                </StackLayout>
+                                <Label IsVisible="{Binding Path=BindingContext.HeaderVisibility, Source={x:Reference Name=pancakeView}}" x:Name="labelLoadinFg" Text="{Binding BuildingName}" VerticalOptions="Center"  HorizontalOptions="CenterAndExpand"  Grid.Row="0" Grid.Column="1"/>
+                                <StackLayout  HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="0" Grid.Column="2">
+                                    <ImageButton  VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding Path=BindingContext.HeaderVisibility, Source={x:Reference Name=pancakeView}}" Source="following.png" BackgroundColor="Transparent"  Clicked="Next_Clicked" ></ImageButton>
+                                </StackLayout>
+                                <AbsoluteLayout Grid.Row="1" Grid.ColumnSpan="3" IsVisible="{Binding DisplayNavigationError}" BackgroundColor="White">
+                                    <Label Text="{x:Static local:AppResource.ErrorLibraryWebSite}" AbsoluteLayout.LayoutFlags="PositionProportional"  AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                                </AbsoluteLayout>
+                                <WebView  Source="{Binding Url}" Grid.Row="1" Grid.ColumnSpan="3" Navigated="WebViewNavigated" Navigating="WebViewNavigating" BackgroundColor="Transparent"  />
+                                <AbsoluteLayout x:Name="AbsoluteIndicatorVisibility" IsVisible="{Binding Path=BindingContext.AbsoluteIndicatorVisibility, Source={x:Reference Name=pancakeView}}"  VerticalOptions="FillAndExpand" Grid.Row="1" Grid.ColumnSpan="3"  >
+                                    <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="Gray" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
+                                </AbsoluteLayout>
+                            </Grid>
+
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+            </StackLayout>
         </yummy:PancakeView>
     </ContentPage.Content>
 </views:MvxContentPage>

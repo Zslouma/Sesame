@@ -59,14 +59,34 @@
                                 </StackLayout.GestureRecognizers>
                                 <material:MaterialIcon Source="{Binding IconImageSource}" TintColor="White" />
                                 <material:MaterialLabel 
-                                    VerticalOptions="Center"
-                                    Margin="15, 0"
-                                    Text="{Binding Text}"
-                                    FontSize="{DynamicResource FontSize}"
-                                    FontFamily="{DynamicResource OpenSans}"
-                                    FontAttributes="Bold"
-                                    TextColor="WhiteSmoke"/>
+                                        VerticalOptions="Center"
+                                        Margin="15, 0"
+                                        Text="{Binding Text}"
+                                        FontSize="{DynamicResource FontSize}"
+                                        FontFamily="{DynamicResource OpenSans}"
+                                        FontAttributes="Bold"
+                                        TextColor="WhiteSmoke">
+                                    <material:MaterialLabel.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="False">
+                                            <Setter Property="IsVisible" Value="True" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
+                                            <Setter Property="IsVisible" Value="False" />
+                                        </DataTrigger>
+                                    </material:MaterialLabel.Triggers>
+                                </material:MaterialLabel>
+                                <material:MaterialLabel 
+                                        VerticalOptions="Center"
+                                        Margin="15, 0"
+                                        IsVisible="{Binding IsSelected}"
+                                        Text="{Binding Text}"
+                                        FontSize="{DynamicResource FontSize}"
+                                        FontFamily="{DynamicResource OpenSans}"
+                                        FontAttributes="Bold"
+                                        TextDecorations="Underline"
+                                        TextColor="WhiteSmoke"/>
                             </StackLayout>
+                            
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

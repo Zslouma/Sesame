@@ -15,8 +15,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         private readonly IMvxNavigationService navigationService;
 
-        private ObservableCollection<MenuItem> menuItemList;
-        public ObservableCollection<MenuItem> MenuItemList
+        private ObservableCollection<MenuNavigation> menuItemList;
+        public ObservableCollection<MenuNavigation> MenuItemList
         {
             get => this.menuItemList;
             set => SetProperty(ref this.menuItemList, value);
@@ -65,17 +65,17 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             IRequestService requestService)
         {
             this.navigationService = navigationService;
-            this.menuItemList = new ObservableCollection<MenuItem>()
+            this.menuItemList = new ObservableCollection<MenuNavigation>()
             {
-                new MenuItem() { Text = ApplicationResource.Home, IconImageSource = "home" },
-                new MenuItem() { Text = ApplicationResource.Account, IconImageSource = "profile" },
-                new MenuItem() { Text = ApplicationResource.OtherAccount, IconImageSource = "allaccounts" },
-                new MenuItem() { Text = ApplicationResource.Bookings, IconImageSource = "reservation" },
-                new MenuItem() { Text = ApplicationResource.Loans, IconImageSource = "borrowing" },
-                new MenuItem() { Text = ApplicationResource.Scan, IconImageSource = "borrowing" },
-                new MenuItem() { Text = ApplicationResource.Library, IconImageSource = "library" },
-                new MenuItem() { Text = ApplicationResource.About, IconImageSource = "library" },
-                new MenuItem() { Text = ApplicationResource.Disconnect, IconImageSource = "library" },
+                new MenuNavigation() { Text = ApplicationResource.Home, IconImageSource = "home" , IsSelected = true},
+                new MenuNavigation() { Text = ApplicationResource.Account, IconImageSource = "profile" },
+                new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconImageSource = "allaccounts" },
+                new MenuNavigation() { Text = ApplicationResource.Bookings, IconImageSource = "reservation" },
+                new MenuNavigation() { Text = ApplicationResource.Loans, IconImageSource = "borrowing" },
+                new MenuNavigation() { Text = ApplicationResource.Scan, IconImageSource = "borrowing" },
+                new MenuNavigation() { Text = ApplicationResource.Library, IconImageSource = "library" },
+                new MenuNavigation() { Text = ApplicationResource.About, IconImageSource = "library" },
+                new MenuNavigation() { Text = ApplicationResource.Disconnect, IconImageSource = "library" },
             };
 
             this.requestService = requestService;
@@ -101,15 +101,15 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 }
                 if (this.IsKm)
                 {
-                    this.menuItemList = new ObservableCollection<MenuItem>()
+                    this.menuItemList = new ObservableCollection<MenuNavigation>()
                     {
-                        new MenuItem() { Text = ApplicationResource.Home, IconImageSource = "home" },
-                        new MenuItem() { Text = ApplicationResource.Account, IconImageSource = "profile" },
-                        new MenuItem() { Text = ApplicationResource.OtherAccount, IconImageSource = "allaccounts" },
-                        new MenuItem() { Text = ApplicationResource.Scan, IconImageSource = "borrowing" },
-                        new MenuItem() { Text = ApplicationResource.Library, IconImageSource = "library" },
-                        new MenuItem() { Text = ApplicationResource.About, IconImageSource = "library" },
-                        new MenuItem() { Text = ApplicationResource.Disconnect, IconImageSource = "library" },
+                        new MenuNavigation() { Text = ApplicationResource.Home, IconImageSource = "home", IsSelected = true },
+                        new MenuNavigation() { Text = ApplicationResource.Account, IconImageSource = "profile"},
+                        new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconImageSource = "allaccounts"},
+                        new MenuNavigation() { Text = ApplicationResource.Scan, IconImageSource = "borrowing"},
+                        new MenuNavigation() { Text = ApplicationResource.Library, IconImageSource = "library"},
+                        new MenuNavigation() { Text = ApplicationResource.About, IconImageSource = "library"},
+                        new MenuNavigation() { Text = ApplicationResource.Disconnect, IconImageSource = "library"},
                     };
                    
                 }
@@ -122,6 +122,20 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         private async Task ShowDetailPageAsync(string name)
         {
+            var MenuItemListtempo = this.MenuItemList;
+            foreach (var item in MenuItemListtempo)
+            {
+                if (item.Text == name)
+                {
+                    item.IsSelected = true;
+                }
+                else { 
+                    item.IsSelected = false;
+                }
+            }
+            this.MenuItemList = new ObservableCollection<MenuNavigation>();
+            this.MenuItemList = MenuItemListtempo;
+            await this.RaiseAllPropertiesChanged();
             if (name == ApplicationResource.Home)
                 _ = this.navigationService.Navigate<HomeViewModel>();
             else if (name == ApplicationResource.Bookings)

@@ -5,6 +5,7 @@
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
                       xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
+                      xmlns:core="clr-namespace:Syracuse.Mobitheque.Core;assembly=Syracuse.Mobitheque.Core"
                       xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
                       xmlns:common="clr-namespace:Syracuse.Mobitheque.UI.Views.Templates"
                       x:TypeArguments="viewModels:OtherAccountViewModel"
@@ -15,7 +16,10 @@
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
-            <ListView x:Name="otherAccountList" 
+            <StackLayout>
+                <Label Grid.RowSpan="2" Grid.ColumnSpan="2" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="{x:Static core:ApplicationResource.OtherAccount}" FontAttributes="Bold" ></Label>
+                <Grid>
+                <ListView x:Name="otherAccountList" 
                           CachingStrategy="RecycleElement"
                           ItemsSource="{Binding OtherAccount}"
                           SeparatorVisibility="Default"
@@ -71,6 +75,8 @@
 
                     </ListView.Footer>
                 </ListView>
+                </Grid>
+            </StackLayout>
         </yummy:PancakeView>
     </ContentPage.Content>
 </views:MvxContentPage>

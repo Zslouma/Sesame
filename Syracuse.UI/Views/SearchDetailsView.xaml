@@ -54,7 +54,7 @@
                                                         <material:MaterialLabel FontSize="Default" Text="{Binding DisplayValues.AuthorDate}"/>
                                                     </StackLayout>
                                                     <StackLayout Grid.Row="1" Grid.ColumnSpan="2"  Orientation="Vertical">
-                                                        <material:MaterialLabel FontSize="Default" Text="{Binding DisplayValues.Desc}" TextType="Html" TextColor="Black"/>
+                                                        <Label FontSize="Medium" Text="{Binding DisplayValues.Desc}" TextType="Html" TextColor="Black"/>
                                                     </StackLayout>
                                                 </Grid>
                                             </StackLayout>

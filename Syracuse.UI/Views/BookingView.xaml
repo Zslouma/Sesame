@@ -8,6 +8,7 @@
                      xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
                      xmlns:common="clr-namespace:Syracuse.Mobitheque.UI.Views.Templates" 
                      xmlns:local="clr-namespace:Syracuse.Mobitheque.UI"
+                     xmlns:core="clr-namespace:Syracuse.Mobitheque.Core;assembly=Syracuse.Mobitheque.Core"
                      x:Name="BookingViewPage"
                      x:TypeArguments="viewModels:BookingViewModel"
                      x:Class="Syracuse.Mobitheque.UI.Views.BookingView"
@@ -18,64 +19,69 @@
     <ContentPage.Content>
         <yummy:PancakeView Margin="0,30,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
             <Grid >
-                <StackLayout VerticalOptions="Center" IsVisible="{Binding NotCurrentBooking}">
-                    <Label VerticalOptions="Center" HorizontalOptions="Center" FontSize = "20" Text="{x:Static local:AppResource.NotCurrentBooking}" />
-                </StackLayout>
-                <StackLayout Padding="5,5" IsVisible="{Binding ReversNotCurrentBooking}">
-                    <ListView x:Name="BookingList" 
+                <StackLayout>
+                    <Label HorizontalTextAlignment="Center" Text="{x:Static core:ApplicationResource.Bookings}" FontAttributes="Bold" ></Label>
+                    <Grid>
+                        <StackLayout VerticalOptions="Center" IsVisible="{Binding NotCurrentBooking}">
+                            <Label VerticalOptions="Center" HorizontalOptions="Center" FontSize = "20" Text="{x:Static local:AppResource.NotCurrentBooking}" />
+                        </StackLayout>
+                        <StackLayout Padding="5,5" IsVisible="{Binding ReversNotCurrentBooking}">
+                            <ListView x:Name="BookingList" 
                           CachingStrategy="RecycleElement"
                           ItemsSource="{Binding Results}" 
                           SeparatorVisibility="None"
                           RowHeight="175"
                           VerticalScrollBarVisibility="Never"
                           IsPullToRefreshEnabled="False">
-                        <ListView.ItemTemplate>
-                            <DataTemplate >
-                                <ViewCell>
-                                    <Frame HasShadow="True" Padding="0, 5, 0, 5">
-                                        <StackLayout 
+                                <ListView.ItemTemplate>
+                                    <DataTemplate >
+                                        <ViewCell>
+                                            <Frame HasShadow="True" Padding="0, 5, 0, 5">
+                                                <StackLayout 
                                             VerticalOptions="Start"
                                             Orientation="Horizontal"
                                             BackgroundColor="White"
                                             Padding="5, 0, 5, 0"
                                             x:Name="Item">
-                                            <Image Source="{Binding ThumbnailUrl}"
+                                                    <Image Source="{Binding ThumbnailUrl}"
                                                HeightRequest="120"
                                                WidthRequest="90" Margin="5"/>
-                                            <StackLayout Padding="0, 12, 0, 0"
+                                                    <StackLayout Padding="0, 12, 0, 0"
                                                      VerticalOptions="Start"
                                                      Orientation="Vertical"
                                                      HorizontalOptions="FillAndExpand">
-                                                <Label MaxLines="2" TextColor="Black"
+                                                        <Label MaxLines="2" TextColor="Black"
                                                    Text="{Binding Title}"
                                                    FontAttributes="Bold"
                                                   />
 
-                                                <Label MaxLines="1" Text="{Binding BookingDateString}" FontSize="Small"></Label>
-                                                <Grid >
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="0.5*" />
-                                                        <ColumnDefinition Width="0.5*" />
-                                                    </Grid.ColumnDefinitions>
-                                                    <Label Grid.Column="0" Text="{Binding LocationLabel}" FontSize="Small"></Label>
-                                                    <Label Grid.Column="1" IsVisible="{Binding IsAvailable}" Text="{x:Static local:AppResource.Available}" TextColor="Green" FontSize="Small" FontAttributes="Bold"></Label>
-                                                </Grid>
-                                                <StackLayout IsVisible="{Binding CanCancel}">
-                                                    <material:MaterialButton
+                                                        <Label MaxLines="1" Text="{Binding BookingDateString}" FontSize="Small"></Label>
+                                                        <Grid >
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="0.5*" />
+                                                                <ColumnDefinition Width="0.5*" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <Label Grid.Column="0" Text="{Binding LocationLabel}" FontSize="Small"></Label>
+                                                            <Label Grid.Column="1" IsVisible="{Binding IsAvailable}" Text="{x:Static local:AppResource.Available}" TextColor="Green" FontSize="Small" FontAttributes="Bold"></Label>
+                                                        </Grid>
+                                                        <StackLayout IsVisible="{Binding CanCancel}">
+                                                            <material:MaterialButton
                                                     Text="{x:Static local:AppResource.Cancel}"
                                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                                     BindingContext="{Binding Source={x:Reference BookingList}, Path=BindingContext}"
                                                     Command="{Binding CancelBookingCommand}"
                                                     BackgroundColor="{Binding Source={x:Reference Item}, Path=BindingContext.buttonColor}"
                                                   />
+                                                        </StackLayout>
+                                                    </StackLayout>
                                                 </StackLayout>
-                                            </StackLayout>
-                                        </StackLayout>
-                                    </Frame>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                                            </Frame>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </Grid>
                 </StackLayout>
                 <AbsoluteLayout IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
                     <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
