@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-  
 <dict>
 	<key>NSAppTransportSecurity</key>
 	<dict>
@@ -13,7 +12,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.03</string>
+	<string>1.0.04</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
@@ -54,11 +53,11 @@
 	<string>Please allow access to data</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
-  <key>UIAppFonts</key>
-  <array>
-    <string>FontAwesome5Brands.otf</string>
-    <string>FontAwesome5Regular.otf</string>
-    <string>FontAwesome5Solid.otf</string>
-  </array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>FontAwesome5Brands.otf</string>
+		<string>FontAwesome5Regular.otf</string>
+		<string>FontAwesome5Solid.otf</string>
+	</array>
 </dict>
 </plist>
