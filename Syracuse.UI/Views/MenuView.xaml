@@ -49,18 +49,23 @@
                 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Orientation="Horizontal" Padding="15, 0, 15, 0" >
+                        <ViewCell >
+                            <StackLayout HorizontalOptions="Fill" Orientation="Horizontal" Padding="5, 0, 15, 0"  >
                                 <StackLayout.GestureRecognizers>
                                     <TapGestureRecognizer
                                         Command="{Binding BindingContext.DataContext.ShowDetailPageCommand, Source={x:Reference MainContent}}"
                                         CommandParameter="{Binding Text}">
                                     </TapGestureRecognizer>
                                 </StackLayout.GestureRecognizers>
-                                <material:MaterialIcon Source="{Binding IconImageSource}" TintColor="White" />
-                                <material:MaterialLabel 
+                                <Grid HorizontalOptions="FillAndExpand" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition  Width="5*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" HorizontalTextAlignment="Center" VerticalOptions="Center" Text="{Binding IconFontAwesome}" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="Title" TextColor="White"/>
+                                    <StackLayout Grid.Column="1" VerticalOptions="Center" >
+                                    <material:MaterialLabel 
                                         VerticalOptions="Center"
-                                        Margin="15, 0"
                                         Text="{Binding Text}"
                                         FontSize="{DynamicResource FontSize}"
                                         FontFamily="{DynamicResource OpenSans}"
@@ -77,7 +82,6 @@
                                 </material:MaterialLabel>
                                 <material:MaterialLabel 
                                         VerticalOptions="Center"
-                                        Margin="15, 0"
                                         IsVisible="{Binding IsSelected}"
                                         Text="{Binding Text}"
                                         FontSize="{DynamicResource FontSize}"
@@ -85,6 +89,8 @@
                                         FontAttributes="Bold"
                                         TextDecorations="Underline"
                                         TextColor="WhiteSmoke"/>
+                                    </StackLayout>
+                                </Grid>
                             </StackLayout>
                             
                         </ViewCell>

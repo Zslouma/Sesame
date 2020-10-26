@@ -35,8 +35,10 @@
                             HorizontalOptions="End"
                             Grid.Column="1"
                             Grid.Row="1"
-                            ImageSource="camera"
+                            Text="&#xf02a;"
+                            FontFamily="{StaticResource FontAwesomeSolid}"
                             x:Name="ScannButton"
+                            TextColor="White"
                             BackgroundColor="Transparent">
                         </Button>
 

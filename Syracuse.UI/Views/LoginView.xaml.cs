@@ -23,6 +23,7 @@ namespace Syracuse.Mobitheque.UI.Views
 
             PasswordInput.Focused += Handle_Focus;
             PasswordInput.Unfocused += Handle_Unfocused;
+            ScannButton.FontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label)) * 2;
             // CHECK VIEW
             // https://devblogs.microsoft.com/xamarin/validation-xamarin-forms-enterprise-apps/
         }

@@ -67,15 +67,15 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.navigationService = navigationService;
             this.menuItemList = new ObservableCollection<MenuNavigation>()
             {
-                new MenuNavigation() { Text = ApplicationResource.Home, IconImageSource = "home" , IsSelected = true},
-                new MenuNavigation() { Text = ApplicationResource.Account, IconImageSource = "profile" },
-                new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconImageSource = "allaccounts" },
-                new MenuNavigation() { Text = ApplicationResource.Bookings, IconImageSource = "reservation" },
-                new MenuNavigation() { Text = ApplicationResource.Loans, IconImageSource = "borrowing" },
-                new MenuNavigation() { Text = ApplicationResource.Scan, IconImageSource = "borrowing" },
-                new MenuNavigation() { Text = ApplicationResource.Library, IconImageSource = "library" },
-                new MenuNavigation() { Text = ApplicationResource.About, IconImageSource = "library" },
-                new MenuNavigation() { Text = ApplicationResource.Disconnect, IconImageSource = "library" },
+                new MenuNavigation() { Text = ApplicationResource.Home, IconFontAwesome = "\uf015" , IsSelected = true},
+                new MenuNavigation() { Text = ApplicationResource.Account, IconFontAwesome = "\uf007" },
+                new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconFontAwesome = "\uf0c0" },
+                new MenuNavigation() { Text = ApplicationResource.Bookings, IconFontAwesome = "\uf017" },
+                new MenuNavigation() { Text = ApplicationResource.Loans, IconFontAwesome = "\uf02d" },
+                new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf02a" },
+                new MenuNavigation() { Text = ApplicationResource.Library, IconFontAwesome = "\uf67f" },
+                new MenuNavigation() { Text = ApplicationResource.About, IconFontAwesome = "\uf05a" },
+                new MenuNavigation() { Text = ApplicationResource.Disconnect, IconFontAwesome = "\uf011" },
             };
 
             this.requestService = requestService;
@@ -103,13 +103,13 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 {
                     this.menuItemList = new ObservableCollection<MenuNavigation>()
                     {
-                        new MenuNavigation() { Text = ApplicationResource.Home, IconImageSource = "home", IsSelected = true },
-                        new MenuNavigation() { Text = ApplicationResource.Account, IconImageSource = "profile"},
-                        new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconImageSource = "allaccounts"},
-                        new MenuNavigation() { Text = ApplicationResource.Scan, IconImageSource = "borrowing"},
-                        new MenuNavigation() { Text = ApplicationResource.Library, IconImageSource = "library"},
-                        new MenuNavigation() { Text = ApplicationResource.About, IconImageSource = "library"},
-                        new MenuNavigation() { Text = ApplicationResource.Disconnect, IconImageSource = "library"},
+                        new MenuNavigation() { Text = ApplicationResource.Home, IconFontAwesome = "\uf015" , IsSelected = true},
+                        new MenuNavigation() { Text = ApplicationResource.Account, IconFontAwesome = "\uf007" },
+                        new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconFontAwesome = "\uf0c0" },
+                        new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf465" },
+                        new MenuNavigation() { Text = ApplicationResource.Library, IconFontAwesome = "\uf67f" },
+                        new MenuNavigation() { Text = ApplicationResource.About, IconFontAwesome = "\uf05a" },
+                        new MenuNavigation() { Text = ApplicationResource.Disconnect, IconFontAwesome = "\uf011" },
                     };
                    
                 }
