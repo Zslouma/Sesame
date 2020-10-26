@@ -50,7 +50,7 @@
                                                         <Image  Grid.Row="1" Grid.Column="0"  HeightRequest="30" WidthRequest="100" Source="{Binding DisplayValues.Star}" VerticalOptions="Start"></Image>
                                                     </StackLayout>
                                                     <StackLayout Grid.Row="0" Grid.Column="1" Padding="10">
-                                                        <material:MaterialLabel FontSize="Large" Text="{Binding FieldList.CroppedTitle}"/>
+                                                        <material:MaterialLabel FontSize="Medium" Text="{Binding FieldList.CroppedTitle}"/>
                                                         <material:MaterialLabel FontSize="Default" Text="{Binding DisplayValues.AuthorDate}"/>
                                                     </StackLayout>
                                                     <StackLayout Grid.Row="1" Grid.ColumnSpan="2"  Orientation="Vertical">
