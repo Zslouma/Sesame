@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using MvvmCross.Binding.Extensions;
 using Newtonsoft.Json;
+using Xamarin.Forms;
 
 namespace Syracuse.Mobitheque.Core.Models
 {
@@ -43,7 +46,6 @@ namespace Syracuse.Mobitheque.Core.Models
         public bool IsDefaultSort { get; set; }
         public string ColumnType { get; set; }
     }
-
     public class ItemHoldingsData
     {
         public int Availability { get; set; }
@@ -85,8 +87,25 @@ namespace Syracuse.Mobitheque.Core.Models
         [JsonProperty("Site")]
         public string Site { get; set; } = "";
 
+        [JsonProperty("Localisation")]
+        public string Localisation { get; set; }
+
+        [JsonProperty("WhenBack")]
+        public string WhenBack { get; set; }
+
+        public bool IsHaveWhenBack
+        {
+            get
+            {
+               return !String.IsNullOrEmpty(WhenBack);
+            }
+        }
+
         [JsonProperty("Type")]
         public string Type { get; set; } = "";
+
+        [JsonProperty("Section")]
+        public string Section { get; set; }
 
         [JsonProperty("Statut")]
         public string Statut { get; set; } = "";
@@ -103,27 +122,170 @@ namespace Syracuse.Mobitheque.Core.Models
         [JsonProperty("isReservable")]
         public bool isReservable { get; set; } = false;
 
-        public string StatusColor {
-                        get {
+        public string StatusColor
+        {
+            get
+            {
                 if (Statut == "En rayon")
                 {
                     return "#97c67d";
                 }
                 return "#fdc76b";
             }
-}
+        }
+        public Dictionary<string, bool> DisplayHoldings { get; set; }
+        public string DisplayValue { get; set; }
+        public string DisponibilityText { get; set; }
+
     }
 
+    public class HoldingsStatement
+    {
+        /// <summary>
+        /// Site de gestion (bibliothèque, etc.)
+        /// </summary>
+        [JsonProperty("Site")]
+        public string Site { get; set; }
+        /// <summary>
+        /// Localisation (ex : étagère, étage, etc.)
+        /// </summary>
+        [JsonProperty("Localisation")]
+        public string Localisation { get; set; }
+        /// <summary>
+        /// Type.
+        /// </summary>
+        [JsonProperty("Type")]
+        public string Type { get; set; }
+        /// <summary>
+        /// Section (ex : Adulte, jeunesse)
+        /// </summary>
+        [JsonProperty("Section")]
+        public string Section { get; set; }
+        /// <summary>
+        /// Cote (ex : 784.1 AYO, I 2.3.5.1)
+        /// </summary>
+        [JsonProperty("Cote")]
+        public string Cote { get; set; }
+
+        /// <summary>
+        /// Cote alternative.
+        /// </summary>
+        [JsonProperty("AlternativeCote")]
+        public string AlternativeCote { get; set; }
+
+        /// <summary>
+        /// Date de début.
+        /// </summary>
+        [JsonProperty("WhenStart")]
+        public string WhenStart { get; set; }
+
+        /// <summary>
+        /// Date de fin.
+        /// </summary>
+        [JsonProperty("WhenEnd")]
+        public string WhenEnd { get; set; }
+
+        /// <summary>
+        /// Numéro du début de l'état.
+        /// </summary>
+        [JsonProperty("StartNumber")]
+        public string StartNumber { get; internal set; }
+
+        /// <summary>
+        /// Date de début en version textuelle.
+        /// </summary>
+        [JsonProperty("WhenStartAsText")]
+        public string WhenStartAsText { get; internal set; }
+
+        /// <summary>
+        /// Numéro de fin.
+        /// </summary>
+        [JsonProperty("EndNumber")]
+        public string EndNumber { get; internal set; }
+
+        /// <summary>
+        /// Date de fin en version textuelle.
+        /// </summary>
+        [JsonProperty("WhenEndAsText")]
+        public string WhenEndAsText { get; internal set; }
+
+        /// <summary>
+        /// Lacunes de l'état de collection.
+        /// </summary>
+        [JsonProperty("Gap")]
+        public string Gap { get; internal set; }
+
+        /// <summary>
+        /// Description textuelle de la couverture de l'état de collection.
+        /// </summary>
+        [JsonProperty("Range")]
+        public string Range { get; internal set; }
+
+        /// <summary>
+        /// Type de support. Physique ou electronique.
+        /// </summary>
+        [JsonProperty("Support")]
+        public string Support { get; internal set; }
+
+        /// <summary>
+        /// Si electronique, url pour acceder à la ressource.
+        /// </summary>
+        [JsonProperty("Url")]
+        public string Url { get; internal set; }
+
+        public Dictionary<string, bool> DisplayHoldingsStatements { get; set; }
+
+        public string DisplayValue { get; set; }
+    }
     public class Dataa
     {
         public IList<HoldingColumn> HoldingColumns { get; set; }
         public IList<object> HoldingPlaces { get; set; }
 
         [JsonProperty("Holdings")]
-
         public List<Holdings> Holdings { get; set; }
+        public bool IsHoldings
+        {
+            get
+            {
+                return Holdings.Count > 0;
+            }
+        }
+        public Dictionary<string, bool> DisplayHoldings
+        {
+            get
+            {
+                Dictionary<string, bool> result = new Dictionary<string, bool>();
+                foreach (var item in HoldingColumns)
+                {
+                    result.Add(item.Name, item.MobileVisible);
+                }
+                return result;
+            }
+        }
         public IList<HoldingsStatementColumn> HoldingsStatementColumns { get; set; }
-        public IList<object> HoldingsStatements { get; set; }
+        [JsonProperty("HoldingsStatements")]
+        public List<HoldingsStatement> HoldingsStatements { get; set; }
+        public bool IsHoldingsStatements
+        {
+            get
+            {
+                return HoldingsStatements.Count > 0;
+            }
+        }
+
+        public Dictionary<string, bool> DisplayHoldingsStatements
+        {
+            get
+            {
+                Dictionary<string, bool> result = new Dictionary<string, bool>();
+                foreach (var item in HoldingsStatementColumns)
+                {
+                    result.Add(item.Name, item.MobileVisible);
+                }
+                return result;
+            }
+        }
         public object HtmlView { get; set; }
         public ItemHoldingsData ItemHoldingsData { get; set; }
         public string ItemHoldinsDataHtmlView { get; set; }

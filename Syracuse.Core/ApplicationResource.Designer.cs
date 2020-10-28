@@ -270,6 +270,24 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Available to {0}.
+        /// </summary>
+        public static string HoldingDisponibilityText {
+            get {
+                return ResourceManager.GetString("HoldingDisponibilityText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expected return on {0} at {1}.
+        /// </summary>
+        public static string HoldingDisponibilityTextDateBack {
+            get {
+                return ResourceManager.GetString("HoldingDisponibilityTextDateBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string Home {

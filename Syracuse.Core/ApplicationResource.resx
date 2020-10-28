@@ -188,6 +188,12 @@ This act is final!</value>
   <data name="HoldingChoice" xml:space="preserve">
     <value>Voulez-vous confirmer votre reservation à {0}</value>
   </data>
+  <data name="HoldingDisponibilityText" xml:space="preserve">
+    <value>Available to {0}</value>
+  </data>
+  <data name="HoldingDisponibilityTextDateBack" xml:space="preserve">
+    <value>Expected return on {0} at {1}</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>

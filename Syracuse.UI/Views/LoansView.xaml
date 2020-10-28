@@ -28,12 +28,12 @@
                     </StackLayout>
                     <StackLayout Padding="5,10" IsVisible="{Binding ReversNotCurrentLoan}">
                         <ListView x:Name="LoansList" 
-                      CachingStrategy="RecycleElement"
-                      ItemsSource="{Binding Results}" 
-                      SeparatorVisibility="None"
-                      RowHeight="160"
-                      VerticalScrollBarVisibility="Never"
-                      IsPullToRefreshEnabled="False">
+                          CachingStrategy="RecycleElement"
+                          ItemsSource="{Binding Results}" 
+                          SeparatorVisibility="None"
+                          RowHeight="160"
+                          VerticalScrollBarVisibility="Never"
+                          IsPullToRefreshEnabled="False">
                             <ListView.ItemTemplate>
                                 <DataTemplate >
                                     <ViewCell>

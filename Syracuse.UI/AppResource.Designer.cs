@@ -133,6 +133,15 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Collection statuses.
+        /// </summary>
+        public static string CopiesCollectionStatements {
+            get {
+                return ResourceManager.GetString("CopiesCollectionStatements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string Delete {

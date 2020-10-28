@@ -141,6 +141,9 @@
   <data name="Copies" xml:space="preserve">
     <value>Exemplaire</value>
   </data>
+  <data name="CopiesCollectionStatements" xml:space="preserve">
+    <value>Etats de collection </value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Suprimer</value>
   </data>

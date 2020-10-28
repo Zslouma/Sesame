@@ -5,6 +5,7 @@ using Syracuse.Mobitheque.Core.Services.Requests;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -42,12 +43,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             get => this.desc;
             set { SetProperty(ref this.desc, value); }
         }
-        //private bool seekForHoldings;
-        //public bool SeekForHoldings
-        //{
-        //    get => this.seekForHoldings;
-        //    set { SetProperty(ref this.seekForHoldings, (value && this.ReversIsKm)); }
-        //}
         private ObservableCollection<Result> itemsSource;
         public ObservableCollection<Result> ItemsSource
         {
@@ -185,12 +180,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 var positionTempo = 0;
                 foreach (var resultTempo in parameterTempo[i].D.Results)
                 {
-                    var author = "";
-                    var date = "";
-                    if (resultTempo.FieldList.Author_exact != null)
-                        author = resultTempo.FieldList.Author_exact[0];
-                    if (resultTempo.FieldList.Date != null)
-                        date = resultTempo.FieldList.Date[0];
                     if (resultTempo.Resource.Desc != null)
                         resultTempo.DisplayValues.Desc = resultTempo.Resource.Desc;
                     resultTempo.DisplayValues.Star = this.setStar(resultTempo.Resource.AvNt);
@@ -201,18 +190,12 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     else { 
                         resultTempo.DisplayValues.DisplayStar = true; 
                     }
-                    if (author != "" && date != "")
-                        resultTempo.DisplayValues.AuthorDate = string.Format("{0} - {1}", author, date);
-                    else if (author == "" && date != "")
-                        resultTempo.DisplayValues.AuthorDate = string.Format("{0}", date);
-                    else if (author != "" && date == "")
-                         resultTempo.DisplayValues.AuthorDate = string.Format("{0}", author);
-                    else
-                        resultTempo.DisplayValues.AuthorDate = "";
-                    resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
+                    //resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
                     await PerformSearch(resultTempo.FieldList.Identifier[0]);
+                    this.BuildHoldingsStatements();
+                    this.BuildHoldings();
                     resultTempo.DisplayValues.Library = this.Library;
-                    resultTempo.DisplayValues.Library.success = resultTempo.DisplayValues.Library.success && resultTempo.DisplayValues.SeekForHoldings;
+                    //resultTempo.DisplayValues.Library.success = resultTempo.DisplayValues.Library.success && resultTempo.DisplayValues.SeekForHoldings;
                     if (i == 1)
                     {
                         if (resultTempo == parameterTempo[0].D.Results[0])
@@ -233,6 +216,91 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
             this.IsBusy = false;
             this.IsPositionVisible = true;
+        }
+
+        public void BuildHoldingsStatements()
+        {
+            if (this.Library.success && this.Library.Dataa.HoldingsStatements.Count > 0)
+            {
+                foreach (var item in this.Library.Dataa.HoldingsStatements)
+                {
+                    Dictionary<string, bool> DisplayHoldingsStatements = new Dictionary<string, bool>();
+                    List<string> strValues = new List<string>();
+                    foreach (var value in this.Library.Dataa.DisplayHoldingsStatements)
+                    {
+                        if (value.Value)
+                        {
+                            var itemObject = item.GetType().GetProperty(value.Key)?.GetValue(item, null);
+                            string itemValue = itemObject != null ? itemObject.ToString() : "";
+                            if (String.IsNullOrEmpty(itemValue))
+                            {
+                                DisplayHoldingsStatements.Add(value.Key, false);
+                                continue;
+                            }
+                            else
+                            {
+                                if (value.Key != "Site")
+                                {
+                                    strValues.Add(itemValue);
+                                }
+                            }
+                        }
+                        DisplayHoldingsStatements.Add(value.Key, value.Value);
+
+                    }
+                    if (strValues.Count > 0)
+                    {
+                        item.DisplayValue = String.Join(" | ", strValues);
+                    }
+                    item.DisplayHoldingsStatements = DisplayHoldingsStatements;
+                }
+            }
+        }
+        public void BuildHoldings()
+        {
+            if (this.Library.success && this.Library.Dataa.Holdings.Count > 0)
+            {
+                foreach (var item in this.Library.Dataa.Holdings)
+                {
+                    Dictionary<string, bool> DisplayHoldings = new Dictionary<string, bool>();
+                    List<string> strValues = new List<string>();
+                    foreach (var value in this.Library.Dataa.DisplayHoldings)
+                    {
+                        if (value.Value)
+                        {
+                            var itemObject = item.GetType().GetProperty(value.Key)?.GetValue(item, null);
+                            string itemValue = itemObject != null? itemObject.ToString() : "";
+                            if (String.IsNullOrEmpty(itemValue))
+                            {
+                                DisplayHoldings.Add(value.Key, false);
+                                continue;
+                            }
+                            else
+                            {
+                                if (value.Key != "Site")
+                                {
+                                    strValues.Add(itemValue);
+                                }
+                            }
+                        }
+                        DisplayHoldings.Add(value.Key, value.Value);
+
+                    }
+                    if (strValues.Count > 0)
+                    {
+                        item.DisplayValue = String.Join(" | ", strValues);
+                    }
+                    if (item.IsHaveWhenBack)
+                    {
+                        item.DisponibilityText = String.Format(ApplicationResource.HoldingDisponibilityTextDateBack, item.WhenBack, item.Site);
+                    }
+                    else
+                    {
+                        item.DisponibilityText = String.Format(ApplicationResource.HoldingDisponibilityText, item.Site);
+                    }
+                    item.DisplayHoldings = DisplayHoldings;
+                }
+            }
         }
 
         public async Task CanHolding()
@@ -258,12 +326,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         {
             foreach (var resultTempo in results)
             {
-                var author = "";
-                var date = "";
-                if (resultTempo.FieldList.Author_exact != null)
-                    author = resultTempo.FieldList.Author_exact[0];
-                if (resultTempo.FieldList.Date != null)
-                    date = resultTempo.FieldList.Date[0];
                 if (resultTempo.Resource.Desc != null)
                     resultTempo.DisplayValues.Desc = resultTempo.Resource.Desc;
                 resultTempo.DisplayValues.Star = this.setStar(resultTempo.Resource.AvNt);
@@ -275,16 +337,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 {
                     resultTempo.DisplayValues.DisplayStar = true;
                 }
-                if (author != "" && date != "")
-                    resultTempo.DisplayValues.AuthorDate = string.Format("{0} - {1}", author, date);
-                else if (author == "" && date != "")
-                    resultTempo.DisplayValues.AuthorDate = string.Format("{0}", date);
-                else if (author != "")
-                    resultTempo.DisplayValues.AuthorDate = string.Format("{0}", author);
-                else
-                    resultTempo.DisplayValues.AuthorDate = "";
                 resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
                 await PerformSearch(resultTempo.FieldList.Identifier[0]);
+                this.BuildHoldingsStatements();
+                this.BuildHoldings();
                 resultTempo.DisplayValues.Library = this.Library;
                 resultTempo.DisplayValues.Library.success = resultTempo.DisplayValues.Library.success && resultTempo.DisplayValues.SeekForHoldings;
                 this.ItemsSource.Add(resultTempo);
