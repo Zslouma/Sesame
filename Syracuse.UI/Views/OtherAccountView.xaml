@@ -70,7 +70,7 @@
                             <ListView.Footer>
                                 <StackLayout  Padding="0, 5, 0, 5" HeightRequest="100" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Orientation="Vertical">
 
-                                    <ImageButton VerticalOptions="CenterAndExpand"  Source="add.png" BackgroundColor="White" Clicked="AddAccount_Clicked"></ImageButton>
+                                <Button VerticalOptions="CenterAndExpand" FontSize="Large"  Text="&#xf234;" FontFamily="{StaticResource FontAwesomeSolid}" BackgroundColor="White" Clicked="AddAccount_Clicked"></Button>
 
                                 </StackLayout>
 

@@ -20,12 +20,12 @@
 
                             <StackLayout Orientation="Vertical">
                                 <Label Margin="4,0,0,0" HorizontalTextAlignment="Start" Text="{x:Static local:AppResource.DepartmentTitle}" FontAttributes="Bold" TextColor="{d:DynamicResource GreyTextColor}" />
-                                <Picker  Title="{x:Static local:AppResource.Choose}"  ItemsSource="{Binding DepartmentsPickerSource, Mode=OneWay}" SelectedIndex="{Binding DepartmentsPickerIndex, Mode=TwoWay}" TitleColor="{d:DynamicResource PurpleTextColor}" FontAttributes="Bold" TextColor="{d:DynamicResource NavigationBarColor}"/>
+                                <Picker Title="{x:Static local:AppResource.Choose}"  ItemsSource="{Binding DepartmentsPickerSource, Mode=OneWay}" SelectedIndex="{Binding DepartmentsPickerIndex, Mode=TwoWay}" TitleColor="{d:DynamicResource PurpleTextColor}" FontAttributes="Bold" TextColor="{d:DynamicResource NavigationBarColor}"/>
                             </StackLayout>
 
                             <StackLayout Orientation="Vertical">
                                 <Label Margin="4,0,0,0" HorizontalTextAlignment="Start"  Text="{x:Static local:AppResource.LibraryTitle}"  FontAttributes="Bold" TextColor="{d:DynamicResource GreyTextColor}" />
-                                <Picker IsEnabled="{Binding IsAnyLibrarySelected}" Title="{x:Static local:AppResource.Choose}" ItemsSource="{Binding LibrariesPickerSource, Mode=OneWay}"  SelectedIndex="{Binding LibrariesPickerIndex, Mode=TwoWay}" TitleColor="{d:DynamicResource PurpleTextColor}" FontAttributes="Bold" TextColor="{d:DynamicResource NavigationBarColor}"/>
+                                <Picker x:Name="LibraryPicker" IsEnabled="{Binding IsAnyLibrarySelected}"  Title="{x:Static local:AppResource.Choose}" ItemsSource="{Binding LibrariesPickerSource, Mode=OneWay}"  SelectedIndex="{Binding LibrariesPickerIndex, Mode=TwoWay}" TitleColor="{d:DynamicResource GreyTextColor}" FontAttributes="Bold" TextColor="{d:DynamicResource NavigationBarColor}"/>
                             </StackLayout>
 
                             <Button Text="{x:Static local:AppResource.Submit}"

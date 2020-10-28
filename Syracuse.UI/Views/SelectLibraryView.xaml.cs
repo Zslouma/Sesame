@@ -1,6 +1,10 @@
 ﻿using MvvmCross.Forms.Presenters.Attributes;
 using MvvmCross.Forms.Views;
 using Syracuse.Mobitheque.Core.ViewModels;
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Syracuse.Mobitheque.UI.Views
@@ -12,7 +16,9 @@ namespace Syracuse.Mobitheque.UI.Views
 
         public SelectLibraryView()
         {
+
             InitializeComponent();
+            LibraryPicker.PropertyChanged += PickerPropertyChanged;
         }
 
         protected override void OnBindingContextChanged()
@@ -29,6 +35,14 @@ namespace Syracuse.Mobitheque.UI.Views
         }
 
         private void SelectLibrary_OnDisplayAlert(string title, string message, string button) => this.DisplayAlert(title, message, button);
+
+        private void PickerPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsEnabled")
+            {
+                LibraryPicker.TitleColor = LibraryPicker.IsEnabled ? (Color)Application.Current.Resources["AppBackgroundColor"] : (Color) Application.Current.Resources["GreyTextColor"];
+            }
+        }
 
     }
 }
