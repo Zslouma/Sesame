@@ -20,14 +20,16 @@ namespace Syracuse.Mobitheque.UI.Views
                 if (!args.PropertyName.Equals("InTimeBorrowedDocuments"))
                     return;
                 string tempo = "";
+                ThicknessTypeConverter margin = new ThicknessTypeConverter();
+                string marginText = "0, 0, 0, 5";
                 foreach (var a in ((AccountInfoViewModel)sender).InTimeBorrowedDocuments)
                 {
 #pragma warning disable S1643 // Strings should not be concatenated using '+' in a loop
                     tempo += $"{a}\n";
 #pragma warning restore S1643 // Strings should not be concatenated using '+' in a loop
                 }
-                InfoList.Children.Add(new Label { Text = tempo, TextColor = Color.Green });
-            };
+                InfoList.Children.Add(new Label { Text = tempo, TextColor = (Color)Application.Current.Resources["AccountInfoTextColor"], Margin = (Thickness)margin.ConvertFromInvariantString(marginText) });
+            }; 
         }
     }
 }

@@ -131,7 +131,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
             this.Results = loans.D.Loans;
             List<Loans> tmp = new List<Loans>(this.Results);
-            tmp.Sort((x, y) => DateTime.Compare(x.WhenBack, y.WhenBack));
+            tmp.Sort((x, y) => DateTimeOffset.Compare(x.WhenBack, y.WhenBack));
             this.Results = tmp.ToArray();
             if (this.results.Length == 0)
             {

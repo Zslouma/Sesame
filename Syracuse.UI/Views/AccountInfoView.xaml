@@ -51,6 +51,7 @@
                                 <yummy:PancakeView Margin="15,5" Padding="10" CornerRadius="30" Border="{yummy:BorderMarkup Color=LightGray, Thickness=1}">
                                     <StackLayout 
                                     HorizontalOptions="Center"
+                                    Padding="15,0,0,0"
                                     x:Name="InfoList">
                                         <Label FontAttributes="Bold" Text="{Binding TotalBorrowedDocuments}"></Label>
                                         <Label Margin="0, 0, 0, 5" TextColor="Red" Text="{Binding LateBorrowedDocuments}"></Label>
@@ -59,7 +60,7 @@
                                 <yummy:PancakeView Margin="15,5" Padding="10" CornerRadius="30" Border="{yummy:BorderMarkup Color=LightGray, Thickness=1}">
                                     <StackLayout HorizontalOptions="Center">
                                         <Label FontAttributes="Bold" Text="{Binding TotalBookingDocuments}"></Label>
-                                        <Label Margin="0, 0, 0, 5" TextColor="Green" Text="{Binding AvailableBookingDocuments}"></Label>
+                                        <Label Margin="0, 0, 0, 5" TextColor="{d:DynamicResource AccountInfoTextColor}" Text="{Binding AvailableBookingDocuments}"></Label>
                                     </StackLayout>
                                 </yummy:PancakeView>
                             </StackLayout>

@@ -15,13 +15,13 @@
         <yummy:PancakeView Margin="15" CornerRadius="10" VerticalOptions="FillAndExpand" BackgroundColor="{DynamicResource AppSecondaryBackgroundColor}">
             <Grid x:Name="displayCardGrid" HorizontalOptions="Center" VerticalOptions="Center">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0.5*"></RowDefinition>
-                    <RowDefinition Height="0.5*"></RowDefinition>
+                    <RowDefinition Height="0.4*"></RowDefinition>
+                    <RowDefinition Height="0.6*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label Margin="20" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding SummaryAccount.DisplayName}"></Label>
-                <zxing:ZXingBarcodeImageView HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" WidthRequest="450" HeightRequest="100" BarcodeValue="{Binding CookiesSave.Username}" BarcodeFormat="CODE_39">
+                <zxing:ZXingBarcodeImageView HorizontalOptions="Center" VerticalOptions="Center" Grid.Row="1" WidthRequest="500" HeightRequest="150" BarcodeValue="{Binding CookiesSave.Username}" BarcodeFormat="CODE_39">
                     <zxing:ZXingBarcodeImageView.BarcodeOptions>
-                        <zxcm:EncodingOptions Width="450" Height="100" />
+                        <zxcm:EncodingOptions Width="500" Height="150" />
                     </zxing:ZXingBarcodeImageView.BarcodeOptions>
                 </zxing:ZXingBarcodeImageView>
             </Grid>

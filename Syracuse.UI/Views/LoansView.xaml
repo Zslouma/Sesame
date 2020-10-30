@@ -69,7 +69,7 @@
                                                           CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                                           BindingContext="{Binding Source={x:Reference LoansList}, Path=BindingContext}"
                                                           Command="{Binding RenewLoanCommand}"
-                                                          BackgroundColor="{Binding Source={x:Reference Item}, Path=BindingContext.buttonColor}"
+                                                          BackgroundColor="{d:DynamicResource AppBackgroundColor}"
                                                           Text="{x:Static local:AppResource.Extend}"/>
                                                     </StackLayout>
 

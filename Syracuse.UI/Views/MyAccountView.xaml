@@ -14,11 +14,36 @@
     </NavigationPage.TitleView>
     <!--Pages can be added as references or inline-->
     <TabbedPage.BarTextColor>
-        <Color x:Uid="colorPrimary">#ffffff</Color>
+
+        <OnPlatform x:TypeArguments="Color">
+            <OnPlatform.iOS>
+                <Color x:Uid="colorPrimary">#000000</Color>
+            </OnPlatform.iOS>
+            <OnPlatform.Android>
+                <Color x:Uid="colorPrimary">#ffffff</Color>
+            </OnPlatform.Android>
+            <OnPlatform.WinPhone>
+                <Color x:Uid="colorPrimary">#ffffff</Color>
+            </OnPlatform.WinPhone>
+        </OnPlatform>
+        
     </TabbedPage.BarTextColor>
     <TabbedPage.SelectedItem>
         <Color x:Uid="colorPrimary">#ffffff</Color>
     </TabbedPage.SelectedItem>
+    <TabbedPage.SelectedTabColor>
+        <OnPlatform x:TypeArguments="Color">
+            <OnPlatform.iOS>
+                <Color x:Uid="colorPrimary">#6574CF</Color>
+            </OnPlatform.iOS>
+            <OnPlatform.Android>
+                <Color x:Uid="colorPrimary">#6574CF</Color>
+            </OnPlatform.Android>
+            <OnPlatform.WinPhone>
+                <Color x:Uid="colorPrimary">#6574CF</Color>
+            </OnPlatform.WinPhone>
+        </OnPlatform>
+    </TabbedPage.SelectedTabColor>
 
     <TabbedPage.Children>
         <views1:AccountInfoView

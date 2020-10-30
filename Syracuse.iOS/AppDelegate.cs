@@ -29,11 +29,6 @@ namespace Syracuse.Mobitheque.iOS
             ZXing.Net.Mobile.Forms.iOS.Platform.Init();
             this.LoadApplication(new App());
             return base.FinishedLaunching(app, options);
-            /*Xamarin.Forms.Forms.Init();
-            XF.Material.iOS.Material.Init();
-
-            LoadApplication(new App());
-            base.FinishedLaunching(application);*/
         }
 
     }

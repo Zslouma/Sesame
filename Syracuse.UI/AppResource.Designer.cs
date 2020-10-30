@@ -81,9 +81,18 @@ namespace Syracuse.Mobitheque.UI {
         /// <summary>
         ///   Looks up a localized string similar to Available.
         /// </summary>
-        public static string Available {
+        public static string BookingAvailable {
             get {
-                return ResourceManager.GetString("Available", resourceCulture);
+                return ResourceManager.GetString("BookingAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pending.
+        /// </summary>
+        public static string BookingWait {
+            get {
+                return ResourceManager.GetString("BookingWait", resourceCulture);
             }
         }
         

@@ -15,7 +15,9 @@
             <Color x:Key="NavigationBarTextColor">#FFFFFF</Color>
             <Color x:Key="DarkTextColor">#000000</Color>
             <Color x:Key="PurpleTextColor">#6574CF</Color>
+            <Color x:Key="PurpleTextColorTransparente">#B2B9E7</Color>
             <Color x:Key="GreyTextColor">#8F9BB3</Color>
+            <Color x:Key="AccountInfoTextColor">#4FBFC3</Color>
             <Color x:Key="LigthGreyTextColor">#8f9bb3</Color>
             <Color x:Key="WhiteTextColor">#FFFFFF</Color>
             <Color x:Key="ActivityIndicatorColor">#FFFFFF</Color>

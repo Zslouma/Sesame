@@ -27,12 +27,12 @@
                         </StackLayout>
                         <StackLayout Padding="5,5" IsVisible="{Binding ReversNotCurrentBooking}">
                             <ListView x:Name="BookingList" 
-                          CachingStrategy="RecycleElement"
-                          ItemsSource="{Binding Results}" 
-                          SeparatorVisibility="None"
-                          RowHeight="175"
-                          VerticalScrollBarVisibility="Never"
-                          IsPullToRefreshEnabled="False">
+                                CachingStrategy="RecycleElement"
+                                ItemsSource="{Binding Results}" 
+                                SeparatorVisibility="None"
+                                RowHeight="175"
+                                VerticalScrollBarVisibility="Never"
+                                IsPullToRefreshEnabled="False">
                                 <ListView.ItemTemplate>
                                     <DataTemplate >
                                         <ViewCell>
@@ -62,7 +62,17 @@
                                                                 <ColumnDefinition Width="0.5*" />
                                                             </Grid.ColumnDefinitions>
                                                             <Label Grid.Column="0" Text="{Binding LocationLabel}" FontSize="Small"></Label>
-                                                            <Label Grid.Column="1" IsVisible="{Binding IsAvailable}" Text="{x:Static local:AppResource.Available}" TextColor="Green" FontSize="Small" FontAttributes="Bold"></Label>
+                                                            <Label Grid.Column="1" IsVisible="{Binding IsAvailable}" Text="{x:Static local:AppResource.BookingAvailable}" TextColor="{d:DynamicResource AccountInfoTextColor}" FontSize="Small" FontAttributes="Bold"></Label>
+                                                            <Label Grid.Column="1" IsVisible="{Binding IsAvailable}" Text="{x:Static local:AppResource.BookingWait}" TextColor="#F8CD8C" FontSize="Small" FontAttributes="Bold">
+                                                                <Label.Triggers>
+                                                                    <DataTrigger TargetType="Label" Binding="{Binding IsAvailable}" Value="True">
+                                                                        <Setter Property="IsVisible" Value="False" />
+                                                                    </DataTrigger>
+                                                                    <DataTrigger TargetType="Label" Binding="{Binding IsAvailable}" Value="False">
+                                                                        <Setter Property="IsVisible" Value="True" />
+                                                                    </DataTrigger>
+                                                                </Label.Triggers>
+                                                            </Label>
                                                         </Grid>
                                                         <StackLayout IsVisible="{Binding CanCancel}">
                                                             <material:MaterialButton
@@ -70,7 +80,7 @@
                                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                                     BindingContext="{Binding Source={x:Reference BookingList}, Path=BindingContext}"
                                                     Command="{Binding CancelBookingCommand}"
-                                                    BackgroundColor="{Binding Source={x:Reference Item}, Path=BindingContext.buttonColor}"
+                                                    BackgroundColor="{d:DynamicResource AppBackgroundColor}"
                                                   />
                                                         </StackLayout>
                                                     </StackLayout>

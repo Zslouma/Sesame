@@ -106,7 +106,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     var documents = new List<string>();
                     var response = await this.requestService.GetLoans();
                     var loans = new List<Loans>(response.D.Loans);
-                    DateTime date;
+                    DateTimeOffset date;
                     while (loans.Count > 0)
                     {
                         date = loans[0].WhenBack;
@@ -120,8 +120,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                         }
                         loans.RemoveAll(item => item.WhenBack == date);
                         String tmp = (total > 1) ?
-                        String.Format(ApplicationResource.AccountInfoReturnDateLoans, total , date.ToShortDateString())
-                        : String.Format(ApplicationResource.AccountInfoReturnDateLoan, total, date.ToShortDateString());
+                        String.Format(ApplicationResource.AccountInfoReturnDateLoans, total , date.Date.ToShortDateString())
+                        : String.Format(ApplicationResource.AccountInfoReturnDateLoan, total, date.Date.ToShortDateString());
                         documents.Add(tmp);
                     }
                     InTimeBorrowedDocuments = documents.ToArray();

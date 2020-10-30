@@ -123,8 +123,11 @@
   <data name="AccountTitle" xml:space="preserve">
     <value>Nom de compte</value>
   </data>
-  <data name="Available" xml:space="preserve">
+  <data name="BookingAvailable" xml:space="preserve">
     <value>Disponible</value>
+  </data>
+  <data name="BookingWait" xml:space="preserve">
+    <value>en attente</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annuler</value>

@@ -40,7 +40,7 @@ namespace Syracuse.Mobitheque.UI.Views
         {
             if (e.PropertyName == "IsEnabled")
             {
-                LibraryPicker.TitleColor = LibraryPicker.IsEnabled ? (Color)Application.Current.Resources["AppBackgroundColor"] : (Color) Application.Current.Resources["GreyTextColor"];
+                LibraryPicker.TitleColor = LibraryPicker.IsEnabled ? (Color)Application.Current.Resources["PurpleTextColor"] : (Color) Application.Current.Resources["PurpleTextColorTransparente"];
             }
         }
 
