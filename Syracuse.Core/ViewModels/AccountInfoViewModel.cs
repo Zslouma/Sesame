@@ -151,10 +151,24 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     InTimeBorrowedDocuments = documents.ToArray();
                     Console.WriteLine(InTimeBorrowedDocuments);
                 }
-                this.TotalBookingDocuments = String.Format(ApplicationResource.AccountInfoCountOfBookings, SummaryAccount.BookingsTotalCount); 
-                this.AvailableBookingDocuments =
-                    (this.SummaryAccount.BookingsAvailableCount != 1) ? String.Format(ApplicationResource.AccountInfoCountAvailableBookings, SummaryAccount.BookingsAvailableCount)
-                    : String.Format(ApplicationResource.AccountInfoCountAvailableBooking, SummaryAccount.BookingsAvailableCount);
+                this.TotalBookingDocuments = String.Format(ApplicationResource.AccountInfoCountOfBookings, SummaryAccount.BookingsTotalCount);
+
+                // Selection du label de pour les disponibilité de reservation de AccountInfo
+                switch (this.SummaryAccount.BookingsAvailableCount)
+                {
+                    // Aucunes disponibilité 
+                    case 0:
+                        this.AvailableBookingDocuments = ApplicationResource.AccountInfoCountNotAvailableBookings;
+                        break;
+                    // Un document disponible 
+                    case 1:
+                        this.AvailableBookingDocuments = String.Format(ApplicationResource.AccountInfoCountAvailableBookings, SummaryAccount.BookingsAvailableCount);
+                        break;
+                    // X nombre de document disponible
+                    default:
+                        this.AvailableBookingDocuments = String.Format(ApplicationResource.AccountInfoCountAvailableBooking, SummaryAccount.BookingsAvailableCount);
+                        break;
+                }
             }
             this.IsBusy = false;
         }

@@ -115,6 +115,15 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No booking available at the moment.
+        /// </summary>
+        public static string AccountInfoCountNotAvailableBookings {
+            get {
+                return ResourceManager.GetString("AccountInfoCountNotAvailableBookings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have reserved {0} documents.
         /// </summary>
         public static string AccountInfoCountOfBookings {

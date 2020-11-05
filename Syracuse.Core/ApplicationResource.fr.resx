@@ -135,6 +135,9 @@
   <data name="AccountInfoCountLateLoans" xml:space="preserve">
     <value>{0} sont en retard</value>
   </data>
+  <data name="AccountInfoCountNotAvailableBookings" xml:space="preserve">
+    <value>Aucunes réservations disponibles pour le moment</value>
+  </data>
   <data name="AccountInfoCountOfBookings" xml:space="preserve">
     <value>Vous avez réservé {0} documents</value>
   </data>
