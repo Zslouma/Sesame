@@ -3,12 +3,17 @@ using System.Threading.Tasks;
 using Syracuse.Mobitheque.Core.Models;
 using Syracuse.Mobitheque.Core.Services.Requests;
 using System.Collections.Generic;
+using MvvmCross.Commands;
+using MvvmCross.Navigation;
+using Xamarin.Forms;
 
 namespace Syracuse.Mobitheque.Core.ViewModels
 {
     public class AccountInfoViewModel : BaseViewModel
     {
-        private IRequestService requestService { get; set; }
+        private readonly IRequestService requestService;
+
+        private readonly IMvxNavigationService navigationService;
 
         private SummaryAccount accountSummary;
         public SummaryAccount SummaryAccount
@@ -70,8 +75,9 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
         }
 
-        public AccountInfoViewModel(IRequestService requestService)
+        public AccountInfoViewModel(IMvxNavigationService navigationService, IRequestService requestService)
         {
+            this.navigationService = navigationService;
             this.requestService = requestService;
         }
 
@@ -83,6 +89,24 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 SetProperty(ref this.isBusy, value);
             }
+        }
+        private MvxAsyncCommand tapBorrowedCommand;
+        public MvxAsyncCommand TapBorrowedCommand => (this.tapBorrowedCommand = new MvxAsyncCommand(NavigateToLoans));
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        private async Task NavigateToLoans()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+            {
+                await this.navigationService.Navigate<LoansViewModel>();
+            }
+        private MvxAsyncCommand tapBookingCommand;
+        public MvxAsyncCommand TapBookingCommand => (this.tapBorrowedCommand = new MvxAsyncCommand(NavigateToBooking));
+
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        private async Task NavigateToBooking()
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+        {
+            await this.navigationService.Navigate<BookingViewModel>();
         }
 
         public async override Task Initialize()

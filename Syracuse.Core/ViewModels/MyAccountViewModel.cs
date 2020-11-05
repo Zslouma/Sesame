@@ -48,7 +48,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
             CookiesSave CookiesSave = App.Database.GetByIDAsync().Result;
 
-            this.AccountInfoViewModel = new AccountInfoViewModel(requestService);
+            this.AccountInfoViewModel = new AccountInfoViewModel(navigationService, requestService);
             this.DisplayCardViewModel = new DisplayCardViewModel(CookiesSave);
 
         }

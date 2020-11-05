@@ -50,15 +50,21 @@
                             Grid.Column="0">
                                 <yummy:PancakeView Margin="15,5" Padding="10" CornerRadius="30" Border="{yummy:BorderMarkup Color=LightGray, Thickness=1}">
                                     <StackLayout 
-                                    HorizontalOptions="Center"
-                                    Padding="15,0,0,0"
-                                    x:Name="InfoList">
+                                            HorizontalOptions="Center"
+                                            Padding="15,0,0,0"
+                                            x:Name="InfoList">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding TapBorrowedCommand}"/>
+                                        </StackLayout.GestureRecognizers>
                                         <Label FontAttributes="Bold" Text="{Binding TotalBorrowedDocuments}"></Label>
                                         <Label Margin="0, 0, 0, 5" TextColor="Red" Text="{Binding LateBorrowedDocuments}"></Label>
                                     </StackLayout>
                                 </yummy:PancakeView>
                                 <yummy:PancakeView Margin="15,5" Padding="10" CornerRadius="30" Border="{yummy:BorderMarkup Color=LightGray, Thickness=1}">
                                     <StackLayout HorizontalOptions="Center">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding TapBookingCommand}"/>
+                                        </StackLayout.GestureRecognizers>
                                         <Label FontAttributes="Bold" Text="{Binding TotalBookingDocuments}"></Label>
                                         <Label Margin="0, 0, 0, 5" TextColor="{d:DynamicResource AccountInfoTextColor}" Text="{Binding AvailableBookingDocuments}"></Label>
                                     </StackLayout>

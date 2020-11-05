@@ -1,9 +1,12 @@
 ﻿using MvvmCross.Commands;
 using MvvmCross.Navigation;
+using MvvmCross.Navigation.EventArguments;
 using Syracuse.Mobitheque.Core.Models;
 using Syracuse.Mobitheque.Core.Services.Requests;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -21,6 +24,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             get => this.menuItemList;
             set => SetProperty(ref this.menuItemList, value);
         }
+
+        private Dictionary<string, string> DictionaryViewModelLabel = new Dictionary<string, string>();
 
         private IMvxAsyncCommand<string> showDetailPageCommand;
         public IMvxAsyncCommand<string> ShowDetailPageCommand
@@ -64,7 +69,13 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         public MenuViewModel(IMvxNavigationService navigationService,
             IRequestService requestService)
         {
+            this.DictionaryViewModelLabel.Add("Syracuse.Mobitheque.Core.ViewModels.BookingViewModel", ApplicationResource.Bookings);
+            this.DictionaryViewModelLabel.Add("Syracuse.Mobitheque.Core.ViewModels.LoansViewModel", ApplicationResource.Loans);
+
             this.navigationService = navigationService;
+
+            this.navigationService.AfterNavigate += LoansNavigation;
+
             this.menuItemList = new ObservableCollection<MenuNavigation>()
             {
                 new MenuNavigation() { Text = ApplicationResource.Home, IconFontAwesome = "\uf015" , IsSelected = true},
@@ -80,6 +91,9 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
             this.requestService = requestService;
         }
+
+        
+
         public override async void Prepare()
         {
 
@@ -119,8 +133,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             
         }
 
-
-        private async Task ShowDetailPageAsync(string name)
+        private async Task RefreshMenuItem( string name)
         {
             var MenuItemListtempo = this.MenuItemList;
             foreach (var item in MenuItemListtempo)
@@ -129,13 +142,18 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 {
                     item.IsSelected = true;
                 }
-                else { 
+                else
+                {
                     item.IsSelected = false;
                 }
             }
             this.MenuItemList = new ObservableCollection<MenuNavigation>();
             this.MenuItemList = MenuItemListtempo;
             await this.RaiseAllPropertiesChanged();
+        }
+        private async Task ShowDetailPageAsync(string name)
+        {
+            await this.RefreshMenuItem(name);
             if (name == ApplicationResource.Home)
                 _ = this.navigationService.Navigate<HomeViewModel>();
             else if (name == ApplicationResource.Bookings)
@@ -166,6 +184,21 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             else if (Application.Current.MainPage is NavigationPage navigationPage && 
                      navigationPage.CurrentPage is MasterDetailPage nestedMasterDetail)
                 nestedMasterDetail.IsPresented = false;
+        }
+
+        /// <summary>
+        /// Permet de detecter une navigation hors menu et de changer l'affichage du menu en conséquent 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void LoansNavigation(object sender, IMvxNavigateEventArgs e)
+        {
+            
+            var key = e.ViewModel.ToString();
+            if (DictionaryViewModelLabel.ContainsKey(key)) {
+                this.RefreshMenuItem(DictionaryViewModelLabel[key]).Wait();
+            }
+
         }
     }
 }
