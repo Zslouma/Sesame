@@ -15,7 +15,7 @@
     <ContentPage.Content>
         <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
             <Grid>
-                <StackLayout VerticalOptions="FillAndExpand" Orientation="Vertical" Padding="15, 0, 15, 0">
+                <StackLayout VerticalOptions="FillAndExpand" Orientation="Vertical" Padding="5, 0, 5, 0">
                     <CarouselView 
                         x:Name="carouselView" 
                         ItemsSource="{Binding ItemsSource}" 
@@ -54,7 +54,7 @@
                                                         <material:MaterialLabel FontSize="Default" Text="{Binding FieldList.shortDesc}"/>
                                                     </StackLayout>
                                                     <StackLayout Grid.Row="1" Grid.ColumnSpan="2"  Orientation="Vertical">
-                                                        <Label FontSize="Medium" Text="{Binding DisplayValues.Desc}" TextType="Html" TextColor="Black"/>
+                                                        <Label FontSize="Large" Text="{Binding DisplayValues.Desc}" TextType="Html" TextColor="Black"/>
                                                     </StackLayout>
                                                 </Grid>
                                             </StackLayout>

@@ -158,6 +158,9 @@
 {0}
 This act is final!</value>
   </data>
+  <data name="BookingResultBookingDate" xml:space="preserve">
+    <value>booked on {0}</value>
+  </data>
   <data name="Bookings" xml:space="preserve">
     <value>My bookings</value>
   </data>

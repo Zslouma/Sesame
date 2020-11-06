@@ -158,6 +158,9 @@
 {0}
 Cet acte est définitif!</value>
   </data>
+  <data name="BookingResultBookingDate" xml:space="preserve">
+    <value>réservé le {0}</value>
+  </data>
   <data name="Bookings" xml:space="preserve">
     <value>Mes réservations</value>
   </data>

@@ -68,7 +68,7 @@
 
                         </ListView.ItemTemplate>
                         <ListView.Footer>
-                            <material:MaterialButton IsVisible="{Binding DisplayLoadMore}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}" VerticalOptions="Center"></material:MaterialButton>
+                            <material:MaterialButton IsVisible="{Binding DisplayLoadMore}" BackgroundColor="{d:DynamicResource AppBackgroundColor}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}" VerticalOptions="Center"></material:MaterialButton>
                         </ListView.Footer>
                     </ListView>
                     <ListView x:Name="resultsListDocument" 
@@ -99,7 +99,7 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                         <ListView.Footer>
-                            <material:MaterialButton IsVisible="{Binding DisplayLoadMore}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}" VerticalOptions="Center"></material:MaterialButton>
+                            <material:MaterialButton IsVisible="{Binding DisplayLoadMore}" BackgroundColor="{d:DynamicResource AppBackgroundColor}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}" VerticalOptions="Center"></material:MaterialButton>
                         </ListView.Footer>
                     </ListView>
                 </StackLayout>

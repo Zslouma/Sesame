@@ -38,32 +38,37 @@
                                         <ViewCell>
                                             <Frame HasShadow="True" Padding="0, 5, 0, 5">
                                                 <StackLayout 
-                                            VerticalOptions="Start"
-                                            Orientation="Horizontal"
-                                            BackgroundColor="White"
-                                            Padding="5, 0, 5, 0"
-                                            x:Name="Item">
+                                                VerticalOptions="Start"
+                                                Orientation="Horizontal"
+                                                BackgroundColor="White"
+                                                Padding="5, 0, 5, 0"
+                                                x:Name="Item">
                                                     <Image Source="{Binding ThumbnailUrl}"
-                                               HeightRequest="120"
-                                               WidthRequest="90" Margin="5"/>
+                                                       HeightRequest="120"
+                                                       WidthRequest="90" Margin="5"/>   
                                                     <StackLayout Padding="0, 12, 0, 0"
                                                      VerticalOptions="Start"
                                                      Orientation="Vertical"
                                                      HorizontalOptions="FillAndExpand">
-                                                        <Label MaxLines="2" TextColor="Black"
-                                                   Text="{Binding Title}"
-                                                   FontAttributes="Bold"
-                                                  />
-
-                                                        <Label MaxLines="1" Text="{Binding BookingDateString}" FontSize="Small"></Label>
-                                                        <Grid >
+                                                        <Label TextColor="Black"
+                                                        Text="{Binding Title}"
+                                                        MaxLines="2"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Medium"/>
+                                                        <Grid HorizontalOptions="FillAndExpand" >
                                                             <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="0.5*" />
-                                                                <ColumnDefinition Width="0.5*" />
+                                                                <ColumnDefinition Width="0.7*" />
+                                                                <ColumnDefinition Width="0.3*" />
                                                             </Grid.ColumnDefinitions>
-                                                            <Label Grid.Column="0" Text="{Binding LocationLabel}" FontSize="Small"></Label>
-                                                            <Label Grid.Column="1" IsVisible="{Binding IsAvailable}" Text="{x:Static local:AppResource.BookingAvailable}" TextColor="{d:DynamicResource AccountInfoTextColor}" FontSize="Small" FontAttributes="Bold"></Label>
-                                                            <Label Grid.Column="1" IsVisible="{Binding IsAvailable}" Text="{x:Static local:AppResource.BookingWait}" TextColor="#F8CD8C" FontSize="Small" FontAttributes="Bold">
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="1*"/>
+                                                                <RowDefinition Height="1*"/>
+                                                            </Grid.RowDefinitions>
+                                                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding BookingDateString}" FontSize="Small"/>
+                                                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding TypeOfDocument}"  FontSize="Small"/>
+                                                            <Label Grid.Row="1" Grid.Column="0" Text="{Binding LocationLabel}" FontSize="Small"></Label>
+                                                            <Label Grid.Row="1" Grid.Column="1" IsVisible="{Binding IsAvailable}" Text="{x:Static local:AppResource.BookingAvailable}" TextColor="{d:DynamicResource AccountInfoTextColor}" FontSize="Small" FontAttributes="Bold"></Label>
+                                                            <Label Grid.Row="1" Grid.Column="1" IsVisible="{Binding IsAvailable}" Text="{x:Static local:AppResource.BookingWait}" TextColor="#F8CD8C" FontSize="Small" FontAttributes="Bold">
                                                                 <Label.Triggers>
                                                                     <DataTrigger TargetType="Label" Binding="{Binding IsAvailable}" Value="True">
                                                                         <Setter Property="IsVisible" Value="False" />
@@ -76,12 +81,12 @@
                                                         </Grid>
                                                         <StackLayout IsVisible="{Binding CanCancel}">
                                                             <material:MaterialButton
-                                                    Text="{x:Static local:AppResource.Cancel}"
-                                                    CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
-                                                    BindingContext="{Binding Source={x:Reference BookingList}, Path=BindingContext}"
-                                                    Command="{Binding CancelBookingCommand}"
-                                                    BackgroundColor="{d:DynamicResource AppBackgroundColor}"
-                                                  />
+                                                                Text="{x:Static local:AppResource.Cancel}"
+                                                                CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                                                BindingContext="{Binding Source={x:Reference BookingList}, Path=BindingContext}"
+                                                                Command="{Binding CancelBookingCommand}"
+                                                                BackgroundColor="{d:DynamicResource AppBackgroundColor}"
+                                                            />
                                                         </StackLayout>
                                                     </StackLayout>
                                                 </StackLayout>

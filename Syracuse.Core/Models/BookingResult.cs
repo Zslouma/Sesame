@@ -39,7 +39,7 @@ namespace Syracuse.Mobitheque.Core.Models
         public object UserComment { get; set; }
         public object AvailabilityDate { get; set; }
         public object AvailableUntilDate { get; set; }
-        public DateTime BookingDate { get; set; }
+        public DateTimeOffset BookingDate { get; set; }
         public bool CanCancel { get; set; }
         public object CannotCancelReason { get; set; }
         public string HoldingPlace { get; set; }
@@ -51,7 +51,7 @@ namespace Syracuse.Mobitheque.Core.Models
         public string BookingDateString {
             get
             {
-                String ret = "Le " + this.BookingDate.ToString(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern);
+                String ret = String.Format(ApplicationResource.BookingResultBookingDate, this.BookingDate.ToString(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern));
                 return ret;
             }
         }

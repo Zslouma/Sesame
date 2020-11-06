@@ -159,7 +159,7 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                         <ListView.Footer>
-                                <material:MaterialButton VerticalOptions="Center" Margin="5" IsVisible="{Binding DisplayLoadMore}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}"></material:MaterialButton>
+                                <material:MaterialButton VerticalOptions="Center" Margin="5" IsVisible="{Binding DisplayLoadMore}" BackgroundColor="{DynamicResource AppBackgroundColor}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}"></material:MaterialButton>
                         </ListView.Footer>
                     </ListView>
                     </StackLayout>
