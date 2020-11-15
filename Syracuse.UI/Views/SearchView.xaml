@@ -97,7 +97,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                            <ListView ItemsSource="{Binding ExpandedFacetteList}" BackgroundColor="White" IsGroupingEnabled="True" GroupDisplayBinding="{Binding Name}" x:Name="FacetteItemList"  Grid.Row="2" Grid.ColumnSpan="3">
+                            <ListView ItemsSource="{Binding ExpandedFacetteList}" BackgroundColor="White" IsGroupingEnabled="True" GroupDisplayBinding="{Binding Name}" x:Name="FacetteItemList" SeparatorVisibility="None"  Grid.Row="2" Grid.ColumnSpan="3">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
@@ -116,7 +116,7 @@
                                 <ListView.GroupHeaderTemplate>
                                     <DataTemplate>
                                         <ViewCell >
-                                            <Grid Padding="5" BackgroundColor="White" VerticalOptions="Center">
+                                            <Grid BackgroundColor="White" VerticalOptions="Fill">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="0.1*" />
                                                     <ColumnDefinition Width="*" />

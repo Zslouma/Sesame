@@ -313,6 +313,13 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 this.IsBusy = false;
                 return;
             }
+            if (!this.FacetteList[selectedIndex].Expanded)
+            {
+                foreach (var facette in this.FacetteList)
+                {
+                    facette.Expanded = false;
+                }
+            }
             this.FacetteList[selectedIndex].Expanded = !this.FacetteList[selectedIndex].Expanded;
             this.UpdateListContent();
             this.IsBusy = false;

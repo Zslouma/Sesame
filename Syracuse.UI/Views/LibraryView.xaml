@@ -6,6 +6,7 @@
             xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
             xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
             xmlns:common="clr-namespace:Syracuse.Mobitheque.UI.Views.Templates" 
+            xmlns:local="clr-namespace:Syracuse.Mobitheque.UI" 
             xmlns:core="clr-namespace:Syracuse.Mobitheque.Core;assembly=Syracuse.Mobitheque.Core"
             x:Name="LibraryViewPage"
             x:TypeArguments="viewModels:LibraryViewModel"
