@@ -13,14 +13,14 @@ namespace Syracuse.Mobitheque.iOS
     public class AppDelegate : MvxFormsApplicationDelegate<MvxFormsIosSetup<Mobitheque.Core.App, UI.App>, Mobitheque.Core.App, UI.App>
     {
 
-        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             Xamarin.Forms.Forms.SetFlags(new string[] { "IndicatorView_Experimental", "SwipeView_Experimental" });
             Xamarin.Forms.Forms.Init();
             XF.Material.iOS.Material.Init();
             ZXing.Net.Mobile.Forms.iOS.Platform.Init();
             this.LoadApplication(new App());
-            return base.FinishedLaunching(app, options);
+            return base.FinishedLaunching(uiApplication, launchOptions);
         }
 
     }
