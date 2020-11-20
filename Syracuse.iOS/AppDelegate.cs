@@ -15,14 +15,6 @@ namespace Syracuse.Mobitheque.iOS
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            foreach (var family in UIFont.FamilyNames)
-            {
-                System.Diagnostics.Debug.WriteLine($"{family}");
-                foreach (var names in UIFont.FontNamesForFamilyName(family))
-                {
-                    System.Diagnostics.Debug.WriteLine($"{names}");
-                }
-            }
             Xamarin.Forms.Forms.SetFlags(new string[] { "IndicatorView_Experimental", "SwipeView_Experimental" });
             Xamarin.Forms.Forms.Init();
             XF.Material.iOS.Material.Init();
