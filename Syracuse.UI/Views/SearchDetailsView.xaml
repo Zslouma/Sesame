@@ -38,11 +38,12 @@
                                                         <RowDefinition Height="Auto" />
                                                         <RowDefinition Height="*" />
                                                     </Grid.RowDefinitions>
-
+                                                    
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="100" />
                                                         <ColumnDefinition  Width="*" />
                                                     </Grid.ColumnDefinitions>
+                                                    
                                                     <StackLayout  Orientation="Vertical">
                                                         <Frame HasShadow="True" BorderColor="LightGray" Grid.Row="0" Grid.Column="0" IsClippedToBounds="True" Padding="0">
                                                             <Image Aspect="AspectFill" HeightRequest="120" WidthRequest="90" Source="{Binding FieldList.Image}"/>
@@ -54,7 +55,7 @@
                                                         <material:MaterialLabel FontSize="Default" Text="{Binding FieldList.shortDesc}"/>
                                                     </StackLayout>
                                                     <StackLayout Grid.Row="1" Grid.ColumnSpan="2"  Orientation="Vertical">
-                                                        <Label FontSize="Medium" Text="{Binding DisplayValues.Desc}" TextType="Html" TextColor="Black"/>
+                                                        <Label FontSize="Default" Text="{Binding DisplayValues.Desc}" TextType="Html" TextColor="Black"/>
                                                     </StackLayout>
                                                 </Grid>
                                             </StackLayout>
@@ -79,7 +80,7 @@
                                                 </StackLayout>
                                             </StackLayout>
                                             <!--#region Holding -->
-
+                                            
                                             <StackLayout   IsVisible="{Binding DisplayValues.Library.success}">
                                                 <StackLayout IsVisible="{Binding DisplayValues.Library.Dataa.IsHoldings}">
                                                     <StackLayout BackgroundColor="#bfbfbf" Padding="10">
@@ -144,7 +145,7 @@
                                                                             <StackLayout Orientation="Horizontal">
                                                                                 <Label TextColor="Gray" Text="{Binding DisplayValue}"/>
                                                                             </StackLayout>
-                                                                            
+
                                                                         </StackLayout>
                                                                     </Grid>
                                                                 </StackLayout>

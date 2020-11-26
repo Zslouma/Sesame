@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using Foundation;
+﻿using Foundation;
 using MvvmCross.Forms.Platforms.Ios.Core;
 using Syracuse.Mobitheque.UI;
-using Syracuse.Mobitheque.UI.Views;
 using UIKit;
 
 namespace Syracuse.Mobitheque.iOS

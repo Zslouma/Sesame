@@ -20,8 +20,7 @@ namespace Syracuse.Mobitheque.Core
             {
                 if (database == null)
                 {
-                    database = new CookiesDatabase(
-                      Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CookiesDatabase.db3"));
+                    database = new CookiesDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CookiesDatabase.db3"));
                 }
                 return database;
             }
