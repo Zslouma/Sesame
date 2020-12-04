@@ -182,7 +182,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.Library = user.Library;
             this.EventsScenarioCode = user.EventsScenarioCode;
             this.SearchScenarioCode = user.SearchScenarioCode;
-            
             this.Results = await this.loadPage(user.IsEvent);
             if (this.results.Length == 0)
             {

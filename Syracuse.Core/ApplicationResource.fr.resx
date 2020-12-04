@@ -218,6 +218,9 @@ Cet acte est définitif!</value>
   <data name="OtherAccount" xml:space="preserve">
     <value>Tous mes comptes</value>
   </data>
+  <data name="PinnedDocuments" xml:space="preserve">
+    <value>documents épinglés</value>
+  </data>
   <data name="RenewChoice" xml:space="preserve">
     <value>Souhaitez-vous prolonger cet exemplaire :
 {0}</value>

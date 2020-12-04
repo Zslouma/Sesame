@@ -37,10 +37,6 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             this.token = this.Timestamp();
         }
 
-       
-
-
-
         public String GetRedirectURL(string originalURL, string defaultURL = "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png")
         {
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(originalURL);
@@ -249,7 +245,6 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
             return status;
             
-        
         }
 
         public async Task<SearchLibraryResult> SearchLibrary(SearchLibraryOptions options, Action<Exception> error = null)
@@ -309,6 +304,21 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 error?.Invoke(ex);
                 return null;
             }
+        }
+        /// <summary>
+        /// Permet de récupérer les paniers de l'utilisateur
+        /// </summary>
+        public async Task<BasketResult> SearchUserBasket(BasketOptions options, Action<Exception> error = null)
+        {
+            await this.InitializeHttpClient();
+            if (options == null)
+                throw new ArgumentNullException(nameof(options));
+            var status = await this.requests.SearchUserBasket<BasketResult>(options);
+
+            await UpdateCookies();
+
+            return status;
+
         }
 
         public async Task<RenewLoanResult> RenewLoans(LoanOptions options, Action<Exception> error = null)

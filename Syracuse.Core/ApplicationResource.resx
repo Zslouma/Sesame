@@ -218,6 +218,9 @@ This act is final!</value>
   <data name="OtherAccount" xml:space="preserve">
     <value>All my accounts</value>
   </data>
+  <data name="PinnedDocuments" xml:space="preserve">
+    <value>Pinned documents</value>
+  </data>
   <data name="RenewChoice" xml:space="preserve">
     <value>Would you like to extend this copy?
 {0}</value>

@@ -4,5 +4,4 @@
                         x:Class="Syracuse.Mobitheque.UI.Views.ZxingScannerView"
                         xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
                         IsScanning="true" NavigationPage.HasNavigationBar="False" OnScanResult="Handle_OnScanResult">
-
 </zxing:ZXingScannerPage>

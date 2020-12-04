@@ -58,6 +58,9 @@
     <Compile Update="Views\NetworkErrorView.xaml.cs">
       <DependentUpon>NetworkErrorView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\PinnedDocumentView.xaml.cs">
+      <DependentUpon>PinnedDocumentView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SearchView.xaml.cs">
       <DependentUpon>SearchView.xaml</DependentUpon>
     </Compile>
@@ -106,6 +109,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\MenuView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PinnedDocumentView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\SearchDetailsView.xaml">

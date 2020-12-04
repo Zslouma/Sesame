@@ -36,6 +36,9 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
         [Post("/Portal/Recherche/Search.svc/Search")]
         Task<T> Search<T>([Body]SearchOptions body);
 
+        [Post("/Portal/Recherche/Search.svc/SearchUserBasket")]
+        Task<T> SearchUserBasket<T>([Body] BasketOptions body);
+
         [Post("/Portal/ILSClient.svc/GetHoldings")]
         Task<T> SearchLibrary<T>([Body]SearchLibraryOptions body);
 

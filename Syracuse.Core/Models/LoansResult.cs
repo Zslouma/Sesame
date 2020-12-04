@@ -86,19 +86,6 @@ namespace Syracuse.Mobitheque.Core.Models
         [JsonProperty("Location")]
         public String Location { get; set; }
 
-        //[JsonProperty("WhenBack")]
-        //public string CustomDate
-        //{
-        //    get { return WhenBack.ToString("DDMMYY"); }
-        //    set
-        //    {
-        //        var pacificZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
-        //        var dateObj = new DateTest { Date = value };
-        //        var jsonDate = JsonConvert.SerializeObject(dateObj.Date);
-        //        var output = JsonConvert.DeserializeObject<DateTime>(jsonDate);
-        //        var outputuniversal = TimeZoneInfo.ConvertTimeFromUtc((DateTime)output, pacificZone);
-        //    }
-        //}
         [JsonProperty("WhenBack")]
         public DateTimeOffset WhenBack { get; set; }
         [JsonIgnore]

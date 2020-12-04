@@ -360,6 +360,15 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pinned documents.
+        /// </summary>
+        public static string PinnedDocuments {
+            get {
+                return ResourceManager.GetString("PinnedDocuments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Would you like to extend this copy?
         ///{0}.
         /// </summary>

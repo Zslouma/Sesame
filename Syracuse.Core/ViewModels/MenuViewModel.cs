@@ -6,7 +6,6 @@ using Syracuse.Mobitheque.Core.Services.Requests;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -81,6 +80,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 new MenuNavigation() { Text = ApplicationResource.Home, IconFontAwesome = "\uf015" , IsSelected = true},
                 new MenuNavigation() { Text = ApplicationResource.Account, IconFontAwesome = "\uf007" },
                 new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconFontAwesome = "\uf0c0" },
+                new MenuNavigation() { Text = ApplicationResource.PinnedDocuments, IconFontAwesome = "\uf08d" },
                 new MenuNavigation() { Text = ApplicationResource.Bookings, IconFontAwesome = "\uf017" },
                 new MenuNavigation() { Text = ApplicationResource.Loans, IconFontAwesome = "\uf02d" },
                 new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf02a" },
@@ -119,6 +119,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     {
                         new MenuNavigation() { Text = ApplicationResource.Home, IconFontAwesome = "\uf015" , IsSelected = true},
                         new MenuNavigation() { Text = ApplicationResource.Account, IconFontAwesome = "\uf007" },
+                        new MenuNavigation() { Text = ApplicationResource.PinnedDocuments, IconFontAwesome = "\uf08d" },
                         new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconFontAwesome = "\uf0c0" },
                         new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf465" },
                         new MenuNavigation() { Text = ApplicationResource.Library, IconFontAwesome = "\uf67f" },
@@ -156,6 +157,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             await this.RefreshMenuItem(name);
             if (name == ApplicationResource.Home)
                 _ = this.navigationService.Navigate<HomeViewModel>();
+            else if (name == ApplicationResource.PinnedDocuments)
+                _ = this.navigationService.Navigate<PinnedDocumentViewModel>();
             else if (name == ApplicationResource.Bookings)
                 _ = this.navigationService.Navigate<BookingViewModel>();
             else if (name == ApplicationResource.Scan)
@@ -166,7 +169,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 _ = this.navigationService.Navigate<MyAccountViewModel>();
             else if (name == ApplicationResource.OtherAccount)
                 _ = this.navigationService.Navigate<OtherAccountViewModel>();
-            else if (name == ApplicationResource.Disconnect) {
+            else if (name == ApplicationResource.Disconnect)
+            {
                 var user = await App.Database.GetActiveUser();
                 user.Active = false;
                 await App.Database.SaveItemAsync(user);
