@@ -243,6 +243,15 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Downloads.
+        /// </summary>
+        public static string Download {
+            get {
+                return ResourceManager.GetString("Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string Error {
@@ -342,6 +351,15 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This feature requires a network connection, please check this before trying again..
+        /// </summary>
+        public static string NetworkDisable {
+            get {
+                return ResourceManager.GetString("NetworkDisable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string No {
@@ -356,6 +374,15 @@ namespace Syracuse.Mobitheque.Core {
         public static string OtherAccount {
             get {
                 return ResourceManager.GetString("OtherAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pinned documents.
+        /// </summary>
+        public static string PinnedDocuments {
+            get {
+                return ResourceManager.GetString("PinnedDocuments", resourceCulture);
             }
         }
         

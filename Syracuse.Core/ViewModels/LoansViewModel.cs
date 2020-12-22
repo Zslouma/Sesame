@@ -127,6 +127,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             if (!loans.Success)
             {
                 this.DisplayAlert(ApplicationResource.Error, loans.Errors[0].Msg, ApplicationResource.ButtonValidation);
+                this.IsBusy = false;
                 return;
             }
             this.Results = loans.D.Loans;

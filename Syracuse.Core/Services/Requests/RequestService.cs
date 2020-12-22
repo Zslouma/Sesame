@@ -4,6 +4,7 @@ using Syracuse.Mobitheque.Core.Models;
 using Syracuse.Mobitheque.Core.Services.Files;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -36,10 +37,6 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             };
             this.token = this.Timestamp();
         }
-
-       
-
-
 
         public String GetRedirectURL(string originalURL, string defaultURL = "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png")
         {
@@ -217,6 +214,10 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
         public async Task<AccountSummary> GetSummary(Action<Exception> error = null)
         {
+            if (!App.AppState.NetworkConnection)
+            {
+                Debug.WriteLine("NetworkConnection" + App.AppState.NetworkConnection);
+            }
             await this.InitializeHttpClient();
 
             try
@@ -236,6 +237,10 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
         public async Task<SearchResult> Search(SearchOptions options, Action<Exception> error = null)
         {
+            if (!App.AppState.NetworkConnection)
+            {
+                Debug.WriteLine("NetworkConnection" + App.AppState.NetworkConnection);
+            }
             await this.InitializeHttpClient();
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
@@ -243,17 +248,39 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             {
                 options.Query.ScenarioCode = (await App.Database.GetActiveUser()).SearchScenarioCode; 
             }
-            var status = await this.requests.Search<SearchResult>(options);
+            try
+            {
+                var status = await this.requests.Search<SearchResult>(options);
 
-            await UpdateCookies();
+                await UpdateCookies();
 
-            return status;
+                return status;
+            }
+            catch (Exception ex)
+            {
+                var status = new SearchResult();
+                status.Errors = new Error[1];
+                if (!App.AppState.NetworkConnection)
+                {
+                    status.Errors[0] = new Error(ApplicationResource.NetworkDisable);
+                }
+                else
+                {
+                    status.Errors[0] = new Error(ApplicationResource.ErrorOccurred);
+                }
+                error?.Invoke(ex);
+                return status; 
+            }
+
             
-        
         }
 
         public async Task<SearchLibraryResult> SearchLibrary(SearchLibraryOptions options, Action<Exception> error = null)
         {
+            if (!App.AppState.NetworkConnection)
+            {
+                Debug.WriteLine("NetworkConnection" + App.AppState.NetworkConnection);
+            }
             await this.InitializeHttpClient();
 
             if (options == null)
@@ -275,6 +302,10 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
         public async Task<LoansResult> GetLoans(Action < Exception> error = null)
         {
+            if (!App.AppState.NetworkConnection)
+            {
+                Debug.WriteLine("NetworkConnection" + App.AppState.NetworkConnection);
+            }
             await this.InitializeHttpClient();
             try
             {
@@ -287,13 +318,27 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 }
                 catch (Exception ex)
                 {
+                    var status = new LoansResult();
+                    status.Errors = new Error[1];
+                    if (!App.AppState.NetworkConnection)
+                    {
+                        status.Errors[0] = new Error(ApplicationResource.NetworkDisable);
+                    }
+                    else
+                    {
+                        status.Errors[0] = new Error(ApplicationResource.ErrorOccurred);
+                    }
                     error?.Invoke(ex);
-                    return null;
+                    return status;
                 }
         }
 
         public async Task<BookingResult> GetBookings(Action<Exception> error = null)
         {
+            if (!App.AppState.NetworkConnection)
+            {
+                Debug.WriteLine("NetworkConnection" + App.AppState.NetworkConnection);
+            }
             await this.InitializeHttpClient();
             try
             {
@@ -306,13 +351,27 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             }
             catch (Exception ex)
             {
+                var status = new BookingResult();
+                status.Errors = new Error[1];
+                if (!App.AppState.NetworkConnection)
+                {
+                    status.Errors[0] = new Error(ApplicationResource.NetworkDisable);
+                }
+                else
+                {
+                    status.Errors[0] = new Error(ApplicationResource.ErrorOccurred);
+                }
                 error?.Invoke(ex);
-                return null;
+                return status;
             }
         }
 
         public async Task<RenewLoanResult> RenewLoans(LoanOptions options, Action<Exception> error = null)
         {
+            if (!App.AppState.NetworkConnection)
+            {
+                Debug.WriteLine("NetworkConnection" + App.AppState.NetworkConnection);
+            }
             await this.InitializeHttpClient();
             try
             {
@@ -332,6 +391,10 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
         public async Task<CancelBookingResult> CancelBooking(BookingOptions options, Action<Exception> error = null)
         {
+            if (!App.AppState.NetworkConnection)
+            {
+                Debug.WriteLine("NetworkConnection " + App.AppState.NetworkConnection);
+            }
             await this.InitializeHttpClient();
             try
             {
@@ -351,6 +414,10 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
         public async Task<PlaceReservationResult> PlaceReservation(PlaceReservationOptions options, Action<Exception> error = null)
         {
+            if (!App.AppState.NetworkConnection)
+            {
+                Debug.WriteLine("NetworkConnection" + App.AppState.NetworkConnection);
+            }
             await this.InitializeHttpClient();
             try
             {

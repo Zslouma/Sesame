@@ -13,7 +13,6 @@ namespace Syracuse.Mobitheque.Core
     {
         static CookiesDatabase database;
 
-
         public static CookiesDatabase Database
         {
             get
@@ -23,6 +22,20 @@ namespace Syracuse.Mobitheque.Core
                     database = new CookiesDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "CookiesDatabase.db3"));
                 }
                 return database;
+            }
+        }
+
+        static ApplicationState appState;
+
+        public static ApplicationState AppState
+        {
+            get
+            {
+                if (appState == null)
+                {
+                    appState = new ApplicationState(false);
+                }
+                return appState;
             }
         }
         public override async void Initialize()

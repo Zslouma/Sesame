@@ -179,6 +179,9 @@ This act is final!</value>
   <data name="Disconnect" xml:space="preserve">
     <value>Disconnect</value>
   </data>
+  <data name="Download" xml:space="preserve">
+    <value>Downloads</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
@@ -212,11 +215,17 @@ This act is final!</value>
   <data name="MissingField" xml:space="preserve">
     <value>Please fill in this field</value>
   </data>
+  <data name="NetworkDisable" xml:space="preserve">
+    <value>This feature requires a network connection, please check this before trying again.</value>
+  </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
   <data name="OtherAccount" xml:space="preserve">
     <value>All my accounts</value>
+  </data>
+  <data name="PinnedDocuments" xml:space="preserve">
+    <value>Pinned documents</value>
   </data>
   <data name="RenewChoice" xml:space="preserve">
     <value>Would you like to extend this copy?

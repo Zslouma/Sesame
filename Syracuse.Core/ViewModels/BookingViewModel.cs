@@ -117,6 +117,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             if (!bookings.Success)
             {
                 this.DisplayAlert(ApplicationResource.Error, bookings.Errors[0].Msg, ApplicationResource.ButtonValidation);
+                this.IsBusy = false;
                 return;
             }
             this.Results = bookings.D.Bookings;

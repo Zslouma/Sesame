@@ -233,6 +233,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             if (search != null && !search.Success)
             {
                 this.DisplayAlert(ApplicationResource.Error, search.Errors?[0]?.Msg, ApplicationResource.ButtonValidation);
+                this.IsBusy = false;
                 return new Result[0];
             }
             else
