@@ -59,5 +59,12 @@ namespace Syracuse.Mobitheque.UI.Views
             this.ViewModel.AbsoluteIndicatorVisibility = false;
             this.ViewModel.RaiseAllPropertiesChanged();
         }
+
+        protected override void OnBindingContextChanged()
+        {
+            (this.DataContext as LibraryViewModel).OnDisplayAlert += LibraryView_OnDisplayAlert;
+            base.OnBindingContextChanged();
+        }
+        private void LibraryView_OnDisplayAlert(string title, string message, string button) => this.DisplayAlert(title, message, button);
     }
 }

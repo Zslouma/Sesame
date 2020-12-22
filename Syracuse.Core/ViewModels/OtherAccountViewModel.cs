@@ -97,7 +97,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 QueryString = search
             };
             SearchOptions opt = new SearchOptions() { Query = options };
-            await this.navigationService.Navigate<SearchViewModel, SearchOptions>(opt);
+            if (App.AppState.NetworkConnection)
+            {
+                await this.navigationService.Navigate<SearchViewModel, SearchOptions>(opt);
+            }
+            else
+            {
+                this.DisplayAlert(ApplicationResource.Warning, ApplicationResource.NetworkDisable, ApplicationResource.ButtonValidation);
+            }
         }
     }
 }

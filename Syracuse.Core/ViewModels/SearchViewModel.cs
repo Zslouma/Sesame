@@ -579,103 +579,110 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         public async Task PerformSearch(string search = null, string sort = null, bool resetFacette = true)
         {
-            this.IsBusy = true;
-            // Don't reset facette choices if user hasn't changed query string
-            if (search == null) resetFacette = false;
+            if (App.AppState.NetworkConnection)
+            {          
+                this.IsBusy = true;
+                // Don't reset facette choices if user hasn't changed query string
+                if (search == null) resetFacette = false;
 
-            // Showing user search is processing
-            await RaisePropertyChanged();
+                // Showing user search is processing
+                await RaisePropertyChanged();
 
-            // Init searchHistory
-            if (search == null && this.SearchQuery != null)
-                search = this.SearchQuery;
-            await initSearchHistory(search, sort, resetFacette);
+                // Init searchHistory
+                if (search == null && this.SearchQuery != null)
+                    search = this.SearchQuery;
+                await initSearchHistory(search, sort, resetFacette);
 
-            // Check if facettes are selected
-            var facetFilter = CheckFacetteSelected();
+                // Check if facettes are selected
+                var facetFilter = CheckFacetteSelected();
 
-            // Search Query Json
-            SearchOptions optionsTempo = new SearchOptions();
-            optionsTempo.Query = new SearchOptionsDetails()
-            {
-                SortOrder = this.SortOrder,
-                SortField = this.SortName,
-                ScenarioCode = (await App.Database.GetActiveUser()).SearchScenarioCode,
-                QueryString = search,
-                FacetFilter = facetFilter
-            };
-
-            // HTTP Request
-            SearchResult result = await this.requestService.Search(optionsTempo);
-
-            // Result Handler
-            if (result != null && result.D != null)
-            {
-                this.D = result.D;
-                this.Results = result.D.Results;
-                await this.GetRedirectURL();
-                this.ResultCountInt = this.D?.SearchInfo?.NbResults;
-                this.ResultCount = this.D.SearchInfo == null ? ApplicationResource.SearchViewResultNull :  (String.Format(ApplicationResource.SearchViewResultCount, this.D.SearchInfo.NbResults));
-                this.FacetCollectionList = result.D.FacetCollectionList;
-
-                // Avoid resetting facette on sortFilter change
-                if (resetFacette && search != null)
+                // Search Query Json
+                SearchOptions optionsTempo = new SearchOptions();
+                optionsTempo.Query = new SearchOptionsDetails()
                 {
-                    this.Itemss = new SelectableObservableCollection<FacetteValue>();
-                    int groupIndex = 0;
-                    // Parsing FacetteList from ResultList
-                    foreach (var tmp in this.FacetCollectionList)
-                    {
-                        FacetteGroup facetteGroupe = new FacetteGroup(tmp.FacetLabel);
-                        foreach (var FacetListItems in tmp.FacetList)
-                        {
-                            
-                            // Adding Facette
-                            var facettetempo = new FacetteValue
-                            {
-                                id = tmp.FacetId,
-                                value = FacetListItems.Label,
-                                font = FontAttributes.None,
-                                noTitle = true,
-                                groupIndex = groupIndex
-                            };
-                            facetteGroupe.Add(facettetempo);
-                        }
+                    SortOrder = this.SortOrder,
+                    SortField = this.SortName,
+                    ScenarioCode = (await App.Database.GetActiveUser()).SearchScenarioCode,
+                    QueryString = search,
+                    FacetFilter = facetFilter
+                };
 
-                        this.FacetteList.Add(facetteGroupe);
-                        // Adding Title
-                        var tmp3 = new FacetteValue
+                // HTTP Request
+                SearchResult result = await this.requestService.Search(optionsTempo);
+
+                // Result Handler
+                if (result != null && result.D != null)
+                {
+                    this.D = result.D;
+                    this.Results = result.D.Results;
+                    await this.GetRedirectURL();
+                    this.ResultCountInt = this.D?.SearchInfo?.NbResults;
+                    this.ResultCount = this.D.SearchInfo == null ? ApplicationResource.SearchViewResultNull :  (String.Format(ApplicationResource.SearchViewResultCount, this.D.SearchInfo.NbResults));
+                    this.FacetCollectionList = result.D.FacetCollectionList;
+
+                    // Avoid resetting facette on sortFilter change
+                    if (resetFacette && search != null)
+                    {
+                        this.Itemss = new SelectableObservableCollection<FacetteValue>();
+                        int groupIndex = 0;
+                        // Parsing FacetteList from ResultList
+                        foreach (var tmp in this.FacetCollectionList)
                         {
-                            id = 0,
-                            value = tmp.FacetLabel,
-                            font = FontAttributes.Bold,
-                            noTitle = false
-                        };
-                        this.Itemss.Add(tmp3);
-                        foreach (var tmp2 in tmp.FacetList)
-                        {
-                            // Adding Facette
-                            tmp3 = new FacetteValue
+                            FacetteGroup facetteGroupe = new FacetteGroup(tmp.FacetLabel);
+                            foreach (var FacetListItems in tmp.FacetList)
                             {
-                                id = tmp.FacetId,
-                                value = tmp2.Label,
-                                font = FontAttributes.None,
-                                noTitle = true
+                            
+                                // Adding Facette
+                                var facettetempo = new FacetteValue
+                                {
+                                    id = tmp.FacetId,
+                                    value = FacetListItems.Label,
+                                    font = FontAttributes.None,
+                                    noTitle = true,
+                                    groupIndex = groupIndex
+                                };
+                                facetteGroupe.Add(facettetempo);
+                            }
+
+                            this.FacetteList.Add(facetteGroupe);
+                            // Adding Title
+                            var tmp3 = new FacetteValue
+                            {
+                                id = 0,
+                                value = tmp.FacetLabel,
+                                font = FontAttributes.Bold,
+                                noTitle = false
                             };
                             this.Itemss.Add(tmp3);
+                            foreach (var tmp2 in tmp.FacetList)
+                            {
+                                // Adding Facette
+                                tmp3 = new FacetteValue
+                                {
+                                    id = tmp.FacetId,
+                                    value = tmp2.Label,
+                                    font = FontAttributes.None,
+                                    noTitle = true
+                                };
+                                this.Itemss.Add(tmp3);
+                            }
+                            groupIndex += 1;
                         }
-                        groupIndex += 1;
                     }
+                    this.UpdateListContent();
                 }
-                this.UpdateListContent();
+                else
+                {
+                    this.ResultCount = ApplicationResource.SearchViewResultNull;
+                }
+                await RaisePropertyChanged(nameof(this.Itemss));
+                await RaisePropertyChanged();
+                this.IsBusy = false;
             }
             else
             {
-                this.ResultCount = ApplicationResource.SearchViewResultNull;
+                this.DisplayAlert(ApplicationResource.Warning, ApplicationResource.NetworkDisable, ApplicationResource.ButtonValidation);
             }
-            await RaisePropertyChanged(nameof(this.Itemss));
-            await RaisePropertyChanged();
-            this.IsBusy = false;
         }
 
         private async Task GetRedirectURL()

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using MvvmCross.Binding.Extensions;
 using Newtonsoft.Json;
-using Xamarin.Forms;
 
 namespace Syracuse.Mobitheque.Core.Models
 {

@@ -1,4 +1,3 @@
-using MvvmCross.Binding.Extensions;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using Syracuse.Mobitheque.Core.Models;
@@ -7,7 +6,6 @@ using Syracuse.Mobitheque.Core.ViewModels.Sorts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using XF.Material.Forms.Models;
@@ -228,10 +226,12 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     Page = this.page,
                 };
             }
-            SearchResult search = await this.requestService.Search(options);
-            if (search != null && !search.Success)
+            var search = await this.requestService.Search(options);
+            if (!search.Success)
             {
+                this.NotCurrentEvent = true;
                 this.DisplayAlert(ApplicationResource.Error, search.Errors?[0]?.Msg, ApplicationResource.ButtonValidation);
+                this.IsBusy = false;
                 return new Result[0];
             }
             else
@@ -283,7 +283,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 QueryString = search
             };
             SearchOptions opt = new SearchOptions() { Query = options };
-            await this.navigationService.Navigate<SearchViewModel, SearchOptions>(opt);
+            if (App.AppState.NetworkConnection)
+            {
+                await this.navigationService.Navigate<SearchViewModel, SearchOptions>(opt);
+            }
+            else
+            {
+                this.DisplayAlert(ApplicationResource.Warning, ApplicationResource.NetworkDisable, ApplicationResource.ButtonValidation);
+            }
 
         }
 

@@ -5,7 +5,6 @@ using Syracuse.Mobitheque.Core.Services.Requests;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -367,20 +366,23 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         private async Task PerformSearch(string search = null)
         {
-            if (search == null)
+            if (App.AppState.NetworkConnection)
             {
-                search = this.Query;
-            } else
-            {
-                this.Query = search;
-            }
-            var options = new SearchLibraryOptionsDetails()
-            {
-                RscId = search
-            };
-            var res = await this.requestService.SearchLibrary(new SearchLibraryOptions() { Record = options });
+                if (search == null)
+                {
+                    search = this.Query;
+                } else
+                {
+                    this.Query = search;
+                }
+                var options = new SearchLibraryOptionsDetails()
+                {
+                    RscId = search
+                };
+                var res = await this.requestService.SearchLibrary(new SearchLibraryOptions() { Record = options });
 
-            this.Library = res;
+                this.Library = res;
+            }
 
         }
 

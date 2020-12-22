@@ -11,5 +11,11 @@ namespace Syracuse.Mobitheque.UI.Views
         {
             InitializeComponent();
         }
+        protected override void OnBindingContextChanged()
+        {
+            (this.DataContext as AboutViewModel).OnDisplayAlert += AboutView_OnDisplayAlert;
+            base.OnBindingContextChanged();
+        }
+        private void AboutView_OnDisplayAlert(string title, string message, string button) => this.DisplayAlert(title, message, button);
     }
 }

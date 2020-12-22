@@ -40,7 +40,7 @@
                       ItemsSource="{Binding Results}" 
                       SeparatorVisibility="None"
                       Margin="0,0,0,20"
-                      RowHeight="235" 
+                      RowHeight="250" 
                       VerticalScrollBarVisibility="Never"
                       IsPullToRefreshEnabled="False">
                         <ListView.ItemTemplate >
@@ -48,9 +48,20 @@
                                 <ViewCell>
                                     <Frame HasShadow="True" Padding="0, 5, 0, 5">
                                         <StackLayout Orientation="Vertical" BackgroundColor="White" Padding="5, 0, 5, 0">
-                                            <Image VerticalOptions="Fill" HorizontalOptions="Fill" Aspect="AspectFill" Source="{Binding FieldList.Image}" HeightRequest="90"/>
-                                            <StackLayout Padding="0, 5, 0, 0"  Orientation="Vertical" >
-                                                <Label Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="{d:DynamicResource FontSizeTitle}" TextColor="{d:DynamicResource DarkTextColor}"/>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="0.5*" />
+                                                    <RowDefinition Height="0.5*" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="0.2*" />
+                                                    <ColumnDefinition Width="0.6*" />
+                                                    <ColumnDefinition Width="0.2*" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label Grid.RowSpan="0" Grid.Column="0" Text="&#xf1ea;"  FontFamily="{StaticResource FontAwesomeSolid}"/>
+                                                <Label Grid.Row="0" Grid.Column="1" TextColor="Black" Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="Medium"/>
+                                                <Button  Grid.Row="0" Grid.Column="2" Text="&#xf02a;" BackgroundColor="Transparent" FontFamily="{StaticResource FontAwesomeSolid}" x:Name="ScannButton" TextColor="DarkGray"/>
                                                 <Grid HorizontalOptions="Fill">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="0.4*" />
@@ -60,7 +71,7 @@
                                                     <Label Grid.Column="1" Text="{Binding FieldList.SubjectLocation[0]}" FontAttributes="Bold" HorizontalTextAlignment="End" FontSize="Medium" TextColor="{d:DynamicResource LigthGreyTextColor}" ></Label>
                                                 </Grid>
                                                 <Label Text="{Binding FieldList.DateTime_String}" FontSize="Small" TextColor="{d:DynamicResource DarkTextColor}"/>
-                                            </StackLayout>
+                                            </Grid>
                                         </StackLayout>
                                     </Frame>
                                 </ViewCell>
@@ -76,7 +87,7 @@
                               CachingStrategy="RecycleElement"
                               ItemsSource="{Binding Results}"
                               SeparatorVisibility="None"
-                              RowHeight="170"
+                              RowHeight="180"
                               Margin="0,0,0,20"
                               SelectionMode="None"
                               VerticalScrollBarVisibility="Never"
@@ -85,15 +96,26 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout Orientation="Horizontal" Padding="7, 0, 7, 0">
-                                        <Image VerticalOptions="Center" Source="{Binding FieldList.Image}" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent" Margin="5"/>
-                                        <StackLayout VerticalOptions="Center" Orientation="Vertical">
-                                            <Label TextColor="Black" Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="Medium"/>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.5*" />
+                                                <RowDefinition Height="0.5*" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.2*" />
+                                                <ColumnDefinition Width="0.6*" />
+                                                <ColumnDefinition Width="0.2*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Grid.RowSpan="0" Grid.Column="0" Text="&#xf1ea;"  FontFamily="{StaticResource FontAwesomeSolid}"/>
+                                            <Label Grid.Row="0" Grid.Column="1" TextColor="Black" Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="Medium"/>
+                                            <Button  Grid.Row="0" Grid.Column="2" Text="&#xf02a;" BackgroundColor="Transparent" FontFamily="{StaticResource FontAwesomeSolid}" x:Name="ScannButton" TextColor="DarkGray"/>
                                             <Label TextColor="Gray" Text="{Binding FieldList.shortDesc}" MaxLines="2" FontSize="Small"/>
                                             <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal">
                                                 <Frame VerticalOptions="Center" WidthRequest="15" HeightRequest="15"  CornerRadius="20"   Margin="0" Padding="0" BackgroundColor="{Binding Resource.ColorStatus}"/>
                                                 <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="Center" FontSize="Medium" Text="{Binding Resource.TextStatus}"/>
                                             </StackLayout>
-                                        </StackLayout>
+                                        </Grid>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>

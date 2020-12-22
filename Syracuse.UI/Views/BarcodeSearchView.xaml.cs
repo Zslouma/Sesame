@@ -18,5 +18,6 @@ namespace Syracuse.Mobitheque.UI.Views
             };
             this.PushAsync(scanner);
         }
+
     }
 }

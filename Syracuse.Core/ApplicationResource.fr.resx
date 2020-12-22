@@ -179,6 +179,9 @@ Cet acte est définitif!</value>
   <data name="Disconnect" xml:space="preserve">
     <value>Déconnexion</value>
   </data>
+  <data name="Download" xml:space="preserve">
+    <value>Téléchargements</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Erreur</value>
   </data>
@@ -211,6 +214,9 @@ Cet acte est définitif!</value>
   </data>
   <data name="MissingField" xml:space="preserve">
     <value>Veuillez remplir ce champ</value>
+  </data>
+  <data name="NetworkDisable" xml:space="preserve">
+    <value>Cette fonctionnalité a besoin d'une connexion au réseau, veuillez vérifier cette dernière avant de réessayer.</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>Non</value>

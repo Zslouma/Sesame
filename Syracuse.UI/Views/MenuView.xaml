@@ -7,8 +7,7 @@
                       xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
                       x:Class="Syracuse.Mobitheque.UI.Views.MenuView"
                       x:TypeArguments="viewModels:MenuViewModel"
-                      x:Name="MainContent"
-                      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+                      x:Name="MainContent">
     <ContentPage.Content>
         <StackLayout  HeightRequest="40">
             <StackLayout.IsVisible>
@@ -62,15 +61,25 @@
                                         <ColumnDefinition Width="1*" />
                                         <ColumnDefinition  Width="5*" />
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" HorizontalTextAlignment="Center" VerticalOptions="Center" Text="{Binding IconFontAwesome}" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="Title" TextColor="White"/>
-                                    <StackLayout Grid.Column="1" VerticalOptions="Center" >
+                                    <Label IsVisible="{Binding IsEnabled}" Grid.Column="0" HorizontalTextAlignment="Center" VerticalOptions="Center" Text="{Binding IconFontAwesome}" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="Title" TextColor="White"/>
+                                    <Label IsVisible="{Binding IsEnabled}" Grid.Column="0" HorizontalTextAlignment="Center" VerticalOptions="Center" Text="{Binding IconFontAwesome}" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="Title" TextColor="#B3FFFFFF">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding IsEnabled}" Value="False">
+                                                <Setter Property="IsVisible" Value="True" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label" Binding="{Binding IsEnabled}" Value="True">
+                                                <Setter Property="IsVisible" Value="False" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                    <StackLayout Grid.Column="1" VerticalOptions="Center" IsVisible="{Binding IsEnabled}" >
                                     <material:MaterialLabel 
                                         VerticalOptions="Center"
                                         Text="{Binding Text}"
                                         FontSize="{DynamicResource FontSize}"
                                         FontFamily="{DynamicResource OpenSans}"
                                         FontAttributes="Bold"
-                                        TextColor="WhiteSmoke">
+                                        TextColor="White">
                                     <material:MaterialLabel.Triggers>
                                         <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="False">
                                             <Setter Property="IsVisible" Value="True" />
@@ -88,7 +97,44 @@
                                         FontFamily="{DynamicResource OpenSans}"
                                         FontAttributes="Bold"
                                         TextDecorations="Underline"
-                                        TextColor="WhiteSmoke"/>
+                                        TextColor="White"/>
+                                    </StackLayout>
+                                    
+                                    <StackLayout Grid.Column="1" VerticalOptions="Center" IsVisible="{Binding IsEnabled}" >
+                                        <StackLayout.Triggers>
+                                            <DataTrigger TargetType="StackLayout" Binding="{Binding IsEnabled}" Value="False">
+                                                <Setter Property="IsVisible" Value="True" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="StackLayout" Binding="{Binding IsEnabled}" Value="True">
+                                                <Setter Property="IsVisible" Value="False" />
+                                            </DataTrigger>
+                                        </StackLayout.Triggers>
+                                        
+                                        <material:MaterialLabel 
+                                        VerticalOptions="Center"
+                                        Text="{Binding Text}"
+                                        FontSize="{DynamicResource FontSize}"
+                                        FontFamily="{DynamicResource OpenSans}"
+                                        FontAttributes="Bold"
+                                        TextColor="#B3FFFFFF">
+                                            <material:MaterialLabel.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="False">
+                                                    <Setter Property="IsVisible" Value="True" />
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
+                                                    <Setter Property="IsVisible" Value="False" />
+                                                </DataTrigger>
+                                            </material:MaterialLabel.Triggers>
+                                        </material:MaterialLabel>
+                                        <material:MaterialLabel 
+                                        VerticalOptions="Center"
+                                        IsVisible="{Binding IsSelected}"
+                                        Text="{Binding Text}"
+                                        FontSize="{DynamicResource FontSize}"
+                                        FontFamily="{DynamicResource OpenSans}"
+                                        FontAttributes="Bold"
+                                        TextDecorations="Underline"
+                                        TextColor="#B3FFFFFF"/>
                                     </StackLayout>
                                 </Grid>
                             </StackLayout>

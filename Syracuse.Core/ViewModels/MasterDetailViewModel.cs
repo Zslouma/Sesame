@@ -29,6 +29,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         public override void Start()
         {
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+            Connectivity_test().Wait();
             base.Start();
         }
         public override void ViewDestroy(bool viewFinishing = true)
@@ -93,13 +94,13 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         {
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
-                await this.navigationService.Navigate<NetworkErrorViewModel>();
+                App.AppState.NetworkConnection = false;
                 this._isnetworkError = true;
             }
             else
             {
+                App.AppState.NetworkConnection = true;
                 if (this._isnetworkError) {
-
                     this._isnetworkError = false;
                 }
             }

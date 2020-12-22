@@ -249,6 +249,7 @@ namespace Syracuse.Mobitheque.UI.Views
             SearchButtonUnderline.IsVisible = false;
             this.UpdateItemList();
         }
+
         private void SearchButton_Clicked(object sender, EventArgs e)
         {
             FacetteItemList.IsVisible   = false;
@@ -270,6 +271,7 @@ namespace Syracuse.Mobitheque.UI.Views
             this.ViewModel.OldSelectedItems = new List<FacetteValue>(this.ViewModel.SelectedItems);
             this.UpdateItemList();
         }
+
         private void SortButton_Clicked(object sender, EventArgs e)
         {
 
@@ -296,6 +298,7 @@ namespace Syracuse.Mobitheque.UI.Views
                 SortPicker.Focus();
             }
         }
+
         private void DeleteButton_Clicked(object sender, EventArgs e)
         {
             if(this.ViewModel.SelectedItems.Count() > 0)
@@ -306,5 +309,12 @@ namespace Syracuse.Mobitheque.UI.Views
             }
 
         }
+
+        protected override void OnBindingContextChanged()
+        {
+            (this.DataContext as SearchViewModel).OnDisplayAlert += SearchView_OnDisplayAlert;
+            base.OnBindingContextChanged();
+        }
+        private void SearchView_OnDisplayAlert(string title, string message, string button) => this.DisplayAlert(title, message, button);
     }
 }

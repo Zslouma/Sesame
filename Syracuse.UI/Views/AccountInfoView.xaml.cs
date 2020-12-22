@@ -31,5 +31,11 @@ namespace Syracuse.Mobitheque.UI.Views
                 InfoList.Children.Add(new Label { Text = tempo, TextColor = (Color)Application.Current.Resources["AccountInfoTextColor"], Margin = (Thickness)margin.ConvertFromInvariantString(marginText) });
             }; 
         }
+        protected override void OnBindingContextChanged()
+        {
+            (this.DataContext as AccountInfoViewModel).OnDisplayAlert += AccountInfoView_OnDisplayAlert;
+            base.OnBindingContextChanged();
+        }
+        private void AccountInfoView_OnDisplayAlert(string title, string message, string button) => this.DisplayAlert(title, message, button);
     }
 }

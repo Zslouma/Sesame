@@ -113,14 +113,18 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private async Task refreshBooking()
         {
             this.IsBusy = true;
-            BookingResult bookings = await this.requestService.GetBookings();
+            var results = await this.requestService.GetBookings();
+            BookingResult bookings = results;
             if (!bookings.Success)
             {
+                this.NotCurrentBooking = true;
                 this.DisplayAlert(ApplicationResource.Error, bookings.Errors[0].Msg, ApplicationResource.ButtonValidation);
+                this.IsBusy = false;
                 return;
             }
             this.Results = bookings.D.Bookings;
             List<Booking> tmp = new List<Booking>(this.Results);
+
             this.Results = tmp.ToArray();
             if (this.results.Length == 0)
             {
@@ -150,7 +154,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 QueryString = search
             };
             SearchOptions opt = new SearchOptions() { Query = options };
-            await this.navigationService.Navigate<SearchViewModel, SearchOptions>(opt);
+            if (App.AppState.NetworkConnection)
+            {
+                await this.navigationService.Navigate<SearchViewModel, SearchOptions>(opt);
+            }
+            else
+            {
+                this.DisplayAlert(ApplicationResource.Warning, ApplicationResource.NetworkDisable, ApplicationResource.ButtonValidation);
+            }
         }
     }
 }

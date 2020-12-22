@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 
 namespace Syracuse.Mobitheque.Core.Models
@@ -342,6 +340,8 @@ namespace Syracuse.Mobitheque.Core.Models
         public FieldList FieldList { get; set; }
 
         public DisplayValues DisplayValues { get; set; } = new DisplayValues();
+
+        public bool IsDownload { get; set; } = false;
 
 
     }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using MvvmCross.Commands;
 using MvvmCross.Navigation;
@@ -126,7 +125,9 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             LoansResult loans = await this.requestService.GetLoans();
             if (!loans.Success)
             {
+                this.NotCurrentLoan = true;
                 this.DisplayAlert(ApplicationResource.Error, loans.Errors[0].Msg, ApplicationResource.ButtonValidation);
+                this.IsBusy = false;
                 return;
             }
             this.Results = loans.D.Loans;
@@ -160,7 +161,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 QueryString = search
             };
             SearchOptions opt = new SearchOptions() { Query = options };
-            await this.navigationService.Navigate<SearchViewModel, SearchOptions>(opt);
+            if (App.AppState.NetworkConnection)
+            {
+                await this.navigationService.Navigate<SearchViewModel, SearchOptions>(opt);
+            }
+            else
+            {
+                this.DisplayAlert(ApplicationResource.Warning, ApplicationResource.NetworkDisable, ApplicationResource.ButtonValidation);
+            }
 
         }
     }
