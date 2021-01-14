@@ -15,6 +15,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private readonly IRequestService requestService;
         private bool _isnetworkError = false;
         private string param;
+        private bool viewCreate = false;
+
         public MasterDetailViewModel(IMvxNavigationService navigationService, IRequestService requestService)
         {
             this.requestService = requestService;
@@ -29,7 +31,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         public override void Start()
         {
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
-            Connectivity_test().Wait();
+            this.Connectivity_test().Wait();
             base.Start();
         }
         public override void ViewDestroy(bool viewFinishing = true)
@@ -39,8 +41,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         }
         public override async void ViewAppearing()
         {
-            
             base.ViewAppearing();
+            await this.Connectivity_test();
             CookiesSave user = await App.Database.GetActiveUser();
             Cookie[] cookies = JsonConvert.DeserializeObject<Cookie[]>(user.Cookies);
             bool found = false;
@@ -82,8 +84,18 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
             else
             {
-                await this.navigationService.Navigate<HomeViewModel>();
+                if (this._isnetworkError)
+                {
+                    await this.navigationService.Navigate<NetworkErrorViewModel>();
+                }
+                else
+                {
+                    await this.navigationService.Navigate<HomeViewModel>();
+                }
+                
             }
+            this.viewCreate = true;
+
         }
         void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
         {
@@ -95,6 +107,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 App.AppState.NetworkConnection = false;
+                if (this.viewCreate)
+                {
+                    await this.navigationService.Navigate<NetworkErrorViewModel>();
+                }
                 this._isnetworkError = true;
             }
             else

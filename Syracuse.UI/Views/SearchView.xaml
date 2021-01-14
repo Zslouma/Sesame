@@ -8,7 +8,6 @@
                      x:TypeArguments="viewModels:SearchViewModel"
                      x:Class="Syracuse.Mobitheque.UI.Views.SearchView"
                      xmlns:local="clr-namespace:Syracuse.Mobitheque.UI"
-                    
                      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
                      xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core">
 
@@ -137,24 +136,27 @@
                           ItemsSource="{Binding Results}"
                           SeparatorVisibility="None"
                           SelectionMode="None"
-                          RowHeight="150"
+                          VerticalOptions="FillAndExpand"
                           Margin="0,0,0,20"
                           VerticalScrollBarVisibility="Never"
-                          IsPullToRefreshEnabled="False">
+                          IsPullToRefreshEnabled="False"
+                          HasUnevenRows="True">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                     <ViewCell>
-                                        <StackLayout Orientation="Horizontal" Padding="7, 0, 7, 0">
-                                            <Image VerticalOptions="Center" Source="{Binding FieldList.Image}" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent" Margin="5"/>
-                                            <StackLayout VerticalOptions="Center" Orientation="Vertical">
-                                                <Label TextColor="Black" Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="Medium"/>
-                                                <Label TextColor="Gray" Text="{Binding FieldList.shortDesc}" MaxLines="2" FontSize="Small"/>
-                                                <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal">
-                                                    <Frame VerticalOptions="Center" WidthRequest="12" HeightRequest="12"  CornerRadius="6" HasShadow="False" BorderColor="Transparent" Margin="0" Padding="0" BackgroundColor="{Binding Resource.ColorStatus}"/>
-                                                    <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="Center" FontSize="Medium" Text="{Binding Resource.TextStatus}"/>
+                                        <ViewCell.View>
+                                            <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal" Padding="7, 0, 7, 0">
+                                                <Image VerticalOptions="Center" Source="{Binding FieldList.Image}" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent" Margin="5"/>
+                                                <StackLayout VerticalOptions="Center" Orientation="Vertical">
+                                                    <Label TextColor="Black" Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="Medium"/>
+                                                    <Label TextColor="Gray" Text="{Binding FieldList.shortDesc}" MaxLines="2" FontSize="Small"/>
+                                                    <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                                        <Frame VerticalOptions="Center" WidthRequest="12" HeightRequest="12"  CornerRadius="6" HasShadow="False" BorderColor="Transparent" Margin="0" Padding="0" BackgroundColor="{Binding Resource.ColorStatus}"/>
+                                                        <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="Center" FontSize="Medium" Text="{Binding Resource.TextStatus}"/>
+                                                    </StackLayout>
                                                 </StackLayout>
                                             </StackLayout>
-                                        </StackLayout>
+                                        </ViewCell.View>
                                     </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>

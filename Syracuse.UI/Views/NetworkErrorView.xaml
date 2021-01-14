@@ -13,7 +13,7 @@
                       xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
     <ContentPage.Content>
         <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
-            <Label Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Text="{x:Static local:AppResource.NetworkError}" ></Label>
+            <Label Margin="5" HorizontalTextAlignment="Center" HorizontalOptions="Center" VerticalOptions="Center" Text="{x:Static local:AppResource.NetworkError}" ></Label>
         </yummy:PancakeView>
     </ContentPage.Content>
 

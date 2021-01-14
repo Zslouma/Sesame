@@ -31,54 +31,57 @@
                           CachingStrategy="RecycleElement"
                           ItemsSource="{Binding Results}" 
                           SeparatorVisibility="None"
-                          RowHeight="160"
+                          VerticalOptions="FillAndExpand"
                           VerticalScrollBarVisibility="Never"
-                          IsPullToRefreshEnabled="False">
+                          IsPullToRefreshEnabled="False"
+                          HasUnevenRows="True">
                             <ListView.ItemTemplate>
                                 <DataTemplate >
-                                    <ViewCell>
-                                        <Frame HasShadow="True" Padding="0, 5, 0, 5">
-                                            <StackLayout 
-                                             VerticalOptions="Start"
-                                             Orientation="Horizontal"
-                                             BackgroundColor="White"
-                                             Padding="5, 0, 5, 0"
-                                             x:Name="Item">
-                                                <Image Source="{Binding ThumbnailUrl}"
-                                                HeightRequest="120"
-                                                WidthRequest="90" Margin="5"/>
+                                        <ViewCell>
+                                            <ViewCell.View>
+                                                <Frame VerticalOptions="FillAndExpand" HasShadow="True" Padding="0, 5, 0, 5">
+                                                    <StackLayout 
+                                                         VerticalOptions="Start"
+                                                         Orientation="Horizontal"
+                                                         BackgroundColor="White"
+                                                         Padding="5, 0, 5, 0"
+                                                         x:Name="Item">
+                                                        <Image Source="{Binding ThumbnailUrl}"
+                                                            HeightRequest="120"
+                                                            WidthRequest="90" Margin="5"/>
 
-                                                <StackLayout Padding="0, 15, 0, 0"
-                                                 VerticalOptions="Start"
-                                                 Orientation="Vertical"
-                                                 HorizontalOptions="FillAndExpand">
-                                                    <Label MaxLines="2" 
-                                                    TextColor="{d:DynamicResource DarkTextColor}"
-                                                    Text="{Binding Title}"
-                                                    FontAttributes="Bold"
-                                                    />
-                                                    <Label
-                                                    MaxLines="1"
-                                                    TextColor="{Binding dateColor}"
-                                                    Text="{Binding WhenBack_String}"
-                                                    FontSize="Small"/>
+                                                        <StackLayout Padding="0, 15, 0, 0"
+                                                             VerticalOptions="Start"
+                                                             Orientation="Vertical"
+                                                             HorizontalOptions="FillAndExpand">
+                                                            <Label MaxLines="2" 
+                                                                TextColor="{d:DynamicResource DarkTextColor}"
+                                                                Text="{Binding Title}"
+                                                                FontAttributes="Bold"
+                                                                />
+                                                            <Label
+                                                                MaxLines="1"
+                                                                TextColor="{Binding dateColor}"
+                                                                Text="{Binding WhenBack_String}"
+                                                                FontSize="Small"/>
 
-                                                    <StackLayout IsVisible="{Binding CanRenew}">
-                                                        <material:MaterialButton
-                                                          Padding="0"
-                                                          CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
-                                                          BindingContext="{Binding Source={x:Reference LoansList}, Path=BindingContext}"
-                                                          Command="{Binding RenewLoanCommand}"
-                                                          BackgroundColor="{d:DynamicResource AppBackgroundColor}"
-                                                          Text="{x:Static local:AppResource.Extend}"/>
+                                                            <StackLayout IsVisible="{Binding CanRenew}">
+                                                                <material:MaterialButton
+                                                                  Padding="0"
+                                                                  CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                                                  BindingContext="{Binding Source={x:Reference LoansList}, Path=BindingContext}"
+                                                                  Command="{Binding RenewLoanCommand}"
+                                                                  BackgroundColor="{d:DynamicResource AppBackgroundColor}"
+                                                                  Text="{x:Static local:AppResource.Extend}"/>
+                                                            </StackLayout>
+
+                                                        </StackLayout>
+
                                                     </StackLayout>
 
-                                                </StackLayout>
-
-                                            </StackLayout>
-
-                                        </Frame>
-                                    </ViewCell>
+                                                </Frame>
+                                            </ViewCell.View>
+                                        </ViewCell>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
