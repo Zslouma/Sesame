@@ -92,6 +92,8 @@
     <BundleResource Include="Resources\previous.png" />
     <BundleResource Include="Resources\following.png" />
     <BundleResource Include="Resources\GreenCheck.png" />
+    <BundleResource Include="Resources\scann.gif" />
+    <BundleResource Include="Resources\close_circle_button.png" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Entitlements.plist" />

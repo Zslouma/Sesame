@@ -1,4 +1,7 @@
 ﻿using MvvmCross.Forms.Presenters.Attributes;
+using Rg.Plugins.Popup.Services;
+using Syracuse.Mobitheque.Core.Services.Database;
+using System.Threading.Tasks;
 using ZXing;
 using ZXing.Net.Mobile.Forms;
 
@@ -7,10 +10,37 @@ namespace Syracuse.Mobitheque.UI.Views
     [MvxContentPagePresentation(NoHistory = true)]
     public partial class ZxingScannerView : ZXingScannerPage
     {
-
+        private TutorialPopup _tutorialPopup;
         public ZxingScannerView()
         {
             InitializeComponent();
+            DisplayPopUp();
+        }
+
+        /// <summary>
+        /// Cette methoode permet de determiner, si l'utilisateur souhaite que l'on affiche le tutoriel ou non 
+        /// </summary>
+        /// <returns></returns>
+        private async Task DisplayPopUp()
+        {
+            var database = Syracuse.Mobitheque.Core.App.Database;
+            var user = await database.GetActiveUser();
+            if (user != null)
+            {
+                if (user.IsTutorial)
+                {
+                    _tutorialPopup = new TutorialPopup(database , user);
+                    await PopupNavigation.Instance.PushAsync(_tutorialPopup);
+                }
+
+            }
+            else
+            {
+                _tutorialPopup = new TutorialPopup();
+                await PopupNavigation.Instance.PushAsync(_tutorialPopup);
+
+            }
+
         }
 
         public void Handle_OnScanResult(Result result)
@@ -21,7 +51,6 @@ namespace Syracuse.Mobitheque.UI.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
             IsScanning = true;
         }
 
