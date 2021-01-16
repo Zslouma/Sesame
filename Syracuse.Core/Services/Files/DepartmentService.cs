@@ -12,7 +12,8 @@ namespace Syracuse.Mobitheque.Core.Services.Files
 
         private DataJson dataJson;
         private const string dataFileName = "data.json";
-        private const string V = "https://syracusepp.archimed.fr/mobitheque/data.json?_s=";
+        //private const string V = "https://syracusepp.archimed.fr/mobitheque/data.json?_s=";
+        private const string V = "https://www.syracuse.cloud/mobitheque/data-prod.json?_s=";
         private const string dataUrl = V;
         public string DataUrl
         {

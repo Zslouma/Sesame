@@ -232,6 +232,15 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Don&apos;t show again.
+        /// </summary>
+        public static string NeverShowAgain {
+            get {
+                return ResourceManager.GetString("NeverShowAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to At the moment.
         /// </summary>
         public static string News {

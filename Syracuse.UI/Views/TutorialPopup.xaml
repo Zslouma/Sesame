@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:local="clr-namespace:Syracuse.Mobitheque.UI" 
     x:Class="Syracuse.Mobitheque.UI.Views.TutorialPopup">
     <!--You can set an animation in the xaml file or in the csharp code behind-->
     <pages:PopupPage.Animation>
@@ -52,7 +53,7 @@
                     <Button 
                         Grid.Column="0" 
                         x:Name="DontShow"
-                        Text="Don't show again"
+                        Text="{x:Static local:AppResource.NeverShowAgain}"
                         TextColor="{DynamicResource AppLigthBackgroundColor}"
                         IsVisible="True"
                         FontSize="Small"
