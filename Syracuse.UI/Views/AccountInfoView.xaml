@@ -49,7 +49,7 @@
                             Grid.Column="0">
                             <yummy:PancakeView VerticalOptions="FillAndExpand" Margin="15,5" Padding="10" CornerRadius="30" Border="{yummy:BorderMarkup Color=LightGray, Thickness=1}">
                                 <StackLayout 
-                                            HorizontalOptions="Center"
+                                            HorizontalOptions="Start"
                                             Padding="15,0,0,0"
                                             x:Name="InfoList">
                                     <StackLayout.GestureRecognizers>
@@ -60,7 +60,9 @@
                                 </StackLayout>
                             </yummy:PancakeView>
                             <yummy:PancakeView VerticalOptions="FillAndExpand" Margin="15,5" Padding="10" CornerRadius="30" Border="{yummy:BorderMarkup Color=LightGray, Thickness=1}">
-                                <StackLayout HorizontalOptions="Center">
+                                <StackLayout 
+                                            HorizontalOptions="Start" 
+                                            Padding="15,0,0,0">
                                     <StackLayout.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding TapBookingCommand}"/>
                                     </StackLayout.GestureRecognizers>

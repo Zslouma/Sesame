@@ -124,11 +124,29 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You borrowed {0} document.
+        /// </summary>
+        public static string AccountInfoCountOfBooking {
+            get {
+                return ResourceManager.GetString("AccountInfoCountOfBooking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have reserved {0} documents.
         /// </summary>
         public static string AccountInfoCountOfBookings {
             get {
                 return ResourceManager.GetString("AccountInfoCountOfBookings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have reserved {0} document.
+        /// </summary>
+        public static string AccountInfoCountOfLoan {
+            get {
+                return ResourceManager.GetString("AccountInfoCountOfLoan", resourceCulture);
             }
         }
         

@@ -138,8 +138,14 @@
   <data name="AccountInfoCountNotAvailableBookings" xml:space="preserve">
     <value>No booking available at the moment</value>
   </data>
+  <data name="AccountInfoCountOfBooking" xml:space="preserve">
+    <value>You borrowed {0} document</value>
+  </data>
   <data name="AccountInfoCountOfBookings" xml:space="preserve">
     <value>You have reserved {0} documents</value>
+  </data>
+  <data name="AccountInfoCountOfLoan" xml:space="preserve">
+    <value>You have reserved {0} document</value>
   </data>
   <data name="AccountInfoCountOfLoans" xml:space="preserve">
     <value>You borrowed {0} documents</value>
