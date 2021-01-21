@@ -40,26 +40,35 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
         public String GetRedirectURL(string originalURL, string defaultURL = "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png")
         {
+
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(originalURL);
             webRequest.AllowAutoRedirect = false;  // IMPORTANT
             webRequest.Timeout = 10000;           // timeout 10s
 
-            // Get the response ...
-            using (var webResponse = (HttpWebResponse)webRequest.GetResponse())
+            try
             {
-                // Now look to see if it's a redirect
-                if ((int)webResponse.StatusCode >= 300 && (int)webResponse.StatusCode <= 399)
+            // Get the response ...
+                using (var webResponse = (HttpWebResponse)webRequest.GetResponse())
                 {
-                    string uriString = webResponse.Headers["Location"];
-                    return uriString;
-                }else if ((int)webResponse.StatusCode >= 200 && (int)webResponse.StatusCode <= 299)
-                {
-                    return originalURL;
+                    // Now look to see if it's a redirect
+                    if ((int)webResponse.StatusCode >= 300 && (int)webResponse.StatusCode <= 399)
+                    {
+                        string uriString = webResponse.Headers["Location"];
+                        return uriString;
+
+                    }else if ((int)webResponse.StatusCode >= 200 && (int)webResponse.StatusCode <= 299)
+                    {
+                        return originalURL;
+                    }
+                    else
+                    {
+                        return defaultURL;
+                    }
                 }
-                else
-                {
-                    return defaultURL;
-                }
+            }
+            catch (Exception e)
+            {
+                return originalURL;
             }
         }
 

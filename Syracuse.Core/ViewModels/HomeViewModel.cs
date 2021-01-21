@@ -184,6 +184,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.SearchScenarioCode = user.SearchScenarioCode;
             
             this.Results = await this.loadPage(user.IsEvent);
+            await this.GetRedirectURL();
             if (this.results.Length == 0)
             {
                 this.NotCurrentEvent = true;
@@ -204,6 +205,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
             Result[] res = await loadPage(this.IsEvent);
             this.Results = this.Results.Concat(res).ToArray();
+            await this.GetRedirectURL();
         }
 
         private async Task<Result[]> loadPage(bool IsSortField)
@@ -320,6 +322,18 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 nbrResults = this.NbrResults.ToString()
             };
             await this.navigationService.Navigate<SearchDetailsViewModel, SearchDetailsParameters>(tempo);
+        }
+
+        private async Task GetRedirectURL()
+        {
+            foreach (var search in this.Results)
+            {
+                if (search.FieldList.ThumbMedium != null && search.FieldList.ThumbMedium[0] != null)
+                    search.FieldList.ThumbMedium[0] = new Uri(this.requestService.GetRedirectURL(search.FieldList.ThumbMedium[0].ToString()));
+                else if (search.FieldList.ThumbSmall != null && search.FieldList.ThumbSmall[0] != null)
+                    search.FieldList.ThumbSmall[0] = new Uri(this.requestService.GetRedirectURL(search.FieldList.ThumbSmall[0].ToString()));
+            }
+            await this.RaiseAllPropertiesChanged();
         }
 
     }
