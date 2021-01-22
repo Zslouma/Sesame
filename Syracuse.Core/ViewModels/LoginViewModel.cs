@@ -154,6 +154,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 item.Cookies = JsonConvert.SerializeObject(this.requestService.GetCookies().ToArray());
                 item.Library = department.Library;
                 item.LibraryUrl = department.LibraryUrl;
+                item.DomainUrl = department.DomainUrl;
                 item.Department = department.Department;
                 item.SearchScenarioCode = department.SearchScenarioCode;
                 item.EventsScenarioCode = department.EventsScenarioCode;
@@ -171,6 +172,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 b.Cookies = JsonConvert.SerializeObject(this.requestService.GetCookies().ToArray());
                 b.Library = department.Library;
                 b.LibraryUrl = department.LibraryUrl;
+                b.DomainUrl = department.DomainUrl;
                 b.Department = department.Department;
                 b.SearchScenarioCode = department.SearchScenarioCode;
                 b.EventsScenarioCode = department.EventsScenarioCode;

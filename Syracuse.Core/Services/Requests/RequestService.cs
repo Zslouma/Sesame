@@ -187,6 +187,27 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             }
         }
 
+        public async Task<UrlWithAuthenticationStatus> GetUrlWithAuthenticationTransfert(Uri uri)
+        {
+
+            await this.InitializeHttpClient();
+
+            UrlWithAuthenticationStatus status;
+            try
+            {
+                UrlWithAuthenticationTransfertOptions transfertOptions = new UrlWithAuthenticationTransfertOptions(uri.ToString());
+                status = await this.requests.GetUrlWithAuthenticationTransfert<UrlWithAuthenticationStatus>(transfertOptions);
+                return status;
+            }
+            catch (Exception)
+            {
+                status = new UrlWithAuthenticationStatus();
+                return status;
+            }
+            
+        }
+
+
         private async Task InitializeHttpClient()
         {
             CookiesSave user =  await App.Database.GetActiveUser();

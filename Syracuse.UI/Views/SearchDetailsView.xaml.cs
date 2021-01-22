@@ -50,7 +50,31 @@ namespace Syracuse.Mobitheque.UI.Views
         private async void OpenBrowser_OnClicked(object sender, EventArgs e)
         {
             string url = ((Button)sender).CommandParameter as string;
-            await Browser.OpenAsync(new Uri(url), BrowserLaunchMode.SystemPreferred);
+            Uri uri;
+            try
+            {
+                if (Uri.TryCreate(url, UriKind.Absolute, out uri)
+                && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps))
+                {
+                    uri = await this.ViewModel.GetUrlTransfert(uri);
+                    await Browser.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+
+                }
+                else
+                {
+                    uri = await this.ViewModel.RelativeUriToAbsolute(url);
+                    uri = await this.ViewModel.GetUrlTransfert(uri);
+                    await Browser.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+
+                }
+            }
+            catch (Exception)
+            {
+                await DisplayAlert(ApplicationResource.Warning, String.Format(ApplicationResource.ErrorOccurred), ApplicationResource.ButtonValidation);
+            }
+
+            
+            
         }
 
         private async void HoldingButton_Clicked(object sender, EventArgs e)

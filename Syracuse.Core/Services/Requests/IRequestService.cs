@@ -33,6 +33,8 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
         Task<LoginStatus> Authentication(string useraccount, string password, string baseUrl, Action<Exception> error = null);
 
+        Task<UrlWithAuthenticationStatus> GetUrlWithAuthenticationTransfert(Uri uri);
+
         Task<LoansResult> GetLoans(Action < Exception> error = null);
 
         Task<PlaceReservationResult> PlaceReservation(PlaceReservationOptions options, Action<Exception> error = null);

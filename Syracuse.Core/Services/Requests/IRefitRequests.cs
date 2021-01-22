@@ -10,6 +10,9 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
         [Post("/logon.svc/logon")]
         Task<T> Authentication<T>([Body(BodySerializationMethod.UrlEncoded)]Dictionary<string, object> data);
 
+        [Post("/logon.svc/GetUrlWithAuthenticationTransfert")]
+        Task<T> GetUrlWithAuthenticationTransfert<T>([Body]UrlWithAuthenticationTransfertOptions body);
+
         [Get("/Portal/UserAccountService.svc/RetrieveAccountSummary?serviceCode{code}&userUniqueIdentifier={uniqueId}&token={token}")]
         Task<T> GetSummary<T>([AliasAs("token")]string token,
                               [AliasAs("code")]string code = "",

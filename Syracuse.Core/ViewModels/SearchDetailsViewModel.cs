@@ -314,14 +314,28 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             await navigationService.Close(this);
         }
 
-        private async void TimeVisibility(int positionTempo)
+        public async Task<Uri> RelativeUriToAbsolute(string uri)
         {
-            await Task.Delay(3000);
-            if (positionTempo == this.position)
-            {
-                this.IsPositionVisible = false;
-            }            
+            var user = await App.Database.GetActiveUser();
+            string url = user.DomainUrl + uri;
+            Uri reslt = new Uri(url);
+            return reslt;
         }
+
+        public async Task<Uri> GetUrlTransfert(Uri uri)
+        {
+            UrlWithAuthenticationStatus status = await this.requestService.GetUrlWithAuthenticationTransfert(uri);
+            if (status.Success)
+            {
+                return status.D;
+            }
+            else
+            {
+                return uri;
+            }
+            
+        }
+
         private async Task FormateToCarrousel(Result[] results)
         {
             foreach (var resultTempo in results)
