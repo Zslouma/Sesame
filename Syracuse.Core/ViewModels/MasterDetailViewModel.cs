@@ -14,6 +14,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private readonly IMvxNavigationService navigationService;
         private readonly IRequestService requestService;
         private bool _isnetworkError = false;
+        private bool _isnetworkErrorAppend = false; 
         private string param;
         private bool viewCreate = false;
 
@@ -87,10 +88,15 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 if (this._isnetworkError)
                 {
                     await this.navigationService.Navigate<NetworkErrorViewModel>();
+                    this._isnetworkErrorAppend = true;
                 }
                 else
                 {
-                    await this.navigationService.Navigate<HomeViewModel>();
+                    if (!this.viewCreate || this._isnetworkErrorAppend)
+                    {
+                        await this.navigationService.Navigate<HomeViewModel>();
+                        this._isnetworkErrorAppend = false;
+                    }
                 }
                 
             }

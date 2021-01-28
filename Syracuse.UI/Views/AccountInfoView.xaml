@@ -13,9 +13,10 @@
 
     <ContentPage.Content>
         <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
+            <ScrollView>
             <Grid>
                 <StackLayout>
-                    <Grid Padding="10">
+                    <Grid Padding="0,10,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
@@ -29,7 +30,7 @@
 
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition  Height="0.2*"></RowDefinition>
+                            <RowDefinition  Height="Auto"></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
@@ -78,6 +79,7 @@
                     <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
                 </AbsoluteLayout>
             </Grid>
+                </ScrollView>
         </yummy:PancakeView>
     </ContentPage.Content>
 
