@@ -37,7 +37,12 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             };
             this.token = this.Timestamp();
         }
-
+        /// <summary>
+        /// Vérifie si l'url passé en paramétre posséde une redirection ou non
+        /// </summary>
+        /// <param name="originalURL"></param>
+        /// <param name="defaultURL"></param>
+        /// <returns></returns>
         public String GetRedirectURL(string originalURL, string defaultURL = "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png")
         {
 
@@ -186,7 +191,11 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 return null;
             }
         }
-
+        /// <summary>
+        /// Fournie une url possédant un token d'Authentication lorsque c'est possible
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns></returns>
         public async Task<UrlWithAuthenticationStatus> GetUrlWithAuthenticationTransfert(Uri uri)
         {
 

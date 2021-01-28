@@ -24,12 +24,13 @@
                         IsScrollAnimated ="False"
                         CurrentItemChanged="carouselView_CurrentItemChanged" 
                         PositionChanged="carouselView_PositionChanged"
+                        VerticalOptions="FillAndExpand"
                         RemainingItemsThreshold="5"
                         RemainingItemsThresholdReached="OnCarouselViewRemainingItemsThresholdReached"
                         HorizontalScrollBarVisibility="Never">
                         <CarouselView.ItemTemplate>
                             <DataTemplate >
-                                <ScrollView x:Name="scrollView"  VerticalScrollBarVisibility="Never">
+                                <ScrollView x:Name="scrollView" VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
                                     <Frame>
                                         <StackLayout Orientation="Vertical">
                                             <StackLayout  Orientation="Horizontal">
