@@ -295,6 +295,15 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are no results to this search..
+        /// </summary>
+        public static string NoSearchResults {
+            get {
+                return ResourceManager.GetString("NoSearchResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You do not have a current reservation.
         /// </summary>
         public static string NotCurrentBooking {

@@ -195,6 +195,9 @@
   <data name="News" xml:space="preserve">
     <value>En ce moment</value>
   </data>
+  <data name="NoSearchResults" xml:space="preserve">
+    <value>Il n'y a pas de résultat à cette recherche.</value>
+  </data>
   <data name="NotCurrentBooking" xml:space="preserve">
     <value>Vous n'avez pas de réservation en cours</value>
   </data>

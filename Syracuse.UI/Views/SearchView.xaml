@@ -55,7 +55,7 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </StackLayout>
-                <Grid Padding="0, 0, 0, 0" VerticalOptions="Center">
+                <Grid Padding="0, 0, 0, 0" VerticalOptions="Center" IsVisible="{Binding IsFilterable}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
@@ -85,7 +85,7 @@
                 </Grid>
                 <yummy:PancakeView  Padding="15, 15, 15, 0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{DynamicResource AppSecondaryBackgroundColor}">
                     <StackLayout>
-                    <Grid Padding="0, 0, 0, 0" Margin="0"  MinimumHeightRequest="400">
+                        <Grid Padding="0, 0, 0, 0" Margin="0"  MinimumHeightRequest="400">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
@@ -131,7 +131,7 @@
                     </Grid>
                         <Picker x:Name="SortPicker"  HorizontalOptions="FillAndExpand" Grid.Column="2" ItemsSource="{Binding SortsName}" SelectedIndex="{Binding SortNamee}" Title="{x:Static local:AppResource.SortOption}" TextColor="{DynamicResource PurpleTextColor}" TitleColor="{DynamicResource PurpleTextColor}" FontAttributes="Bold" ios:Picker.UpdateMode="WhenFinished"></Picker>
                         <Label TextColor="Black" Text="{Binding ResultCount}" Margin="10,0,0,0" Grid.Column="3"/>
-                    <ListView x:Name="resultsList" 
+                        <ListView x:Name="resultsList" 
                           CachingStrategy="RecycleElement"
                           ItemsSource="{Binding Results}"
                           SeparatorVisibility="None"
@@ -167,6 +167,17 @@
                     </StackLayout>
                 </yummy:PancakeView>
             </StackLayout>
+            <AbsoluteLayout VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+                <Label AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" FontSize = "20" Text="{x:Static local:AppResource.NoSearchResults}" />
+                <AbsoluteLayout.Triggers>
+                    <DataTrigger TargetType="AbsoluteLayout" Binding="{Binding IsFilterable}" Value="True">
+                        <Setter Property="IsVisible" Value="False" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="AbsoluteLayout" Binding="{Binding IsFilterable}" Value="False">
+                        <Setter Property="IsVisible" Value="True" />
+                    </DataTrigger>
+                </AbsoluteLayout.Triggers>
+            </AbsoluteLayout>
             <AbsoluteLayout IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
                 <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
             </AbsoluteLayout>

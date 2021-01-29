@@ -177,7 +177,7 @@ Cet acte est définitif!</value>
     <value>Du {0} au {1} de {2} à {3}</value>
   </data>
   <data name="DateToDateShort" xml:space="preserve">
-    <value>{0} de {1}  à {2}</value>
+    <value>{0} de {1} à {2}</value>
   </data>
   <data name="DisconectAuthorization" xml:space="preserve">
     <value>Pour ajouter un nouveau compte nous allons devoir mettre un terme à la session actuelle voulez-vous continuer?</value>

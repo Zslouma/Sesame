@@ -114,6 +114,15 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 SetProperty(ref this.d, value);
             } 
         }
+        private bool isFilterable = true;
+        public bool IsFilterable
+        {
+            get => this.isFilterable;
+            set
+            {
+                SetProperty(ref this.isFilterable, value);
+            }
+        }
 
         private string resultCount;
         public string ResultCount
@@ -131,6 +140,18 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set
             {
                 SetProperty(ref this.resultCountInt, value);
+                
+                if (value == 0)
+                {
+                    this.DisplayLoadMore = false;
+                    this.IsFilterable = false;
+                    return;
+                }
+                else
+                {
+                    this.IsFilterable = true;
+                }
+
                 if (this.Results.Count() < this.ResultCountInt)
                 {
                     this.DisplayLoadMore = true;
