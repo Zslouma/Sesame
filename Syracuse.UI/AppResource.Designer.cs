@@ -295,7 +295,7 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no results to this search..
+        ///   Looks up a localized string similar to Your search does not return any results.
         /// </summary>
         public static string NoSearchResults {
             get {
