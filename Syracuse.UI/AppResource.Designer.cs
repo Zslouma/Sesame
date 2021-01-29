@@ -61,6 +61,51 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copyright (c) {0} Archimed..
+        /// </summary>
+        public static string AboutCopyright {
+            get {
+                return ResourceManager.GetString("AboutCopyright", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact : contact@archimed.fr.
+        /// </summary>
+        public static string AboutMailContact {
+            get {
+                return ResourceManager.GetString("AboutMailContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All rights reserved.
+        /// </summary>
+        public static string AboutRigth {
+            get {
+                return ResourceManager.GetString("AboutRigth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version {0}.
+        /// </summary>
+        public static string AboutVersion {
+            get {
+                return ResourceManager.GetString("AboutVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Site web : https://www.archimed.fr.
+        /// </summary>
+        public static string AboutWebLink {
+            get {
+                return ResourceManager.GetString("AboutWebLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to My accounts.
         /// </summary>
         public static string Accounts {

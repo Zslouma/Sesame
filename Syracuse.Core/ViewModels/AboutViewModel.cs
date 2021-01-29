@@ -15,6 +15,24 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private IRequestService requestService { get; set; }
         private readonly IMvxNavigationService navigationService;
 
+        private string versionLabel;
+        public string VersionLabel
+        {
+            get => this.versionLabel;
+            set
+            {
+                SetProperty(ref this.versionLabel, value);
+            }
+        }
+        private string copyrightLabel;
+        public string CopyrightLabel
+        {
+            get => this.copyrightLabel;
+            set
+            {
+                SetProperty(ref this.copyrightLabel, value);
+            }
+        }
         public AboutViewModel(IMvxNavigationService navigationService, IRequestService requestService)
         {
             this.navigationService = navigationService;

@@ -6,6 +6,7 @@
                       xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
                       xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
                       xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
+                      xmlns:local="clr-namespace:Syracuse.Mobitheque.UI"
                       xmlns:core="clr-namespace:Syracuse.Mobitheque.Core;assembly=Syracuse.Mobitheque.Core"
                       x:TypeArguments="viewModels:AboutViewModel"
                       xmlns:common="clr-namespace:Syracuse.Mobitheque.UI.Views.Templates"
@@ -16,9 +17,15 @@
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <yummy:PancakeView Margin="0,30,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
-            <StackLayout VerticalOptions="Fill">
-                <Label Grid.RowSpan="2" Grid.ColumnSpan="2" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="{x:Static core:ApplicationResource.About}" FontAttributes="Bold" ></Label>
-                <Label VerticalOptions="Fill" VerticalTextAlignment="Center" HorizontalOptions="Center">A propos</Label>
+            <StackLayout VerticalOptions="Fill" Orientation="Vertical">
+                <Label Margin="0,0,0,30"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="{x:Static core:ApplicationResource.About}" FontAttributes="Bold" ></Label>
+                <StackLayout VerticalOptions="CenterAndExpand" Orientation="Vertical">
+                    <Label Margin="0,5" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="{Binding VersionLabel}" FontAttributes="Bold" ></Label>
+                    <Label Margin="0,5" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="{x:Static local:AppResource.AboutWebLink}" FontAttributes="Bold" ></Label>
+                    <Label Margin="0,5" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="{x:Static local:AppResource.AboutMailContact}" FontAttributes="Bold" ></Label>
+                    <Label Margin="0,5" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="{Binding CopyrightLabel}" FontAttributes="Bold" ></Label>
+                    <Label Margin="0,5" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="{x:Static local:AppResource.AboutRigth}" FontAttributes="Bold" ></Label>
+                </StackLayout>
             </StackLayout>
         </yummy:PancakeView>
     </ContentPage.Content>
