@@ -160,9 +160,9 @@
     <value>You are logged in as {0}</value>
   </data>
   <data name="BookingCancelChoice" xml:space="preserve">
-    <value>Would you like to cancel the following booking:
+    <value>Would you like to cancel the following booking :
 {0}
-This act is final!</value>
+Cancellation is final.</value>
   </data>
   <data name="BookingResultBookingDate" xml:space="preserve">
     <value>booked on {0}</value>

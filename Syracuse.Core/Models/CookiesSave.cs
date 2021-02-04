@@ -38,5 +38,7 @@ namespace Syracuse.Mobitheque.Core.Models
         public string BuildingInfos { get; set; }
 
         public bool IsTutorial { get; set; } = true;
+
+        public bool IsTutorialAddAcount { get; set; } = true;
     }
 }

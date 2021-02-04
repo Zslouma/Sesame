@@ -138,6 +138,9 @@
   <data name="AccountTitle" xml:space="preserve">
     <value>Nom de compte</value>
   </data>
+  <data name="AddAccountTuto" xml:space="preserve">
+    <value>Cette page mémorise les comptes précédemment authentifiés et vous permet de vous connecter à ces comptes en un clic. Pour enregistrer un nouveau compte cliqué sur:</value>
+  </data>
   <data name="BookingAvailable" xml:space="preserve">
     <value>Disponible</value>
   </data>
@@ -152,6 +155,9 @@
   </data>
   <data name="Choose" xml:space="preserve">
     <value>Choisir</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Fermer</value>
   </data>
   <data name="Connect" xml:space="preserve">
     <value>Se connecter</value>
@@ -179,6 +185,9 @@
   </data>
   <data name="FilterOption" xml:space="preserve">
     <value>Filtrer</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
   </data>
   <data name="LibraryTitle" xml:space="preserve">
     <value>Etablissement</value>

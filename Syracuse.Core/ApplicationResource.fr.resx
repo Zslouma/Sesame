@@ -160,9 +160,9 @@
     <value>Vous êtes connecté en tant que {0}</value>
   </data>
   <data name="BookingCancelChoice" xml:space="preserve">
-    <value>Souhaitez-vous annuler la réservation suivante:
+    <value>Souhaitez-vous annuler la réservation suivante :
 {0}
-Cet acte est définitif!</value>
+L’annulation est définitive.</value>
   </data>
   <data name="BookingResultBookingDate" xml:space="preserve">
     <value>réservé le {0}</value>

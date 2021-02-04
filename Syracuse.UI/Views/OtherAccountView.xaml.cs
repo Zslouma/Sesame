@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Threading.Tasks;
 using MvvmCross.Forms.Presenters.Attributes;
 using MvvmCross.Forms.Views;
+using Rg.Plugins.Popup.Services;
 using Syracuse.Mobitheque.Core;
 using Syracuse.Mobitheque.Core.Models;
 using Syracuse.Mobitheque.Core.ViewModels;
@@ -11,10 +13,33 @@ namespace Syracuse.Mobitheque.UI.Views
     [MvxMasterDetailPagePresentation(Position = MasterDetailPosition.Detail, NoHistory = true, Title = "")]
     public partial class OtherAccountView : MvxContentPage<OtherAccountViewModel>
     {
+
+        private TutorialPopupAddAccount _tutorialPopup;
         public OtherAccountView()
         {
             InitializeComponent();
             this.otherAccountList.ItemTapped += OtherAccountList_ItemTapped;
+        }
+
+        private async Task DisplayPopUp()
+        {
+            var database = Syracuse.Mobitheque.Core.App.Database;
+            var user = await database.GetActiveUser();
+            if (user != null)
+            {
+                Console.WriteLine("DisplayPopUp : " + user.IsTutorialAddAcount.ToString());
+                if (user.IsTutorialAddAcount)
+                {
+                    _tutorialPopup = new TutorialPopupAddAccount(database, user);
+                    await PopupNavigation.Instance.PushAsync(_tutorialPopup);
+                }
+            }
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            this.DisplayPopUp();
         }
 
         private async void OtherAccountList_ItemTapped(object sender, ItemTappedEventArgs e)

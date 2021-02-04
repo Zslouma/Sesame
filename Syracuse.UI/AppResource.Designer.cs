@@ -124,6 +124,15 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This page remembers previously authenticated accounts and allows you to log in to these accounts with one click. To register a new account click :.
+        /// </summary>
+        public static string AddAccountTuto {
+            get {
+                return ResourceManager.GetString("AddAccountTuto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Available.
         /// </summary>
         public static string BookingAvailable {
@@ -165,6 +174,15 @@ namespace Syracuse.Mobitheque.UI {
         public static string Choose {
             get {
                 return ResourceManager.GetString("Choose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
             }
         }
         
@@ -246,6 +264,15 @@ namespace Syracuse.Mobitheque.UI {
         public static string FilterOption {
             get {
                 return ResourceManager.GetString("FilterOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        public static string Information {
+            get {
+                return ResourceManager.GetString("Information", resourceCulture);
             }
         }
         

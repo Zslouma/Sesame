@@ -187,9 +187,9 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Would you like to cancel the following booking:
+        ///   Looks up a localized string similar to Would you like to cancel the following booking :
         ///{0}
-        ///This act is final!.
+        ///Cancellation is final..
         /// </summary>
         public static string BookingCancelChoice {
             get {

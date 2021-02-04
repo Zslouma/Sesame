@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:local="clr-namespace:Syracuse.Mobitheque.UI" 
+    x:Class="Syracuse.Mobitheque.UI.Views.TutorialPopupAddAccount">
+    <!--You can set an animation in the xaml file or in the csharp code behind-->
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+    <!--You can use any elements here which are extended from Xamarin.Forms.View-->
+
+    <StackLayout
+            Padding="20"
+            HorizontalOptions="Center"
+            VerticalOptions="CenterAndExpand">
+        <Frame
+            x:Name="FrameContainer"
+            Margin="15"
+            HorizontalOptions="Center"
+            VerticalOptions="FillAndExpand"
+            BackgroundColor="White">
+                <StackLayout VerticalOptions="FillAndExpand" Orientation="Vertical">
+                    <Label HorizontalOptions="Center" Margin="0,5" FontAttributes="Bold" Text="{x:Static local:AppResource.Information}"/>
+                    <Label HorizontalOptions="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span Text="{x:Static local:AppResource.AddAccountTuto}"/>
+                                    <Span FontFamily="{StaticResource FontAwesomeSolid}" Text="  &#xf234;"/>
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                <Grid HorizontalOptions="Fill">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button 
+                        x:Name="DontShow"
+                        Grid.Column="0"
+                        Text="{x:Static local:AppResource.NeverShowAgain}"
+                        TextColor="{DynamicResource AppLigthBackgroundColor}"
+                        FontSize="Small"
+                        HorizontalOptions="Start"
+                        BackgroundColor="Transparent"
+                        Clicked="OnNotShowAgain" />
+                    <Button
+                        x:Name="Close"
+                        Grid.Column="1"
+                        Text="{x:Static local:AppResource.Close}"
+                        TextColor="{DynamicResource AppLigthBackgroundColor}"
+                        FontSize="Small"
+                        HorizontalOptions="End"
+                        BackgroundColor="Transparent"
+                        Clicked="OnClose" />
+                </Grid>
+            </StackLayout>
+            </Frame>
+        </StackLayout>
+
+
+
+</pages:PopupPage>
