@@ -85,7 +85,7 @@
                 </Grid>
                 <yummy:PancakeView  Padding="15, 15, 15, 0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{DynamicResource AppSecondaryBackgroundColor}">
                     <StackLayout>
-                        <Grid Padding="0, 0, 0, 0" Margin="0"  MinimumHeightRequest="400">
+                        <Grid Padding="0, 0, 0, 0" Margin="0"  VerticalOptions="FillAndExpand">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />

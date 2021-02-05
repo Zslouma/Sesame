@@ -247,10 +247,10 @@ L’annulation est définitive.</value>
     <value>0 résultat</value>
   </data>
   <data name="SortOptionAutorASC" xml:space="preserve">
-    <value>A à Z (Auteur)</value>
+    <value>Auteur (A à Z) </value>
   </data>
   <data name="SortOptionAutorDESC" xml:space="preserve">
-    <value>Z à A (Auteur)</value>
+    <value>Auteur (Z à A)</value>
   </data>
   <data name="SortOptionTimeASC" xml:space="preserve">
     <value>+ récent</value>
@@ -259,10 +259,10 @@ L’annulation est définitive.</value>
     <value>- récent</value>
   </data>
   <data name="SortOptionTitleASC" xml:space="preserve">
-    <value>A à Z (Titre)</value>
+    <value>Titre (A à Z)</value>
   </data>
   <data name="SortOptionTitleDESC" xml:space="preserve">
-    <value>Z à A (Titre)</value>
+    <value>Titre (Z à A)</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Succès</value>
@@ -271,10 +271,10 @@ L’annulation est définitive.</value>
     <value>Le document vous sera mis à disposition prochainement</value>
   </data>
   <data name="SuccessCancelBooking" xml:space="preserve">
-    <value>L'annulation a été réussie pour le titre {0}</value>
+    <value>Votre réservation a été annulée pour le titre {0}</value>
   </data>
   <data name="SuccessExtendLoan" xml:space="preserve">
-    <value>La prolongation a été effectué pour le titre {0}</value>
+    <value>Votre réservation a été prolongée pour le titre {0}</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Avertissement</value>

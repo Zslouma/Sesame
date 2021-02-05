@@ -24,10 +24,12 @@ namespace Syracuse.Mobitheque.UI.Views
             // Adding gesture detector
             SearchBar.Focused               += SearchBar_OnFocus;
             SearchBar.Unfocused             += SearchBar_OnUnfocus;
+            SearchBar.SearchButtonPressed   += SearchBar_Onsearch;
             this.FacetteItemList.ItemTapped += FacetteItemList_ItemTapped;
 
             // Set bools for facetteList
             FacetteItemList.IsVisible   = false;
+            resultsList.IsVisible       = true;
             SortPicker.IsVisible        = false;
             enableMultiSelect           = true;
             SearchButton.IsVisible      = false;
@@ -115,6 +117,7 @@ namespace Syracuse.Mobitheque.UI.Views
             this.UpdateItemList();
         }
 
+
         // Search for Detailed view of the Item
         private void ResultsList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
@@ -192,8 +195,29 @@ namespace Syracuse.Mobitheque.UI.Views
         {
             searchHistoryList.IsVisible = false;
         }
+        private void SearchBar_Onsearch(Object sender, EventArgs e)
+        {
+            resultsList.IsVisible = true;
 
-        private void HeaderButton_Clicked(object sender, EventArgs e)
+            FacetteItemList.IsVisible = false;
+            FacetteButton.FontAttributes = FontAttributes.None;
+            FacetteButtonUnderline.IsVisible = false;
+
+            SortPicker.IsVisible = false;
+            SortPicker.FontAttributes = FontAttributes.None;
+            SortButtonUnderline.IsVisible = false;
+            
+            SearchButton.IsVisible = false;
+            DeleteButton.IsVisible = false;
+            
+            DeleteButtonUnderline.IsVisible = false;
+            SearchButtonUnderline.IsVisible = false;
+
+            enableMultiSelect = true;
+            resultsList.ScrollTo(this.ViewModel.Results[0], 0, true);
+        }
+
+    private void HeaderButton_Clicked(object sender, EventArgs e)
         {
             FacetteGroup facetteGroupSelected = (FacetteGroup)((ImageButton)sender).CommandParameter;
             this.ViewModel.HeaderTapped(facetteGroupSelected);
@@ -208,6 +232,7 @@ namespace Syracuse.Mobitheque.UI.Views
             SortButtonUnderline.IsVisible = false;
             SortPicker.IsVisible = false;
             FacetteItemList.IsVisible   = !FacetteItemList.IsVisible;
+            resultsList.IsVisible = !resultsList.IsVisible;
             if (FacetteItemList.IsVisible)
             {
                 
@@ -252,6 +277,7 @@ namespace Syracuse.Mobitheque.UI.Views
         private void SearchButton_Clicked(object sender, EventArgs e)
         {
             FacetteItemList.IsVisible   = false;
+            resultsList.IsVisible = true;
             DeleteButton.IsVisible      = false;
             SearchButton.IsVisible      = false;
             Task.Run( async () => await this.ViewModel.PerformSearch());
@@ -274,6 +300,7 @@ namespace Syracuse.Mobitheque.UI.Views
         {
 
             FacetteItemList.IsVisible = false;
+            resultsList.IsVisible = true;
             FacetteButton.FontAttributes = FontAttributes.None;
             FacetteButtonUnderline.IsVisible = false;
             SearchButton.IsVisible = false;

@@ -61,7 +61,7 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copyright (c) {0} Archimed..
+        ///   Looks up a localized string similar to Copyright (©) {0} Archimed..
         /// </summary>
         public static string AboutCopyright {
             get {

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutCopyright" xml:space="preserve">
-    <value>Copyright (c) {0} Archimed.</value>
+    <value>Copyright (©) {0} Archimed.</value>
   </data>
   <data name="AboutMailContact" xml:space="preserve">
     <value>Contact : contact@archimed.fr</value>
@@ -139,7 +139,7 @@
     <value>Nom de compte</value>
   </data>
   <data name="AddAccountTuto" xml:space="preserve">
-    <value>Cette page mémorise les comptes précédemment authentifiés et vous permet de vous connecter à ces comptes en un clic. Pour enregistrer un nouveau compte cliqué sur:</value>
+    <value>Cette page mémorise les comptes précédemment authentifiés et vous permet de vous connecter à ces comptes en un clic. Pour enregistrer un nouveau compte cliquer sur:</value>
   </data>
   <data name="BookingAvailable" xml:space="preserve">
     <value>Disponible</value>

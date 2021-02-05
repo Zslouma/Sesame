@@ -271,10 +271,10 @@ Cancellation is final.</value>
     <value>The document will be made available to you shortly.</value>
   </data>
   <data name="SuccessCancelBooking" xml:space="preserve">
-    <value>Cancellation was successful for the title {0}</value>
+    <value>Your booking has been cancelled for the title {0}</value>
   </data>
   <data name="SuccessExtendLoan" xml:space="preserve">
-    <value>The extension has been made for the title {0}</value>
+    <value>Your bookings has been extended for the title {0}</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>

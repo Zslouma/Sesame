@@ -514,7 +514,7 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancellation was successful for the title {0}.
+        ///   Looks up a localized string similar to Your booking has been cancelled for the title {0}.
         /// </summary>
         public static string SuccessCancelBooking {
             get {
@@ -523,7 +523,7 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The extension has been made for the title {0}.
+        ///   Looks up a localized string similar to Your bookings has been extended for the title {0}.
         /// </summary>
         public static string SuccessExtendLoan {
             get {
