@@ -153,6 +153,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 item.Active = true;
                 item.Cookies = JsonConvert.SerializeObject(this.requestService.GetCookies().ToArray());
                 item.Library = department.Library;
+                item.LibraryCode = department.LibraryCode;
                 item.LibraryUrl = department.LibraryUrl;
                 item.DomainUrl = department.DomainUrl;
                 item.Department = department.Department;
@@ -171,6 +172,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 b.Active = true;
                 b.Cookies = JsonConvert.SerializeObject(this.requestService.GetCookies().ToArray());
                 b.Library = department.Library;
+                b.LibraryCode = department.LibraryCode;
                 b.LibraryUrl = department.LibraryUrl;
                 b.DomainUrl = department.DomainUrl;
                 b.Department = department.Department;

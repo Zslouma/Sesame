@@ -21,6 +21,8 @@ namespace Syracuse.Mobitheque.Core.Models
 
         public string Library { get; set; }
 
+        public string LibraryCode { get; set; }
+
         public string LibraryUrl { get; set; }
 
         public string DomainUrl { get; set; }  
