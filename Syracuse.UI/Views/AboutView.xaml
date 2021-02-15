@@ -18,8 +18,17 @@
     <ContentPage.Content>
         <yummy:PancakeView Margin="0,30,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
             <StackLayout VerticalOptions="Fill" Orientation="Vertical">
-                <Label Margin="0,0,0,30"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="{x:Static core:ApplicationResource.About}" FontAttributes="Bold" ></Label>
-                <StackLayout VerticalOptions="CenterAndExpand" Orientation="Vertical">
+                <Label  VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" >
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span Text="&#xf05a; " FontFamily="{StaticResource FontAwesomeSolid}" FontSize = "20"/>
+                                <Span Text="{x:Static core:ApplicationResource.About}" FontAttributes="Bold" FontSize = "20"/>
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <StackLayout VerticalOptions="FillAndExpand" Orientation="Vertical">
                     <Label Margin="0,5" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="{Binding VersionLabel}" FontAttributes="Bold" ></Label>
                     <Label Margin="0,5" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="{x:Static local:AppResource.AboutWebLink}" FontAttributes="Bold" ></Label>
                     <Label Margin="0,5" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="{x:Static local:AppResource.AboutMailContact}" FontAttributes="Bold" ></Label>

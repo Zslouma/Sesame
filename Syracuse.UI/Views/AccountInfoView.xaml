@@ -15,27 +15,25 @@
         <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
             <ScrollView>
             <Grid>
-                <StackLayout>
-                    <Grid Padding="0,10,0,0">
+                    <StackLayout>
+                        <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text="&#xf007; " FontFamily="{StaticResource FontAwesomeSolid}" FontSize = "20"/>
+                                        <Span Text="{x:Static core:ApplicationResource.Account}" FontSize = "20" FontAttributes="Bold"/>
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
+                                <RowDefinition  Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*" />
-                            <ColumnDefinition Width="0.5*" />
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.RowSpan="2" Grid.ColumnSpan="2" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Text="{x:Static core:ApplicationResource.Account}" FontAttributes="Bold" ></Label>
-                    </Grid>
-
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition  Height="Auto"></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
 
                         <Label Text="{Binding SummaryAccount.DisplayName}"
                             TextColor="{d:DynamicResource DarkTextColor}"

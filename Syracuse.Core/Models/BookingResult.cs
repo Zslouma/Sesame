@@ -46,7 +46,7 @@ namespace Syracuse.Mobitheque.Core.Models
         public bool IsAvailable { get; set; }
         public string LocationLabel { get; set; }
         public string Rank { get; set; }
-        public int RankSort { get; set; }
+        public int? RankSort { get; set; }
 
         public string BookingDateString {
             get

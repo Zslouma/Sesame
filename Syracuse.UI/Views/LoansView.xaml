@@ -20,7 +20,16 @@
         <yummy:PancakeView Margin="0,30,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
             <Grid>
                 <StackLayout>
-                    <Label HorizontalTextAlignment="Center" Text="{x:Static core:ApplicationResource.Loans}" FontAttributes="Bold" ></Label>
+                    <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" >
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span Text="&#xf02d; " FontFamily="{StaticResource FontAwesomeSolid}" FontSize="20"/>
+                                    <Span Text="{x:Static core:ApplicationResource.Loans}" FontAttributes="Bold" FontSize="20"/>
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                     <Grid>
                     <StackLayout VerticalOptions="Center" IsVisible="{Binding NotCurrentLoan}">
                         <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize = "20" Text="{x:Static local:AppResource.NotCurrentLoan}" />

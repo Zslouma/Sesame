@@ -11,9 +11,11 @@ namespace Syracuse.Mobitheque.Core.Services.Files
     {
 
         private DataJson dataJson;
-        private const string dataFileName = "data.json";
+        private const string dataFileName = "data-prod.json ";
+        private const string V = "https://syracusepp.archimed.fr/mobitheque/data-prod.json?_s=";
+        //private const string dataFileName = "data.json";
         //private const string V = "https://syracusepp.archimed.fr/mobitheque/data.json?_s=";
-        private const string V = "https://www.syracuse.cloud/mobitheque/data-prod.json?_s=";
+        //private const string V = "https://www.syracuse.cloud/mobitheque/data-prod.json?_s=";
         private const string dataUrl = V;
         public string DataUrl
         {
@@ -55,9 +57,9 @@ namespace Syracuse.Mobitheque.Core.Services.Files
             return this.departments;
         }
 
-        public async Task<Library[]> GetLibraries()
+        public async Task<Library[]> GetLibraries(bool refresh = false)
         {
-            if (this.dataJson == null)
+            if (this.dataJson == null || refresh)
             {
                 var dataText = await this.GetDataRessource(dataFileName, DataUrl);
                 if (dataText != string.Empty)

@@ -212,7 +212,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         {
             this.IsBusy = true;
             SearchOptions options = new SearchOptions();
-            if (IsSortField)
+            if (true)
             {
                 options.Query = new SearchOptionsDetails()
                 {

@@ -214,7 +214,11 @@ namespace Syracuse.Mobitheque.UI.Views
             SearchButtonUnderline.IsVisible = false;
 
             enableMultiSelect = true;
-            resultsList.ScrollTo(this.ViewModel.Results[0], 0, true);
+            if (this.ViewModel.Results.Count() > 0)
+            {
+                resultsList.ScrollTo(this.ViewModel.Results[0], 0, true);
+            }
+            
         }
 
     private void HeaderButton_Clicked(object sender, EventArgs e)

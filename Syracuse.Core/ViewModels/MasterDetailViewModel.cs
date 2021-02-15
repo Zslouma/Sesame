@@ -29,7 +29,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         public override void Prepare(string parameter)
         {
             param = parameter;
-            this.JsonSynchronisation();
             base.Prepare();
         }
 
@@ -37,6 +36,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         {
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
             this.Connectivity_test().Wait();
+            this.JsonSynchronisation();
             base.Start();
         }
          public async Task JsonSynchronisation()
@@ -44,7 +44,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             CookiesSave user = await App.Database.GetActiveUser();
             if (user != null)
             {
-                Library[] Alllibraries = await this.departmentService.GetLibraries();
+                Library[] Alllibraries = await this.departmentService.GetLibraries(true);
                 try
                 {
                     Library library = Array.Find(Alllibraries, element => element.Name == user.Library && element.Code == user.LibraryCode);
