@@ -168,7 +168,7 @@
                 </yummy:PancakeView>
             </StackLayout>
             <AbsoluteLayout VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
-                <Label AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" FontSize = "20" Text="{x:Static local:AppResource.NoSearchResults}" />
+                <Label HorizontalTextAlignment="Center" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" FontSize = "20" Text="{x:Static local:AppResource.NoSearchResults}" />
                 <AbsoluteLayout.Triggers>
                     <DataTrigger TargetType="AbsoluteLayout" Binding="{Binding IsFilterable}" Value="True">
                         <Setter Property="IsVisible" Value="False" />
