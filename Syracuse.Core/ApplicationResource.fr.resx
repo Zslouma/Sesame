@@ -252,6 +252,9 @@ L’annulation est définitive.</value>
   <data name="SortOptionAutorDESC" xml:space="preserve">
     <value>Auteur (Z à A)</value>
   </data>
+  <data name="SortOptionPertinence" xml:space="preserve">
+    <value>Pertinence</value>
+  </data>
   <data name="SortOptionTimeASC" xml:space="preserve">
     <value>+ récent</value>
   </data>

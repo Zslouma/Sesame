@@ -252,6 +252,9 @@ Cancellation is final.</value>
   <data name="SortOptionAutorDESC" xml:space="preserve">
     <value>Z to A (Author)</value>
   </data>
+  <data name="SortOptionPertinence" xml:space="preserve">
+    <value>Pertinence</value>
+  </data>
   <data name="SortOptionTimeASC" xml:space="preserve">
     <value>most recent</value>
   </data>

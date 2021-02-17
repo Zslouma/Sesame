@@ -217,8 +217,11 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             get => this.sortNamee;
             set
             {
-                SetProperty(ref this.sortNamee, value);
-                this.SetSort(Convert.ToInt32(this.SortNamee));
+                if (Convert.ToInt32(value) >= 0)
+                {
+                    SetProperty(ref this.sortNamee, value);
+                    this.SetSort(Convert.ToInt32(this.SortNamee));
+                }
             }
         }
 
@@ -247,36 +250,41 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 return;
 
             this.filterIndex = (filter);
-
             if (this.filterIndex == 0)
+            {
+                this.SortName = null;
+                this.SortOrder = 0;
+                this.PerformSearch(null, null, false);
+            }
+            if (this.filterIndex == 1)
             {
                 this.SortName = "Title_sort";
                 this.SortOrder = 1;
-            }
-            else if (this.filterIndex == 1)
-            {
-                this.SortName = "Title_sort";
-                this.SortOrder = 0;
             }
             else if (this.filterIndex == 2)
             {
-                this.SortName = "Author_sort";
-                this.SortOrder = 1;
+                this.SortName = "Title_sort";
+                this.SortOrder = 0;
             }
             else if (this.filterIndex == 3)
             {
                 this.SortName = "Author_sort";
-                this.SortOrder = 0;
+                this.SortOrder = 1;
             }
             else if (this.filterIndex == 4)
             {
-                this.SortName = "YearOfPublication_sort";
-                this.SortOrder = 1;
+                this.SortName = "Author_sort";
+                this.SortOrder = 0;
             }
             else if (this.filterIndex == 5)
             {
                 this.SortName = "YearOfPublication_sort";
                 this.SortOrder = 0;
+            }
+            else if (this.filterIndex == 6)
+            {
+                this.SortName = "YearOfPublication_sort";
+                this.SortOrder = 1;
             }
             if (this.D == null || this.D.Results == null)
                 return;
@@ -483,12 +491,13 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private Dictionary<string, Func<IEnumerable<Result>, IEnumerable<Result>>> sorts =
         new Dictionary<string, Func<IEnumerable<Result>, IEnumerable<Result>>>()
         {
-                    { "A à Z (Titre)", (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.ASCENDING).Sort(x, "Title")},
-                    { "Z à A (Titre)", (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.DESCENDING).Sort(x, "Title")},
-                    { "A à Z (Auteur)", (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.ASCENDING).Sort(x, "Author")},
-                    { "Z à A (Auteur)", (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.DESCENDING).Sort(x, "Author")},
-                    { "+ récent", (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.ASCENDING).Sort(x, "Date")},
-                    { "- récent", (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.DESCENDING).Sort(x, "Date")}
+                    { ApplicationResource.SortOptionPertinence, (x) => null},
+                    { ApplicationResource.SortOptionTitleASC, (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.ASCENDING).Sort(x, "Title")},
+                    { ApplicationResource.SortOptionTitleDESC, (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.DESCENDING).Sort(x, "Title")},
+                    { ApplicationResource.SortOptionAutorASC, (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.ASCENDING).Sort(x, "Author")},
+                    { ApplicationResource.SortOptionAutorDESC, (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.DESCENDING).Sort(x, "Author")},
+                    { ApplicationResource.SortOptionTimeASC, (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.ASCENDING).Sort(x, "Date")},
+                    { ApplicationResource.SortOptionTimeDESC, (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.DESCENDING).Sort(x, "Date")}
         };
 
         public List<string> SortsName 
@@ -601,6 +610,11 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         public async Task PerformSearch(string search = null, string sort = null, bool resetFacette = true)
         {
             this.IsBusy = true;
+            if (sort == null)
+            {
+                this.SortName = null;
+                this.SortOrder = 0;
+            }
             // Don't reset facette choices if user hasn't changed query string
             if (search == null) resetFacette = false;
 

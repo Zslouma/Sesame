@@ -460,6 +460,15 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pertinence.
+        /// </summary>
+        public static string SortOptionPertinence {
+            get {
+                return ResourceManager.GetString("SortOptionPertinence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to most recent.
         /// </summary>
         public static string SortOptionTimeASC {
