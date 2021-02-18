@@ -120,7 +120,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                         new MenuNavigation() { Text = ApplicationResource.Home, IconFontAwesome = "\uf015" , IsSelected = true},
                         new MenuNavigation() { Text = ApplicationResource.Account, IconFontAwesome = "\uf007" },
                         new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconFontAwesome = "\uf0c0" },
-                        new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf465" },
+                        new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf02a" },
                         new MenuNavigation() { Text = ApplicationResource.Library, IconFontAwesome = "\uf66f" },
                         new MenuNavigation() { Text = ApplicationResource.About, IconFontAwesome = "\uf05a" },
                         new MenuNavigation() { Text = ApplicationResource.Disconnect, IconFontAwesome = "\uf011" },
