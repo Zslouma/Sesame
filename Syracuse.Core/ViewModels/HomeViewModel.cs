@@ -195,22 +195,26 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
             this.IsEvent = user.IsEvent;
 
+            this.IsBusy = false;
             await base.Initialize();
         }
 
         private async Task getNextPage()
         {
 
+            this.IsBusy = true;
+            await this.RaisePropertyChanged(nameof(IsBusy));
             this.page += 1;
 
             Result[] res = await loadPage(this.IsEvent);
             this.Results = this.Results.Concat(res).ToArray();
             await this.GetRedirectURL();
+            this.IsBusy = false;
+            await this.RaisePropertyChanged(nameof(IsBusy));
         }
 
         private async Task<Result[]> loadPage(bool IsSortField)
         {
-            this.IsBusy = true;
             SearchOptions options = new SearchOptions();
             if (true)
             {
@@ -235,7 +239,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             if (search != null && !search.Success)
             {
                 this.DisplayAlert(ApplicationResource.Error, search.Errors?[0]?.Msg, ApplicationResource.ButtonValidation);
-                this.IsBusy = false;
                 return new Result[0];
             }
             else
@@ -246,8 +249,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 }
                 
             }
-           
-            this.IsBusy = false;
             return search?.D?.Results;
         }
 

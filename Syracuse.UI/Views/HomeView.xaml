@@ -38,15 +38,14 @@
                       CachingStrategy="RecycleElement"
                       ItemsSource="{Binding Results}" 
                       SeparatorVisibility="None"
-                      Margin="0,0,0,20"
-                      RowHeight="235" 
                       VerticalScrollBarVisibility="Never"
-                      IsPullToRefreshEnabled="False">
+                      IsPullToRefreshEnabled="False"
+                       HasUnevenRows="True">
                         <ListView.ItemTemplate >
                             <DataTemplate>
                                 <ViewCell>
                                     <Frame HasShadow="True" Padding="0, 5, 0, 5">
-                                        <StackLayout Orientation="Vertical" BackgroundColor="White" Padding="5, 0, 5, 0">
+                                        <StackLayout Orientation="Vertical" BackgroundColor="White" Padding="5, 0, 5, 0" Margin="0,0,0,15">
                                             <Image VerticalOptions="Fill" HorizontalOptions="Fill" Aspect="AspectFill" Source="{Binding FieldList.Image}" HeightRequest="90"/>
                                             <StackLayout Padding="0, 5, 0, 0"  Orientation="Vertical" >
                                                 <Label Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="{d:DynamicResource FontSizeTitle}" TextColor="{d:DynamicResource DarkTextColor}"/>
@@ -67,7 +66,7 @@
 
                         </ListView.ItemTemplate>
                         <ListView.Footer>
-                            <material:MaterialButton IsVisible="{Binding DisplayLoadMore}" BackgroundColor="{d:DynamicResource AppBackgroundColor}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}" VerticalOptions="Center"></material:MaterialButton>
+                            <material:MaterialButton IsVisible="{Binding DisplayLoadMore}" BackgroundColor="{d:DynamicResource AppBackgroundColor}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}"/>
                         </ListView.Footer>
                     </ListView>
                     <ListView x:Name="resultsListDocument" 
@@ -75,15 +74,14 @@
                               CachingStrategy="RecycleElement"
                               ItemsSource="{Binding Results}"
                               SeparatorVisibility="None"
-                              RowHeight="170"
-                              Margin="0,0,0,20"
                               SelectionMode="None"
                               VerticalScrollBarVisibility="Never"
-                              IsPullToRefreshEnabled="False">
+                              IsPullToRefreshEnabled="False"
+                              HasUnevenRows="True">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout Orientation="Horizontal" Padding="7, 0, 7, 0">
+                                    <StackLayout Orientation="Horizontal" Padding="7, 0, 7, 0" Margin="0,0,0,15">
                                         <Image VerticalOptions="Center" Source="{Binding FieldList.Image}" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent" Margin="5"/>
                                         <StackLayout VerticalOptions="Center" Orientation="Vertical">
                                             <Label TextColor="Black" Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="Medium"/>
@@ -98,7 +96,7 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                         <ListView.Footer>
-                            <material:MaterialButton IsVisible="{Binding DisplayLoadMore}" BackgroundColor="{d:DynamicResource AppBackgroundColor}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}" VerticalOptions="Center"></material:MaterialButton>
+                            <material:MaterialButton IsVisible="{Binding DisplayLoadMore}" BackgroundColor="{d:DynamicResource AppBackgroundColor}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}" />
                         </ListView.Footer>
                     </ListView>
                 </StackLayout>
