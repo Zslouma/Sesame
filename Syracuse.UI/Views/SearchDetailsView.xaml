@@ -60,25 +60,27 @@
                                                     </StackLayout>
                                                 </Grid>
                                             </StackLayout>
-                                            <StackLayout IsVisible="{Binding HasPrimaryDocs}"  BackgroundColor="#bfbfbf" Padding="10">
-                                                <material:MaterialLabel FontSize="Large" Text="{x:Static local:AppResource.DigitalDocumentLink}" TextColor="White"/>
-                                            </StackLayout>
-                                            <StackLayout IsVisible="{Binding HasPrimaryDocs}">
-                                                <StackLayout
-                                                    BindableLayout.ItemsSource="{Binding PrimaryDocs}" 
-                                                    VerticalOptions="FillAndExpand">
-                                                    <BindableLayout.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <StackLayout Padding="5"  BackgroundColor="#f0f0f0">
-                                                                <Button Text="{Binding Label}"
-                                                                                TextColor="Blue"
-                                                                                BackgroundColor="Transparent"
-                                                                                CommandParameter="{Binding Link}"
-                                                                                Clicked="OpenBrowser_OnClicked"></Button>
+                                            <StackLayout IsVisible="{Binding HasPrimaryDocs}" BindableLayout.ItemsSource="{Binding PrimaryDocs}" >
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackLayout IsVisible="{Binding Haslink}" >
+                                                            <StackLayout IsVisible="{Binding Haslink}" BackgroundColor="#bfbfbf" Padding="10">
+                                                                <material:MaterialLabel FontSize="Large" Text="{x:Static local:AppResource.DigitalDocumentLink}" TextColor="White"/>
                                                             </StackLayout>
-                                                        </DataTemplate>
-                                                    </BindableLayout.ItemTemplate>
-                                                </StackLayout>
+                                                            <StackLayout IsVisible="{Binding Haslink}">
+                                                                <StackLayout VerticalOptions="FillAndExpand">
+                                                                    <StackLayout Padding="5"  BackgroundColor="#f0f0f0">
+                                                                        <Button Text="{Binding Label}"
+                                                                                        TextColor="Blue"
+                                                                                        BackgroundColor="Transparent"
+                                                                                        CommandParameter="{Binding Link}"
+                                                                                        Clicked="OpenBrowser_OnClicked"/>
+                                                                    </StackLayout>
+                                                                </StackLayout>
+                                                            </StackLayout>
+                                                        </StackLayout>
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
                                             </StackLayout>
                                             <!--#region Holding -->
                                             

@@ -367,7 +367,13 @@ namespace Syracuse.Mobitheque.Core.Models
         public string Label { get; set; }
 
         [JsonProperty("Link")]
-        public string Link { get; set; }
+        public string Link { get; set; } = null;
+
+        public bool HasLink
+        {
+            get { return this.Link != null; }
+        }
+
 
         [JsonProperty("ResourceKey")]
         public string ResourceKey { get; set; }
