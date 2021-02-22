@@ -19,20 +19,9 @@
                         HeightRequest="35"
                         Placeholder="{x:Static local:AppResource.Search}"
                         SearchCommand="{Binding SearchCommand}" 
-                        SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}">
-                    <SearchBar.TextColor>
-                        <OnPlatform x:TypeArguments="Color">
-                            <OnPlatform.iOS>
-                                Black
-                            </OnPlatform.iOS>
-                            <OnPlatform.Android>
-                                Black
-                            </OnPlatform.Android>
-                            <OnPlatform.WinPhone>
-                                Black
-                            </OnPlatform.WinPhone>
-                        </OnPlatform>
-                    </SearchBar.TextColor>
+                        SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}"
+                        TextColor="Black"
+                        PlaceholderColor="Black">
                 </SearchBar>
             </yummy:PancakeView>
         </StackLayout>

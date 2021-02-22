@@ -99,7 +99,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         }
 
-
         private MvxAsyncCommand<SearchResult> openDetailsCommand;
         public MvxAsyncCommand<SearchResult> OpenDetailsCommand => this.openDetailsCommand ??
             (this.openDetailsCommand = new MvxAsyncCommand<SearchResult>((result) => this.OpenResultDetails(result)));
