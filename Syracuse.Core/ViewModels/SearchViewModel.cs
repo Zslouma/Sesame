@@ -541,7 +541,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 this.SearchHistory = list;
                 b.SearchValue = string.Join(",", list);
                 await App.Database.SaveItemAsync(b);
-                await this.RaiseAllPropertiesChanged();
             }
             // Create new one, add query and save
             else

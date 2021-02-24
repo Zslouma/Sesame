@@ -95,6 +95,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 this.SearchHistory = b.SearchValue.Split(',').ToList();
             else
                 this.SearchHistory = new List<string>();
+
+
         }
 
         private MvxAsyncCommand<SearchResult> openDetailsCommand;
@@ -150,29 +152,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 QueryString = search
             };
             SearchOptions opt = new SearchOptions() { Query = options };
-
-            CookiesSave b = await App.Database.GetActiveUser();
-
-            if (b.SearchValue != null)
-            {
-                var list = b.SearchValue.Split(',').ToList();
-                if (!list.Contains(search))
-                {
-                    list.Insert(0, search);
-                }
-                this.SearchHistory = list;
-                b.SearchValue = string.Join(",", list);
-                await App.Database.SaveItemAsync(b);
-            }
-
-            else
-            {
-                this.SearchHistory = new List<string>();
-                this.SearchHistory.Add(search);
-                b.SearchValue = search;
-                await App.Database.SaveItemAsync(b);
-            }
-
             await this.navigationService.Navigate<SearchViewModel, SearchOptions>(opt);
 
         }
