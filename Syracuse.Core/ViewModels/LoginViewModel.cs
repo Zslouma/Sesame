@@ -83,7 +83,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         public string PasswordErrorString { get; private set; }
 
-        private CookiesSave department;
+        public CookiesSave department;
 
         public LoginViewModel(
                               IRequestService requestService,
@@ -156,6 +156,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 item.LibraryCode = department.LibraryCode;
                 item.LibraryUrl = department.LibraryUrl;
                 item.DomainUrl = department.DomainUrl;
+                item.ForgetMdpUrl = department.ForgetMdpUrl;
                 item.Department = department.Department;
                 item.SearchScenarioCode = department.SearchScenarioCode;
                 item.EventsScenarioCode = department.EventsScenarioCode;
@@ -175,6 +176,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 b.LibraryCode = department.LibraryCode;
                 b.LibraryUrl = department.LibraryUrl;
                 b.DomainUrl = department.DomainUrl;
+                b.ForgetMdpUrl = department.ForgetMdpUrl;
                 b.Department = department.Department;
                 b.SearchScenarioCode = department.SearchScenarioCode;
                 b.EventsScenarioCode = department.EventsScenarioCode;

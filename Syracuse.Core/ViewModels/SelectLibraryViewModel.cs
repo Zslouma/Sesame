@@ -86,6 +86,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             opt.LibraryCode = this.librariesSelected[this.librariesPickerIndex].Code;
             opt.LibraryUrl = this.librariesSelected[this.librariesPickerIndex].Config.BaseUri;
             opt.DomainUrl = this.librariesSelected[this.librariesPickerIndex].Config.DomainUri;
+            opt.ForgetMdpUrl = this.librariesSelected[this.librariesPickerIndex].Config.ForgetMdpUri;
             opt.EventsScenarioCode = this.librariesSelected[this.librariesPickerIndex].Config.EventsScenarioCode;
             opt.SearchScenarioCode = this.librariesSelected[this.librariesPickerIndex].Config.SearchScenarioCode;
             opt.IsEvent = this.librariesSelected[this.librariesPickerIndex].Config.IsEvent;

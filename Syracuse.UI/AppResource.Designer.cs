@@ -367,6 +367,15 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Forgot your password?.
+        /// </summary>
+        public static string PasswordForget {
+            get {
+                return ResourceManager.GetString("PasswordForget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search....
         /// </summary>
         public static string Search {

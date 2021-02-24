@@ -25,7 +25,9 @@ namespace Syracuse.Mobitheque.Core.Models
 
         public string LibraryUrl { get; set; }
 
-        public string DomainUrl { get; set; }  
+        public string DomainUrl { get; set; }
+
+        public string ForgetMdpUrl { get; set; }
 
         public string SearchScenarioCode { get; set; }
 

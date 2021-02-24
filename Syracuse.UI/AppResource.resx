@@ -219,6 +219,9 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="PasswordForget" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Search...</value>
   </data>

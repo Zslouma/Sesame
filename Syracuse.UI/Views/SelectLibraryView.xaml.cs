@@ -16,7 +16,6 @@ namespace Syracuse.Mobitheque.UI.Views
 
         public SelectLibraryView()
         {
-
             InitializeComponent();
             LibraryPicker.PropertyChanged += PickerPropertyChanged;
         }
