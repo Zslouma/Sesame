@@ -305,7 +305,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
             }
             var result = this.ItemsSource;
-            this.ItemsSource = new ObservableCollection<Result>();
             this.ItemsSource = new ObservableCollection<Result>(result);
             await this.RaisePropertyChanged(nameof(ItemsSource));
             if (endIsBusy)

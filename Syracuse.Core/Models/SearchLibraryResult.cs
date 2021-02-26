@@ -249,7 +249,7 @@ namespace Syracuse.Mobitheque.Core.Models
         {
             get
             {
-                return Holdings.Count > 0;
+                return Holdings.Count > 0 && Holdings != null;
             }
         }
         public Dictionary<string, bool> DisplayHoldings
@@ -271,7 +271,7 @@ namespace Syracuse.Mobitheque.Core.Models
         {
             get
             {
-                return HoldingsStatements.Count > 0;
+                return HoldingsStatements.Count > 0 && HoldingsStatements != null;
             }
         }
 
