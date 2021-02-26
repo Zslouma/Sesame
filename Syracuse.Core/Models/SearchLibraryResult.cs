@@ -71,6 +71,7 @@ namespace Syracuse.Mobitheque.Core.Models
         public IList<string> sys_support { get; set; }
         public IList<string> Popularity_sort { get; set; }
         public IList<string> sys_base { get; set; }
+
     }
 
     public class Holdings

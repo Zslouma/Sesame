@@ -143,7 +143,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set { SetProperty(ref this.reversIsKm, value); }
         }
 
+        private bool absoluteIndicatorVisibility;
+        public bool AbsoluteIndicatorVisibility
+        {
+            get => this.absoluteIndicatorVisibility;
+            set { SetProperty(ref this.absoluteIndicatorVisibility, value); }
+        }
 
+        public CookiesSave user { get; set; }
 
         private MvxAsyncCommand<string> searchCommand;
         public MvxAsyncCommand<string> SearchCommand => this.searchCommand ??
@@ -190,6 +197,24 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     else { 
                         resultTempo.DisplayValues.DisplayStar = true; 
                     }
+                    if (resultTempo.HasDigitalReady)
+                    {
+                        if (this.user == null)
+                        {
+                            this.user = await App.Database.GetActiveUser();
+                        }
+                        // Génération des url du Viewer DR 
+                        if (resultTempo.FieldList.NumberOfDigitalNotices.Length > 0 && resultTempo.FieldList.NumberOfDigitalNotices[0] > 0){
+                            resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/c-" + resultTempo.FieldList.Identifier[0];
+                        }
+                        else if (resultTempo.FieldList.DigitalReadyIsEntryPoint.Length > 0 && resultTempo.FieldList.DigitalReadyIsEntryPoint[0]){
+                            resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/d-" + resultTempo.FieldList.Identifier[0];
+                        }
+                        else
+                        {
+                            resultTempo.HasDigitalReady = false;
+                        }
+                    }
                     //resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
                     await PerformSearch(resultTempo.FieldList.Identifier[0]);
                     this.BuildHoldingsStatements();
@@ -216,6 +241,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
             this.IsBusy = false;
             this.IsPositionVisible = true;
+            this.RaiseAllPropertiesChanged();
         }
 
         public void BuildHoldingsStatements()
@@ -350,6 +376,26 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 else
                 {
                     resultTempo.DisplayValues.DisplayStar = true;
+                }
+                if (resultTempo.HasDigitalReady)
+                {
+                    if (this.user ==null)
+                    {
+                        this.user = await App.Database.GetActiveUser();
+                    }
+                    // Génération des url du Viewer DR 
+                    if (resultTempo.FieldList.NumberOfDigitalNotices.Length > 0 && resultTempo.FieldList.NumberOfDigitalNotices[0] > 0)
+                    {
+                        resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/c-" + resultTempo.FieldList.Identifier[0];
+                    }
+                    else if (resultTempo.FieldList.DigitalReadyIsEntryPoint.Length > 0 && resultTempo.FieldList.DigitalReadyIsEntryPoint[0])
+                    {
+                        resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/d-" + resultTempo.FieldList.Identifier[0];
+                    }
+                    else
+                    {
+                        resultTempo.HasDigitalReady = false;
+                    }
                 }
                 resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
                 await PerformSearch(resultTempo.FieldList.Identifier[0]);

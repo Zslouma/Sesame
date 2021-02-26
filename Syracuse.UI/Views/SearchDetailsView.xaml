@@ -13,7 +13,7 @@
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
 
     <ContentPage.Content>
-        <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
+        <yummy:PancakeView  x:Name="pancakeView" Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
             <Grid>
                 <StackLayout VerticalOptions="FillAndExpand" Orientation="Vertical" Padding="5, 0, 5, 0">
                     <CarouselView 
@@ -63,18 +63,20 @@
                                             <StackLayout IsVisible="{Binding HasPrimaryDocs}" BindableLayout.ItemsSource="{Binding PrimaryDocs}" >
                                                 <BindableLayout.ItemTemplate>
                                                     <DataTemplate>
-                                                        <StackLayout IsVisible="{Binding Haslink}" >
-                                                            <StackLayout IsVisible="{Binding Haslink}" BackgroundColor="#bfbfbf" Padding="10">
-                                                                <material:MaterialLabel FontSize="Large" Text="{x:Static local:AppResource.DigitalDocumentLink}" TextColor="White"/>
-                                                            </StackLayout>
-                                                            <StackLayout IsVisible="{Binding Haslink}">
-                                                                <StackLayout VerticalOptions="FillAndExpand">
-                                                                    <StackLayout Padding="5"  BackgroundColor="#f0f0f0">
-                                                                        <Button Text="{Binding Label}"
-                                                                                        TextColor="Blue"
-                                                                                        BackgroundColor="Transparent"
-                                                                                        CommandParameter="{Binding Link}"
-                                                                                        Clicked="OpenBrowser_OnClicked"/>
+                                                        <StackLayout>
+                                                            <StackLayout IsVisible="{Binding Haslink}" >
+                                                                <StackLayout BackgroundColor="#bfbfbf" Padding="10">
+                                                                    <material:MaterialLabel FontSize="Large" Text="{x:Static local:AppResource.DigitalDocumentLink}" TextColor="White"/>
+                                                                </StackLayout>
+                                                                <StackLayout >
+                                                                    <StackLayout VerticalOptions="FillAndExpand">
+                                                                        <StackLayout Padding="5"  BackgroundColor="#f0f0f0">
+                                                                            <Button         Text="{Binding Label}"
+                                                                                            TextColor="Blue"
+                                                                                            BackgroundColor="Transparent"
+                                                                                            CommandParameter="{Binding Link}"
+                                                                                            Clicked="OpenBrowser_OnClicked"/>
+                                                                        </StackLayout>
                                                                     </StackLayout>
                                                                 </StackLayout>
                                                             </StackLayout>
@@ -82,6 +84,12 @@
                                                     </DataTemplate>
                                                 </BindableLayout.ItemTemplate>
                                             </StackLayout>
+                                            <StackLayout BackgroundColor="Aqua" IsVisible="{Binding HasDigitalReady}">
+                                                <!--Loading label should not render by default.-->
+                                                <Label BindingContext="carouselView" x:Name="labelLoading" HorizontalOptions="Fill" Text="Loading..." IsVisible="{Binding Path=BindingContext.AbsoluteIndicatorVisibility, Source={x:Reference Name=carouselView}}"  />
+                                                <WebView Source="{Binding FieldList.UrlViewerDR}" Navigated="WebViewNavigated" HeightRequest="400" HorizontalOptions="Fill" Navigating="WebViewNavigating" BackgroundColor="Green"/>
+                                            </StackLayout>
+
                                             <!--#region Holding -->
                                             
                                             <StackLayout   IsVisible="{Binding DisplayValues.Library.success}">

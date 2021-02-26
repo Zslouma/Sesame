@@ -60,7 +60,7 @@
                                 <AbsoluteLayout Grid.Row="1" Grid.ColumnSpan="3" IsVisible="{Binding DisplayNavigationError}" BackgroundColor="White">
                                     <Label Text="{x:Static local:AppResource.ErrorLibraryWebSite}" AbsoluteLayout.LayoutFlags="PositionProportional"  AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
                                 </AbsoluteLayout>
-                                <WebView  Source="{Binding Url}" Grid.Row="1" Grid.ColumnSpan="3" Navigated="WebViewNavigated" Navigating="WebViewNavigating" BackgroundColor="Transparent"  />
+                                <WebView  Source="http://xamarin.com" Grid.Row="1" Grid.ColumnSpan="3" Navigated="WebViewNavigated" Navigating="WebViewNavigating" BackgroundColor="Transparent"  />
                                 <AbsoluteLayout x:Name="AbsoluteIndicatorVisibility" IsVisible="{Binding Path=BindingContext.AbsoluteIndicatorVisibility, Source={x:Reference Name=pancakeView}}"  VerticalOptions="FillAndExpand" Grid.Row="1" Grid.ColumnSpan="3"  >
                                     <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="Gray" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
                                 </AbsoluteLayout>

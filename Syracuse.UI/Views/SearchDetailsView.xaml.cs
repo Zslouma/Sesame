@@ -87,6 +87,18 @@ namespace Syracuse.Mobitheque.UI.Views
             }
         }
 
+        private void WebViewNavigating(object sender, WebNavigatingEventArgs e)
+        {
+            this.ViewModel.AbsoluteIndicatorVisibility = true;
+            this.ViewModel.RaiseAllPropertiesChanged();
+        }
+
+        private void WebViewNavigated(object sender, WebNavigatedEventArgs e)
+        {
+            var item = sender as WebView;
+            this.ViewModel.AbsoluteIndicatorVisibility = false;
+        }
+
         protected override void OnBindingContextChanged()
         {
             (this.DataContext as SearchDetailsViewModel).OnDisplayAlert += SearchDetailsView_OnDisplayAlert;

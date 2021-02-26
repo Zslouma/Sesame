@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
+using System.Threading;
+using System.Threading.Tasks;
+
 
 namespace Syracuse.Mobitheque.Core.Models
 {
@@ -189,6 +192,12 @@ namespace Syracuse.Mobitheque.Core.Models
 
         public string[] Language { get; set; }
 
+        public int[] NumberOfDigitalNotices { get; set; }
+
+        public bool[] DigitalReadyIsEntryPoint { get; set; }
+
+        public string UrlViewerDR { get; set; }
+
         public string CroppedTitle
         {
             get {
@@ -368,6 +377,8 @@ namespace Syracuse.Mobitheque.Core.Models
 
         [JsonProperty("Link")]
         public string Link { get; set; } = null;
+
+        public Uri ViewerUri { get; set; } = new Uri("https://publiclibrary.syracuse.cloud/Default/digital-viewer/c-516522");
 
         public bool HasLink
         {
