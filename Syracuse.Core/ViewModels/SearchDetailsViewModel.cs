@@ -43,7 +43,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             get => this.desc;
             set { SetProperty(ref this.desc, value); }
         }
-        private ObservableCollection<Result> itemsSource;
+        private ObservableCollection<Result> itemsSource = new ObservableCollection<Result>();
         public ObservableCollection<Result> ItemsSource
         {
             get => this.itemsSource;
@@ -64,6 +64,27 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 SetProperty(ref this.position, value); 
             }
         }
+
+        private int startDataPosition;
+        public int StartDataPosition
+        {
+            get => this.startDataPosition;
+            set
+            {
+                SetProperty(ref this.startDataPosition, value);
+            }
+        }
+
+        private int endDataPosition;
+        public int EndDataPosition
+        {
+            get => this.endDataPosition;
+            set
+            {
+                SetProperty(ref this.endDataPosition, value);
+            }
+        }
+
         private string displayPosition = "";
         public string DisplayPosition
         {
@@ -76,13 +97,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         {
             get => this.nbrResults;
             set { SetProperty(ref this.nbrResults, value); }
-        }
-
-        private IList<Result> results;
-        public IList<Result> Results
-        {
-            get => this.results;
-            set { SetProperty(ref this.results, value); }
         }
 
         private string query;
@@ -177,71 +191,121 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         {
             this.IsBusy = true;
             await this.CanHolding();
-            this.Results = new List<Result>();
-            int finalPosition = 0;
             this.SearchOptions = parameter.searchOptions;
             this.NbrResults = parameter.nbrResults;
             var parameterTempo = parameter.parameter;
-            for (int i = 0; i < 2; i++)
-            {
-                var positionTempo = 0;
-                foreach (var resultTempo in parameterTempo[i].D.Results)
-                {
-                    if (resultTempo.Resource.Desc != null)
-                        resultTempo.DisplayValues.Desc = resultTempo.Resource.Desc;
-                    resultTempo.DisplayValues.Star = this.setStar(resultTempo.Resource.AvNt);
-                    if (resultTempo.DisplayValues.Star == null)
-                    {
-                        resultTempo.DisplayValues.DisplayStar = false;
-                    }
-                    else { 
-                        resultTempo.DisplayValues.DisplayStar = true; 
-                    }
-                    if (resultTempo.HasDigitalReady)
-                    {
-                        if (this.user == null)
-                        {
-                            this.user = await App.Database.GetActiveUser();
-                        }
-                        // Génération des url du Viewer DR 
-                        if (resultTempo.FieldList.NumberOfDigitalNotices.Length > 0 && resultTempo.FieldList.NumberOfDigitalNotices[0] > 0){
-                            resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/c-" + resultTempo.FieldList.Identifier[0];
-                        }
-                        else if (resultTempo.FieldList.DigitalReadyIsEntryPoint.Length > 0 && resultTempo.FieldList.DigitalReadyIsEntryPoint[0]){
-                            resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/d-" + resultTempo.FieldList.Identifier[0];
-                        }
-                        else
-                        {
-                            resultTempo.HasDigitalReady = false;
-                        }
-                    }
-                    //resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
-                    await PerformSearch(resultTempo.FieldList.Identifier[0]);
-                    this.BuildHoldingsStatements();
-                    this.BuildHoldings();
-                    resultTempo.DisplayValues.Library = this.Library;
-                    //resultTempo.DisplayValues.Library.success = resultTempo.DisplayValues.Library.success && resultTempo.DisplayValues.SeekForHoldings;
-                    if (i == 1)
-                    {
-                        if (resultTempo == parameterTempo[0].D.Results[0])
-                        {
-                            finalPosition = positionTempo;
-                        }
-                        this.Results.Add(resultTempo);
-                    }
-                    positionTempo += 1;
-                }
-            }
-            this.ItemsSource = new ObservableCollection<Result>(this.Results);
-            this.CurrentItem = this.Results.Skip(finalPosition).FirstOrDefault();
-            this.Position = finalPosition;
+            this.Position = parameterTempo[1].D.Results.ToList().FindIndex(x => x == parameterTempo[0].D.Results[0]);
+            this.StartDataPosition = position - 10 >= 0 ? position - 10 : 0;
+            this.ItemsSource = new ObservableCollection<Result>(parameterTempo[1].D.Results);
+            this.EndDataPosition = position + 10 < parameterTempo[1].D.Results.Length ? position + 10 : parameterTempo[1].D.Results.Length - 1;
+            await this.FormateToCarrousel(this.StartDataPosition, this.EndDataPosition, false);
+            this.CurrentItem = this.ItemsSource.Skip(this.Position).FirstOrDefault();
             if (this.Position >= (this.ItemsSource.Count() - 5) && int.Parse(this.NbrResults) > this.ItemsSource.Count)
             {
                 await LoadMore();
             }
             this.IsBusy = false;
             this.IsPositionVisible = true;
-            this.RaiseAllPropertiesChanged();
+            await this.RaiseAllPropertiesChanged();
+        }
+
+        public async Task FormateToCarrousel(Result[] results)
+        {
+            foreach (var resultTempo in results)
+            {
+                if (resultTempo.Resource.Desc != null)
+                    resultTempo.DisplayValues.Desc = resultTempo.Resource.Desc;
+                resultTempo.DisplayValues.Star = this.setStar(resultTempo.Resource.AvNt);
+                if (resultTempo.DisplayValues.Star == null)
+                {
+                    resultTempo.DisplayValues.DisplayStar = false;
+                }
+                else
+                {
+                    resultTempo.DisplayValues.DisplayStar = true;
+                }
+                if (resultTempo.HasDigitalReady)
+                {
+                    if (this.user == null)
+                    {
+                        this.user = await App.Database.GetActiveUser();
+                    }
+                    // Génération des url du Viewer DR 
+                    if (resultTempo.FieldList.NumberOfDigitalNotices.Length > 0 && resultTempo.FieldList.NumberOfDigitalNotices[0] > 0)
+                    {
+                        resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/c-" + resultTempo.FieldList.Identifier[0];
+                    }
+                    else if (resultTempo.FieldList.DigitalReadyIsEntryPoint.Length > 0 && resultTempo.FieldList.DigitalReadyIsEntryPoint[0])
+                    {
+                        resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/d-" + resultTempo.FieldList.Identifier[0];
+                    }
+                    else
+                    {
+                        resultTempo.HasDigitalReady = false;
+                    }
+                }
+                resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
+                await PerformSearch(resultTempo.FieldList.Identifier[0]);
+                this.BuildHoldingsStatements();
+                this.BuildHoldings();
+                resultTempo.DisplayValues.Library = this.Library;
+                resultTempo.DisplayValues.Library.success = resultTempo.DisplayValues.Library.success && resultTempo.DisplayValues.SeekForHoldings;
+                this.ItemsSource.Add(resultTempo);
+            }
+        }
+        public async Task FormateToCarrousel(int start, int end, bool endIsBusy = true)
+        {
+            this.IsBusy = true;
+            Debug.WriteLine("start : " +  start.ToString());
+            Debug.WriteLine("end : " + end.ToString());
+            Debug.WriteLine("position : " + this.position.ToString());
+            for (int i = start; i <= end; i++)
+            {
+                if (this.ItemsSource[i].Resource.Desc != null)
+                    this.ItemsSource[i].DisplayValues.Desc = this.ItemsSource[i].Resource.Desc;
+                this.ItemsSource[i].DisplayValues.Star = this.setStar(this.ItemsSource[i].Resource.AvNt);
+                if (this.ItemsSource[i].DisplayValues.Star == null)
+                {
+                    this.ItemsSource[i].DisplayValues.DisplayStar = false;
+                }
+                else
+                {
+                    this.ItemsSource[i].DisplayValues.DisplayStar = true;
+                }
+                if (this.ItemsSource[i].HasDigitalReady)
+                {
+                    if (this.user == null)
+                    {
+                        this.user = await App.Database.GetActiveUser();
+                    }
+                    // Génération des url du Viewer DR 
+                    if (this.ItemsSource[i].FieldList.NumberOfDigitalNotices.Length > 0 && this.ItemsSource[i].FieldList.NumberOfDigitalNotices[0] > 0)
+                    {
+                        this.ItemsSource[i].FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/c-" + this.ItemsSource[i].FieldList.Identifier[0];
+                    }
+                    else if (this.ItemsSource[i].FieldList.DigitalReadyIsEntryPoint.Length > 0 && this.ItemsSource[i].FieldList.DigitalReadyIsEntryPoint[0])
+                    {
+                        this.ItemsSource[i].FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/d-" + this.ItemsSource[i].FieldList.Identifier[0];
+                    }
+                    else
+                    {
+                        this.ItemsSource[i].HasDigitalReady = false;
+                    }
+                }
+                this.ItemsSource[i].DisplayValues.SeekForHoldings = this.ItemsSource[i].SeekForHoldings && this.ReversIsKm;
+                await PerformSearch(this.ItemsSource[i].FieldList.Identifier[0]);
+                this.BuildHoldingsStatements();
+                this.BuildHoldings();
+                this.ItemsSource[i].DisplayValues.Library = this.Library;
+                this.ItemsSource[i].DisplayValues.Library.success = this.ItemsSource[i].DisplayValues.Library.success && this.ItemsSource[i].DisplayValues.SeekForHoldings;
+
+            }
+            this.itemsSource = new ObservableCollection<Result>(this.ItemsSource);
+            await this.RaiseAllPropertiesChanged();
+            if (endIsBusy)
+            {
+                this.IsBusy = false;
+            }
         }
 
         public void BuildHoldingsStatements()
@@ -360,51 +424,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 return uri;
             }
             
-        }
-
-        private async Task FormateToCarrousel(Result[] results)
-        {
-            foreach (var resultTempo in results)
-            {
-                if (resultTempo.Resource.Desc != null)
-                    resultTempo.DisplayValues.Desc = resultTempo.Resource.Desc;
-                resultTempo.DisplayValues.Star = this.setStar(resultTempo.Resource.AvNt);
-                if (resultTempo.DisplayValues.Star == null)
-                {
-                    resultTempo.DisplayValues.DisplayStar = false;
-                }
-                else
-                {
-                    resultTempo.DisplayValues.DisplayStar = true;
-                }
-                if (resultTempo.HasDigitalReady)
-                {
-                    if (this.user ==null)
-                    {
-                        this.user = await App.Database.GetActiveUser();
-                    }
-                    // Génération des url du Viewer DR 
-                    if (resultTempo.FieldList.NumberOfDigitalNotices.Length > 0 && resultTempo.FieldList.NumberOfDigitalNotices[0] > 0)
-                    {
-                        resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/c-" + resultTempo.FieldList.Identifier[0];
-                    }
-                    else if (resultTempo.FieldList.DigitalReadyIsEntryPoint.Length > 0 && resultTempo.FieldList.DigitalReadyIsEntryPoint[0])
-                    {
-                        resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/d-" + resultTempo.FieldList.Identifier[0];
-                    }
-                    else
-                    {
-                        resultTempo.HasDigitalReady = false;
-                    }
-                }
-                resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
-                await PerformSearch(resultTempo.FieldList.Identifier[0]);
-                this.BuildHoldingsStatements();
-                this.BuildHoldings();
-                resultTempo.DisplayValues.Library = this.Library;
-                resultTempo.DisplayValues.Library.success = resultTempo.DisplayValues.Library.success && resultTempo.DisplayValues.SeekForHoldings;
-                this.ItemsSource.Add(resultTempo);
-            }
         }
 
         public async Task LoadMore()

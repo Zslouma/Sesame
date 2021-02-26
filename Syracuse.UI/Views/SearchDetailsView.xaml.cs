@@ -28,6 +28,22 @@ namespace Syracuse.Mobitheque.UI.Views
         private void carouselView_PositionChanged(object sender, PositionChangedEventArgs e)
         {
             Console.WriteLine("CurrentItem's CurrentPosition:" + e.CurrentPosition);
+            if (e.CurrentPosition > e.PreviousPosition)
+            {
+                if (e.CurrentPosition+1 >= this.ViewModel.EndDataPosition && e.CurrentPosition + 1 < this.ViewModel.ItemsSource.Count )
+                {
+                    this.ViewModel.EndDataPosition = this.ViewModel.EndDataPosition + 10 < this.ViewModel.ItemsSource.Count ? this.ViewModel.EndDataPosition + 10 : this.ViewModel.ItemsSource.Count - 1;
+                    this.ViewModel.FormateToCarrousel(e.CurrentPosition, this.ViewModel.EndDataPosition);
+                }
+            }
+            else
+            {
+                if (e.CurrentPosition <=  this.ViewModel.StartDataPosition && e.CurrentPosition > 0 )
+                {
+                    this.ViewModel.StartDataPosition = this.ViewModel.StartDataPosition - 10 >= 0 ? this.ViewModel.StartDataPosition - 10 : 0;
+                    this.ViewModel.FormateToCarrousel( this.ViewModel.StartDataPosition, e.CurrentPosition);
+                }
+            }
             this.ViewModel.IsPositionVisible = true;
         }
         private async void OnCarouselViewRemainingItemsThresholdReached(object sender, EventArgs e)
