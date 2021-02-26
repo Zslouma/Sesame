@@ -43,7 +43,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             get => this.desc;
             set { SetProperty(ref this.desc, value); }
         }
-        private ObservableCollection<Result> itemsSource = new ObservableCollection<Result>();
+        private ObservableCollection<Result> itemsSource;
         public ObservableCollection<Result> ItemsSource
         {
             get => this.itemsSource;
@@ -194,19 +194,23 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.SearchOptions = parameter.searchOptions;
             this.NbrResults = parameter.nbrResults;
             var parameterTempo = parameter.parameter;
-            this.Position = parameterTempo[1].D.Results.ToList().FindIndex(x => x == parameterTempo[0].D.Results[0]);
-            this.StartDataPosition = position - 10 >= 0 ? position - 10 : 0;
             this.ItemsSource = new ObservableCollection<Result>(parameterTempo[1].D.Results);
-            this.EndDataPosition = position + 10 < parameterTempo[1].D.Results.Length ? position + 10 : parameterTempo[1].D.Results.Length - 1;
+            var tempo = parameterTempo[1].D.Results.ToList().FindIndex(x => x == parameterTempo[0].D.Results[0]);
+            this.CurrentItem = this.ItemsSource[tempo];
+            this.StartDataPosition = tempo - 10 >= 0 ? tempo - 10 : 0;
+            this.EndDataPosition = tempo + 10 < parameterTempo[1].D.Results.Length ? tempo + 10 : parameterTempo[1].D.Results.Length - 1;
             await this.FormateToCarrousel(this.StartDataPosition, this.EndDataPosition, false);
-            this.CurrentItem = this.ItemsSource.Skip(this.Position).FirstOrDefault();
-            if (this.Position >= (this.ItemsSource.Count() - 5) && int.Parse(this.NbrResults) > this.ItemsSource.Count)
+            if (tempo >= (this.ItemsSource.Count() - 5) && int.Parse(this.NbrResults) > this.ItemsSource.Count)
             {
                 await LoadMore();
             }
-            this.IsBusy = false;
+            this.Position = tempo;
             this.IsPositionVisible = true;
+            await this.RaisePropertyChanged(nameof(this.ItemsSource));
+            await this.RaisePropertyChanged(nameof(CurrentItem));
+            await this.RaisePropertyChanged(nameof(this.Position));
             await this.RaiseAllPropertiesChanged();
+            this.IsBusy = false;
         }
 
         public async Task FormateToCarrousel(Result[] results)
@@ -300,8 +304,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 this.ItemsSource[i].DisplayValues.Library.success = this.ItemsSource[i].DisplayValues.Library.success && this.ItemsSource[i].DisplayValues.SeekForHoldings;
 
             }
-            this.itemsSource = new ObservableCollection<Result>(this.ItemsSource);
-            await this.RaiseAllPropertiesChanged();
+            var result = this.ItemsSource;
+            this.ItemsSource = new ObservableCollection<Result>();
+            this.ItemsSource = new ObservableCollection<Result>(result);
+            await this.RaisePropertyChanged(nameof(ItemsSource));
             if (endIsBusy)
             {
                 this.IsBusy = false;
