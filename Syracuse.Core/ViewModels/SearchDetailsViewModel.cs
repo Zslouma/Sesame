@@ -150,6 +150,17 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
         }
 
+        private bool isCarouselVisibility = false;
+        public bool IsCarouselVisibility
+        {
+            get => this.isCarouselVisibility;
+            set
+            {
+                SetProperty(ref this.isCarouselVisibility, value);
+            }
+        }
+
+
         private bool reversIsKm = false;
         public bool ReversIsKm
         {
@@ -196,18 +207,17 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             var parameterTempo = parameter.parameter;
             this.ItemsSource = new ObservableCollection<Result>(parameterTempo[1].D.Results);
             var tempo = parameterTempo[1].D.Results.ToList().FindIndex(x => x == parameterTempo[0].D.Results[0]);
-            this.CurrentItem = this.ItemsSource[tempo];
-            this.Position = tempo;
             this.StartDataPosition = tempo - 10 >= 0 ? tempo - 10 : 0;
             this.EndDataPosition = tempo + 10 < parameterTempo[1].D.Results.Length ? tempo + 10 : parameterTempo[1].D.Results.Length - 1;
             await this.FormateToCarrousel(this.StartDataPosition, this.EndDataPosition, false);
+            this.CurrentItem = this.ItemsSource[tempo];
+            this.Position = tempo;
+            this.IsPositionVisible = true;
+            this.IsCarouselVisibility = true;
             if (tempo >= (this.ItemsSource.Count() - 5) && int.Parse(this.NbrResults) > this.ItemsSource.Count)
             {
                 await LoadMore();
             }
-            this.CurrentItem = this.ItemsSource[tempo];
-            this.Position = tempo;
-            this.IsPositionVisible = true;
             await this.RaisePropertyChanged(nameof(this.ItemsSource));
             await this.RaisePropertyChanged(nameof(CurrentItem));
             await this.RaisePropertyChanged(nameof(this.Position));

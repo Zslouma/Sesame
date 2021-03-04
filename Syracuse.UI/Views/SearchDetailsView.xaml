@@ -30,7 +30,7 @@
                         HorizontalScrollBarVisibility="Never">
                         <CarouselView.ItemTemplate>
                             <DataTemplate >
-                                <ScrollView x:Name="scrollView" VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Never">
+                                <ScrollView x:Name="scrollView" VerticalOptions="FillAndExpand" BindingContext="carouselView" IsVisible="{Binding Path=BindingContext.IsCarouselVisibility, Source={x:Reference Name=carouselView}}" VerticalScrollBarVisibility="Never">
                                     <Frame>
                                         <StackLayout Orientation="Vertical">
                                             <StackLayout  Orientation="Horizontal">
