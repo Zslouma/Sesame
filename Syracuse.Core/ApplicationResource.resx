@@ -238,7 +238,7 @@ Cancellation is final.</value>
 {0}</value>
   </data>
   <data name="Scan" xml:space="preserve">
-    <value>Scan</value>
+    <value>Document scanner</value>
   </data>
   <data name="SearchViewResultCount" xml:space="preserve">
     <value>{0} results</value>
