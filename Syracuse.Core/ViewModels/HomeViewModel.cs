@@ -216,7 +216,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private async Task<Result[]> loadPage(bool IsSortField)
         {
             SearchOptions options = new SearchOptions();
-            if (true)
+            if (IsSortField)
             {
                 options.Query = new SearchOptionsDetails()
                 {
@@ -233,6 +233,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 {
                     ScenarioCode = this.eventsScenarioCode,
                     Page = this.page,
+                    SortField = "VolumeNumber_sort",
+                    SortOrder = 0,
                 };
             }
             SearchResult search = await this.requestService.Search(options);
