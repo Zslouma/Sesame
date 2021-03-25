@@ -506,12 +506,12 @@ namespace Syracuse.Mobitheque.Core.Models
             {
                 try
                 {
-                    return HtmlViewDisponibility.Contains("available indicator") ? "Disponible" : "Non disponible";
+                    return HtmlViewDisponibility.Contains("available indicator") ? ApplicationResource.DisponibilityYes : ApplicationResource.DisponibilityNo;
                 }
                 catch (Exception)
                 {
                     Debug.WriteLine("TextStatus Exception ");
-                    return "Non disponible";
+                    return ApplicationResource.DisponibilityNo;
                 }
                 
             }

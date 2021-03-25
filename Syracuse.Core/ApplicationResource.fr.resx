@@ -185,6 +185,12 @@ L’annulation est définitive.</value>
   <data name="Disconnect" xml:space="preserve">
     <value>Déconnexion</value>
   </data>
+  <data name="DisponibilityNo" xml:space="preserve">
+    <value>Non disponible</value>
+  </data>
+  <data name="DisponibilityYes" xml:space="preserve">
+    <value>Disponible</value>
+  </data>
   <data name="Download" xml:space="preserve">
     <value>Téléchargements</value>
   </data>

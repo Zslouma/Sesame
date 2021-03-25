@@ -185,6 +185,12 @@ Cancellation is final.</value>
   <data name="Disconnect" xml:space="preserve">
     <value>Disconnect</value>
   </data>
+  <data name="DisponibilityNo" xml:space="preserve">
+    <value>Not available</value>
+  </data>
+  <data name="DisponibilityYes" xml:space="preserve">
+    <value>Available</value>
+  </data>
   <data name="Download" xml:space="preserve">
     <value>Downloads</value>
   </data>
