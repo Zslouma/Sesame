@@ -11,7 +11,27 @@ namespace Syracuse.Mobitheque.Core.Models
 
         public string Username { get; set; }
 
-        public string SearchValue { get; set; }
+        private string searchValue { get; set; }
+        public string SearchValue {
+            get { return this.searchValue; }
+            set
+            {
+                string[] val = value.Split(',');
+                if (val.Length > 20)
+                {
+                    string[] res = new string[20];
+                    for (int i = 0; i < 20; i++)
+                    {
+                        res[i] = val[i];
+                    }
+                    this.searchValue = string.Join(",", res);
+                }
+                else
+                {
+                    this.searchValue = value;
+                }
+            } 
+        }
 
         public string DisplayName { get; set; }
 
