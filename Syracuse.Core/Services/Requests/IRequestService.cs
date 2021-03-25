@@ -27,6 +27,8 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
         Task<SearchResult> Search(SearchOptions options, Action<Exception> error = null);
 
+        Task<CheckAvailabilityResult> CheckAvailability(CheckAvailabilityOptions options, Action<Exception> error = null);
+
         Task<AccountSummary> GetSummary(Action<Exception> error = null);
 
         Task<SearchLibraryResult> SearchLibrary(SearchLibraryOptions options, Action<Exception> error = null);

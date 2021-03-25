@@ -28,10 +28,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private List<string> searchHistory;
         public SelectableObservableCollection<FacetteValue> Itemss { get; set; }
         private ObservableCollection<FacetteGroup> facetteList { get; set; } = new ObservableCollection<FacetteGroup>();
-        public ObservableCollection<FacetteGroup> FacetteList 
-        { 
+        public ObservableCollection<FacetteGroup> FacetteList
+        {
             get { return this.facetteList; }
-            set { this.facetteList = value; } 
+            set { this.facetteList = value; }
         }
         private ObservableCollection<FacetteGroup> expandedFacetteList { get; set; } = new ObservableCollection<FacetteGroup>();
         public ObservableCollection<FacetteGroup> ExpandedFacetteList
@@ -52,7 +52,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         private List<FacetteValue> selectedItems = new List<FacetteValue>();
         public List<FacetteValue> SelectedItems
-        { 
+        {
             get => this.selectedItems;
             set
             {
@@ -112,7 +112,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             get => this.d;
             set {
                 SetProperty(ref this.d, value);
-            } 
+            }
         }
         private bool isFilterable = true;
         public bool IsFilterable
@@ -140,7 +140,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set
             {
                 SetProperty(ref this.resultCountInt, value);
-                
+
                 if (value == 0)
                 {
                     this.DisplayLoadMore = false;
@@ -337,7 +337,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         {
             this.IsBusy = true;
             var selectedIndex = this.ExpandedFacetteList.IndexOf(facetteGroupSelected);
-            if (selectedIndex<0)
+            if (selectedIndex < 0)
             {
                 this.IsBusy = false;
                 return;
@@ -413,7 +413,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             parameter[1] = new SearchResult();
             parameter[1].D = new D();
             parameter[1].D.Results = this.Results;
-            
+
             SearchOptions searchOptions = new SearchOptions();
             searchOptions.Query = new SearchOptionsDetails()
             {
@@ -439,6 +439,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.page += 1;
             Result[] res = await loadPage();
             this.Results = this.Results.Concat(res).ToArray();
+
             await this.GetRedirectURL();
             this.IsBusy = false;
         }
@@ -485,6 +486,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 return new Result[0];
             }
+            else if (search.Success && search.D != null)
+            {
+                search.D.Results = await this.CheckAvCheckAvailability(search.D.Results, this.SearchQuery);
+            }
             return search?.D?.Results;
         }
 
@@ -500,7 +505,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     { ApplicationResource.SortOptionTimeDESC, (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.DESCENDING).Sort(x, "Date")}
         };
 
-        public List<string> SortsName 
+        public List<string> SortsName
         {
             get => this.sorts.Keys.ToList();
         }
@@ -556,10 +561,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private string CheckFacetteSelected()
         {
 
-            Dictionary<int, List<string>> choiceList    = new Dictionary<int, List<string>>();
-            List<string> value                          = new List<string>();
-            SearchOptions optionsTempo                  = new SearchOptions();
-            StringBuilder facetFilter                   = new StringBuilder("");
+            Dictionary<int, List<string>> choiceList = new Dictionary<int, List<string>>();
+            List<string> value = new List<string>();
+            SearchOptions optionsTempo = new SearchOptions();
+            StringBuilder facetFilter = new StringBuilder("");
             if (this.FacetteList != null && this.SelectedItems != null)
             {
                 foreach (var choices in this.SelectedItems)
@@ -642,7 +647,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
             // HTTP Request
             SearchResult result = await this.requestService.Search(optionsTempo);
-
+            result.D.Results = await this.CheckAvCheckAvailability(result.D.Results , search , facetFilter);
             // Result Handler
             if (result != null && result.D != null)
             {
@@ -650,7 +655,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 this.Results = result.D.Results;
                 await this.GetRedirectURL();
                 this.ResultCountInt = this.D?.SearchInfo?.NbResults;
-                this.ResultCount = this.D.SearchInfo == null ? ApplicationResource.SearchViewResultNull :  (String.Format(ApplicationResource.SearchViewResultCount, this.D.SearchInfo.NbResults));
+                this.ResultCount = this.D.SearchInfo == null ? ApplicationResource.SearchViewResultNull : (String.Format(ApplicationResource.SearchViewResultCount, this.D.SearchInfo.NbResults));
                 this.FacetCollectionList = result.D.FacetCollectionList;
 
                 // Avoid resetting facette on sortFilter change
@@ -664,7 +669,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                         FacetteGroup facetteGroupe = new FacetteGroup(tmp.FacetLabel);
                         foreach (var FacetListItems in tmp.FacetList)
                         {
-                            
+
                             // Adding Facette
                             var facettetempo = new FacetteValue
                             {
@@ -711,6 +716,42 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             await RaisePropertyChanged(nameof(this.Itemss));
             await RaisePropertyChanged();
             this.IsBusy = false;
+        }
+
+        public async Task<Result[]> CheckAvCheckAvailability (Result[] results, string search, string facetFilter="") {
+
+            List<RecordIdArray> RecordIdArray = new List<RecordIdArray>();
+            CheckAvailabilityOptions optionsTempo = new CheckAvailabilityOptions();
+
+            foreach (var result in results)
+            {
+                RecordIdArray.Add(new RecordIdArray(result.Resource.RscBase , result.Resource.RscId , result.Resource.Frmt));
+            }
+
+            optionsTempo.Query = new SearchOptionsDetails()
+            {
+                SortOrder = this.SortOrder,
+                SortField = this.SortName,
+                ScenarioCode = (await App.Database.GetActiveUser()).SearchScenarioCode,
+                QueryString = search,
+                FacetFilter = facetFilter
+            };
+            optionsTempo.RecordIdArray = RecordIdArray;
+
+            // HTTP Request
+            CheckAvailabilityResult rslts = await this.requestService.CheckAvailability(optionsTempo);
+
+            var resultTempo = results.ToList();
+            if (rslts.Success && rslts.D != null)
+            {
+                foreach (var rslt in rslts.D)
+                {
+                    int v = resultTempo.FindIndex(x => x.Resource.RscId == rslt.Id.RscId);
+                    results[v].Resource.HtmlViewDisponibility = rslt.HtmlView;
+                }
+            }
+
+            return results;
         }
 
         private async Task GetRedirectURL()

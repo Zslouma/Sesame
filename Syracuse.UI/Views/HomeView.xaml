@@ -21,7 +21,7 @@
                 <StackLayout Orientation="Vertical" 
                              VerticalOptions="FillAndExpand"
                              Padding="15, 15, 15, 0">
-                    <Grid Padding="10,0" VerticalOptions="FillAndExpand">
+                    <Grid Margin="0, 10, 0, 20" VerticalOptions="FillAndExpand">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.5*" />
                             <ColumnDefinition Width="0.5*" />
@@ -30,32 +30,35 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Text="{Binding Library}" FontAttributes="Bold" FontSize="{d:DynamicResource FontSizeTitle}" TextColor="{d:DynamicResource DarkTextColor}"></Label>
-                        <Label Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="End" Text="{x:Static local:AppResource.News }" FontAttributes="Bold" TextColor="{d:DynamicResource LigthGreyTextColor}" IsVisible="{Binding NotCurrentEventReverse}"></Label>
+                        <Label Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="End" Text="{x:Static local:AppResource.News }" TextColor="{d:DynamicResource PurpleTextColor}" IsVisible="{Binding NotCurrentEventReverse}"></Label>
                     </Grid>
                     <Label Margin="10" HorizontalTextAlignment="Start" Text="{x:Static local:AppResource.NotCurrentEvent}" IsVisible="{Binding NotCurrentEvent}" />
                     <ListView x:Name="resultsListEvent"
                       IsVisible="{Binding IsEvent}"
                       CachingStrategy="RecycleElement"
                       ItemsSource="{Binding Results}" 
-                      SeparatorVisibility="None"
+                      SeparatorVisibility="Default"
                       VerticalScrollBarVisibility="Never"
                       IsPullToRefreshEnabled="False"
                        HasUnevenRows="True">
                         <ListView.ItemTemplate >
                             <DataTemplate>
                                 <ViewCell>
-                                    <Frame HasShadow="True" Padding="0, 5, 0, 5">
+                                    <Frame HasShadow="True" Padding="0, 20, 0, 20">
                                         <StackLayout Orientation="Vertical" BackgroundColor="White" Padding="5, 0, 5, 0" Margin="0,0,0,15">
                                             <Image VerticalOptions="Fill" HorizontalOptions="Fill" Aspect="AspectFill" Source="{Binding FieldList.Image}" HeightRequest="90"/>
-                                            <StackLayout Padding="0, 5, 0, 0"  Orientation="Vertical" >
-                                                <Label Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="{d:DynamicResource FontSizeTitle}" TextColor="{d:DynamicResource DarkTextColor}"/>
-                                                <Grid HorizontalOptions="Fill">
+                                            <StackLayout Padding="0, 5, 0, 0"  Orientation="Vertical"  >
+                                                <Label Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="20" TextColor="{d:DynamicResource DarkTextColor}"/>
+                                                <Grid HorizontalOptions="Fill" >
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*"/>
+                                                        <RowDefinition Height="*"/>
+                                                    </Grid.RowDefinitions>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="0.4*" />
-                                                        <ColumnDefinition Width="0.6*" />
+                                                        <ColumnDefinition Width="*" />
                                                     </Grid.ColumnDefinitions>
-                                                    <Label Grid.Column="0" Text="{Binding FieldList.SubjectTopicFirstUpper}" FontAttributes="Bold" FontSize="Medium" TextColor="{d:DynamicResource LigthGreyTextColor}" ></Label>
-                                                    <Label Grid.Column="1" Text="{Binding FieldList.SubjectLocation[0]}" FontAttributes="Bold" HorizontalTextAlignment="End" FontSize="Medium" TextColor="{d:DynamicResource LigthGreyTextColor}" ></Label>
+                                                    <Label Grid.Column="0" Grid.Row="0" Text="{Binding FieldList.SubjectTopicFirstUpper}"  TextColor="{d:DynamicResource PurpleTextColor}" FontSize="16"></Label>
+                                                    <Label Grid.Column="0" Grid.Row="1" Text="{Binding FieldList.SubjectLocation[0]}" FontSize="16"></Label>
                                                 </Grid>
                                                 <Label Text="{Binding FieldList.DateTime_String}" FontSize="Small" TextColor="{d:DynamicResource DarkTextColor}"/>
                                             </StackLayout>
@@ -86,7 +89,7 @@
                                         <StackLayout VerticalOptions="Center" Orientation="Vertical">
                                             <Label TextColor="Black" Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="Medium"/>
                                             <Label TextColor="Gray" Text="{Binding FieldList.shortDesc}" MaxLines="2" FontSize="Small"/>
-                                            <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+                                            <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal" IsVisible="{Binding Resource.HasViewDisponibility}" >
                                                 <Frame VerticalOptions="Center" WidthRequest="15" HeightRequest="15"  CornerRadius="20"   Margin="0" Padding="0" BackgroundColor="{Binding Resource.ColorStatus}"/>
                                                 <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="Center" FontSize="Medium" Text="{Binding Resource.TextStatus}"/>
                                             </StackLayout>

@@ -198,7 +198,7 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to booked on {0}.
+        ///   Looks up a localized string similar to Booked on {0}.
         /// </summary>
         public static string BookingResultBookingDate {
             get {

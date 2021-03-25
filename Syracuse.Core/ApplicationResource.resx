@@ -165,7 +165,7 @@
 Cancellation is final.</value>
   </data>
   <data name="BookingResultBookingDate" xml:space="preserve">
-    <value>booked on {0}</value>
+    <value>Booked on {0}</value>
   </data>
   <data name="Bookings" xml:space="preserve">
     <value>My bookings</value>

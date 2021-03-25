@@ -17,7 +17,7 @@
     <ContentPage.Content>
         <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
             <StackLayout>
-                    <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="0,10,0,20"  TextColor="{d:DynamicResource DarkTextColor}">
                         <Label.FormattedText>
                             <FormattedString>
                                 <FormattedString.Spans>
@@ -41,32 +41,39 @@
                                 <Frame Padding="0, 5, 0, 5">
                                     <Grid>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="0.3*" />
-                                            <RowDefinition Height="0.85*" />
+                                            <RowDefinition Height="0.35*" />
+                                            <RowDefinition Height="0.8*" />
                                         </Grid.RowDefinitions>
-                                        <Button Text="X"
-                                        HorizontalOptions="End"
-                                        VerticalOptions="Start"
-                                        Grid.Row="0"
-                                        FontSize="Small"
-                                        BackgroundColor="White"
-                                        Command="{Binding BindingContext.RemoveItemCommand,Source={x:Reference otherAccountList}}"
-                                        CommandParameter="{Binding .}"
+                                        <Button 
+                                            Text="&#xf057;" 
+                                            FontFamily="{StaticResource FontAwesomeSolid}"
+                                            HorizontalOptions="End"
+                                            VerticalOptions="Start"
+                                            Grid.Row="0"
+                                            FontSize="Medium"
+                                            TextColor="Red"
+                                            BackgroundColor="Transparent"
+                                            Command="{Binding BindingContext.RemoveItemCommand,Source={x:Reference otherAccountList}}"
+                                            CommandParameter="{Binding .}"
                                         />
-                                        <StackLayout Grid.Row="1" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Orientation="Vertical">
+                                        <StackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="StartAndExpand" Orientation="Vertical">
 
                                             <Label
                                                 HorizontalTextAlignment="Center"
-                                                TextColor="Black" Text="{Binding DisplayName}"
-                                                FontAttributes="Bold" FontSize="Medium"/>
+                                                TextColor="Black" 
+                                                Text="{Binding DisplayName}"
+                                                FontSize="20"/>
                                             <Label
                                                 HorizontalTextAlignment="Center"
-                                                TextColor="Black" Text="{Binding Username}"
-                                                FontAttributes="None" FontSize="Default"></Label>
+                                                TextColor="{d:DynamicResource PurpleTextColor}"
+                                                Text="{Binding Username}"
+                                                FontAttributes="None" 
+                                                FontSize="16"></Label>
                                             <Label
                                                 HorizontalTextAlignment="Center"
-                                                TextColor="LightGray" Text="{Binding Library}"
-                                                FontAttributes="None" FontSize="Default"></Label>
+                                                Text="{Binding Library}"
+                                                FontAttributes="None" 
+                                                FontSize="Default"></Label>
                                         </StackLayout>
 
                                     </Grid>
@@ -75,7 +82,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                     <ListView.Footer>
-                        <StackLayout  Padding="0, 5, 0, 5" HeightRequest="100" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Orientation="Vertical">
+                        <StackLayout  Padding="0, 5, 0, 5" HeightRequest="100" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Orientation="Vertical">
 
                             <Button HorizontalOptions="Center" VerticalOptions="CenterAndExpand" FontSize="Large"  Text="&#xf234;" FontFamily="{StaticResource FontAwesomeSolid}" BackgroundColor="White" Clicked="AddAccount_Clicked"></Button>
 

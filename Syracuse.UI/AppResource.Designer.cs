@@ -142,7 +142,7 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to pending.
+        ///   Looks up a localized string similar to Pending.
         /// </summary>
         public static string BookingWait {
             get {

@@ -6,6 +6,7 @@ using Syracuse.Mobitheque.Core.Services.Requests;
 using Syracuse.Mobitheque.Core.ViewModels.Sorts;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -233,8 +234,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 {
                     ScenarioCode = this.eventsScenarioCode,
                     Page = this.page,
-                    SortField = "VolumeNumber_sort",
-                    SortOrder = 0,
                 };
             }
             SearchResult search = await this.requestService.Search(options);
@@ -248,11 +247,49 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 if (search != null )
                 {
                     this.NbrResults = search?.D?.SearchInfo?.NbResults;
+                    if (search.D != null && this.IsEvent)
+                    {
+                        search.D.Results = await this.CheckAvCheckAvailability(search.D.Results);
+                    }
                 }
-                
+
             }
             return search?.D?.Results;
         }
+        public async Task<Result[]> CheckAvCheckAvailability(Result[] results)
+        {
+
+            List<RecordIdArray> RecordIdArray = new List<RecordIdArray>();
+            CheckAvailabilityOptions optionsTempo = new CheckAvailabilityOptions();
+
+            foreach (var result in results)
+            {
+                RecordIdArray.Add(new RecordIdArray(result.Resource.RscBase, result.Resource.RscId, result.Resource.Frmt));
+            }
+
+            optionsTempo.Query = new SearchOptionsDetails()
+            {
+                ScenarioCode = this.eventsScenarioCode,
+                Page = this.page,
+            };
+            optionsTempo.RecordIdArray = RecordIdArray;
+
+            // HTTP Request
+            CheckAvailabilityResult rslts = await this.requestService.CheckAvailability(optionsTempo);
+
+            var resultTempo = results.ToList();
+            if (rslts.Success && rslts.D != null )
+            {
+                foreach (var rslt in rslts.D)
+                {
+                    int v = resultTempo.FindIndex(x => x.Resource.RscId == rslt.Id.RscId);
+                    results[v].Resource.HtmlViewDisponibility = rslt.HtmlView;
+                }
+            }
+
+            return results;
+        }
+
 
         public async Task GoToDetailView(Result item)
         {
@@ -332,9 +369,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             foreach (var search in this.Results)
             {
                 if (search.FieldList.ThumbMedium != null && search.FieldList.ThumbMedium[0] != null)
-                    search.FieldList.ThumbMedium[0] = new Uri(this.requestService.GetRedirectURL(search.FieldList.ThumbMedium[0].ToString()));
+                    search.FieldList.ThumbMedium[0] = new Uri(this.requestService.GetRedirectURL(search.FieldList.ThumbMedium[0].ToString(), "https://graphisme-syracuse.archimed.fr/basicfilesdownload.ashx?itemGuid=05E01B10-51AE-4EDF-AEF2-64E696038A71"));
                 else if (search.FieldList.ThumbSmall != null && search.FieldList.ThumbSmall[0] != null)
-                    search.FieldList.ThumbSmall[0] = new Uri(this.requestService.GetRedirectURL(search.FieldList.ThumbSmall[0].ToString()));
+                    search.FieldList.ThumbSmall[0] = new Uri(this.requestService.GetRedirectURL(search.FieldList.ThumbSmall[0].ToString(), "https://graphisme-syracuse.archimed.fr/basicfilesdownload.ashx?itemGuid=05E01B10-51AE-4EDF-AEF2-64E696038A71"));
+                else
+                {
+                    Debug.Write("Invalid object. ");
+                }
+
             }
             await this.RaiseAllPropertiesChanged();
         }

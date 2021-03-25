@@ -145,7 +145,7 @@
     <value>Disponible</value>
   </data>
   <data name="BookingWait" xml:space="preserve">
-    <value>en attente</value>
+    <value>En attente</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annuler</value>

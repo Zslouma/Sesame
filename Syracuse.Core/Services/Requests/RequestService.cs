@@ -73,7 +73,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             }
             catch (Exception e)
             {
-                return originalURL;
+                return defaultURL;
             }
         }
 
@@ -312,6 +312,46 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             }
 
             
+        }
+
+        public async Task<CheckAvailabilityResult> CheckAvailability(CheckAvailabilityOptions options, Action<Exception> error = null)
+        {
+            if (!App.AppState.NetworkConnection)
+            {
+                Debug.WriteLine("NetworkConnection" + App.AppState.NetworkConnection);
+            }
+            await this.InitializeHttpClient();
+            if (options == null)
+                throw new ArgumentNullException(nameof(options));
+            if (options.Query.ScenarioCode == "")
+            {
+                options.Query.ScenarioCode = (await App.Database.GetActiveUser()).SearchScenarioCode;
+            }
+            try
+            {
+                var status = await this.requests.CheckAvailability<CheckAvailabilityResult>(options);
+
+                await UpdateCookies();
+
+                return status;
+            }
+            catch (Exception ex)
+            {
+                var status = new CheckAvailabilityResult();
+                status.Errors = new Error[1];
+                if (!App.AppState.NetworkConnection)
+                {
+                    status.Errors[0] = new Error(ApplicationResource.NetworkDisable);
+                }
+                else
+                {
+                    status.Errors[0] = new Error(ApplicationResource.ErrorOccurred);
+                }
+                error?.Invoke(ex);
+                return status;
+            }
+
+
         }
 
         public async Task<SearchLibraryResult> SearchLibrary(SearchLibraryOptions options, Action<Exception> error = null)

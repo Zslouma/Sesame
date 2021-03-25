@@ -15,6 +15,11 @@ namespace Syracuse.Mobitheque.Core.Models
 
         public string DisplayName { get; set; }
 
+        public bool haveDisplayName
+        {
+            get { return this.DisplayName != null && this.DisplayName != ""; }
+        }
+
         public string Cookies { get; set; }
 
         public string Department { get; set; }

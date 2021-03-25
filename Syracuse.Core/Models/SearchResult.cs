@@ -4,7 +4,8 @@ using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace Syracuse.Mobitheque.Core.Models
 {
@@ -198,6 +199,60 @@ namespace Syracuse.Mobitheque.Core.Models
 
         public string UrlViewerDR { get; set; }
 
+        public string[] ZIPURL { get; set; } = null;
+
+        public bool HasZipUrl
+        {
+            get { return ZIPURL != null && ZIPURL[0] != null; }
+        }
+
+        public string GetZipUri
+        {
+            get {
+                try {
+                    if (HasZipUrl)
+                    {
+                        Regex regex = new Regex("href\\s*=\\s*(?:\"(?<1>[^\"]*)\"|(?<1>\\S+))", RegexOptions.IgnoreCase);
+                        Match match = regex.Match(ZIPURL[0]);
+                        return match.Groups[1].ToString();
+                    }
+                    else
+                    {
+                        return "";
+                    }
+                    }
+                catch
+                {
+                    this.ZIPURL[0] = null ;
+                    return "";
+                }
+            }
+        }
+        public string GetZipLabel
+        {
+            get
+            {
+                try
+                {
+                    if (HasZipUrl)
+                    {
+                        Regex regex = new Regex("title\\s*=\\s*(?:\"(?<1>[^\"]*)\"|(?<1>\\S+))", RegexOptions.IgnoreCase);
+                        Match match = regex.Match(ZIPURL[0]);
+                        return match.Groups[1].ToString();
+                    }
+                    else
+                    {
+                        return "";
+                    }
+                }
+                catch
+                {
+                    this.ZIPURL[0] = null;
+                    return "";
+                }
+            }
+        }
+
         public string CroppedTitle
         {
             get {
@@ -245,6 +300,8 @@ namespace Syracuse.Mobitheque.Core.Models
         { get
             {
                 string ret;
+                try
+                {
                 DateTime DateTimeStart = DateTime.ParseExact(DateStart_idx[0], "yyyy-MM-ddTHH:mm:ss", null);
                 DateTime DateTimeEnd = DateTime.ParseExact(DateEnd_idx[0], "yyyy-MM-ddTHH:mm:ss", null);
                 if (this.DateStart_idx != null)
@@ -265,6 +322,11 @@ namespace Syracuse.Mobitheque.Core.Models
                     }
                 }
                 else
+                {
+                    ret = "";
+                }
+                }
+                catch (Exception)
                 {
                     ret = "";
                 }
@@ -442,7 +504,16 @@ namespace Syracuse.Mobitheque.Core.Models
         {
             get
             {
-                return (Status == 0) ? "Disponible" : "Non disponible";
+                try
+                {
+                    return HtmlViewDisponibility.Contains("available indicator") ? "Disponible" : "Non disponible";
+                }
+                catch (Exception)
+                {
+                    Debug.WriteLine("TextStatus Exception ");
+                    return "Non disponible";
+                }
+                
             }
         }
 
@@ -450,9 +521,58 @@ namespace Syracuse.Mobitheque.Core.Models
         {
             get
             {
-                return (Status == 0) ? "#97c67d" : "#fdc76b";
+                try
+                {
+                    return HtmlViewDisponibility.Contains("available indicator") ? "#97c67d" : "#fdc76b";
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine("ColorStatus Exception ");
+                    return "#fdc76b";
+                }
+                
             }
         }
+
+        private bool hasViewDisponibility { get; set; } = false;
+        public bool HasViewDisponibility
+        {
+            get
+            {
+                return this.hasViewDisponibility;
+            }
+            set
+            {
+                this.hasViewDisponibility = value;
+            }
+        }
+
+        private string htmlViewDisponibility { get; set; }
+        public string HtmlViewDisponibility
+        {
+            get { return this.htmlViewDisponibility; }
+            set { 
+                this.htmlViewDisponibility = value;
+                try
+                {
+                    if (HtmlViewDisponibility != null && HtmlViewDisponibility != "" )
+                    {
+                        this.HasViewDisponibility = true;
+                    }
+                    else
+                    {
+                        this.hasViewDisponibility = false;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine("HtmlViewDisponibility Exception ");
+                    this.hasViewDisponibility = false;
+                }
+            }
+
+        }
+
         [JsonProperty("Tags")]
         public object[] Tags { get; set; }
 

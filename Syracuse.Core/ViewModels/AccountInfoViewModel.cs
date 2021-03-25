@@ -42,6 +42,16 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set
             {
                 SetProperty(ref this.lateBorrowedDocuments, value);
+ 
+            }
+        }
+        private bool isLateVisibility;
+        public bool IsLateVisibility
+        {
+            get => this.isLateVisibility;
+            set
+            {
+                SetProperty(ref this.isLateVisibility, value);
             }
         }
 
@@ -126,6 +136,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 this.LateBorrowedDocuments =
                     (this.SummaryAccount.LoansLateCount > 1) ? String.Format(ApplicationResource.AccountInfoCountLateLoans, SummaryAccount.LoansLateCount)
                     : String.Format(ApplicationResource.AccountInfoCountLateLoan, SummaryAccount.LoansLateCount);
+                this.IsLateVisibility = this.SummaryAccount.LoansLateCount != 0;
                 if (SummaryAccount.LoansNotLateCount > 0)
                 {
                     var documents = new List<string>();

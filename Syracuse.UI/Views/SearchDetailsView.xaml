@@ -56,10 +56,18 @@
                                                         <material:MaterialLabel FontSize="Default" Text="{Binding FieldList.shortDesc}"/>
                                                     </StackLayout>
                                                     <StackLayout Grid.Row="1" Grid.ColumnSpan="2"  Orientation="Vertical">
+                                                        <StackLayout IsVisible="{Binding FieldList.HasZipUrl}">
+                                                            <Button         Text="{Binding FieldList.GetZipLabel}"
+                                                                                            TextColor="Blue"
+                                                                                            BackgroundColor="Transparent"
+                                                                                            CommandParameter="{Binding FieldList.GetZipUri}"
+                                                                                            Clicked="OpenBrowser_OnClicked"/>
+                                                        </StackLayout>
                                                         <Label FontSize="Default" Text="{Binding DisplayValues.Desc}" TextType="Html" TextColor="Black"/>
                                                     </StackLayout>
                                                 </Grid>
                                             </StackLayout>
+
                                             <StackLayout IsVisible="{Binding HasPrimaryDocs}" BindableLayout.ItemsSource="{Binding PrimaryDocs}" >
                                                 <BindableLayout.ItemTemplate>
                                                     <DataTemplate>
@@ -89,7 +97,6 @@
                                                 <Label BindingContext="carouselView" x:Name="labelLoading" HorizontalOptions="Fill" Text="Loading..." IsVisible="{Binding Path=BindingContext.AbsoluteIndicatorVisibility, Source={x:Reference Name=carouselView}}"  />
                                                 <WebView Source="{Binding FieldList.UrlViewerDR}" Navigated="WebViewNavigated" HeightRequest="400" HorizontalOptions="Fill" Navigating="WebViewNavigating" BackgroundColor="Green"/>
                                             </StackLayout>
-
                                             <!--#region Holding -->
                                             
                                             <StackLayout   IsVisible="{Binding DisplayValues.Library.success}">
