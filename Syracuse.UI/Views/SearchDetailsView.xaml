@@ -47,15 +47,19 @@
                                                     
                                                     <StackLayout  Orientation="Vertical">
                                                         <Frame HasShadow="True" BorderColor="LightGray" Grid.Row="0" Grid.Column="0" IsClippedToBounds="True" Padding="0">
-                                                            <Image Aspect="AspectFill" HeightRequest="120" WidthRequest="90" Source="{Binding FieldList.Image}"/>
+                                                            <Image Aspect="AspectFill" HeightRequest="120" WidthRequest="90"  Source="{Binding FieldList.Image}"/>
                                                         </Frame>
-                                                        <Image  Grid.Row="1" Grid.Column="0"  HeightRequest="30" WidthRequest="100" Source="{Binding DisplayValues.Star}" VerticalOptions="Start"></Image>
+                                                        <Image  Grid.Row="1" Grid.Column="0"  HeightRequest="30" WidthRequest="100" IsVisible="{Binding DisplayValues.HaveStar}" Source="{Binding DisplayValues.Star}" VerticalOptions="Start"></Image>
                                                     </StackLayout>
                                                     <StackLayout Grid.Row="0" Grid.Column="1" Padding="10">
                                                         <material:MaterialLabel FontSize="Medium" Text="{Binding FieldList.CroppedTitle}"/>
                                                         <material:MaterialLabel FontSize="Default" Text="{Binding FieldList.shortDesc}"/>
                                                     </StackLayout>
                                                     <StackLayout Grid.Row="1" Grid.ColumnSpan="2"  Orientation="Vertical">
+                                                        <StackLayout IsVisible="{Binding FieldList.HaveDateTime}"  >
+                                                            <Label Text="{Binding FieldList.SubjectLocation[0]}" FontSize="16" TextColor="{d:DynamicResource PurpleTextColor}"/>
+                                                            <Label Text="{Binding FieldList.DateTime_String}" FontSize="Small" TextColor="Black"/>
+                                                        </StackLayout>
                                                         <StackLayout IsVisible="{Binding FieldList.HasZipUrl}">
                                                             <Button         Text="{Binding FieldList.GetZipLabel}"
                                                                                             TextColor="Blue"
@@ -67,6 +71,7 @@
                                                     </StackLayout>
                                                 </Grid>
                                             </StackLayout>
+
 
                                             <StackLayout IsVisible="{Binding HasPrimaryDocs}" BindableLayout.ItemsSource="{Binding PrimaryDocs}" >
                                                 <BindableLayout.ItemTemplate>

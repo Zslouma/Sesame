@@ -335,6 +335,12 @@ namespace Syracuse.Mobitheque.Core.Models
             }
         }
 
+        public bool HaveDateTime { 
+            get{
+                return DateTime_String != null && DateTime_String != "";
+            } 
+        }
+
         public Uri[] ThumbMedium { get; set; }
 
         public Uri[] ThumbLarge { get; set; }
@@ -361,6 +367,15 @@ namespace Syracuse.Mobitheque.Core.Models
         public string AuthorDate { get; set; }
 
         public string Star { get; set; }
+
+        public bool HaveStar
+        {
+            get
+            {
+                return Star != null && Star != "";
+            }
+        }
+
 
         public bool DisplayStar { get; set; }
 
