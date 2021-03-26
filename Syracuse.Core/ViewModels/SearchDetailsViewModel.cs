@@ -216,7 +216,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.IsCarouselVisibility = true;
             if (tempo >= (this.ItemsSource.Count() - 5) && int.Parse(this.NbrResults) > this.ItemsSource.Count)
             {
-                await LoadMore();
+                await LoadMore(false);
             }
             await this.RaisePropertyChanged(nameof(this.ItemsSource));
             await this.RaisePropertyChanged(nameof(CurrentItem));
@@ -443,7 +443,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             
         }
 
-        public async Task LoadMore()
+        public async Task LoadMore(bool endIsBusy = true)
         {
             this.InLoadMore = true;
             this.SearchOptions.Query.Page += 1;
@@ -458,7 +458,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 await this.FormateToCarrousel(search?.D?.Results);
             }
 
-            this.InLoadMore = false;
+            if (endIsBusy)
+            {
+                this.IsBusy = false;
+            }
         }
 
         private async Task PerformSearch(string search = null)

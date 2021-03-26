@@ -173,6 +173,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
         }
 
+
+
         private Result[] results;
         public Result[] Results
         {
@@ -198,6 +200,16 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set
             {
                 SetProperty(ref this.searchQuery, value);
+            }
+        }
+
+        private string facetFilter;
+        public string FacetFilter
+        {
+            get => this.facetFilter;
+            set
+            {
+                SetProperty(ref this.facetFilter, value);
             }
         }
 
@@ -420,6 +432,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 SortOrder = this.SortOrder,
                 SortField = this.SortName,
                 ScenarioCode = (await App.Database.GetActiveUser()).SearchScenarioCode,
+                FacetFilter = this.FacetFilter,
                 QueryString = this.SearchQuery,
                 Page = this.page
             };
@@ -473,12 +486,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private async Task<Result[]> loadPage()
         {
             SearchOptions optionsTempo = new SearchOptions();
+
             optionsTempo.Query = new SearchOptionsDetails()
             {
                 SortOrder = this.sortOrder,
                 SortField = this.SortName,
                 ScenarioCode = (await App.Database.GetActiveUser()).SearchScenarioCode,
                 QueryString = this.SearchQuery,
+                FacetFilter = this.FacetFilter,
                 Page = this.page
             };
             SearchResult search = await this.requestService.Search(optionsTempo);
@@ -543,6 +558,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 {
                     list.Insert(0, search);
                 }
+                this.SearchHistory = new List<string>();
+                await RaisePropertyChanged(nameof(SearchHistory));
                 this.SearchHistory = list;
                 b.SearchValue = string.Join(",", list);
                 await App.Database.SaveItemAsync(b);
@@ -632,7 +649,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             await initSearchHistory(search, sort, resetFacette);
 
             // Check if facettes are selected
-            var facetFilter = CheckFacetteSelected();
+            this.FacetFilter = CheckFacetteSelected();
 
             // Search Query Json
             SearchOptions optionsTempo = new SearchOptions();
@@ -642,7 +659,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 SortField = this.SortName,
                 ScenarioCode = (await App.Database.GetActiveUser()).SearchScenarioCode,
                 QueryString = search,
-                FacetFilter = facetFilter
+                FacetFilter = this.FacetFilter
             };
 
             // HTTP Request
