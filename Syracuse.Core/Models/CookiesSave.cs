@@ -1,4 +1,4 @@
-﻿using SQLite;
+﻿zusing SQLite;
 
 namespace Syracuse.Mobitheque.Core.Models
 {
@@ -16,17 +16,23 @@ namespace Syracuse.Mobitheque.Core.Models
             get { return this.searchValue; }
             set
             {
-                string[] val = value.Split(',');
-                if (val.Length > 20)
+                if (value != null && value!="")
                 {
-                    string[] res = new string[20];
-                    for (int i = 0; i < 20; i++)
+                    string[] val = value.Split(',');
+                    if (val.Length > 20)
                     {
-                        res[i] = val[i];
+                        string[] res = new string[20];
+                        for (int i = 0; i < 20; i++)
+                        {
+                            res[i] = val[i];
+                        }
+                        this.searchValue = string.Join(",", res);
                     }
-                    this.searchValue = string.Join(",", res);
-                }
-                else
+                    else
+                    {
+                        this.searchValue = value;
+                    }
+                }else
                 {
                     this.searchValue = value;
                 }
