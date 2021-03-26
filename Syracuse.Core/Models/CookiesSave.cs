@@ -1,4 +1,4 @@
-﻿zusing SQLite;
+﻿using SQLite;
 
 namespace Syracuse.Mobitheque.Core.Models
 {
