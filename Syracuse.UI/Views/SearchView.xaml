@@ -146,14 +146,14 @@
                                 <DataTemplate>
                                     <ViewCell>
                                         <ViewCell.View>
-                                            <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal" Padding="7, 0, 7, 0">
-                                                <Image VerticalOptions="Center" Source="{Binding FieldList.Image}" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent" Margin="5"/>
-                                                <StackLayout VerticalOptions="Center" Orientation="Vertical">
+                                            <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal" Padding="7, 0, 7, 0" Margin="0,0,0,20">
+                                                <Image VerticalOptions="Start" Source="{Binding FieldList.Image}" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent" Margin="5"/>
+                                                    <StackLayout VerticalOptions="Start" Orientation="Vertical">
                                                     <Label TextColor="Black" Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="Medium"/>
                                                         <Label TextColor="Gray" Text="{Binding FieldList.shortDesc}" MaxLines="2" FontSize="Small"/>
                                                         <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal" IsVisible="{Binding Resource.HasViewDisponibility}">
                                                         <Frame VerticalOptions="Center" WidthRequest="12" HeightRequest="12"  CornerRadius="6" HasShadow="False" BorderColor="Transparent" Margin="0" Padding="0" BackgroundColor="{Binding Resource.ColorStatus}"/>
-                                                            <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="Center" FontSize="Medium" Text="{Binding Resource.TextStatus}"/>
+                                                            <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="Center" FontSize="Small" Text="{Binding Resource.TextStatus}"/>
                                                         </StackLayout>
                                                 </StackLayout>
                                             </StackLayout>

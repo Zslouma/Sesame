@@ -14,6 +14,7 @@ namespace Syracuse.Mobitheque.Core.Models
 
         [JsonProperty("d")]
         public Dataa Dataa { get; set; }
+            
     }
     public class HoldingColumn
     {

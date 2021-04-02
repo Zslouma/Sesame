@@ -389,6 +389,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             try
             {
                 var timestamp = this.Timestamp();
+                this.token = this.Timestamp();
                 var status = await this.requests.GetLoans<LoansResult>(timestamp, this.token);
 
                 await UpdateCookies();
@@ -422,6 +423,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             try
             {
                 var timestamp = this.Timestamp();
+                this.token = this.Timestamp();
                 var status = await this.requests.GetBookings<BookingResult>(timestamp, this.token);
 
                 await UpdateCookies();

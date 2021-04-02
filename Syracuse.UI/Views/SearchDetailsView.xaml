@@ -44,16 +44,16 @@
                                                         <ColumnDefinition Width="100" />
                                                         <ColumnDefinition  Width="*" />
                                                     </Grid.ColumnDefinitions>
-                                                    
-                                                    <StackLayout  Orientation="Vertical">
-                                                        <Frame HasShadow="True" BorderColor="LightGray" Grid.Row="0" Grid.Column="0" IsClippedToBounds="True" Padding="0">
-                                                            <Image Aspect="AspectFill" HeightRequest="120" WidthRequest="90"  Source="{Binding FieldList.Image}"/>
+
+                                                    <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical">
+                                                        <Frame VerticalOptions="Center" HasShadow="True" BorderColor="LightGray" Grid.Row="0" Grid.Column="0" IsClippedToBounds="True" Padding="0">
+                                                            <Image  Aspect="AspectFill" HeightRequest="120" WidthRequest="90"  Source="{Binding FieldList.Image}"/>
                                                         </Frame>
-                                                        <Image  Grid.Row="1" Grid.Column="0"  HeightRequest="30" WidthRequest="100" IsVisible="{Binding DisplayValues.HaveStar}" Source="{Binding DisplayValues.Star}" VerticalOptions="Start"></Image>
+                                                        <Image   HeightRequest="30" WidthRequest="100" IsVisible="{Binding DisplayValues.HaveStar}" Source="{Binding DisplayValues.Star}" VerticalOptions="Start"></Image>
                                                     </StackLayout>
                                                     <StackLayout Grid.Row="0" Grid.Column="1" Padding="10">
-                                                        <material:MaterialLabel FontSize="Medium" Text="{Binding FieldList.CroppedTitle}"/>
-                                                        <material:MaterialLabel FontSize="Default" Text="{Binding FieldList.shortDesc}"/>
+                                                        <material:MaterialLabel FontSize="Medium" Text="{Binding FieldList.Title[0]}"/>
+                                                        <material:MaterialLabel FontSize="Small" Text="{Binding FieldList.shortDesc}"/>
                                                     </StackLayout>
                                                     <StackLayout Grid.Row="1" Grid.ColumnSpan="2"  Orientation="Vertical">
                                                         <StackLayout IsVisible="{Binding FieldList.HaveDateTime}"  >

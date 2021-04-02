@@ -462,6 +462,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 this.IsBusy = false;
             }
+            this.InLoadMore = false;
         }
 
         private async Task PerformSearch(string search = null)

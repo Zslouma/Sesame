@@ -54,19 +54,24 @@
                                                         Padding="5, 0, 5, 0"
                                                         Margin="0,0,0,20"
                                                         x:Name="Item">
-                                                        <StackLayout VerticalOptions="Center" Margin="0,0,15,0">
-                                                            <Frame BorderColor="LightGray"  
-                                                                   Margin="0,0,0,10"
-                                                                   Padding="0">
-                                                            <Image Source="{Binding ThumbnailUrl}"  />
-                                                            </Frame>
-                                                            <Label  Text="{Binding TypeOfDocument}"  HorizontalOptions="Center" FontSize="Small"/>
+                                                        <StackLayout VerticalOptions="Start" Margin="0,0,15,0">
+                                                            <Image Source="{Binding ThumbnailUrl}"                                                              
+                                                                HeightRequest="120"
+                                                                WidthRequest="90" 
+                                                                VerticalOptions="Start"
+                                                                Margin="0,5,0,0"
+                                                                 />
                                                         </StackLayout>
-                                                        <StackLayout Padding="0, 12, 0, 0"
+                                                        <StackLayout 
+                                                             Padding="0, 0, 0, 0"
+                                                             Margin="0"
                                                              VerticalOptions="Start"
                                                              Orientation="Vertical"
                                                              HorizontalOptions="FillAndExpand">
                                                             <Label TextColor="Black"
+                                                                Margin="0"
+                                                                VerticalOptions="Start"
+                                                                VerticalTextAlignment="Start"
                                                                 Text="{Binding Title}"
                                                                 MaxLines="2"
                                                                 FontAttributes="Bold"
@@ -77,8 +82,20 @@
                                                                     <RowDefinition Height="*"/>
                                                                     <RowDefinition Height="*"/>
                                                                 </Grid.RowDefinitions>
+                                                                <Label Grid.Row="0"  FontSize="Small">
+                                                                    <Label.FormattedText>
+                                                                        <FormattedString>
+                                                                            <FormattedString.Spans>
+                                                                                <Span Text="{Binding TypeOfDocument}" />
+                                                                                <Span Text=" | "/>
+                                                                                <Span Text="{Binding BookingDateString}" />
+                                                                            </FormattedString.Spans>
+                                                                        </FormattedString>
+                                                                    </Label.FormattedText>
+                                                                </Label>
+                                                                <Label Grid.Row="1" Text="{Binding LocationLabel}" TextColor="{d:DynamicResource PurpleTextColor}"  FontSize="16"/>
 
-                                                                <Label Grid.Row="0" IsVisible="{Binding IsAvailable}"  Text="{x:Static local:AppResource.BookingWait}"  TextColor="#F8CD8C" FontSize="Small" FontAttributes="Bold">
+                                                                <Label Grid.Row="2" IsVisible="{Binding IsAvailable}"  Text="{x:Static local:AppResource.BookingWait}"  TextColor="#F8CD8C" FontSize="Small" FontAttributes="Bold">
                                                                     <Label.Triggers>
                                                                         <DataTrigger TargetType="Label" Binding="{Binding IsAvailable}" Value="True">
                                                                             <Setter Property="IsVisible" Value="False" />
@@ -88,9 +105,7 @@
                                                                         </DataTrigger>
                                                                     </Label.Triggers>
                                                                 </Label>
-                                                                <Label Grid.Row="0"  IsVisible="{Binding IsAvailable}" HorizontalOptions="Center" Text="{x:Static local:AppResource.BookingAvailable}"  TextColor="{d:DynamicResource AccountInfoTextColor}" FontSize="Small" FontAttributes="Bold"></Label>
-                                                                <Label Grid.Row="1" Text="{Binding LocationLabel}" TextColor="{d:DynamicResource PurpleTextColor}"  FontSize="16"/>
-                                                                <Label Grid.Row="2" Text="{Binding BookingDateString}" TextColor="{d:DynamicResource DarkTextColor}"  FontSize="16"/>
+                                                                <Label Grid.Row="2"  IsVisible="{Binding IsAvailable}" Text="{x:Static local:AppResource.BookingAvailable}"  TextColor="{d:DynamicResource AccountInfoTextColor}" FontSize="Small" FontAttributes="Bold"/>
                                                             </Grid>
                                                             <StackLayout IsVisible="{Binding CanCancel}">
                                                                 <material:MaterialButton

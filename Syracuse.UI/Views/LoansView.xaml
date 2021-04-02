@@ -55,15 +55,21 @@
                                                          Padding="5, 0, 5, 0"
                                                          Margin="0,0,0,20"
                                                          x:Name="Item">
-                                                        <Image Source="{Binding ThumbnailUrl}"
-                                                            HeightRequest="120"
-                                                            WidthRequest="90" Margin="5"/>
-
-                                                        <StackLayout Padding="0, 15, 0, 0"
+                                                        <StackLayout VerticalOptions="Start" Margin="0,0,15,0">
+                                                            <Image Source="{Binding ThumbnailUrl}"                                                              
+                                                                HeightRequest="120"
+                                                                WidthRequest="90" 
+                                                                VerticalOptions="Start"
+                                                                Margin="0,5,0,0"
+                                                                 />
+                                                        </StackLayout>
+                                                        <StackLayout Padding="0, 0, 0, 0"
                                                              VerticalOptions="Start"
                                                              Orientation="Vertical"
                                                              HorizontalOptions="FillAndExpand">
                                                             <Label MaxLines="2" 
+                                                                VerticalOptions="Start"
+                                                                VerticalTextAlignment="Start"
                                                                 TextColor="{d:DynamicResource DarkTextColor}"
                                                                 Text="{Binding Title}"
                                                                 FontAttributes="Bold"
@@ -76,7 +82,7 @@
 
                                                             <StackLayout IsVisible="{Binding CanRenew}">
                                                                 <material:MaterialButton
-                                                                  Padding="0"
+                                                                  Margin="-5,0,-5,0"
                                                                   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                                                   BindingContext="{Binding Source={x:Reference LoansList}, Path=BindingContext}"
                                                                   Command="{Binding RenewLoanCommand}"
