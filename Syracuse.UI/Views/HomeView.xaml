@@ -39,6 +39,7 @@
                       ItemsSource="{Binding Results}" 
                       SeparatorVisibility="Default"
                       VerticalScrollBarVisibility="Never"
+                      VerticalOptions="FillAndExpand"
                       IsPullToRefreshEnabled="False"
                        HasUnevenRows="True">
                         <ListView.ItemTemplate >
@@ -78,6 +79,7 @@
                               ItemsSource="{Binding Results}"
                               SeparatorVisibility="None"
                               SelectionMode="None"
+                              VerticalOptions="FillAndExpand"
                               VerticalScrollBarVisibility="Never"
                               IsPullToRefreshEnabled="False"
                               HasUnevenRows="True">

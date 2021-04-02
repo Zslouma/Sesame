@@ -218,8 +218,9 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 await LoadMore(false);
             }
+            this.ItemsSource[0] = this.ItemsSource[0].Clone();
             await this.RaisePropertyChanged(nameof(this.ItemsSource));
-            await this.RaisePropertyChanged(nameof(CurrentItem));
+            await this.RaisePropertyChanged(nameof(this.CurrentItem));
             await this.RaisePropertyChanged(nameof(this.Position));
             await this.RaiseAllPropertiesChanged();
             this.IsBusy = false;
