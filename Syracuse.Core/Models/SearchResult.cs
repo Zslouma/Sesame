@@ -383,7 +383,9 @@ namespace Syracuse.Mobitheque.Core.Models
 
         public bool SeekForHoldings { get; set; }
 
-        public SearchLibraryResult Library  { get; set; }
+        public SearchLibraryResult Library { get; set; } = null;
+
+        public bool HasLibrary { get { return Library != null; } }
     }
 
     public partial class Result
@@ -430,6 +432,26 @@ namespace Syracuse.Mobitheque.Core.Models
         public DisplayValues DisplayValues { get; set; } = new DisplayValues();
 
 
+        public Result Clone()
+        {
+            return new Result
+            {
+                CustomResult = this.CustomResult,
+                FriendlyUrl = this.FriendlyUrl,
+                GroupedResults = this.GroupedResults,
+                HasDigitalReady = this.HasDigitalReady,
+                HasPrimaryDocs = this.HasPrimaryDocs,
+                HighLights = this.HighLights,
+                LinkedResultsTwin = this.LinkedResultsTwin,
+                PrimaryDocs = this.PrimaryDocs,
+                Resource = this.Resource,
+                SeekForHoldings = this.SeekForHoldings,
+                TemplateLabel = this.TemplateLabel,
+                WorksKeyResults = this.WorksKeyResults,
+                FieldList = this.FieldList,
+                DisplayValues = this.DisplayValues,
+            };
+        }
     }
     public partial class Suggestions
     {
