@@ -139,7 +139,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         {
             foreach (var booking in this.Results)
             {
-                booking.ThumbnailUrl = this.requestService.GetRedirectURL(booking.ThumbnailUrl, booking.DefaultThumbnailUrl);
+                if (booking.DefaultThumbnailUrl != null)
+                {
+                    booking.ThumbnailUrl = this.requestService.GetRedirectURL(booking.ThumbnailUrl, booking.DefaultThumbnailUrl);
+                }
+                else
+                {
+                    booking.ThumbnailUrl = this.requestService.GetRedirectURL(booking.ThumbnailUrl);
+                }
             }
             await this.RaiseAllPropertiesChanged();
         }

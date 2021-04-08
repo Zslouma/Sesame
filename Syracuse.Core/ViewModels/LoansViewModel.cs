@@ -150,7 +150,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         {
             foreach (var Loans in this.Results)
             {
-               Loans.ThumbnailUrl = this.requestService.GetRedirectURL(Loans.ThumbnailUrl , Loans.DefaultThumbnailUrl);
+                if (Loans.DefaultThumbnailUrl != null)
+                {
+                    Loans.ThumbnailUrl = this.requestService.GetRedirectURL(Loans.ThumbnailUrl, Loans.DefaultThumbnailUrl);
+                }
+                else
+                {
+                    Loans.ThumbnailUrl = this.requestService.GetRedirectURL(Loans.ThumbnailUrl);
+                }
             }
             await this.RaiseAllPropertiesChanged();
         }

@@ -46,12 +46,12 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
         public String GetRedirectURL(string originalURL, string defaultURL = "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png")
         {
 
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(originalURL);
-            webRequest.AllowAutoRedirect = false;  // IMPORTANT
-            webRequest.Timeout = 10000;           // timeout 10s
-
             try
             {
+                HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(originalURL);
+                webRequest.AllowAutoRedirect = false;  // IMPORTANT
+                webRequest.Timeout = 10000;           // timeout 10s
+
             // Get the response ...
                 using (var webResponse = (HttpWebResponse)webRequest.GetResponse())
                 {
