@@ -18,9 +18,13 @@
     <ContentPage.Content>
         <yummy:PancakeView Margin="0,30,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
             <Grid VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
                 <StackLayout Orientation="Vertical" 
                              VerticalOptions="FillAndExpand"
-                             Padding="15, 15, 15, 0">
+                             Padding="15, 15, 15, 0"
+                             Grid.Row="0">
                     <Grid Margin="0, 10, 0, 20" VerticalOptions="FillAndExpand">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.5*" />
@@ -105,7 +109,7 @@
                         </ListView.Footer>
                     </ListView>
                 </StackLayout>
-                <AbsoluteLayout IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
+                <AbsoluteLayout Grid.Row="0" IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
                     <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
                 </AbsoluteLayout>
             </Grid>
