@@ -239,7 +239,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             SearchResult search = await this.requestService.Search(options);
             if (search != null && !search.Success)
             {
-                this.DisplayAlert(ApplicationResource.Error, search.Errors?[0]?.Msg, ApplicationResource.ButtonValidation);
+                this.DisplayAlert(ApplicationResource.Error, search.Errors?[0]?.Msg != null ? search.Errors?[0]?.Msg : ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
                 return new Result[0];
             }
             else
