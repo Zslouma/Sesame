@@ -34,8 +34,13 @@ namespace Syracuse.Mobitheque.UI.Views
             enableMultiSelect           = true;
             SearchButton.IsVisible      = false;
             DeleteButton.IsVisible      = false;
+            
         }
-
+        protected override void OnBindingContextChanged()
+        {
+            (this.DataContext as SearchViewModel).OnDisplayAlert += SearchViewModel_OnDisplayAlert;
+            base.OnBindingContextChanged();
+        }
         // Enable MultiSelect for MultiPicker Component
         public bool EnableMultiSelect
         {
@@ -337,5 +342,7 @@ namespace Syracuse.Mobitheque.UI.Views
             }
 
         }
+        private void SearchViewModel_OnDisplayAlert(string title, string message, string button) => this.DisplayAlert(title, message, button);
     }
+    
 }

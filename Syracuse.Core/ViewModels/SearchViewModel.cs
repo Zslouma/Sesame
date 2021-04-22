@@ -665,11 +665,12 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
             // HTTP Request
             SearchResult result = await this.requestService.Search(optionsTempo);
-            result.D.Results = await this.CheckAvCheckAvailability(result.D.Results , search , facetFilter);
+            
             // Result Handler
-            if (result != null && result.D != null)
+            if (result != null && result.D != null && result.Success)
             {
                 this.D = result.D;
+                result.D.Results = await this.CheckAvCheckAvailability(result.D.Results, search, facetFilter);
                 this.Results = result.D.Results;
                 await this.GetRedirectURL();
                 this.ResultCountInt = this.D?.SearchInfo?.NbResults;
@@ -729,6 +730,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
             else
             {
+                this.DisplayAlert(ApplicationResource.Error, (result.Errors?[0]?.Msg) ?? ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
                 this.ResultCount = ApplicationResource.SearchViewResultNull;
             }
             await RaisePropertyChanged(nameof(this.Itemss));
