@@ -693,7 +693,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                             var facettetempo = new FacetteValue
                             {
                                 id = tmp.FacetId,
-                                value = FacetListItems.Label,
+                                value = FacetListItems.DisplayLabel ?? FacetListItems.Label,
                                 font = FontAttributes.None,
                                 noTitle = true,
                                 groupIndex = groupIndex
