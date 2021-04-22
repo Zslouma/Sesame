@@ -46,6 +46,11 @@
                       VerticalOptions="FillAndExpand"
                       IsPullToRefreshEnabled="False"
                        HasUnevenRows="True">
+                        <ListView.RowHeight>
+                            <OnPlatform x:TypeArguments="x:Int32">
+                                <On Platform="iOS">280</On>
+                            </OnPlatform>
+                        </ListView.RowHeight>
                         <ListView.ItemTemplate >
                             <DataTemplate>
                                 <ViewCell>
@@ -87,6 +92,11 @@
                               VerticalScrollBarVisibility="Never"
                               IsPullToRefreshEnabled="False"
                               HasUnevenRows="True">
+                        <ListView.RowHeight>
+                            <OnPlatform x:TypeArguments="x:Int32">
+                                <On Platform="iOS">200</On>
+                            </OnPlatform>
+                        </ListView.RowHeight>
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>

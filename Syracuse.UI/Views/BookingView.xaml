@@ -45,6 +45,11 @@
                                 VerticalScrollBarVisibility="Never"
                                 IsPullToRefreshEnabled="False"
                                 HasUnevenRows="True">
+                                <ListView.RowHeight>
+                                    <OnPlatform x:TypeArguments="x:Int32">
+                                        <On Platform="iOS">180</On>
+                                    </OnPlatform>
+                                </ListView.RowHeight>
                                 <ListView.ItemTemplate>
                                     <DataTemplate >
                                         <ViewCell>
