@@ -25,7 +25,7 @@
                              VerticalOptions="FillAndExpand"
                              Padding="15, 15, 15, 0"
                              Grid.Row="0">
-                    <Grid Margin="0, 10, 0, 20" VerticalOptions="FillAndExpand">
+                    <Grid Margin="0, 10, 0, 10" VerticalOptions="FillAndExpand">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.5*" />
                             <ColumnDefinition Width="0.5*" />
@@ -48,7 +48,7 @@
                        HasUnevenRows="True">
                         <ListView.RowHeight>
                             <OnPlatform x:TypeArguments="x:Int32">
-                                <On Platform="iOS">280</On>
+                                <On Platform="iOS">270</On>
                             </OnPlatform>
                         </ListView.RowHeight>
                         <ListView.ItemTemplate >
