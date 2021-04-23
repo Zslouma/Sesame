@@ -115,7 +115,7 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Account name.
+        ///   Looks up a localized string similar to Identifier.
         /// </summary>
         public static string AccountTitle {
             get {

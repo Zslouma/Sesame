@@ -225,11 +225,20 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to from {0} to {1} from {2} to {3}.
+        ///   Looks up a localized string similar to From {0} to {1} .
         /// </summary>
         public static string DateToDate {
             get {
                 return ResourceManager.GetString("DateToDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From {0} to {1} from {2} to {3}.
+        /// </summary>
+        public static string DateToDateHours {
+            get {
+                return ResourceManager.GetString("DateToDateHours", resourceCulture);
             }
         }
         

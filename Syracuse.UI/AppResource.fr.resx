@@ -136,7 +136,7 @@
     <value>Mon compte</value>
   </data>
   <data name="AccountTitle" xml:space="preserve">
-    <value>Nom de compte</value>
+    <value>Identifiant</value>
   </data>
   <data name="AddAccountTuto" xml:space="preserve">
     <value>Cette page mémorise les comptes précédemment authentifiés et vous permet de vous connecter à ces comptes en un clic. Pour enregistrer un nouveau compte cliquer sur:</value>

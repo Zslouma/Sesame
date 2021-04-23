@@ -313,8 +313,15 @@ namespace Syracuse.Mobitheque.Core.Models
 
                     if (DateTimeStart.Date != DateTimeEnd.Date)
                     {
+                            if (HoursStart == HoursEnd)
+                            {
+                                ret = String.Format(ApplicationResource.DateToDate, DateStart, DateEnd, HoursStart, HoursEnd);
+                            }
+                            else
+                            {
+                                ret = String.Format(ApplicationResource.DateToDateHours, DateStart, DateEnd, HoursStart, HoursEnd);
+                            }
                         
-                        ret = String.Format(ApplicationResource.DateToDate, DateStart, DateEnd, HoursStart, HoursEnd);
                     }
                     else
                     {

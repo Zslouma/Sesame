@@ -136,7 +136,7 @@
     <value>My accounts</value>
   </data>
   <data name="AccountTitle" xml:space="preserve">
-    <value>Account name</value>
+    <value>Identifier</value>
   </data>
   <data name="AddAccountTuto" xml:space="preserve">
     <value>This page remembers previously authenticated accounts and allows you to log in to these accounts with one click. To register a new account click :</value>

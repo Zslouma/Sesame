@@ -62,15 +62,14 @@
                                         <ColumnDefinition Width="1*" />
                                         <ColumnDefinition  Width="5*" />
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" HorizontalTextAlignment="Center" VerticalOptions="Center" Text="{Binding IconFontAwesome}" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="Title" TextColor="White"/>
+                                    <Label Grid.Column="0" HorizontalTextAlignment="Center" VerticalOptions="Center" Text="{Binding IconFontAwesome}" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="Title" TextColor="WhiteSmoke"/>
                                     <StackLayout Grid.Column="1" VerticalOptions="Center" >
                                     <material:MaterialLabel 
                                         VerticalOptions="Center"
                                         Text="{Binding Text}"
                                         FontSize="{DynamicResource FontSize}"
                                         FontFamily="{DynamicResource OpenSans}"
-                                        FontAttributes="Bold"
-                                        TextColor="WhiteSmoke">
+                                        TextColor="White">
                                     <material:MaterialLabel.Triggers>
                                         <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="False">
                                             <Setter Property="IsVisible" Value="True" />
@@ -85,10 +84,9 @@
                                         IsVisible="{Binding IsSelected}"
                                         Text="{Binding Text}"
                                         FontSize="{DynamicResource FontSize}"
-                                        FontFamily="{DynamicResource OpenSans}"
-                                        FontAttributes="Bold"
+                                        FontFamily="{DynamicResource OpenSans}" 
                                         TextDecorations="Underline"
-                                        TextColor="WhiteSmoke"/>
+                                        TextColor="White"/>
                                     </StackLayout>
                                 </Grid>
                             </StackLayout>

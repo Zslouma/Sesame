@@ -101,7 +101,7 @@
                             BackgroundColor="Transparent"
                             FontFamily=""
                             Clicked="OpenBrowser_OnClicked"/>
-                    <ActivityIndicator IsRunning="{Binding IsLoading}"></ActivityIndicator>
+                    <ActivityIndicator IsRunning="{Binding IsLoading}" Color="White"/>
                 </StackLayout>
             </Grid>
         </ScrollView>
