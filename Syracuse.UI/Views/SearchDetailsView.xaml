@@ -70,7 +70,7 @@
                                                                     <RowDefinition Height="Auto"/>
                                                                 </Grid.RowDefinitions>
                                                                 <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="0.05*"/>
+                                                                    <ColumnDefinition Width="Auto"/>
                                                                     <ColumnDefinition Width="*" />
                                                                 </Grid.ColumnDefinitions>
                                                                 <Label Grid.Column="0" Grid.Row="1" Text="&#xf3c5;" FontFamily="{StaticResource FontAwesomeSolid}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Fill" FontSize="Small" TextColor="#88929D"/>
