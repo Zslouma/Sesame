@@ -16,7 +16,7 @@
         <common:SearchBarTemplate />
     </NavigationPage.TitleView>
     <ContentPage.Content>
-        <yummy:PancakeView Margin="0,30,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
+        <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
             <Grid >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>

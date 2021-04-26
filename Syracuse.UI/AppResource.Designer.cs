@@ -61,7 +61,7 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copyright (©) {0} Archimed..
+        ///   Looks up a localized string similar to Copyright © {0} Archimed..
         /// </summary>
         public static string AboutCopyright {
             get {
@@ -223,6 +223,15 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete this account from the application.
+        /// </summary>
+        public static string DeleteAppAccount {
+            get {
+                return ResourceManager.GetString("DeleteAppAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Department.
         /// </summary>
         public static string DepartmentTitle {
@@ -358,6 +367,42 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  Do you want to declare the different accounts of your family? .
+        /// </summary>
+        public static string OtherAccountPart2Tuto {
+            get {
+                return ResourceManager.GetString("OtherAccountPart2Tuto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  Manage your accounts here and switch quickly from one profile to another..
+        /// </summary>
+        public static string OtherAccountPart3Tuto {
+            get {
+                return ResourceManager.GetString("OtherAccountPart3Tuto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you have several accounts in different libraries?.
+        /// </summary>
+        public static string OtherAccountPartTuto {
+            get {
+                return ResourceManager.GetString("OtherAccountPartTuto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage all your accounts in one place.
+        /// </summary>
+        public static string OtherAccountTitleTuto {
+            get {
+                return ResourceManager.GetString("OtherAccountTitleTuto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
@@ -399,6 +444,24 @@ namespace Syracuse.Mobitheque.UI {
         public static string Submit {
             get {
                 return ResourceManager.GetString("Submit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Switch to this account.
+        /// </summary>
+        public static string SwitchAccount {
+            get {
+                return ResourceManager.GetString("SwitchAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What do you want to do?.
+        /// </summary>
+        public static string SwitchDeleteAccountPopupTitle {
+            get {
+                return ResourceManager.GetString("SwitchDeleteAccountPopupTitle", resourceCulture);
             }
         }
         

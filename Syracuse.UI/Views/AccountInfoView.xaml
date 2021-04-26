@@ -16,7 +16,7 @@
             <ScrollView>
             <Grid>
                     <StackLayout>
-                        <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="0,10,0,10"  TextColor="{d:DynamicResource DarkTextColor}">
+                        <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Margin="0,10,0,10"  TextColor="{d:DynamicResource DarkTextColor}">
                             <Label.FormattedText>
                                 <FormattedString>
                                     <FormattedString.Spans>

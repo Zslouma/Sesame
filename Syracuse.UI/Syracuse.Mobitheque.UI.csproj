@@ -58,6 +58,9 @@
     <Compile Update="Views\NetworkErrorView.xaml.cs">
       <DependentUpon>NetworkErrorView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\PopUp\SwitchOrDeleteAccountPopup.xaml.cs">
+      <DependentUpon>SwitchOrDeleteAccountPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SearchView.xaml.cs">
       <DependentUpon>SearchView.xaml</DependentUpon>
     </Compile>
@@ -108,6 +111,9 @@
     <EmbeddedResource Update="Views\MenuView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\PopUp\SwitchOrDeleteAccountPopup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\SearchDetailsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -117,10 +123,10 @@
     <EmbeddedResource Update="Views\SelectLibraryView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\TutorialPopup.xaml">
+    <EmbeddedResource Update="Views\PopUp\TutorialPopup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\TutorialPopupAddAccount.xaml">
+    <EmbeddedResource Update="Views\PopUp\TutorialPopupAddAccount.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

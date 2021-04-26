@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using MvvmCross.Forms.Presenters.Attributes;
 using MvvmCross.Forms.Views;
@@ -15,39 +16,44 @@ namespace Syracuse.Mobitheque.UI.Views
     {
 
         private TutorialPopupAddAccount _tutorialPopup;
+        private SwitchOrDeleteAccountPopup _changeOrDeleteAccountPopup;
         public OtherAccountView()
         {
             InitializeComponent();
             this.otherAccountList.ItemTapped += OtherAccountList_ItemTapped;
         }
 
-        private async Task DisplayPopUp()
+        private async Task AskActionPopUp(CookiesSave otherAccount)
         {
-            var database = Syracuse.Mobitheque.Core.App.Database;
+            var database = Core.App.Database;
             var user = await database.GetActiveUser();
             if (user != null)
             {
-                Console.WriteLine("DisplayPopUp : " + user.IsTutorialAddAcount.ToString());
-                if (user.IsTutorialAddAcount)
+                _changeOrDeleteAccountPopup = new SwitchOrDeleteAccountPopup(otherAccount);
+                await PopupNavigation.Instance.PushAsync(_changeOrDeleteAccountPopup);
+                var ret = await _changeOrDeleteAccountPopup.PopupClosedTask;
+                switch (ret)
                 {
-                    _tutorialPopup = new TutorialPopupAddAccount(database, user);
-                    await PopupNavigation.Instance.PushAsync(_tutorialPopup);
+                    case SwitchOrDeleteAccountPopup.EnumOutputType.Cancel:
+                        break;
+                    case SwitchOrDeleteAccountPopup.EnumOutputType.Switch:
+                        await this.ViewModel.ChangeAccount(otherAccount);
+                        break;
+                    case SwitchOrDeleteAccountPopup.EnumOutputType.Delete:
+                        bool answer = await DisplayAlert(ApplicationResource.Warning, ApplicationResource.ForgetAccount, ApplicationResource.Yes, ApplicationResource.No);
+                        if (answer)
+                        {
+                            await this.ViewModel.ExecuteRemoveItemCommand(otherAccount);
+                        }
+                        break;
                 }
             }
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            this.DisplayPopUp();
         }
 
         private async void OtherAccountList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             CookiesSave otherAccount = e.Item as CookiesSave;
-
-
-            await this.ViewModel.ChangeAccount(otherAccount);
+            await AskActionPopUp(otherAccount);
         }
 
         private async void AddAccount_Clicked(object sender, EventArgs e)

@@ -209,6 +209,9 @@ Cancellation is final.</value>
   <data name="FailExtendLoan" xml:space="preserve">
     <value>Renewal Impossible</value>
   </data>
+  <data name="ForgetAccount" xml:space="preserve">
+    <value>Did you forget this account on the application? You can always log back in to it later.</value>
+  </data>
   <data name="HoldingChoice" xml:space="preserve">
     <value>Voulez-vous confirmer votre reservation à {0}</value>
   </data>
@@ -247,7 +250,7 @@ Cancellation is final.</value>
 {0}</value>
   </data>
   <data name="Scan" xml:space="preserve">
-    <value>Document scanner</value>
+    <value>Scanning a book</value>
   </data>
   <data name="SearchViewResultCount" xml:space="preserve">
     <value>{0} results</value>

@@ -31,10 +31,7 @@ namespace Syracuse.Mobitheque.UI.Views
             }
 
         }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-        }
+
         private void OnCloseButtonTapped(object sender, EventArgs e)
         {
             CloseAllPopup();

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutCopyright" xml:space="preserve">
-    <value>Copyright (©) {0} Archimed.</value>
+    <value>Copyright © {0} Archimed.</value>
   </data>
   <data name="AboutMailContact" xml:space="preserve">
     <value>Contact : contact@archimed.fr</value>
@@ -171,6 +171,9 @@
   <data name="Delete" xml:space="preserve">
     <value>Suprimer</value>
   </data>
+  <data name="DeleteAppAccount" xml:space="preserve">
+    <value>Supprimer ce compte de l'application</value>
+  </data>
   <data name="DepartmentTitle" xml:space="preserve">
     <value>Département</value>
   </data>
@@ -216,6 +219,18 @@
   <data name="NotCurrentLoan" xml:space="preserve">
     <value>Vous n'avez pas de prêt en cours</value>
   </data>
+  <data name="OtherAccountPart2Tuto" xml:space="preserve">
+    <value> Voulez-vous déclarer les différents comptes de votre famille ?</value>
+  </data>
+  <data name="OtherAccountPart3Tuto" xml:space="preserve">
+    <value> Gérer vos comptes ici et basculez rapidement d'un profil à l'autre.</value>
+  </data>
+  <data name="OtherAccountPartTuto" xml:space="preserve">
+    <value>Vous avez plusieurs comptes dans différentes bibliothèques ?</value>
+  </data>
+  <data name="OtherAccountTitleTuto" xml:space="preserve">
+    <value>Gérez l'ensemble de vos comptes au même endroit</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Mot de passe</value>
   </data>
@@ -230,6 +245,12 @@
   </data>
   <data name="Submit" xml:space="preserve">
     <value>Valider</value>
+  </data>
+  <data name="SwitchAccount" xml:space="preserve">
+    <value>Basculer sur ce compte</value>
+  </data>
+  <data name="SwitchDeleteAccountPopupTitle" xml:space="preserve">
+    <value>Que souhaitez-vous faire?</value>
   </data>
   <data name="Synthesis" xml:space="preserve">
     <value>Ma synthèse</value>

@@ -209,6 +209,9 @@ L’annulation est définitive.</value>
   <data name="FailExtendLoan" xml:space="preserve">
     <value>Renouvelement impossible</value>
   </data>
+  <data name="ForgetAccount" xml:space="preserve">
+    <value>Souaitez-vous oublier ce compte sur l'application? Vous pourrez toujours vous reconnecter à ce dernier par la suite.</value>
+  </data>
   <data name="HoldingChoice" xml:space="preserve">
     <value>Voulez-vous confirmer votre réservation à {0}</value>
   </data>
@@ -247,7 +250,7 @@ L’annulation est définitive.</value>
 {0}</value>
   </data>
   <data name="Scan" xml:space="preserve">
-    <value>Scanner de documents</value>
+    <value>Scanner un ouvrage</value>
   </data>
   <data name="SearchViewResultCount" xml:space="preserve">
     <value>{0} résultats</value>

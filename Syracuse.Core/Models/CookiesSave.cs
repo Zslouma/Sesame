@@ -41,7 +41,7 @@ namespace Syracuse.Mobitheque.Core.Models
 
         public string DisplayName { get; set; }
 
-        public bool haveDisplayName
+        public bool HaveDisplayName
         {
             get { return this.DisplayName != null && this.DisplayName != ""; }
         }

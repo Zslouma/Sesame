@@ -333,6 +333,15 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Did you forget this account on the application? You can always log back in to it later..
+        /// </summary>
+        public static string ForgetAccount {
+            get {
+                return ResourceManager.GetString("ForgetAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Voulez-vous confirmer votre reservation à {0}.
         /// </summary>
         public static string HoldingChoice {
@@ -442,7 +451,7 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Document scanner.
+        ///   Looks up a localized string similar to Scanning a book.
         /// </summary>
         public static string Scan {
             get {

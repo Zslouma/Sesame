@@ -6,6 +6,7 @@
                       xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
                       xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
                       xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
+                      xmlns:local="clr-namespace:Syracuse.Mobitheque.UI" 
                       xmlns:core="clr-namespace:Syracuse.Mobitheque.Core;assembly=Syracuse.Mobitheque.Core"
                       xmlns:common="clr-namespace:Syracuse.Mobitheque.UI.Views.Templates"
                       x:TypeArguments="viewModels:OtherAccountViewModel"
@@ -16,81 +17,120 @@
     </NavigationPage.TitleView>
     <ContentPage.Content>
         <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
-            <StackLayout>
+            <StackLayout VerticalOptions="FillAndExpand">
                 <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="0,10,0,10"  TextColor="{d:DynamicResource DarkTextColor}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span Text="&#xf0c0; " FontFamily="{StaticResource FontAwesomeSolid}" FontSize="20"/>
+                                <Span Text="{x:Static core:ApplicationResource.OtherAccount}" FontAttributes="Bold" FontSize="20"/>
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <StackLayout>
+                    <Label Text="{x:Static local:AppResource.OtherAccountTitleTuto}" FontAttributes="Bold" FontSize="Small" HorizontalTextAlignment="Center"/>
+                    <Label HorizontalTextAlignment="Center" FontSize="Small">
                         <Label.FormattedText>
                             <FormattedString>
-                                <FormattedString.Spans>
-                                    <Span Text="&#xf0c0; " FontFamily="{StaticResource FontAwesomeSolid}" FontSize="20"/>
-                                    <Span Text="{x:Static core:ApplicationResource.OtherAccount}" FontAttributes="Bold" FontSize="20"/>
+                                <FormattedString.Spans >
+                                    <Span Text="{x:Static local:AppResource.OtherAccountPartTuto}"    />
+                                    <Span Text="{x:Static local:AppResource.OtherAccountPart2Tuto}"  />
+                                    <Span Text="{x:Static local:AppResource.OtherAccountPart3Tuto}" />
                                 </FormattedString.Spans>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
-
+                    
+                </StackLayout>
                 <ListView x:Name="otherAccountList" 
                           CachingStrategy="RecycleElement"
                           ItemsSource="{Binding OtherAccount}"
                           SeparatorVisibility="Default"
-                          RowHeight="150"
+                          RowHeight="100"
+                          VerticalOptions="Fill"
                           VerticalScrollBarVisibility="Never"
+                          Margin="25,0"
                           IsPullToRefreshEnabled="False" >
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <Frame Padding="0, 5, 0, 5">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="0.35*" />
-                                            <RowDefinition Height="0.8*" />
-                                        </Grid.RowDefinitions>
-                                        <Button 
-                                            Text="&#xf057;" 
-                                            FontFamily="{StaticResource FontAwesomeSolid}"
-                                            HorizontalOptions="End"
-                                            VerticalOptions="Start"
-                                            Grid.Row="0"
-                                            FontSize="Medium"
-                                            TextColor="Red"
-                                            BackgroundColor="Transparent"
-                                            Command="{Binding BindingContext.RemoveItemCommand,Source={x:Reference otherAccountList}}"
-                                            CommandParameter="{Binding .}"
-                                        />
-                                        <StackLayout Grid.Row="1" HorizontalOptions="Center" VerticalOptions="StartAndExpand" Orientation="Vertical">
+                                    <StackLayout   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal">
 
-                                            <Label
-                                                HorizontalTextAlignment="Center"
-                                                TextColor="Black" 
-                                                Text="{Binding DisplayName}"
-                                                FontSize="20"/>
-                                            <Label
-                                                HorizontalTextAlignment="Center"
-                                                TextColor="{d:DynamicResource PurpleTextColor}"
-                                                Text="{Binding Username}"
-                                                FontAttributes="None" 
-                                                FontSize="16"></Label>
-                                            <Label
-                                                HorizontalTextAlignment="Center"
-                                                Text="{Binding Library}"
-                                                FontAttributes="None" 
-                                                FontSize="Default"></Label>
-                                        </StackLayout>
+                                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
 
-                                    </Grid>
+                                            <Label 
+                                                    Grid.Column="0" 
+                                                    Grid.Row="0" 
+                                                    Text="&#xf007;" 
+                                                    IsVisible="{Binding HaveDisplayName}"
+                                                    FontFamily="{StaticResource FontAwesomeRegular}" 
+                                                    VerticalTextAlignment="Center" 
+                                                    HorizontalTextAlignment="Center" 
+                                                    VerticalOptions="Fill" 
+                                                    FontSize="Small" 
+                                                     TextColor="Black" />
+                                            <Label
+                                                    Grid.Column="1" Grid.Row="0"
+                                                    HorizontalTextAlignment="Start"
+                                                    TextColor="Black" 
+                                                    Text="{Binding DisplayName}"
+                                                    FontSize="20"/>
+                                            <Label
+                                                    Grid.Column="0" Grid.Row="1"
+                                                    HorizontalTextAlignment="Start"
+                                                    Text="ID :"
+                                                    TextColor="{d:DynamicResource PurpleTextColor}"
+                                                    FontAttributes="None" 
+                                                    FontSize="16"/>
+                                            <Label
+                                                    Grid.Column="1" Grid.Row="1"
+                                                    HorizontalTextAlignment="Start"
+                                                    TextColor="{d:DynamicResource PurpleTextColor}"
+                                                    Text="{Binding Username}"
+                                                    FontAttributes="None" 
+                                                    FontSize="16"/>
+                                            <Label 
+                                                    Grid.Column="0" 
+                                                    Grid.Row="2" 
+                                                    Text="&#xf3c5;" 
+                                                    FontFamily="{StaticResource FontAwesomeSolid}" 
+                                                    VerticalTextAlignment="Center" 
+                                                    HorizontalTextAlignment="Center" 
+                                                    VerticalOptions="Fill" 
+                                                    FontSize="Small" 
+                                                    TextColor="#88929D"/>
+                                            <Label
+                                                    Grid.Column="1" Grid.Row="2"
+                                                    HorizontalTextAlignment="Start"
+                                                    Text="{Binding Library}"
+                                                    FontAttributes="None" 
+                                                    FontSize="Default"/>
+
+                                        </Grid>
+                                    </StackLayout>
                                 </Frame>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                    <ListView.Footer>
-                        <StackLayout  Padding="0, 5, 0, 5" HeightRequest="100" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Orientation="Vertical">
-
-                            <Button HorizontalOptions="Center" VerticalOptions="CenterAndExpand" FontSize="Large"  Text="&#xf234;" FontFamily="{StaticResource FontAwesomeSolid}" BackgroundColor="White" Clicked="AddAccount_Clicked"></Button>
-
-                        </StackLayout>
-
-                    </ListView.Footer>
                 </ListView>
+                <StackLayout VerticalOptions="End" HorizontalOptions="FillAndExpand">
+
+                    <Button HorizontalOptions="Center" VerticalOptions="CenterAndExpand" FontSize="Large"  Text="&#xf234;" FontFamily="{StaticResource FontAwesomeSolid}" BackgroundColor="White" Clicked="AddAccount_Clicked"></Button>
+
+                </StackLayout>
             </StackLayout>
+
         </yummy:PancakeView>
     </ContentPage.Content>
 </views:MvxContentPage>

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutCopyright" xml:space="preserve">
-    <value>Copyright (©) {0} Archimed.</value>
+    <value>Copyright © {0} Archimed.</value>
   </data>
   <data name="AboutMailContact" xml:space="preserve">
     <value>Contact : contact@archimed.fr</value>
@@ -171,6 +171,9 @@
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="DeleteAppAccount" xml:space="preserve">
+    <value>Delete this account from the application</value>
+  </data>
   <data name="DepartmentTitle" xml:space="preserve">
     <value>Department</value>
   </data>
@@ -216,6 +219,18 @@
   <data name="NotCurrentLoan" xml:space="preserve">
     <value>You don't have a loan currently</value>
   </data>
+  <data name="OtherAccountPart2Tuto" xml:space="preserve">
+    <value> Do you want to declare the different accounts of your family? </value>
+  </data>
+  <data name="OtherAccountPart3Tuto" xml:space="preserve">
+    <value> Manage your accounts here and switch quickly from one profile to another.</value>
+  </data>
+  <data name="OtherAccountPartTuto" xml:space="preserve">
+    <value>Do you have several accounts in different libraries?</value>
+  </data>
+  <data name="OtherAccountTitleTuto" xml:space="preserve">
+    <value>Manage all your accounts in one place</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
@@ -230,6 +245,12 @@
   </data>
   <data name="Submit" xml:space="preserve">
     <value>Submit</value>
+  </data>
+  <data name="SwitchAccount" xml:space="preserve">
+    <value>Switch to this account</value>
+  </data>
+  <data name="SwitchDeleteAccountPopupTitle" xml:space="preserve">
+    <value>What do you want to do?</value>
   </data>
   <data name="Synthesis" xml:space="preserve">
     <value>My synthesis</value>
