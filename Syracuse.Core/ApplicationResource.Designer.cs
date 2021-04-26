@@ -252,7 +252,7 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To add a new account we will have to end the current session do you want to continue?.
+        ///   Looks up a localized string similar to You will be temporarily logged out of your current session. Once the new account has been added, you can switch from one to the other in one click..
         /// </summary>
         public static string DisconectAuthorization {
             get {

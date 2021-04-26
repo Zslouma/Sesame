@@ -183,7 +183,7 @@ L’annulation est définitive.</value>
     <value>{0} de {1} à {2}</value>
   </data>
   <data name="DisconectAuthorization" xml:space="preserve">
-    <value>Pour ajouter un nouveau compte nous allons devoir mettre un terme à la session actuelle voulez-vous continuer?</value>
+    <value>Vous allez être provisoirement déconnecté de votre session actuelle. Une fois le nouveau compte ajouté, vous avez la possibilité de basculer de l'un à l'autre en 1 clic.</value>
   </data>
   <data name="Disconnect" xml:space="preserve">
     <value>Déconnexion</value>
