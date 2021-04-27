@@ -98,11 +98,13 @@
                                                 <Grid Padding="5" VerticalOptions="Center">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="0.1*" />
-                                                        <ColumnDefinition Width="0.8*" />
+                                                        <ColumnDefinition Width="0.5*" />
+                                                        <ColumnDefinition Width="0.3*" />
                                                         <ColumnDefinition Width="0.1*" />
                                                     </Grid.ColumnDefinitions>
                                                     <Label VerticalOptions="Center" FontSize="15" Text="{Binding displayValue}" Grid.Column="1" />
-                                                    <Label Grid.Column="2"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Fill" FontFamily="{StaticResource FontAwesomeSolid}" IsVisible="{Binding IsSelected}"  FontSize="Small" Text="&#xf00c;" TextColor="LightGreen"/>
+                                                    <Label VerticalOptions="Center" HorizontalTextAlignment="End" FontSize="15" Text="{Binding count}" Grid.Column="2" />
+                                                    <Label Grid.Column="3"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Fill" FontFamily="{StaticResource FontAwesomeSolid}" IsVisible="{Binding IsSelected}"  FontSize="Small" Text="&#xf00c;" TextColor="LightGreen"/>
                                                 </Grid>
                                             </ViewCell>
                                         </DataTemplate>
@@ -124,7 +126,9 @@
                                 </ListView>
                             </Grid>
                         <Picker x:Name="SortPicker"  HorizontalOptions="FillAndExpand" Grid.Column="2" ItemsSource="{Binding SortsName}" SelectedIndex="{Binding SortNamee}" Title="{x:Static local:AppResource.SortOption}" TextColor="{DynamicResource PurpleTextColor}" TitleColor="{DynamicResource PurpleTextColor}" FontAttributes="Bold" ios:Picker.UpdateMode="WhenFinished"></Picker>
-                        <Label x:Name="resultCount" TextColor="Black" Text="{Binding ResultCount}" Margin="10,0,0,5" />
+                            <StackLayout IsVisible="{Binding IsFilterable}">
+                                <Label x:Name="resultCount" TextColor="Black"  Text="{Binding ResultCount}" Margin="10,0,0,5" />
+                            </StackLayout>    
                         <ListView x:Name="resultsList" 
                           CachingStrategy="RecycleElement"
                           ItemsSource="{Binding Results}"
@@ -173,7 +177,7 @@
                         </ListView>
                     </StackLayout>
                     <StackLayout VerticalOptions="Fill" >
-                            <Label VerticalOptions="FillAndExpand"  HorizontalTextAlignment="Center" VerticalTextAlignment="Center"  FontSize = "20" Text="{x:Static local:AppResource.NoSearchResults}" />
+                            <Label VerticalOptions="FillAndExpand"  HorizontalTextAlignment="Center" VerticalTextAlignment="Start"  Margin="30" FontSize="Medium" Text="{x:Static local:AppResource.NoSearchResults}" />
                         <StackLayout.Triggers>
                             <DataTrigger TargetType="StackLayout" Binding="{Binding IsFilterable}" Value="True">
                                 <Setter Property="IsVisible" Value="False" />

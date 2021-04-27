@@ -376,7 +376,21 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 {
                     foreach (var facette in group)
                     {
-                        newGroup.Add(facette);
+                        bool found = false;
+                        foreach (var selectedItem in SelectedItems)
+                        {
+                            if (selectedItem.id == facette.id)
+                            {
+                                facette.IsSelected = true;
+                                newGroup.Add(facette);
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found){
+                            facette.IsSelected = false;
+                            newGroup.Add(facette);
+                        }
                     }
                 }
                 this.ExpandedFacetteList.Add(newGroup);
@@ -638,12 +652,9 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 this.SortName = null;
                 this.SortOrder = 0;
             }
-            // Don't reset facette choices if user hasn't changed query string
-            if (search == null) resetFacette = false;
-
             // Showing user search is processing
-            await RaisePropertyChanged();
-
+            await RaiseAllPropertiesChanged();
+            if (search == null) resetFacette = false;
             // Init searchHistory
             if (search == null && this.SearchQuery != null)
                 search = this.SearchQuery;
@@ -680,7 +691,9 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 // Avoid resetting facette on sortFilter change
                 if (resetFacette && search != null)
                 {
+                    this.FacetteList = new ObservableCollection<FacetteGroup>();
                     this.Itemss = new SelectableObservableCollection<FacetteValue>();
+
                     int groupIndex = 0;
                     // Parsing FacetteList from ResultList
                     foreach (var tmp in this.FacetCollectionList)
@@ -695,6 +708,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                                 id = tmp.FacetId,
                                 value = FacetListItems.Label,
                                 displayValue = FacetListItems.DisplayLabel ?? FacetListItems.Label,
+                                count = FacetListItems.Count.ToString(),
                                 font = FontAttributes.None,
                                 noTitle = true,
                                 groupIndex = groupIndex
@@ -721,6 +735,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                                 id = tmp.FacetId,
                                 value = tmp2.Label,
                                 displayValue = tmp2.DisplayLabel ?? tmp2.Label,
+                                count = tmp2.Count.ToString(),
                                 font = FontAttributes.None,
                                 noTitle = true
                             };
@@ -737,7 +752,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 this.ResultCount = ApplicationResource.SearchViewResultNull;
             }
             await RaisePropertyChanged(nameof(this.Itemss));
-            await RaisePropertyChanged();
+
+            await RaiseAllPropertiesChanged();
             this.IsBusy = false;
         }
 

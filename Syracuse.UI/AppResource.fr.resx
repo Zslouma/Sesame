@@ -208,7 +208,7 @@
     <value>En ce moment</value>
   </data>
   <data name="NoSearchResults" xml:space="preserve">
-    <value>Votre recherche ne renvoie aucun résultat</value>
+    <value>Aucun résultat ne correspond à votre recherche</value>
   </data>
   <data name="NotCurrentBooking" xml:space="preserve">
     <value>Vous n'avez pas de réservation en cours</value>
