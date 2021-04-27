@@ -256,7 +256,7 @@ Cancellation is final.</value>
     <value>{0} results</value>
   </data>
   <data name="SearchViewResultNull" xml:space="preserve">
-    <value>0 result</value>
+    <value>{0} result</value>
   </data>
   <data name="SortOptionAutorASC" xml:space="preserve">
     <value>A to Z (Author)</value>

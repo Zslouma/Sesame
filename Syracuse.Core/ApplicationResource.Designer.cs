@@ -469,7 +469,7 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0 result.
+        ///   Looks up a localized string similar to {0} result.
         /// </summary>
         public static string SearchViewResultNull {
             get {

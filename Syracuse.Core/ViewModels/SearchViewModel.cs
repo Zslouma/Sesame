@@ -674,7 +674,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 this.Results = result.D.Results;
                 await this.GetRedirectURL();
                 this.ResultCountInt = this.D?.SearchInfo?.NbResults;
-                this.ResultCount = this.D.SearchInfo == null ? ApplicationResource.SearchViewResultNull : (String.Format(ApplicationResource.SearchViewResultCount, this.D.SearchInfo.NbResults));
+                this.ResultCount = this.ResultCountInt <= 1 ? (String.Format(ApplicationResource.SearchViewResultNull, this.D.SearchInfo.NbResults)) : (String.Format(ApplicationResource.SearchViewResultCount, this.D.SearchInfo.NbResults));
                 this.FacetCollectionList = result.D.FacetCollectionList;
 
                 // Avoid resetting facette on sortFilter change
