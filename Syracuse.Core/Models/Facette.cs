@@ -17,6 +17,7 @@ namespace Syracuse.Mobitheque.Core.Models
         public long id { get; set; }
         public int groupIndex { get; set; }
         public string value { get; set; }
+        public string displayValue { get; set; }
         public FontAttributes font { get; set; } = FontAttributes.None;
         public bool noTitle { get; set; }
         private bool _isSelected { get; set; } = false;

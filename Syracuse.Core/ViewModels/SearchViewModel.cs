@@ -693,7 +693,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                             var facettetempo = new FacetteValue
                             {
                                 id = tmp.FacetId,
-                                value = FacetListItems.DisplayLabel ?? FacetListItems.Label,
+                                value = FacetListItems.Label,
+                                displayValue = FacetListItems.DisplayLabel ?? FacetListItems.Label,
                                 font = FontAttributes.None,
                                 noTitle = true,
                                 groupIndex = groupIndex
@@ -707,6 +708,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                         {
                             id = 0,
                             value = tmp.FacetLabel,
+                            displayValue = tmp.FacetLabel,
                             font = FontAttributes.Bold,
                             noTitle = false
                         };
@@ -718,6 +720,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                             {
                                 id = tmp.FacetId,
                                 value = tmp2.Label,
+                                displayValue = tmp2.DisplayLabel ?? tmp2.Label,
                                 font = FontAttributes.None,
                                 noTitle = true
                             };
