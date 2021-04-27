@@ -256,7 +256,7 @@ L’annulation est définitive.</value>
     <value>{0} résultats</value>
   </data>
   <data name="SearchViewResultNull" xml:space="preserve">
-    <value>0 résultat</value>
+    <value>{0} résultat</value>
   </data>
   <data name="SortOptionAutorASC" xml:space="preserve">
     <value>Auteur (A à Z) </value>
