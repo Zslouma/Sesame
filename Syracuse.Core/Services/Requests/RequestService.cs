@@ -50,7 +50,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             {
                 HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(originalURL);
                 webRequest.AllowAutoRedirect = false;  // IMPORTANT
-                webRequest.Timeout = 10000;           // timeout 10s
+                webRequest.Timeout = 2000;           // timeout 10s
 
             // Get the response ...
                 using (var webResponse = (HttpWebResponse)webRequest.GetResponse())

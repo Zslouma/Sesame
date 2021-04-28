@@ -117,7 +117,7 @@
                                                         <ColumnDefinition Width="0.1*" />
                                                         <ColumnDefinition Width="*" />
                                                     </Grid.ColumnDefinitions>
-                                                    <Button VerticalOptions="Center" Text="{Binding Name}" Grid.Column="1" BackgroundColor="Transparent" Clicked="HeaderButton_Clicked" CommandParameter="{Binding .}" TextTransform="None" FontAttributes="None"/>
+                                                    <Button VerticalOptions="Center" Text="{Binding Name}" TextColor="Black" Grid.Column="1" BackgroundColor="Transparent" Clicked="HeaderButton_Clicked" CommandParameter="{Binding .}" TextTransform="None" FontAttributes="None"/>
                                                     <ImageButton x:Name="HeaderButton" VerticalOptions="Center" Source="{Binding StateIcon}" BorderColor="Transparent" BackgroundColor="Transparent" Clicked="HeaderImageButton_Clicked" CommandParameter="{Binding .}" ></ImageButton>
                                                 </Grid>
                                             </ViewCell>

@@ -46,7 +46,7 @@
                 <ListView x:Name="otherAccountList" 
                           CachingStrategy="RecycleElement"
                           ItemsSource="{Binding OtherAccount}"
-                          SeparatorVisibility="Default"
+                          SeparatorVisibility="None"
                           RowHeight="100"
                           VerticalOptions="FillAndExpand"
                           VerticalScrollBarVisibility="Never"

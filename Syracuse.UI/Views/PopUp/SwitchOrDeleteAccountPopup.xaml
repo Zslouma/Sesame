@@ -24,21 +24,21 @@
     <!--You can use any elements here which are extended from Xamarin.Forms.View-->
 
     <AbsoluteLayout Padding="20"
-            HorizontalOptions="Center"
-            VerticalOptions="Center">
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill">
         <Frame
             x:Name="FrameSwitchDeleteContainer"
             Margin="15"
-            HorizontalOptions="Center"
+            HorizontalOptions="Fill"
             VerticalOptions="Center"
             BackgroundColor="White">
-            <StackLayout>
+            <StackLayout HorizontalOptions="Fill">
                 <StackLayout >
                     <Label Text="{x:Static local:AppResource.SwitchDeleteAccountPopupTitle}" FontSize="Medium" HorizontalTextAlignment="Center"/>
                 </StackLayout>
                 <yummy:PancakeView  Margin="15,15" Padding="5" CornerRadius="10" Border="{yummy:BorderMarkup Color=LightGray, Thickness=1}">
 
-                    <StackLayout  HorizontalOptions="Fill" >
+                    <StackLayout>
                         <Label  
                             Text="&#xf2bd;" 
                             FontFamily="{StaticResource FontAwesomeRegular}" 
@@ -55,7 +55,7 @@
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
                             <Label 
@@ -78,7 +78,7 @@
                             <Label
                                 Grid.Column="0" Grid.Row="1"
                                 HorizontalTextAlignment="Start"
-                                Text="ID :"
+                                Text="ID"
                                 FontAttributes="None" 
                                 FontSize="Small"/>
                             <Label
@@ -107,34 +107,35 @@
                     </Grid>
                     </StackLayout>
                 </yummy:PancakeView>
-                <Grid HorizontalOptions="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Button 
-                        x:Name="DeleteAppAccount"
-                        Grid.Column="0"
-                        Text="{x:Static local:AppResource.DeleteAppAccount}"
-                        TextColor="Red"
-                        IsVisible="True"
-                        FontSize="Small"
-                        FontAttributes="None"
-                        BackgroundColor="Transparent"
-                        Clicked="OnDeleteClick" />
-                    <Button 
-                        x:Name="SwitchAccount"
-                        Grid.Column="1"
-                        Text="{x:Static local:AppResource.SwitchAccount}"
-                        TextColor="{DynamicResource AppLigthBackgroundColor}"
-                        IsVisible="True"
-                        FontSize="Small"
-                        FontAttributes="None"
-                        BackgroundColor="Transparent"
-                        Clicked="OnSwitchAccountClick" />
+                <StackLayout>
+                <Grid Margin="15" >
 
+                    <Label Text="{x:Static local:AppResource.DeleteAppAccount}"
+                           HorizontalTextAlignment="Center"
+                           FontSize="Small"
+                     
+                           FontAttributes="None"
+                           TextColor="Red"
+                           Grid.Column="0"
+                           Grid.Row="0">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnDeleteClick"/>
+                            </Label.GestureRecognizers>
+                    </Label>
 
+                    <Label Text="{x:Static local:AppResource.SwitchAccount}"
+                           HorizontalTextAlignment="Center"
+                           FontSize="Small"
+                           FontAttributes="None"
+                           TextColor="{DynamicResource AppLigthBackgroundColor}"
+                           Grid.Column="1"
+                           Grid.Row="0">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSwitchAccountClick"/>
+                            </Label.GestureRecognizers>
+                    </Label>
                 </Grid>
+                    </StackLayout>
             </StackLayout>
         </Frame>
         <ContentView
