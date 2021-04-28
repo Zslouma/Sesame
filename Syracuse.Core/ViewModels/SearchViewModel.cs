@@ -379,7 +379,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                         bool found = false;
                         foreach (var selectedItem in SelectedItems)
                         {
-                            if (selectedItem.id == facette.id)
+                            if (selectedItem.id == facette.id && selectedItem.value == facette.value && selectedItem.groupIndex == facette.groupIndex)
                             {
                                 facette.IsSelected = true;
                                 newGroup.Add(facette);
