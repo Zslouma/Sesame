@@ -49,13 +49,13 @@ namespace Syracuse.Mobitheque.UI.Views
             ReturnValue = EnumOutputType.Cancel;
             CloseAllPopup();
         }
-        async void OnDeleteClick(object sender, EventArgs args)
+        private void OnDeleteClick(object sender, EventArgs args)
         {
             ReturnValue = EnumOutputType.Delete;
             CloseAllPopup();
         }
 
-        async void OnSwitchAccountClick(object sender, EventArgs args)
+        private void OnSwitchAccountClick(object sender, EventArgs args)
         {
             ReturnValue = EnumOutputType.Switch;
             CloseAllPopup();
