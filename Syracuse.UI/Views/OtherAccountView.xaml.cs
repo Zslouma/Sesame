@@ -14,8 +14,6 @@ namespace Syracuse.Mobitheque.UI.Views
     [MvxMasterDetailPagePresentation(Position = MasterDetailPosition.Detail, NoHistory = true, Title = "")]
     public partial class OtherAccountView : MvxContentPage<OtherAccountViewModel>
     {
-
-        private TutorialPopupAddAccount _tutorialPopup;
         private SwitchOrDeleteAccountPopup _changeOrDeleteAccountPopup;
         public OtherAccountView()
         {

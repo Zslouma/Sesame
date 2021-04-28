@@ -252,7 +252,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     {
                         resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/c-" + resultTempo.FieldList.Identifier[0];
                     }
-                    else if (resultTempo.FieldList.DigitalReadyIsEntryPoint.Length > 0 && resultTempo.FieldList.DigitalReadyIsEntryPoint[0])
+                    else if (resultTempo.FieldList.DigitalReadyIsEntryPoint.Length > 0 && resultTempo.FieldList.DigitalReadyIsEntryPoint[0] == "1")
                     {
                         resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/d-" + resultTempo.FieldList.Identifier[0];
                     }
@@ -300,7 +300,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     {
                         this.ItemsSource[i].FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/c-" + this.ItemsSource[i].FieldList.Identifier[0];
                     }
-                    else if (this.ItemsSource[i].FieldList.DigitalReadyIsEntryPoint.Length > 0 && this.ItemsSource[i].FieldList.DigitalReadyIsEntryPoint[0])
+                    else if (this.ItemsSource[i].FieldList.DigitalReadyIsEntryPoint.Length > 0 && this.ItemsSource[i].FieldList.DigitalReadyIsEntryPoint[0] == "1")
                     {
                         this.ItemsSource[i].FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/d-" + this.ItemsSource[i].FieldList.Identifier[0];
                     }

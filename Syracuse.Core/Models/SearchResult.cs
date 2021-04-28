@@ -195,7 +195,7 @@ namespace Syracuse.Mobitheque.Core.Models
 
         public int[] NumberOfDigitalNotices { get; set; }
 
-        public bool[] DigitalReadyIsEntryPoint { get; set; }
+        public string[] DigitalReadyIsEntryPoint { get; set; }
 
         public string UrlViewerDR { get; set; }
 
