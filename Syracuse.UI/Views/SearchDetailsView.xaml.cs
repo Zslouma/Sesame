@@ -96,7 +96,7 @@ namespace Syracuse.Mobitheque.UI.Views
         private async void HoldingButton_Clicked(object sender, EventArgs e)
         {
             Holdings data = ((Button)sender).BindingContext as Holdings;
-            bool answer = await DisplayAlert(ApplicationResource.Warning, String.Format(ApplicationResource.HoldingChoice, data.Site), ApplicationResource.Yes, ApplicationResource.No);
+            bool answer = await DisplayAlert(ApplicationResource.Warning, String.Format(ApplicationResource.HoldingChoice, data.Site), ApplicationResource.Book, ApplicationResource.Cancel);
             if (answer)
             {
                 await this.ViewModel.Holding(data.Holdingid, data.RecordId, data.BaseName);

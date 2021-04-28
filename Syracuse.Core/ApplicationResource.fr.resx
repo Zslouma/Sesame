@@ -159,6 +159,9 @@
   <data name="AccountSwitchSuccess" xml:space="preserve">
     <value>Vous êtes connecté en tant que {0}</value>
   </data>
+  <data name="Book" xml:space="preserve">
+    <value>Réserver</value>
+  </data>
   <data name="BookingCancelChoice" xml:space="preserve">
     <value>Souhaitez-vous annuler la réservation suivante :
 {0}
@@ -172,6 +175,9 @@ L’annulation est définitive.</value>
   </data>
   <data name="ButtonValidation" xml:space="preserve">
     <value>OK</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
   </data>
   <data name="DateToDate" xml:space="preserve">
     <value>Du {0} au {1}</value>

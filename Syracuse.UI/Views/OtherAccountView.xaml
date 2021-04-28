@@ -95,7 +95,7 @@
                                             <Label
                                                     Grid.Column="0" Grid.Row="1"
                                                     HorizontalTextAlignment="Start"
-                                                    Text="ID :"
+                                                    Text="ID"
                                                     TextColor="{d:DynamicResource PurpleTextColor}"
                                                     FontAttributes="None" 
                                                     FontSize="16"/>

@@ -141,6 +141,9 @@
   <data name="AddAccountTuto" xml:space="preserve">
     <value>Cette page mémorise les comptes précédemment authentifiés et vous permet de vous connecter à ces comptes en un clic. Pour enregistrer un nouveau compte cliquer sur:</value>
   </data>
+  <data name="Book" xml:space="preserve">
+    <value>Réserver</value>
+  </data>
   <data name="BookingAvailable" xml:space="preserve">
     <value>Disponible</value>
   </data>

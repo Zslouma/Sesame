@@ -141,6 +141,9 @@
   <data name="AddAccountTuto" xml:space="preserve">
     <value>This page remembers previously authenticated accounts and allows you to log in to these accounts with one click. To register a new account click :</value>
   </data>
+  <data name="Book" xml:space="preserve">
+    <value>Book</value>
+  </data>
   <data name="BookingAvailable" xml:space="preserve">
     <value>Available</value>
   </data>
