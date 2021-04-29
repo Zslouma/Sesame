@@ -124,6 +124,7 @@
     <BundleResource Include="Resources\FontAwesome5Solid.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
+    <BundleResource Include="Resources\splash_logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -164,69 +165,27 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 1024x1024.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 1024x10241.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 120x120.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 120x1201.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 120x1202.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 152x152.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 167x167.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 180x180.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 180x1801.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 20x20.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 29x29.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 40x40.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 40x401.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 40x402.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 58x58.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 58x581.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 60x60.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 76x76.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 80x80.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 80x801.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Vignette app IOS 87x87.png">
-      <Visible>false</Visible>
-    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-40.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-60.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-58.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-87.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-80.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-120-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-180.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-20.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-40-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-29.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-58-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-40-2.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-80-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-76.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-152.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-167.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-1024.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-120-2.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-180-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-1024-1.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Syracuse.Core\Syracuse.Mobitheque.Core.csproj">
