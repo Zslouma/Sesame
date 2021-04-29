@@ -165,27 +165,69 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-40.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-60.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-58.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-87.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-80.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-120.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-120-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-180.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-20.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-40-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-29.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-58-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-40-2.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-80-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-76.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-152.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-167.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-1024.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-120-2.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-180-1.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-1024-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-60.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-58.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-87.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-80.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-120.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-120-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-180.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-20.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-40-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-29.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-58-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-40-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-80-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-152.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-167.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-1024.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-120-2.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-180-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\logo_mobitheque-seul-1024-1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Syracuse.Core\Syracuse.Mobitheque.Core.csproj">
