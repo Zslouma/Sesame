@@ -45,6 +45,7 @@
         <Grid VerticalOptions="FillAndExpand">
             <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
                     <ListView x:Name="searchHistoryList"
+                          BackgroundColor="White" 
                           IsVisible="False"
                           CachingStrategy="RecycleElement"  ItemTapped="ListView_OnItemTapped">
                         <ListView.ItemTemplate>
