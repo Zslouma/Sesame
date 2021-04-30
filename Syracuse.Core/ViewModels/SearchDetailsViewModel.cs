@@ -247,19 +247,28 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     {
                         this.user = await App.Database.GetActiveUser();
                     }
-                    // Génération des url du Viewer DR 
-                    if (resultTempo.FieldList.NumberOfDigitalNotices.Length > 0 && resultTempo.FieldList.NumberOfDigitalNotices[0] > 0)
+                    try
                     {
-                        resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/c-" + resultTempo.FieldList.Identifier[0];
+                        if (resultTempo.FieldList.NumberOfDigitalNotices != null && resultTempo.FieldList.NumberOfDigitalNotices.Length > 0 && resultTempo.FieldList.NumberOfDigitalNotices[0] > 0)
+                        {
+                            resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/c-" + resultTempo.FieldList.Identifier[0];
+                        }
+                        else if (resultTempo.FieldList.DigitalReadyIsEntryPoint != null && resultTempo.FieldList.DigitalReadyIsEntryPoint.Length > 0 && Convert.ToInt32(resultTempo.FieldList.DigitalReadyIsEntryPoint[0]) > 0)
+                        {
+                            resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/d-" + resultTempo.FieldList.Identifier[0];
+                        }
+                        else
+                        {
+                            resultTempo.HasDigitalReady = false;
+                        }
                     }
-                    else if (resultTempo.FieldList.DigitalReadyIsEntryPoint.Length > 0 && resultTempo.FieldList.DigitalReadyIsEntryPoint[0] == "1")
-                    {
-                        resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/d-" + resultTempo.FieldList.Identifier[0];
-                    }
-                    else
+                    catch (Exception)
                     {
                         resultTempo.HasDigitalReady = false;
                     }
+                    // Génération des url du Viewer DR 
+
+
                 }
                 resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
                 await PerformSearch(resultTempo.FieldList.Identifier[0]);
@@ -296,18 +305,26 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                         this.user = await App.Database.GetActiveUser();
                     }
                     // Génération des url du Viewer DR 
-                    if (this.ItemsSource[i].FieldList.NumberOfDigitalNotices.Length > 0 && this.ItemsSource[i].FieldList.NumberOfDigitalNotices[0] > 0)
+                    try
                     {
-                        this.ItemsSource[i].FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/c-" + this.ItemsSource[i].FieldList.Identifier[0];
+                        if (this.ItemsSource[i].FieldList.NumberOfDigitalNotices != null && this.ItemsSource[i].FieldList.NumberOfDigitalNotices.Length > 0 && this.ItemsSource[i].FieldList.NumberOfDigitalNotices[0] > 0)
+                        {
+                            this.ItemsSource[i].FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/c-" + this.ItemsSource[i].FieldList.Identifier[0];
+                        }
+                        else if (this.ItemsSource[i].FieldList.DigitalReadyIsEntryPoint != null && this.ItemsSource[i].FieldList.DigitalReadyIsEntryPoint.Length > 0 && Convert.ToInt32(this.ItemsSource[i].FieldList.DigitalReadyIsEntryPoint[0]) > 0)
+                        {
+                            this.ItemsSource[i].FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/d-" + this.ItemsSource[i].FieldList.Identifier[0];
+                        }
+                        else
+                        {
+                            this.ItemsSource[i].HasDigitalReady = false;
+                        }
                     }
-                    else if (this.ItemsSource[i].FieldList.DigitalReadyIsEntryPoint.Length > 0 && this.ItemsSource[i].FieldList.DigitalReadyIsEntryPoint[0] == "1")
-                    {
-                        this.ItemsSource[i].FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/d-" + this.ItemsSource[i].FieldList.Identifier[0];
-                    }
-                    else
+                    catch (Exception)
                     {
                         this.ItemsSource[i].HasDigitalReady = false;
                     }
+
                 }
                 this.ItemsSource[i].DisplayValues.SeekForHoldings = this.ItemsSource[i].SeekForHoldings && this.ReversIsKm;
                 await PerformSearch(this.ItemsSource[i].FieldList.Identifier[0]);
