@@ -41,7 +41,7 @@
                                 TextColor="White"/>
                             <Label Text="{Binding Library}" 
                                    HorizontalTextAlignment="Center" 
-                                   TextColor="LightGray" 
+                                   TextColor="White" 
                                    FontSize="Small"></Label>
                         </StackLayout>
                     </StackLayout>
