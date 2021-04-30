@@ -11,14 +11,14 @@
                     x:Class="Syracuse.Mobitheque.UI.Views.LoginView"
                     xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
     <ContentPage.Content>
-        <ScrollView>
-            <Grid Margin="20">
+        <StackLayout VerticalOptions="Fill">
+            <Grid Padding="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Image Grid.Row="0" Source="logo_Syracuse" VerticalOptions="Start"></Image>
-                <StackLayout Grid.Row="1" Margin="15" VerticalOptions="Center" x:Name="FormLayout" Spacing="20">
+                <StackLayout Grid.Row="1" Margin="15,0" VerticalOptions="Center" x:Name="FormLayout" Spacing="20">
                     <Grid Margin="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.8*" />
@@ -101,9 +101,11 @@
                             BackgroundColor="Transparent"
                             FontFamily=""
                             Clicked="OpenBrowser_OnClicked"/>
-                    <ActivityIndicator IsRunning="{Binding IsLoading}" Color="White"/>
                 </StackLayout>
+             <AbsoluteLayout Grid.RowSpan="2" Margin="-20" IsVisible="{Binding IsLoading}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
+                <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
+            </AbsoluteLayout>
             </Grid>
-        </ScrollView>
+        </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>

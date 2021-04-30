@@ -46,60 +46,37 @@ namespace Syracuse.Mobitheque.UI {
                 resourceCulture = value;
             }
         }
-        /// <summary>
-        ///   Looks up a localized string similar to Copyright (c) {0} Archimed..
-        /// </summary>
-        public static string AboutCopyright
-        {
-            get
-            {
+        
+        public static string AboutCopyright {
+            get {
                 return ResourceManager.GetString("AboutCopyright", resourceCulture);
             }
         }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Contact : contact@archimed.fr.
-        /// </summary>
-        public static string AboutMailContact
-        {
-            get
-            {
+        
+        public static string AboutMailContact {
+            get {
                 return ResourceManager.GetString("AboutMailContact", resourceCulture);
             }
         }
-
-        /// <summary>
-        ///   Looks up a localized string similar to All rights reserved.
-        /// </summary>
-        public static string AboutRigth
-        {
-            get
-            {
+        
+        public static string AboutRigth {
+            get {
                 return ResourceManager.GetString("AboutRigth", resourceCulture);
             }
         }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Version {0}.
-        /// </summary>
-        public static string AboutVersion
-        {
-            get
-            {
+        
+        public static string AboutVersion {
+            get {
                 return ResourceManager.GetString("AboutVersion", resourceCulture);
             }
         }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Site web : https://www.archimed.fr.
-        /// </summary>
-        public static string AboutWebLink
-        {
-            get
-            {
+        
+        public static string AboutWebLink {
+            get {
                 return ResourceManager.GetString("AboutWebLink", resourceCulture);
             }
         }
+        
         public static string Accounts {
             get {
                 return ResourceManager.GetString("Accounts", resourceCulture);
@@ -111,14 +88,31 @@ namespace Syracuse.Mobitheque.UI {
                 return ResourceManager.GetString("AccountTitle", resourceCulture);
             }
         }
-        public static string Available
-        {
-            get
-            {
-                return ResourceManager.GetString("Available", resourceCulture);
+        
+        public static string AddAccountTuto {
+            get {
+                return ResourceManager.GetString("AddAccountTuto", resourceCulture);
             }
         }
-
+        
+        public static string Book {
+            get {
+                return ResourceManager.GetString("Book", resourceCulture);
+            }
+        }
+        
+        public static string BookingAvailable {
+            get {
+                return ResourceManager.GetString("BookingAvailable", resourceCulture);
+            }
+        }
+        
+        public static string BookingWait {
+            get {
+                return ResourceManager.GetString("BookingWait", resourceCulture);
+            }
+        }
+        
         public static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
@@ -137,6 +131,12 @@ namespace Syracuse.Mobitheque.UI {
             }
         }
         
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
         public static string Connect {
             get {
                 return ResourceManager.GetString("Connect", resourceCulture);
@@ -148,35 +148,43 @@ namespace Syracuse.Mobitheque.UI {
                 return ResourceManager.GetString("Copies", resourceCulture);
             }
         }
-        public static string Delete
-        {
-            get
-            {
+        
+        public static string CopiesCollectionStatements {
+            get {
+                return ResourceManager.GetString("CopiesCollectionStatements", resourceCulture);
+            }
+        }
+        
+        public static string Delete {
+            get {
                 return ResourceManager.GetString("Delete", resourceCulture);
             }
         }
-
+        
+        public static string DeleteAppAccount {
+            get {
+                return ResourceManager.GetString("DeleteAppAccount", resourceCulture);
+            }
+        }
+        
         public static string DepartmentTitle {
             get {
                 return ResourceManager.GetString("DepartmentTitle", resourceCulture);
             }
         }
-        public static string DigitalDocumentLink
-        {
-            get
-            {
+        
+        public static string DigitalDocumentLink {
+            get {
                 return ResourceManager.GetString("DigitalDocumentLink", resourceCulture);
             }
         }
-
-        public static string ErrorLibraryWebSite
-        {
-            get
-            {
+        
+        public static string ErrorLibraryWebSite {
+            get {
                 return ResourceManager.GetString("ErrorLibraryWebSite", resourceCulture);
             }
         }
-
+        
         public static string Extend {
             get {
                 return ResourceManager.GetString("Extend", resourceCulture);
@@ -189,9 +197,21 @@ namespace Syracuse.Mobitheque.UI {
             }
         }
         
+        public static string Information {
+            get {
+                return ResourceManager.GetString("Information", resourceCulture);
+            }
+        }
+        
         public static string LibraryTitle {
             get {
                 return ResourceManager.GetString("LibraryTitle", resourceCulture);
+            }
+        }
+        
+        public static string Loading {
+            get {
+                return ResourceManager.GetString("Loading", resourceCulture);
             }
         }
         
@@ -200,23 +220,82 @@ namespace Syracuse.Mobitheque.UI {
                 return ResourceManager.GetString("LoadMore", resourceCulture);
             }
         }
-        public static string NetworkError
-        {
-            get
-            {
+        
+        public static string NetworkError {
+            get {
                 return ResourceManager.GetString("NetworkError", resourceCulture);
             }
         }
-
+        
+        public static string NeverShowAgain {
+            get {
+                return ResourceManager.GetString("NeverShowAgain", resourceCulture);
+            }
+        }
+        
         public static string News {
             get {
                 return ResourceManager.GetString("News", resourceCulture);
             }
         }
-
-         public static string Password {
+        
+        public static string NoSearchResults {
+            get {
+                return ResourceManager.GetString("NoSearchResults", resourceCulture);
+            }
+        }
+        
+        public static string NotCurrentBooking {
+            get {
+                return ResourceManager.GetString("NotCurrentBooking", resourceCulture);
+            }
+        }
+        
+        public static string NotCurrentEvent {
+            get {
+                return ResourceManager.GetString("NotCurrentEvent", resourceCulture);
+            }
+        }
+        
+        public static string NotCurrentLoan {
+            get {
+                return ResourceManager.GetString("NotCurrentLoan", resourceCulture);
+            }
+        }
+        
+        public static string OtherAccountPart2Tuto {
+            get {
+                return ResourceManager.GetString("OtherAccountPart2Tuto", resourceCulture);
+            }
+        }
+        
+        public static string OtherAccountPart3Tuto {
+            get {
+                return ResourceManager.GetString("OtherAccountPart3Tuto", resourceCulture);
+            }
+        }
+        
+        public static string OtherAccountPartTuto {
+            get {
+                return ResourceManager.GetString("OtherAccountPartTuto", resourceCulture);
+            }
+        }
+        
+        public static string OtherAccountTitleTuto {
+            get {
+                return ResourceManager.GetString("OtherAccountTitleTuto", resourceCulture);
+            }
+        }
+        
+        public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        public static string PasswordForget {
+            get {
+                return ResourceManager.GetString("PasswordForget", resourceCulture);
             }
         }
         
@@ -238,15 +317,26 @@ namespace Syracuse.Mobitheque.UI {
             }
         }
         
+        public static string SwitchAccount {
+            get {
+                return ResourceManager.GetString("SwitchAccount", resourceCulture);
+            }
+        }
+        
+        public static string SwitchDeleteAccountPopupTitle {
+            get {
+                return ResourceManager.GetString("SwitchDeleteAccountPopupTitle", resourceCulture);
+            }
+        }
+        
         public static string Synthesis {
             get {
                 return ResourceManager.GetString("Synthesis", resourceCulture);
             }
         }
-        public static string Validate
-        {
-            get
-            {
+        
+        public static string Validate {
+            get {
                 return ResourceManager.GetString("Validate", resourceCulture);
             }
         }

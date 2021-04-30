@@ -83,7 +83,7 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="AppResource.fr.resx">
-      <LastGenOutput>AppResource.Designer.cs</LastGenOutput>
+      <LastGenOutput>AppResource.fr.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="AppResource.resx">
