@@ -25,7 +25,7 @@
 
     <AbsoluteLayout Padding="20"
             HorizontalOptions="Fill"
-            VerticalOptions="Fill">
+            VerticalOptions="Center">
         <Frame
             x:Name="FrameSwitchDeleteContainer"
             Margin="15"
