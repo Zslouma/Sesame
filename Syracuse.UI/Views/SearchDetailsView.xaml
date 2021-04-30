@@ -97,15 +97,12 @@
                                                     <DataTemplate>
                                                         <StackLayout>
                                                             <StackLayout IsVisible="{Binding Haslink}" >
-                                                                <StackLayout BackgroundColor="#bfbfbf" Padding="10">
-                                                                    <material:MaterialLabel FontSize="Large" Text="{x:Static local:AppResource.DigitalDocumentLink}" TextColor="White"/>
-                                                                </StackLayout>
                                                                 <StackLayout >
                                                                     <StackLayout VerticalOptions="FillAndExpand">
-                                                                        <StackLayout Padding="5"  BackgroundColor="#f0f0f0">
+                                                                        <StackLayout Padding="0,5" >
                                                                             <Button         Text="{Binding Label}"
-                                                                                            TextColor="Blue"
-                                                                                            BackgroundColor="Transparent"
+                                                                                            TextColor="White"
+                                                                                            BackgroundColor="{d:DynamicResource AppBackgroundColor}"
                                                                                             CommandParameter="{Binding Link}"
                                                                                             Clicked="OpenBrowser_OnClicked"/>
                                                                         </StackLayout>
