@@ -80,9 +80,9 @@
                                                             </Grid>
                                                         </StackLayout>
                                                         <StackLayout IsVisible="{Binding FieldList.HasZipUrl}">
-                                                            <Button         Text="{Binding FieldList.GetZipLabel}"
-                                                                                            TextColor="Blue"
-                                                                                            BackgroundColor="Transparent"
+                                                            <Button                         Text="{Binding FieldList.GetZipLabel}"
+                                                                                            TextColor="White"
+                                                                                            BackgroundColor="{d:DynamicResource AppBackgroundColor}"
                                                                                             CommandParameter="{Binding FieldList.GetZipUri}"
                                                                                             Clicked="OpenBrowser_OnClicked"/>
                                                         </StackLayout>
