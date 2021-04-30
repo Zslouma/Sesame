@@ -661,7 +661,16 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             await initSearchHistory(search, sort, resetFacette);
 
             // Check if facettes are selected
-            this.FacetFilter = CheckFacetteSelected();
+            if (!resetFacette)
+            {
+                this.FacetFilter = CheckFacetteSelected();
+            }
+            else
+            {
+                this.SelectedItems = new List<FacetteValue>();
+                this.FacetFilter = "";
+            }
+            
 
             // Search Query Json
             SearchOptions optionsTempo = new SearchOptions();

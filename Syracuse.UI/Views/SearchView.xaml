@@ -85,7 +85,7 @@
                     <Grid VerticalOptions="FillAndExpand">
                     <StackLayout VerticalOptions="FillAndExpand">
                         <Grid Padding="0, 0, 0, 0" Margin="0">
-                                <ListView ItemsSource="{Binding ExpandedFacetteList}"  IsGroupingEnabled="True" GroupDisplayBinding="{Binding Name}" x:Name="FacetteItemList" SeparatorVisibility="None" BackgroundColor="Transparent" Grid.ColumnSpan="3">
+                                <ListView ItemsSource="{Binding ExpandedFacetteList}"  IsGroupingEnabled="True" GroupDisplayBinding="{Binding Name}" x:Name="FacetteItemList" SeparatorVisibility="None" VerticalScrollBarVisibility="Never" BackgroundColor="Transparent" Grid.ColumnSpan="3">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <ViewCell >

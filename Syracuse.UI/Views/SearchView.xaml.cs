@@ -183,12 +183,34 @@ namespace Syracuse.Mobitheque.UI.Views
         {
             String listsd = e.Item as string;
             SearchBar.Text = listsd;
-            searchHistoryList.IsVisible = false;
+            resultsList.IsVisible = true;
+            resultCount.IsVisible = true;
+
+            FacetteItemList.IsVisible = false;
+            FacetteButton.FontAttributes = FontAttributes.None;
+            FacetteButtonUnderline.IsVisible = false;
+
+            SortPicker.IsVisible = false;
+            SortPicker.FontAttributes = FontAttributes.None;
+            SortButtonUnderline.IsVisible = false;
+
+            SearchButton.IsVisible = false;
+            DeleteButton.IsVisible = false;
+
+            DeleteButtonUnderline.IsVisible = false;
+            SearchButtonUnderline.IsVisible = false;
+
+            enableMultiSelect = true;
             setHeight();
             SearchBar.Unfocus();
             ((ListView)sender).SelectedItem = null;
-            await this.ViewModel.PerformSearch(listsd, null, false);
+            await this.ViewModel.PerformSearch(listsd, null, true);
+            if (this.ViewModel.Results.Count() > 0)
+            {
+                resultsList.ScrollTo(this.ViewModel.Results[0], 0, true);
+            }
             SearchBar.IsEnabled = true;
+            this.UpdateItemList();
         }
 
         private void SearchBar_OnFocus(Object sender, FocusEventArgs args)
@@ -224,7 +246,8 @@ namespace Syracuse.Mobitheque.UI.Views
             {
                 resultsList.ScrollTo(this.ViewModel.Results[0], 0, true);
             }
-            
+            this.UpdateItemList();
+
         }
 
         private void HeaderButton_Clicked(object sender, EventArgs e)
