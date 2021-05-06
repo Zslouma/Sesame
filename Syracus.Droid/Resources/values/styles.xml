@@ -24,6 +24,7 @@
   </style>
   
   <style name="MainTheme" parent="MainTheme.Base">
+    <item name="android:colorActivatedHighlight">@color/main_background</item>
   </style>
   
   <!-- Base theme applied no matter what API -->
@@ -40,7 +41,7 @@
     <item name="colorPrimaryDark">#1976D2</item>
     <!-- colorAccent is used as the default value for colorControlActivated
          which is used to tint widgets -->
-    <item name="colorAccent">#FFFFFF</item>
+    <item name="colorAccent">@color/main_background</item>
     <!-- You can also set colorControlNormal, colorControlActivated
          colorControlHighlight and colorSwitchThumbNormal. -->
     <item name="windowActionModeOverlay">true</item>
@@ -50,7 +51,7 @@
   </style>
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
-    <item name="colorAccent">#FFFFFF</item>
+    <item name="colorAccent">@color/main_background</item>
   </style>
 
   <style name="DialogUplatform" parent="Theme.AppCompat.Light.Dialog.Alert">
