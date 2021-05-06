@@ -71,12 +71,19 @@
                                                          Margin="0,0,0,20"
                                                          x:Name="Item">
                                                         <StackLayout VerticalOptions="Start" Margin="0,0,15,0">
-                                                            <Image Source="{Binding ThumbnailUrl}"                                                              
+                                                            <Frame VerticalOptions="FillAndExpand" Margin="0,5,0,0" Padding="0" >
+                                                                <Frame.HasShadow>
+                                                                    <OnPlatform x:TypeArguments="x:Boolean">
+                                                                        <On Platform="iOS">false</On>
+                                                                        <On Platform="Android">true</On>
+                                                                    </OnPlatform>
+                                                                </Frame.HasShadow>
+                                                                <Image Source="{Binding ThumbnailUrl}"
+                                                                Aspect="AspectFill"
                                                                 HeightRequest="120"
                                                                 WidthRequest="90" 
-                                                                VerticalOptions="Start"
-                                                                Margin="0,5,0,0"
-                                                                 />
+                                                                VerticalOptions="Start"/>
+                                                            </Frame>
                                                         </StackLayout>
                                                         <StackLayout Padding="0, 0, 0, 0"
                                                              VerticalOptions="Start"

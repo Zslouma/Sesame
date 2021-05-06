@@ -11,8 +11,8 @@
                     x:Class="Syracuse.Mobitheque.UI.Views.LoginView"
                     xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="Fill">
-            <Grid Padding="20">
+        <StackLayout VerticalOptions="FillAndExpand">
+            <Grid Padding="20" VerticalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
