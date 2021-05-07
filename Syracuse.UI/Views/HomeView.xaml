@@ -23,15 +23,11 @@
                              Padding="15, 15, 15, 0"
                              Grid.Row="0">
                     <Grid Margin="0, 10, 0, 10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*" />
-                            <ColumnDefinition Width="0.5*" />
-                        </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Text="{Binding Library}" FontAttributes="Bold" FontSize="{d:DynamicResource FontSizeTitle}" TextColor="{d:DynamicResource DarkTextColor}"></Label>
-                        <Label Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="End" Text="{x:Static local:AppResource.News }" TextColor="{d:DynamicResource PurpleTextColor}" IsVisible="{Binding NotCurrentEventReverse}"></Label>
+                        <Label Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Text="{Binding Library}" FontAttributes="Bold" FontSize="Large" TextColor="{d:DynamicResource DarkTextColor}"/>
+                        <Label Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="End" Text="{x:Static local:AppResource.News }" TextColor="{d:DynamicResource PurpleTextColor}" IsVisible="{Binding NotCurrentEventReverse}"/>
                     </Grid>
                     <Label Margin="10" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{x:Static local:AppResource.NotCurrentEvent}" IsVisible="{Binding NotCurrentEvent}" />
                     <ListView x:Name="resultsListEvent"
