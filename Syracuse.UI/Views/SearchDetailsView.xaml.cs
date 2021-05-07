@@ -22,12 +22,10 @@ namespace Syracuse.Mobitheque.UI.Views
         private void carouselView_CurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
         {
             var model = e.CurrentItem as Result;
-            Console.WriteLine("CurrentItem's Name:" + model.FieldList.CroppedTitle);
         }
 
         private void carouselView_PositionChanged(object sender, PositionChangedEventArgs e)
         {
-            Console.WriteLine("CurrentItem's CurrentPosition:" + e.CurrentPosition);
             if (e.CurrentPosition > e.PreviousPosition)
             {
                 if (e.CurrentPosition+1 >= this.ViewModel.EndDataPosition && e.CurrentPosition + 1 < this.ViewModel.ItemsSource.Count )
@@ -48,7 +46,6 @@ namespace Syracuse.Mobitheque.UI.Views
         }
         private async void OnCarouselViewRemainingItemsThresholdReached(object sender, EventArgs e)
         {
-            Console.WriteLine("OnCarouselViewRemainingItemsThresholdReached:");
             if (int.Parse(this.ViewModel.NbrResults) > this.ViewModel.ItemsSource.Count)
             {
             

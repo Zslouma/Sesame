@@ -58,7 +58,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 SetProperty(ref this.librariesPickerIndex, value);
                 this.RaisePropertyChanged(nameof(ButtonColor));
                 this.RaisePropertyChanged(nameof(TextColor));
-                Console.WriteLine("librariesPickerIndex = {0}", value);
             }
         }
 

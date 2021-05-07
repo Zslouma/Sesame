@@ -106,7 +106,6 @@ namespace Syracuse.Mobitheque.Core.Models
         {
             get
             {
-                Console.WriteLine("Value in datetime format : " + WhenBack);
                 return (DateTime.Now > WhenBack)
                     ? ApplicationResource.LoansDateLate + WhenBack.Date.ToShortDateString()
                     : ApplicationResource.LoansDateBefore + WhenBack.Date.ToShortDateString();

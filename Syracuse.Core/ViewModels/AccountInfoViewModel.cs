@@ -161,7 +161,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                         documents.Add(tmp);
                     }
                     InTimeBorrowedDocuments = documents.ToArray();
-                    Console.WriteLine(InTimeBorrowedDocuments);
                 }
                 this.TotalBookingDocuments = (this.SummaryAccount.BookingsTotalCount > 1) ? String.Format(ApplicationResource.AccountInfoCountOfBookings, SummaryAccount.BookingsTotalCount) 
                     : String.Format(ApplicationResource.AccountInfoCountOfBooking, SummaryAccount.BookingsTotalCount);
