@@ -807,9 +807,9 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             foreach (var search in this.Results)
             {
                 if (search.FieldList.ThumbMedium != null && search.FieldList.ThumbMedium[0] != null)
-                    search.FieldList.ThumbMedium[0] = new Uri(this.requestService.GetRedirectURL(search.FieldList.ThumbMedium[0].ToString()));
+                    search.FieldList.ThumbMedium[0] = new Uri(await this.requestService.GetRedirectURL(search.FieldList.ThumbMedium[0].ToString()));
                 else if (search.FieldList.ThumbSmall != null && search.FieldList.ThumbSmall[0] != null)
-                    search.FieldList.ThumbSmall[0] = new Uri(this.requestService.GetRedirectURL(search.FieldList.ThumbSmall[0].ToString()));
+                    search.FieldList.ThumbSmall[0] = new Uri(await this.requestService.GetRedirectURL(search.FieldList.ThumbSmall[0].ToString()));
             }
             await this.RaiseAllPropertiesChanged();
         }

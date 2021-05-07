@@ -152,11 +152,11 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 if (Loans.DefaultThumbnailUrl != null)
                 {
-                    Loans.ThumbnailUrl = this.requestService.GetRedirectURL(Loans.ThumbnailUrl, Loans.DefaultThumbnailUrl);
+                    Loans.ThumbnailUrl = await this.requestService.GetRedirectURL(Loans.ThumbnailUrl, Loans.DefaultThumbnailUrl);
                 }
                 else
                 {
-                    Loans.ThumbnailUrl = this.requestService.GetRedirectURL(Loans.ThumbnailUrl);
+                    Loans.ThumbnailUrl = await this.requestService.GetRedirectURL(Loans.ThumbnailUrl);
                 }
             }
             await this.RaiseAllPropertiesChanged();

@@ -141,11 +141,11 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 if (booking.DefaultThumbnailUrl != null)
                 {
-                    booking.ThumbnailUrl = this.requestService.GetRedirectURL(booking.ThumbnailUrl, booking.DefaultThumbnailUrl);
+                    booking.ThumbnailUrl = await this.requestService.GetRedirectURL(booking.ThumbnailUrl, booking.DefaultThumbnailUrl);
                 }
                 else
                 {
-                    booking.ThumbnailUrl = this.requestService.GetRedirectURL(booking.ThumbnailUrl);
+                    booking.ThumbnailUrl = await this.requestService.GetRedirectURL(booking.ThumbnailUrl);
                 }
             }
             await this.RaiseAllPropertiesChanged();
