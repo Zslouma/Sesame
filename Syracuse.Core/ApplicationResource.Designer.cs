@@ -414,6 +414,24 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Return on .
+        /// </summary>
+        public static string LoansDateBefore {
+            get {
+                return ResourceManager.GetString("LoansDateBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Late since the .
+        /// </summary>
+        public static string LoansDateLate {
+            get {
+                return ResourceManager.GetString("LoansDateLate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please fill in this field.
         /// </summary>
         public static string MissingField {

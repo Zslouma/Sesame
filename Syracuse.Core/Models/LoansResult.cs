@@ -108,8 +108,8 @@ namespace Syracuse.Mobitheque.Core.Models
             {
                 Console.WriteLine("Value in datetime format : " + WhenBack);
                 return (DateTime.Now > WhenBack)
-                    ? "En retard depuis le " + WhenBack.Date.ToShortDateString()
-                    : "A rendre avant le " + WhenBack.Date.ToShortDateString();
+                    ? ApplicationResource.LoansDateLate + WhenBack.Date.ToShortDateString()
+                    : ApplicationResource.LoansDateBefore + WhenBack.Date.ToShortDateString();
             }
         }
 

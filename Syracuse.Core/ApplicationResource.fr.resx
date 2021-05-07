@@ -236,6 +236,12 @@ L’annulation est définitive.</value>
   <data name="Loans" xml:space="preserve">
     <value>Mes prêts</value>
   </data>
+  <data name="LoansDateBefore" xml:space="preserve">
+    <value>A rendre avant le </value>
+  </data>
+  <data name="LoansDateLate" xml:space="preserve">
+    <value>En retard depuis le </value>
+  </data>
   <data name="MissingField" xml:space="preserve">
     <value>Veuillez remplir ce champ</value>
   </data>

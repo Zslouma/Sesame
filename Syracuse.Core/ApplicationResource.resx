@@ -236,6 +236,12 @@ Cancellation is final.</value>
   <data name="Loans" xml:space="preserve">
     <value>My loans</value>
   </data>
+  <data name="LoansDateBefore" xml:space="preserve">
+    <value>Return on </value>
+  </data>
+  <data name="LoansDateLate" xml:space="preserve">
+    <value>Late since the </value>
+  </data>
   <data name="MissingField" xml:space="preserve">
     <value>Please fill in this field</value>
   </data>
