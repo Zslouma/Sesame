@@ -143,7 +143,7 @@
 
                                                                         <BoxView BackgroundColor="{Binding StatusColor}" Grid.Row="0" Grid.Column="0" />
                                                                         <StackLayout  Grid.Row="0" Grid.Column="1">
-                                                                            <Label Text="{Binding DisponibilityText}"></Label>
+                                                                            <Label Text="{Binding DisponibilityText}"/>
                                                                             <Label TextColor="Gray" Text="{Binding DisplayValue}"/>
                                                                             <Button x:Name="HoldingButton" IsVisible="{Binding isReservable}" BackgroundColor="{d:DynamicResource AppBackgroundColor}" Text="{x:Static local:AppResource.Book}" TextColor="White" BindingContext="{Binding .}" Clicked="HoldingButton_Clicked"/>
                                                                         </StackLayout>

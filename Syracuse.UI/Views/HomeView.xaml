@@ -97,7 +97,15 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout Orientation="Horizontal" Padding="7, 0, 7, 0" Margin="0,0,0,15">
-                                        <Image VerticalOptions="Center" Source="{Binding FieldList.Image}" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent" Margin="5"/>
+                                        <Frame VerticalOptions="FillAndExpand" Margin="5" Padding="0" >
+                                            <Frame.HasShadow>
+                                                <OnPlatform x:TypeArguments="x:Boolean">
+                                                    <On Platform="iOS">false</On>
+                                                    <On Platform="Android">true</On>
+                                                </OnPlatform>
+                                            </Frame.HasShadow>
+                                            <Image VerticalOptions="Center" Source="{Binding FieldList.Image}" HeightRequest="120" WidthRequest="90" Background="" BackgroundColor="Transparent"/>
+                                        </Frame>
                                         <StackLayout VerticalOptions="Center" Orientation="Vertical">
                                             <Label TextColor="Black" Text="{Binding FieldList.Title[0]}" MaxLines="2" FontAttributes="Bold" FontSize="Medium"/>
                                             <Label TextColor="Gray" Text="{Binding FieldList.shortDesc}" MaxLines="2" FontSize="Small"/>
