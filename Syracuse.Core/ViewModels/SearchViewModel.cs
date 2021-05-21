@@ -396,7 +396,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 }
                 this.ExpandedFacetteList.Add(newGroup);
             }
-            GetRedirectURL();
             this.RaiseAllPropertiesChanged();
         }
         private void OnRemoveSelected()
@@ -468,6 +467,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.page += 1;
             Result[] res = await loadPage();
             this.Results = this.Results.Concat(res).ToArray();
+            GetRedirectURL();
             this.IsBusy = false;
         }
         public bool Equals(List<FacetteValue> NewItems, List<FacetteValue> OldItem)
@@ -692,6 +692,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 this.D = result.D;
                 result.D.Results = await this.CheckAvCheckAvailability(result.D.Results, search, facetFilter);
                 this.Results = result.D.Results;
+                GetRedirectURL();
                 this.ResultCountInt = this.D?.SearchInfo?.NbResults;
                 this.ResultCount = this.ResultCountInt <= 1 ? (String.Format(ApplicationResource.SearchViewResultNull, this.D.SearchInfo.NbResults)) : (String.Format(ApplicationResource.SearchViewResultCount, this.D.SearchInfo.NbResults));
                 this.FacetCollectionList = result.D.FacetCollectionList;
