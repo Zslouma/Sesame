@@ -150,7 +150,10 @@
                                                                 <On Platform="Android">true</On>
                                                             </OnPlatform>
                                                         </Frame.HasShadow>
-                                                        <Image VerticalOptions="Start" Source="{Binding FieldList.Image}" Aspect="AspectFill" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent" />
+                                                        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                                            <Image VerticalOptions="Start" IsVisible="{Binding FieldList.HaveImage}" Source="{Binding FieldList.Image}" Aspect="AspectFill" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent" />
+                                                            <ActivityIndicator VerticalOptions="Center" HeightRequest="120" WidthRequest="90" IsRunning="True" Color="Gray" IsVisible="{Binding FieldList.ReverseHaveImage}" />
+                                                        </StackLayout>
                                                     </Frame>
                                                     <StackLayout VerticalOptions="Start" Orientation="Vertical">
                                                     <Label TextColor="Black" Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="Medium"/>

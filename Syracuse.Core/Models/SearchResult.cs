@@ -273,6 +273,18 @@ namespace Syracuse.Mobitheque.Core.Models
         }
 
 
+        private bool haveImage { get; set; } = false;
+        public bool HaveImage { 
+            get { return this.haveImage; }
+            set {
+                this.haveImage = value;
+                this.ReverseHaveImage = !value;   
+                } 
+
+        }
+
+        public bool ReverseHaveImage { get; set; } = true;
+
         public string shortDesc
         {
             get {

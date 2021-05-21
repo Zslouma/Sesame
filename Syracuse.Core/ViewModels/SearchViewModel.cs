@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -319,7 +320,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             if (parameter.Query.QueryString != "")
             {
                 this.SearchQuery = parameter.Query.QueryString;
-                await PerformSearch(parameter.Query.QueryString);
+                PerformSearch(parameter.Query.QueryString);
             }
 
         }
@@ -395,6 +396,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 }
                 this.ExpandedFacetteList.Add(newGroup);
             }
+            GetRedirectURL();
             this.RaiseAllPropertiesChanged();
         }
         private void OnRemoveSelected()
@@ -466,8 +468,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.page += 1;
             Result[] res = await loadPage();
             this.Results = this.Results.Concat(res).ToArray();
-
-            await this.GetRedirectURL();
             this.IsBusy = false;
         }
         public bool Equals(List<FacetteValue> NewItems, List<FacetteValue> OldItem)
@@ -692,7 +692,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 this.D = result.D;
                 result.D.Results = await this.CheckAvCheckAvailability(result.D.Results, search, facetFilter);
                 this.Results = result.D.Results;
-                await this.GetRedirectURL();
                 this.ResultCountInt = this.D?.SearchInfo?.NbResults;
                 this.ResultCount = this.ResultCountInt <= 1 ? (String.Format(ApplicationResource.SearchViewResultNull, this.D.SearchInfo.NbResults)) : (String.Format(ApplicationResource.SearchViewResultCount, this.D.SearchInfo.NbResults));
                 this.FacetCollectionList = result.D.FacetCollectionList;
@@ -804,16 +803,31 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         private async Task GetRedirectURL()
         {
-            foreach (var search in this.Results)
+            await Task.Run(async () =>
             {
-                if (search.FieldList.ThumbMedium != null && search.FieldList.ThumbMedium[0] != null)
-                    search.FieldList.ThumbMedium[0] = new Uri(await this.requestService.GetRedirectURL(search.FieldList.ThumbMedium[0].ToString()));
-                else if (search.FieldList.ThumbSmall != null && search.FieldList.ThumbSmall[0] != null)
-                    search.FieldList.ThumbSmall[0] = new Uri(await this.requestService.GetRedirectURL(search.FieldList.ThumbSmall[0].ToString()));
-            }
+                foreach (var search in this.Results)
+                {
+                    if (search.FieldList.ThumbMedium != null && search.FieldList.ThumbMedium[0] != null)
+                        search.FieldList.ThumbMedium[0] = new Uri(await this.requestService.GetRedirectURL(search.FieldList.ThumbMedium[0].ToString()));
+                    else if (search.FieldList.ThumbSmall != null && search.FieldList.ThumbSmall[0] != null)
+                        search.FieldList.ThumbSmall[0] = new Uri(await this.requestService.GetRedirectURL(search.FieldList.ThumbSmall[0].ToString()));
+                    else
+                        Console.WriteLine("test");
+                    search.FieldList.HaveImage = true;
+                    await this.RaisePropertyChanged(nameof(search.FieldList.HaveImage));
+                }
+            });
+            this.ForceListUpdate();
             await this.RaiseAllPropertiesChanged();
         }
 
         #endregion search
+        private void ForceListUpdate()
+        {
+            var tempo = this.Results;
+            this.Results = new Result[0];
+            this.Results = tempo;
+        }
     }
+
 }
