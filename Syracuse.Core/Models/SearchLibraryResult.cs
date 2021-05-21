@@ -12,6 +12,7 @@ namespace Syracuse.Mobitheque.Core.Models
 
         [JsonProperty("d")]
         public Dataa Dataa { get; set; }
+            
     }
     public class HoldingColumn
     {
@@ -69,6 +70,7 @@ namespace Syracuse.Mobitheque.Core.Models
         public IList<string> sys_support { get; set; }
         public IList<string> Popularity_sort { get; set; }
         public IList<string> sys_base { get; set; }
+
     }
 
     public class Holdings
@@ -246,7 +248,7 @@ namespace Syracuse.Mobitheque.Core.Models
         {
             get
             {
-                return Holdings.Count > 0;
+                return Holdings.Count > 0 && Holdings != null;
             }
         }
         public Dictionary<string, bool> DisplayHoldings
@@ -268,7 +270,7 @@ namespace Syracuse.Mobitheque.Core.Models
         {
             get
             {
-                return HoldingsStatements.Count > 0;
+                return HoldingsStatements.Count > 0 && HoldingsStatements != null;
             }
         }
 

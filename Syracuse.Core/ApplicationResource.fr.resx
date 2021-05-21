@@ -136,10 +136,16 @@
     <value>{0} sont en retard</value>
   </data>
   <data name="AccountInfoCountNotAvailableBookings" xml:space="preserve">
-    <value>Aucunes réservations disponibles pour le moment</value>
+    <value>Aucune réservation disponible pour le moment</value>
+  </data>
+  <data name="AccountInfoCountOfBooking" xml:space="preserve">
+    <value>Vous avez réservé {0} document</value>
   </data>
   <data name="AccountInfoCountOfBookings" xml:space="preserve">
     <value>Vous avez réservé {0} documents</value>
+  </data>
+  <data name="AccountInfoCountOfLoan" xml:space="preserve">
+    <value>Vous avez emprunté {0} document</value>
   </data>
   <data name="AccountInfoCountOfLoans" xml:space="preserve">
     <value>Vous avez emprunté {0} documents</value>
@@ -153,13 +159,16 @@
   <data name="AccountSwitchSuccess" xml:space="preserve">
     <value>Vous êtes connecté en tant que {0}</value>
   </data>
+  <data name="Book" xml:space="preserve">
+    <value>Réserver</value>
+  </data>
   <data name="BookingCancelChoice" xml:space="preserve">
-    <value>Souhaitez-vous annuler la réservation suivante:
+    <value>Souhaitez-vous annuler la réservation suivante :
 {0}
-Cet acte est définitif!</value>
+L’annulation est définitive.</value>
   </data>
   <data name="BookingResultBookingDate" xml:space="preserve">
-    <value>réservé le {0}</value>
+    <value>Réservé le {0}</value>
   </data>
   <data name="Bookings" xml:space="preserve">
     <value>Mes réservations</value>
@@ -167,17 +176,29 @@ Cet acte est définitif!</value>
   <data name="ButtonValidation" xml:space="preserve">
     <value>OK</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
   <data name="DateToDate" xml:space="preserve">
+    <value>Du {0} au {1}</value>
+  </data>
+  <data name="DateToDateHours" xml:space="preserve">
     <value>Du {0} au {1} de {2} à {3}</value>
   </data>
   <data name="DateToDateShort" xml:space="preserve">
-    <value>{0} de {1}  à {2}</value>
+    <value>{0} de {1} à {2}</value>
   </data>
   <data name="DisconectAuthorization" xml:space="preserve">
-    <value>Pour ajouter un nouveau compte nous allons devoir mettre un terme à la session actuelle voulez-vous continuer?</value>
+    <value>Vous allez être provisoirement déconnecté de votre session actuelle. Une fois le nouveau compte ajouté, vous avez la possibilité de basculer de l'un à l'autre en 1 clic.</value>
   </data>
   <data name="Disconnect" xml:space="preserve">
     <value>Déconnexion</value>
+  </data>
+  <data name="DisponibilityNo" xml:space="preserve">
+    <value>Non disponible</value>
+  </data>
+  <data name="DisponibilityYes" xml:space="preserve">
+    <value>Disponible</value>
   </data>
   <data name="Download" xml:space="preserve">
     <value>Téléchargements</value>
@@ -193,6 +214,9 @@ Cet acte est définitif!</value>
   </data>
   <data name="FailExtendLoan" xml:space="preserve">
     <value>Renouvelement impossible</value>
+  </data>
+  <data name="ForgetAccount" xml:space="preserve">
+    <value>Souaitez-vous oublier ce compte sur l'application? Vous pourrez toujours vous reconnecter à ce dernier par la suite.</value>
   </data>
   <data name="HoldingChoice" xml:space="preserve">
     <value>Voulez-vous confirmer votre réservation à {0}</value>
@@ -211,6 +235,12 @@ Cet acte est définitif!</value>
   </data>
   <data name="Loans" xml:space="preserve">
     <value>Mes prêts</value>
+  </data>
+  <data name="LoansDateBefore" xml:space="preserve">
+    <value>A rendre avant le </value>
+  </data>
+  <data name="LoansDateLate" xml:space="preserve">
+    <value>En retard depuis le </value>
   </data>
   <data name="MissingField" xml:space="preserve">
     <value>Veuillez remplir ce champ</value>
@@ -232,19 +262,22 @@ Cet acte est définitif!</value>
 {0}</value>
   </data>
   <data name="Scan" xml:space="preserve">
-    <value>Scanner</value>
+    <value>Scanner un ouvrage</value>
   </data>
   <data name="SearchViewResultCount" xml:space="preserve">
     <value>{0} résultats</value>
   </data>
   <data name="SearchViewResultNull" xml:space="preserve">
-    <value>0 résultat</value>
+    <value>{0} résultat</value>
   </data>
   <data name="SortOptionAutorASC" xml:space="preserve">
-    <value>A à Z (Auteur)</value>
+    <value>Auteur (A à Z) </value>
   </data>
   <data name="SortOptionAutorDESC" xml:space="preserve">
-    <value>Z à A (Auteur)</value>
+    <value>Auteur (Z à A)</value>
+  </data>
+  <data name="SortOptionPertinence" xml:space="preserve">
+    <value>Pertinence</value>
   </data>
   <data name="SortOptionTimeASC" xml:space="preserve">
     <value>+ récent</value>
@@ -253,10 +286,10 @@ Cet acte est définitif!</value>
     <value>- récent</value>
   </data>
   <data name="SortOptionTitleASC" xml:space="preserve">
-    <value>A à Z (Titre)</value>
+    <value>Titre (A à Z)</value>
   </data>
   <data name="SortOptionTitleDESC" xml:space="preserve">
-    <value>Z à A (Titre)</value>
+    <value>Titre (Z à A)</value>
   </data>
   <data name="Success" xml:space="preserve">
     <value>Succès</value>
@@ -265,10 +298,10 @@ Cet acte est définitif!</value>
     <value>Le document vous sera mis à disposition prochainement</value>
   </data>
   <data name="SuccessCancelBooking" xml:space="preserve">
-    <value>L'annulation a été réussie pour le titre {0}</value>
+    <value>Votre réservation a été annulée pour le titre {0}</value>
   </data>
   <data name="SuccessExtendLoan" xml:space="preserve">
-    <value>La prolongation a été effectué pour le titre {0}</value>
+    <value>Votre réservation a été prolongée pour le titre {0}</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Avertissement</value>

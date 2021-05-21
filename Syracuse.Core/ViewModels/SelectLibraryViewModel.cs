@@ -58,7 +58,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 SetProperty(ref this.librariesPickerIndex, value);
                 this.RaisePropertyChanged(nameof(ButtonColor));
                 this.RaisePropertyChanged(nameof(TextColor));
-                Console.WriteLine("librariesPickerIndex = {0}", value);
             }
         }
 
@@ -83,7 +82,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
             opt.Department = this.DepartmentsPickerSource[this.departmentsPickerIndex];
             opt.Library = this.librariesPickerSource[this.LibrariesPickerIndex];
+            opt.LibraryCode = this.librariesSelected[this.librariesPickerIndex].Code;
             opt.LibraryUrl = this.librariesSelected[this.librariesPickerIndex].Config.BaseUri;
+            opt.DomainUrl = this.librariesSelected[this.librariesPickerIndex].Config.DomainUri;
+            opt.ForgetMdpUrl = this.librariesSelected[this.librariesPickerIndex].Config.ForgetMdpUri;
             opt.EventsScenarioCode = this.librariesSelected[this.librariesPickerIndex].Config.EventsScenarioCode;
             opt.SearchScenarioCode = this.librariesSelected[this.librariesPickerIndex].Config.SearchScenarioCode;
             opt.IsEvent = this.librariesSelected[this.librariesPickerIndex].Config.IsEvent;

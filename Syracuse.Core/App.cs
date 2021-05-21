@@ -6,6 +6,7 @@ using Syracuse.Mobitheque.Core.ViewModels;
 using Syracuse.Mobitheque.Core.ViewModels.Sorts;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Syracuse.Mobitheque.Core
 {

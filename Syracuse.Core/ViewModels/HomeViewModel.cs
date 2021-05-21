@@ -5,6 +5,7 @@ using Syracuse.Mobitheque.Core.Services.Requests;
 using Syracuse.Mobitheque.Core.ViewModels.Sorts;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -181,6 +182,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.EventsScenarioCode = user.EventsScenarioCode;
             this.SearchScenarioCode = user.SearchScenarioCode;
             this.Results = await this.loadPage(user.IsEvent);
+
             if (this.results.Length == 0)
             {
                 this.NotCurrentEvent = true;
@@ -190,22 +192,27 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 this.NotCurrentEvent = false;
             }
             this.IsEvent = user.IsEvent;
-
+            await this.GetRedirectURL();
+            this.IsBusy = false;
             await base.Initialize();
         }
 
         private async Task getNextPage()
         {
 
+            this.IsBusy = true;
+            await this.RaisePropertyChanged(nameof(IsBusy));
             this.page += 1;
 
             Result[] res = await loadPage(this.IsEvent);
             this.Results = this.Results.Concat(res).ToArray();
+            await this.GetRedirectURL();
+            this.IsBusy = false;
+            await this.RaisePropertyChanged(nameof(IsBusy));
         }
 
         private async Task<Result[]> loadPage(bool IsSortField)
         {
-            this.IsBusy = true;
             SearchOptions options = new SearchOptions();
             if (IsSortField)
             {
@@ -229,9 +236,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             var search = await this.requestService.Search(options);
             if (!search.Success)
             {
-                this.NotCurrentEvent = true;
-                this.DisplayAlert(ApplicationResource.Error, search.Errors?[0]?.Msg, ApplicationResource.ButtonValidation);
-                this.IsBusy = false;
+                this.DisplayAlert(ApplicationResource.Error, search.Errors?[0]?.Msg != null ? search.Errors?[0]?.Msg : ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
                 return new Result[0];
             }
             else
@@ -239,13 +244,49 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 if (search != null )
                 {
                     this.NbrResults = search?.D?.SearchInfo?.NbResults;
+                    if (search.D != null && this.IsEvent)
+                    {
+                        search.D.Results = await this.CheckAvCheckAvailability(search.D.Results);
+                    }
                 }
-                
+
             }
-           
-            this.IsBusy = false;
             return search?.D?.Results;
         }
+        public async Task<Result[]> CheckAvCheckAvailability(Result[] results)
+        {
+
+            List<RecordIdArray> RecordIdArray = new List<RecordIdArray>();
+            CheckAvailabilityOptions optionsTempo = new CheckAvailabilityOptions();
+
+            foreach (var result in results)
+            {
+                RecordIdArray.Add(new RecordIdArray(result.Resource.RscBase, result.Resource.RscId, result.Resource.Frmt));
+            }
+
+            optionsTempo.Query = new SearchOptionsDetails()
+            {
+                ScenarioCode = this.eventsScenarioCode,
+                Page = this.page,
+            };
+            optionsTempo.RecordIdArray = RecordIdArray;
+
+            // HTTP Request
+            CheckAvailabilityResult rslts = await this.requestService.CheckAvailability(optionsTempo);
+
+            var resultTempo = results.ToList();
+            if (rslts.Success && rslts.D != null )
+            {
+                foreach (var rslt in rslts.D)
+                {
+                    int v = resultTempo.FindIndex(x => x.Resource.RscId == rslt.Id.RscId);
+                    results[v].Resource.HtmlViewDisponibility = rslt.HtmlView;
+                }
+            }
+
+            return results;
+        }
+
 
         public async Task GoToDetailView(Result item)
         {
@@ -325,6 +366,24 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 nbrResults = this.NbrResults.ToString()
             };
             await this.navigationService.Navigate<SearchDetailsViewModel, SearchDetailsParameters>(tempo);
+        }
+
+        private async Task GetRedirectURL()
+        {
+            var defaultUrlTempo = this.IsEvent ? "https://graphisme-syracuse.archimed.fr/basicfilesdownload.ashx?itemGuid=05E01B10-51AE-4EDF-AEF2-64E696038A71" : "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png";
+            foreach (var search in this.Results)
+            {
+                if (search.FieldList.ThumbMedium != null && search.FieldList.ThumbMedium[0] != null)
+                    search.FieldList.ThumbMedium[0] = new Uri(await this.requestService.GetRedirectURL(search.FieldList.ThumbMedium[0].ToString(), defaultUrlTempo)) ;
+                else if (search.FieldList.ThumbSmall != null && search.FieldList.ThumbSmall[0] != null)
+                    search.FieldList.ThumbSmall[0] = new Uri(await this.requestService.GetRedirectURL(search.FieldList.ThumbSmall[0].ToString(), defaultUrlTempo));
+                else
+                {
+                    Debug.Write("Invalid object. ");
+                }
+
+            }
+            await this.RaiseAllPropertiesChanged();
         }
 
     }

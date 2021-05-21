@@ -8,11 +8,11 @@
 		<true/>
 	</dict>
 	<key>CFBundleDisplayName</key>
-	<string>Mobitheque</string>
+	<string>Mobithèque</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.05</string>
+	<string>1.0.29</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>

@@ -124,11 +124,29 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You borrowed {0} document.
+        /// </summary>
+        public static string AccountInfoCountOfBooking {
+            get {
+                return ResourceManager.GetString("AccountInfoCountOfBooking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have reserved {0} documents.
         /// </summary>
         public static string AccountInfoCountOfBookings {
             get {
                 return ResourceManager.GetString("AccountInfoCountOfBookings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have reserved {0} document.
+        /// </summary>
+        public static string AccountInfoCountOfLoan {
+            get {
+                return ResourceManager.GetString("AccountInfoCountOfLoan", resourceCulture);
             }
         }
         
@@ -169,9 +187,18 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Would you like to cancel the following booking:
+        ///   Looks up a localized string similar to Book.
+        /// </summary>
+        public static string Book {
+            get {
+                return ResourceManager.GetString("Book", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Would you like to cancel the following booking :
         ///{0}
-        ///This act is final!.
+        ///Cancellation is final..
         /// </summary>
         public static string BookingCancelChoice {
             get {
@@ -180,7 +207,7 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to booked on {0}.
+        ///   Looks up a localized string similar to Booked on {0}.
         /// </summary>
         public static string BookingResultBookingDate {
             get {
@@ -207,11 +234,29 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to from {0} to {1} from {2} to {3}.
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From {0} to {1} .
         /// </summary>
         public static string DateToDate {
             get {
                 return ResourceManager.GetString("DateToDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From {0} to {1} from {2} to {3}.
+        /// </summary>
+        public static string DateToDateHours {
+            get {
+                return ResourceManager.GetString("DateToDateHours", resourceCulture);
             }
         }
         
@@ -225,7 +270,7 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To add a new account we will have to end the current session do you want to continue?.
+        ///   Looks up a localized string similar to You will be temporarily logged out of your current session. Once the new account has been added, you can switch from one to the other in one click..
         /// </summary>
         public static string DisconectAuthorization {
             get {
@@ -239,6 +284,24 @@ namespace Syracuse.Mobitheque.Core {
         public static string Disconnect {
             get {
                 return ResourceManager.GetString("Disconnect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not available.
+        /// </summary>
+        public static string DisponibilityNo {
+            get {
+                return ResourceManager.GetString("DisponibilityNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available.
+        /// </summary>
+        public static string DisponibilityYes {
+            get {
+                return ResourceManager.GetString("DisponibilityYes", resourceCulture);
             }
         }
         
@@ -284,6 +347,15 @@ namespace Syracuse.Mobitheque.Core {
         public static string FailExtendLoan {
             get {
                 return ResourceManager.GetString("FailExtendLoan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Did you forget this account on the application? You can always log back in to it later..
+        /// </summary>
+        public static string ForgetAccount {
+            get {
+                return ResourceManager.GetString("ForgetAccount", resourceCulture);
             }
         }
         
@@ -338,6 +410,24 @@ namespace Syracuse.Mobitheque.Core {
         public static string Loans {
             get {
                 return ResourceManager.GetString("Loans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return on .
+        /// </summary>
+        public static string LoansDateBefore {
+            get {
+                return ResourceManager.GetString("LoansDateBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Late since the .
+        /// </summary>
+        public static string LoansDateLate {
+            get {
+                return ResourceManager.GetString("LoansDateLate", resourceCulture);
             }
         }
         
@@ -397,7 +487,7 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scan.
+        ///   Looks up a localized string similar to Scanning a book.
         /// </summary>
         public static string Scan {
             get {
@@ -415,7 +505,7 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0 result.
+        ///   Looks up a localized string similar to {0} result.
         /// </summary>
         public static string SearchViewResultNull {
             get {
@@ -438,6 +528,15 @@ namespace Syracuse.Mobitheque.Core {
         public static string SortOptionAutorDESC {
             get {
                 return ResourceManager.GetString("SortOptionAutorDESC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pertinence.
+        /// </summary>
+        public static string SortOptionPertinence {
+            get {
+                return ResourceManager.GetString("SortOptionPertinence", resourceCulture);
             }
         }
         
@@ -496,7 +595,7 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancellation was successful for the title {0}.
+        ///   Looks up a localized string similar to Your booking has been cancelled for the title {0}.
         /// </summary>
         public static string SuccessCancelBooking {
             get {
@@ -505,7 +604,7 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The extension has been made for the title {0}.
+        ///   Looks up a localized string similar to Your bookings has been extended for the title {0}.
         /// </summary>
         public static string SuccessExtendLoan {
             get {

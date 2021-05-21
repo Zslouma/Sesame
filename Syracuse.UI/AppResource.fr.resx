@@ -117,17 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutCopyright" xml:space="preserve">
+    <value>Copyright © {0} Archimed.</value>
+  </data>
+  <data name="AboutMailContact" xml:space="preserve">
+    <value>Contact : contact@archimed.fr</value>
+  </data>
+  <data name="AboutRigth" xml:space="preserve">
+    <value>Tous droits réservés</value>
+  </data>
+  <data name="AboutVersion" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="AboutWebLink" xml:space="preserve">
+    <value>Site web : https://www.archimed.fr</value>
+  </data>
   <data name="Accounts" xml:space="preserve">
     <value>Mon compte</value>
   </data>
   <data name="AccountTitle" xml:space="preserve">
-    <value>Nom de compte</value>
+    <value>Identifiant</value>
+  </data>
+  <data name="AddAccountTuto" xml:space="preserve">
+    <value>Cette page mémorise les comptes précédemment authentifiés et vous permet de vous connecter à ces comptes en un clic. Pour enregistrer un nouveau compte cliquer sur:</value>
+  </data>
+  <data name="Book" xml:space="preserve">
+    <value>Réserver</value>
   </data>
   <data name="BookingAvailable" xml:space="preserve">
     <value>Disponible</value>
   </data>
   <data name="BookingWait" xml:space="preserve">
-    <value>en attente</value>
+    <value>En attente</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annuler</value>
@@ -137,6 +158,9 @@
   </data>
   <data name="Choose" xml:space="preserve">
     <value>Choisir</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Fermer</value>
   </data>
   <data name="Connect" xml:space="preserve">
     <value>Se connecter</value>
@@ -149,6 +173,9 @@
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Suprimer</value>
+  </data>
+  <data name="DeleteAppAccount" xml:space="preserve">
+    <value>Supprimer ce compte de l'application</value>
   </data>
   <data name="DepartmentTitle" xml:space="preserve">
     <value>Département</value>
@@ -165,8 +192,14 @@
   <data name="FilterOption" xml:space="preserve">
     <value>Filtrer</value>
   </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
   <data name="LibraryTitle" xml:space="preserve">
     <value>Etablissement</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Chargement...</value>
   </data>
   <data name="LoadMore" xml:space="preserve">
     <value>Charger plus</value>
@@ -174,8 +207,14 @@
   <data name="NetworkError" xml:space="preserve">
     <value>Cette application necessite une connexion internet veuillez verifier votre reseau</value>
   </data>
+  <data name="NeverShowAgain" xml:space="preserve">
+    <value>Ne plus afficher</value>
+  </data>
   <data name="News" xml:space="preserve">
     <value>En ce moment</value>
+  </data>
+  <data name="NoSearchResults" xml:space="preserve">
+    <value>Aucun résultat ne correspond à votre recherche</value>
   </data>
   <data name="NotCurrentBooking" xml:space="preserve">
     <value>Vous n'avez pas de réservation en cours</value>
@@ -186,8 +225,23 @@
   <data name="NotCurrentLoan" xml:space="preserve">
     <value>Vous n'avez pas de prêt en cours</value>
   </data>
+  <data name="OtherAccountPart2Tuto" xml:space="preserve">
+    <value> Voulez-vous déclarer les différents comptes de votre famille ?</value>
+  </data>
+  <data name="OtherAccountPart3Tuto" xml:space="preserve">
+    <value> Gérer vos comptes ici et basculez rapidement d'un profil à l'autre.</value>
+  </data>
+  <data name="OtherAccountPartTuto" xml:space="preserve">
+    <value>Vous avez plusieurs comptes dans différentes bibliothèques ?</value>
+  </data>
+  <data name="OtherAccountTitleTuto" xml:space="preserve">
+    <value>Gérez l'ensemble de vos comptes au même endroit</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Mot de passe</value>
+  </data>
+  <data name="PasswordForget" xml:space="preserve">
+    <value>Mot de passe oublié ?</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Recherche...</value>
@@ -197,6 +251,12 @@
   </data>
   <data name="Submit" xml:space="preserve">
     <value>Valider</value>
+  </data>
+  <data name="SwitchAccount" xml:space="preserve">
+    <value>Basculer sur ce compte</value>
+  </data>
+  <data name="SwitchDeleteAccountPopupTitle" xml:space="preserve">
+    <value>Que souhaitez-vous faire?</value>
   </data>
   <data name="Synthesis" xml:space="preserve">
     <value>Ma synthèse</value>

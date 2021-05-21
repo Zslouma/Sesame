@@ -10,6 +10,7 @@ namespace Syracuse.Mobitheque.UI.Views
     public partial class HomeView : MvxContentPage<HomeViewModel>
     {
 
+
         public HomeView()
         {
             InitializeComponent();

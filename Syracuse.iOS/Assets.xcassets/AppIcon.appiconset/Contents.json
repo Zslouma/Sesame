@@ -1,133 +1,250 @@
 {
   "images": [
     {
-      "scale": "2x",
+      "filename": "logo_mobitheque-seul-40.png",
       "size": "20x20",
-      "idiom": "iphone",
-      "filename": "Vignette app IOS 40x40.png"
+      "scale": "2x",
+      "idiom": "iphone"
     },
     {
-      "scale": "3x",
+      "filename": "logo_mobitheque-seul-60.png",
       "size": "20x20",
-      "idiom": "iphone",
-      "filename": "Vignette app IOS 60x60.png"
-    },
-    {
-      "scale": "2x",
-      "size": "29x29",
-      "idiom": "iphone",
-      "filename": "Vignette app IOS 58x58.png"
-    },
-    {
       "scale": "3x",
+      "idiom": "iphone"
+    },
+    {
+      "filename": "logo_mobitheque-seul-58.png",
       "size": "29x29",
-      "idiom": "iphone",
-      "filename": "Vignette app IOS 87x87.png"
-    },
-    {
       "scale": "2x",
-      "size": "40x40",
-      "idiom": "iphone",
-      "filename": "Vignette app IOS 80x80.png"
+      "idiom": "iphone"
     },
     {
+      "filename": "logo_mobitheque-seul-87.png",
+      "size": "29x29",
       "scale": "3x",
-      "size": "40x40",
-      "idiom": "iphone",
-      "filename": "Vignette app IOS 120x120.png"
+      "idiom": "iphone"
     },
     {
+      "filename": "logo_mobitheque-seul-80.png",
+      "size": "40x40",
       "scale": "2x",
+      "idiom": "iphone"
+    },
+    {
+      "filename": "logo_mobitheque-seul-120.png",
+      "size": "40x40",
+      "scale": "3x",
+      "idiom": "iphone"
+    },
+    {
+      "filename": "logo_mobitheque-seul-120-1.png",
       "size": "60x60",
-      "idiom": "iphone",
-      "filename": "Vignette app IOS 120x1201.png"
+      "scale": "2x",
+      "idiom": "iphone"
     },
     {
-      "scale": "3x",
+      "filename": "logo_mobitheque-seul-180.png",
       "size": "60x60",
-      "idiom": "iphone",
-      "filename": "Vignette app IOS 180x180.png"
+      "scale": "3x",
+      "idiom": "iphone"
     },
     {
-      "scale": "1x",
+      "filename": "logo_mobitheque-seul-20.png",
       "size": "20x20",
-      "idiom": "ipad",
-      "filename": "Vignette app IOS 20x20.png"
+      "scale": "1x",
+      "idiom": "ipad"
     },
     {
-      "scale": "2x",
+      "filename": "logo_mobitheque-seul-40-1.png",
       "size": "20x20",
-      "idiom": "ipad",
-      "filename": "Vignette app IOS 40x401.png"
+      "scale": "2x",
+      "idiom": "ipad"
     },
     {
-      "scale": "1x",
+      "filename": "logo_mobitheque-seul-29.png",
       "size": "29x29",
-      "idiom": "ipad",
-      "filename": "Vignette app IOS 29x29.png"
-    },
-    {
-      "scale": "2x",
-      "size": "29x29",
-      "idiom": "ipad",
-      "filename": "Vignette app IOS 58x581.png"
-    },
-    {
       "scale": "1x",
-      "size": "40x40",
-      "idiom": "ipad",
-      "filename": "Vignette app IOS 40x402.png"
+      "idiom": "ipad"
     },
     {
+      "filename": "logo_mobitheque-seul-58-1.png",
+      "size": "29x29",
       "scale": "2x",
-      "size": "40x40",
-      "idiom": "ipad",
-      "filename": "Vignette app IOS 80x801.png"
+      "idiom": "ipad"
     },
     {
+      "filename": "logo_mobitheque-seul-40-2.png",
+      "size": "40x40",
+      "scale": "1x",
+      "idiom": "ipad"
+    },
+    {
+      "filename": "logo_mobitheque-seul-80-1.png",
+      "size": "40x40",
       "scale": "2x",
+      "idiom": "ipad"
+    },
+    {
+      "filename": "logo_mobitheque-seul-167.png",
       "size": "83.5x83.5",
-      "idiom": "ipad",
-      "filename": "Vignette app IOS 167x167.png"
-    },
-    {
-      "scale": "1x",
-      "size": "76x76",
-      "idiom": "ipad",
-      "filename": "Vignette app IOS 76x76.png"
-    },
-    {
       "scale": "2x",
-      "size": "76x76",
-      "idiom": "ipad",
-      "filename": "Vignette app IOS 152x152.png"
+      "idiom": "ipad"
     },
     {
+      "filename": "logo_mobitheque-seul-76.png",
+      "size": "76x76",
       "scale": "1x",
+      "idiom": "ipad"
+    },
+    {
+      "filename": "logo_mobitheque-seul-152.png",
+      "size": "76x76",
+      "scale": "2x",
+      "idiom": "ipad"
+    },
+    {
+      "filename": "logo_mobitheque-seul-1024.png",
       "size": "1024x1024",
-      "idiom": "ios-marketing",
-      "filename": "Vignette app IOS 1024x1024.png"
+      "scale": "1x",
+      "idiom": "ios-marketing"
     },
     {
-      "scale": "2x",
+      "filename": "logo_mobitheque-seul-120-2.png",
       "size": "60x60",
-      "idiom": "car",
-      "filename": "Vignette app IOS 120x1202.png"
+      "scale": "2x",
+      "idiom": "car"
     },
     {
+      "filename": "logo_mobitheque-seul-180-1.png",
+      "size": "60x60",
       "scale": "3x",
-      "size": "60x60",
-      "idiom": "car",
-      "filename": "Vignette app IOS 180x1801.png"
+      "idiom": "car"
     },
     {
-      "scale": "1x",
+      "role": "notificationCenter",
+      "size": "24x24",
+      "subtype": "38mm",
+      "scale": "2x",
+      "idiom": "watch"
+    },
+    {
+      "role": "notificationCenter",
+      "size": "27.5x27.5",
+      "subtype": "42mm",
+      "scale": "2x",
+      "idiom": "watch"
+    },
+    {
+      "role": "companionSettings",
+      "size": "29x29",
+      "scale": "2x",
+      "idiom": "watch"
+    },
+    {
+      "role": "companionSettings",
+      "size": "29x29",
+      "scale": "3x",
+      "idiom": "watch"
+    },
+    {
+      "role": "appLauncher",
+      "size": "40x40",
+      "subtype": "38mm",
+      "scale": "2x",
+      "idiom": "watch"
+    },
+    {
+      "role": "appLauncher",
+      "size": "44x44",
+      "subtype": "40mm",
+      "scale": "2x",
+      "idiom": "watch"
+    },
+    {
+      "role": "appLauncher",
+      "size": "50x50",
+      "subtype": "44mm",
+      "scale": "2x",
+      "idiom": "watch"
+    },
+    {
+      "role": "quickLook",
+      "size": "86x86",
+      "subtype": "38mm",
+      "scale": "2x",
+      "idiom": "watch"
+    },
+    {
+      "role": "quickLook",
+      "size": "98x98",
+      "subtype": "42mm",
+      "scale": "2x",
+      "idiom": "watch"
+    },
+    {
+      "role": "quickLook",
+      "size": "108x108",
+      "subtype": "44mm",
+      "scale": "2x",
+      "idiom": "watch"
+    },
+    {
+      "filename": "logo_mobitheque-seul-1024-1.png",
       "size": "1024x1024",
-      "idiom": "watch-marketing",
-      "filename": "Vignette app IOS 1024x10241.png"
+      "scale": "1x",
+      "idiom": "watch-marketing"
+    },
+    {
+      "size": "16x16",
+      "scale": "1x",
+      "idiom": "mac"
+    },
+    {
+      "size": "16x16",
+      "scale": "2x",
+      "idiom": "mac"
+    },
+    {
+      "size": "32x32",
+      "scale": "1x",
+      "idiom": "mac"
+    },
+    {
+      "size": "32x32",
+      "scale": "2x",
+      "idiom": "mac"
+    },
+    {
+      "size": "128x128",
+      "scale": "1x",
+      "idiom": "mac"
+    },
+    {
+      "size": "128x128",
+      "scale": "2x",
+      "idiom": "mac"
+    },
+    {
+      "size": "256x256",
+      "scale": "1x",
+      "idiom": "mac"
+    },
+    {
+      "size": "256x256",
+      "scale": "2x",
+      "idiom": "mac"
+    },
+    {
+      "size": "512x512",
+      "scale": "1x",
+      "idiom": "mac"
+    },
+    {
+      "size": "512x512",
+      "scale": "2x",
+      "idiom": "mac"
     }
   ],
-  "properties": {},
   "info": {
     "version": 1,
     "author": "xcode"

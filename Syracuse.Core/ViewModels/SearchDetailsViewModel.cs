@@ -63,6 +63,27 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 SetProperty(ref this.position, value); 
             }
         }
+
+        private int startDataPosition;
+        public int StartDataPosition
+        {
+            get => this.startDataPosition;
+            set
+            {
+                SetProperty(ref this.startDataPosition, value);
+            }
+        }
+
+        private int endDataPosition;
+        public int EndDataPosition
+        {
+            get => this.endDataPosition;
+            set
+            {
+                SetProperty(ref this.endDataPosition, value);
+            }
+        }
+
         private string displayPosition = "";
         public string DisplayPosition
         {
@@ -75,13 +96,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         {
             get => this.nbrResults;
             set { SetProperty(ref this.nbrResults, value); }
-        }
-
-        private IList<Result> results;
-        public IList<Result> Results
-        {
-            get => this.results;
-            set { SetProperty(ref this.results, value); }
         }
 
         private string query;
@@ -135,6 +149,17 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
         }
 
+        private bool isCarouselVisibility = false;
+        public bool IsCarouselVisibility
+        {
+            get => this.isCarouselVisibility;
+            set
+            {
+                SetProperty(ref this.isCarouselVisibility, value);
+            }
+        }
+
+
         private bool reversIsKm = false;
         public bool ReversIsKm
         {
@@ -142,7 +167,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set { SetProperty(ref this.reversIsKm, value); }
         }
 
+        private bool absoluteIndicatorVisibility;
+        public bool AbsoluteIndicatorVisibility
+        {
+            get => this.absoluteIndicatorVisibility;
+            set { SetProperty(ref this.absoluteIndicatorVisibility, value); }
+        }
 
+        public CookiesSave user { get; set; }
 
         private MvxAsyncCommand<string> searchCommand;
         public MvxAsyncCommand<string> SearchCommand => this.searchCommand ??
@@ -169,52 +201,145 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         {
             this.IsBusy = true;
             await this.CanHolding();
-            this.Results = new List<Result>();
-            int finalPosition = 0;
             this.SearchOptions = parameter.searchOptions;
             this.NbrResults = parameter.nbrResults;
             var parameterTempo = parameter.parameter;
-            for (int i = 0; i < 2; i++)
-            {
-                var positionTempo = 0;
-                foreach (var resultTempo in parameterTempo[i].D.Results)
-                {
-                    if (resultTempo.Resource.Desc != null)
-                        resultTempo.DisplayValues.Desc = resultTempo.Resource.Desc;
-                    resultTempo.DisplayValues.Star = this.setStar(resultTempo.Resource.AvNt);
-                    if (resultTempo.DisplayValues.Star == null)
-                    {
-                        resultTempo.DisplayValues.DisplayStar = false;
-                    }
-                    else { 
-                        resultTempo.DisplayValues.DisplayStar = true; 
-                    }
-                    //resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
-                    await PerformSearch(resultTempo.FieldList.Identifier[0]);
-                    this.BuildHoldingsStatements();
-                    this.BuildHoldings();
-                    resultTempo.DisplayValues.Library = this.Library;
-                    //resultTempo.DisplayValues.Library.success = resultTempo.DisplayValues.Library.success && resultTempo.DisplayValues.SeekForHoldings;
-                    if (i == 1)
-                    {
-                        if (resultTempo == parameterTempo[0].D.Results[0])
-                        {
-                            finalPosition = positionTempo;
-                        }
-                        this.Results.Add(resultTempo);
-                    }
-                    positionTempo += 1;
-                }
-            }
-            this.ItemsSource = new ObservableCollection<Result>(this.Results);
-            this.CurrentItem = this.Results.Skip(finalPosition).FirstOrDefault();
-            this.Position = finalPosition;
-            if (this.Position >= (this.ItemsSource.Count() - 5) && int.Parse(this.NbrResults) > this.ItemsSource.Count)
-            {
-                await LoadMore();
-            }
-            this.IsBusy = false;
+            this.ItemsSource = new ObservableCollection<Result>(parameterTempo[1].D.Results);
+            var tempo = parameterTempo[1].D.Results.ToList().FindIndex(x => x == parameterTempo[0].D.Results[0]);
+            this.StartDataPosition = tempo - 10 >= 0 ? tempo - 10 : 0;
+            this.EndDataPosition = tempo + 10 < parameterTempo[1].D.Results.Length ? tempo + 10 : parameterTempo[1].D.Results.Length - 1;
+            await this.FormateToCarrousel(this.StartDataPosition, this.EndDataPosition, false);
+            this.CurrentItem = this.ItemsSource[tempo];
+            this.Position = tempo;
             this.IsPositionVisible = true;
+            this.IsCarouselVisibility = true;
+            if (tempo >= (this.ItemsSource.Count() - 5) && int.Parse(this.NbrResults) > this.ItemsSource.Count)
+            {
+                await LoadMore(false);
+            }
+            this.ItemsSource[0] = this.ItemsSource[0].Clone();
+            await this.RaisePropertyChanged(nameof(this.ItemsSource));
+            await this.RaisePropertyChanged(nameof(this.CurrentItem));
+            await this.RaisePropertyChanged(nameof(this.Position));
+            await this.RaiseAllPropertiesChanged();
+            this.IsBusy = false;
+        }
+
+        public async Task FormateToCarrousel(Result[] results)
+        {
+            foreach (var resultTempo in results)
+            {
+                if (resultTempo.Resource.Desc != null)
+                    resultTempo.DisplayValues.Desc = resultTempo.Resource.Desc;
+                resultTempo.DisplayValues.Star = this.setStar(resultTempo.Resource.AvNt);
+                if (resultTempo.DisplayValues.Star == null)
+                {
+                    resultTempo.DisplayValues.DisplayStar = false;
+                }
+                else
+                {
+                    resultTempo.DisplayValues.DisplayStar = true;
+                }
+                if (resultTempo.HasDigitalReady)
+                {
+                    if (this.user == null)
+                    {
+                        this.user = await App.Database.GetActiveUser();
+                    }
+                    try
+                    {
+                        if (resultTempo.FieldList.NumberOfDigitalNotices != null && resultTempo.FieldList.NumberOfDigitalNotices.Length > 0 && resultTempo.FieldList.NumberOfDigitalNotices[0] > 0)
+                        {
+                            resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/c-" + resultTempo.FieldList.Identifier[0];
+                        }
+                        else if (resultTempo.FieldList.DigitalReadyIsEntryPoint != null && resultTempo.FieldList.DigitalReadyIsEntryPoint.Length > 0 && Convert.ToInt32(resultTempo.FieldList.DigitalReadyIsEntryPoint[0]) > 0)
+                        {
+                            resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/d-" + resultTempo.FieldList.Identifier[0];
+                        }
+                        else
+                        {
+                            resultTempo.HasDigitalReady = false;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        resultTempo.HasDigitalReady = false;
+                    }
+                    // Génération des url du Viewer DR 
+
+
+                }
+                resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
+                await PerformSearch(resultTempo.FieldList.Identifier[0]);
+                this.BuildHoldingsStatements();
+                this.BuildHoldings();
+                resultTempo.DisplayValues.Library = this.Library;
+                resultTempo.DisplayValues.Library.success = resultTempo.DisplayValues.Library.success && resultTempo.DisplayValues.SeekForHoldings;
+                this.ItemsSource.Add(resultTempo);
+            }
+        }
+        public async Task FormateToCarrousel(int start, int end, bool endIsBusy = true)
+        {
+            this.IsBusy = true;
+            Debug.WriteLine("start : " +  start.ToString());
+            Debug.WriteLine("end : " + end.ToString());
+            Debug.WriteLine("position : " + this.position.ToString());
+            for (int i = start; i <= end; i++)
+            {
+                if (this.ItemsSource[i].Resource.Desc != null)
+                    this.ItemsSource[i].DisplayValues.Desc = this.ItemsSource[i].Resource.Desc;
+                this.ItemsSource[i].DisplayValues.Star = this.setStar(this.ItemsSource[i].Resource.AvNt);
+                if (this.ItemsSource[i].DisplayValues.Star == null)
+                {
+                    this.ItemsSource[i].DisplayValues.DisplayStar = false;
+                }
+                else
+                {
+                    this.ItemsSource[i].DisplayValues.DisplayStar = true;
+                }
+                if (this.ItemsSource[i].HasDigitalReady)
+                {
+                    if (this.user == null)
+                    {
+                        this.user = await App.Database.GetActiveUser();
+                    }
+                    // Génération des url du Viewer DR 
+                    try
+                    {
+                        if (this.ItemsSource[i].FieldList.NumberOfDigitalNotices != null && this.ItemsSource[i].FieldList.NumberOfDigitalNotices.Length > 0 && this.ItemsSource[i].FieldList.NumberOfDigitalNotices[0] > 0)
+                        {
+                            this.ItemsSource[i].FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/c-" + this.ItemsSource[i].FieldList.Identifier[0];
+                        }
+                        else if (this.ItemsSource[i].FieldList.DigitalReadyIsEntryPoint != null && this.ItemsSource[i].FieldList.DigitalReadyIsEntryPoint.Length > 0 && Convert.ToInt32(this.ItemsSource[i].FieldList.DigitalReadyIsEntryPoint[0]) > 0)
+                        {
+                            this.ItemsSource[i].FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/d-" + this.ItemsSource[i].FieldList.Identifier[0];
+                        }
+                        else
+                        {
+                            this.ItemsSource[i].HasDigitalReady = false;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        this.ItemsSource[i].HasDigitalReady = false;
+                    }
+
+                }
+                this.ItemsSource[i].DisplayValues.SeekForHoldings = this.ItemsSource[i].SeekForHoldings && this.ReversIsKm;
+                await PerformSearch(this.ItemsSource[i].FieldList.Identifier[0]);
+                this.BuildHoldingsStatements();
+                this.BuildHoldings();
+                this.ItemsSource[i].DisplayValues.Library = this.Library;
+                this.ItemsSource[i].DisplayValues.Library.success = this.ItemsSource[i].DisplayValues.Library.success && this.ItemsSource[i].DisplayValues.SeekForHoldings;
+
+            }
+            var result = this.ItemsSource;
+            this.ItemsSource = new ObservableCollection<Result>(result);
+            await this.RaisePropertyChanged(nameof(ItemsSource));
+            if (endIsBusy)
+            {
+                this.IsBusy = false;
+            }
         }
 
         public void BuildHoldingsStatements()
@@ -313,40 +438,29 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             await navigationService.Close(this);
         }
 
-        private async void TimeVisibility(int positionTempo)
+        public async Task<Uri> RelativeUriToAbsolute(string uri)
         {
-            await Task.Delay(3000);
-            if (positionTempo == this.position)
-            {
-                this.IsPositionVisible = false;
-            }            
-        }
-        private async Task FormateToCarrousel(Result[] results)
-        {
-            foreach (var resultTempo in results)
-            {
-                if (resultTempo.Resource.Desc != null)
-                    resultTempo.DisplayValues.Desc = resultTempo.Resource.Desc;
-                resultTempo.DisplayValues.Star = this.setStar(resultTempo.Resource.AvNt);
-                if (resultTempo.DisplayValues.Star == null)
-                {
-                    resultTempo.DisplayValues.DisplayStar = false;
-                }
-                else
-                {
-                    resultTempo.DisplayValues.DisplayStar = true;
-                }
-                resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
-                await PerformSearch(resultTempo.FieldList.Identifier[0]);
-                this.BuildHoldingsStatements();
-                this.BuildHoldings();
-                resultTempo.DisplayValues.Library = this.Library;
-                resultTempo.DisplayValues.Library.success = resultTempo.DisplayValues.Library.success && resultTempo.DisplayValues.SeekForHoldings;
-                this.ItemsSource.Add(resultTempo);
-            }
+            var user = await App.Database.GetActiveUser();
+            string url = user.DomainUrl + uri;
+            Uri reslt = new Uri(url);
+            return reslt;
         }
 
-        public async Task LoadMore()
+        public async Task<Uri> GetUrlTransfert(Uri uri)
+        {
+            UrlWithAuthenticationStatus status = await this.requestService.GetUrlWithAuthenticationTransfert(uri);
+            if (status.Success)
+            {
+                return status.D;
+            }
+            else
+            {
+                return uri;
+            }
+            
+        }
+
+        public async Task LoadMore(bool endIsBusy = true)
         {
             this.InLoadMore = true;
             this.SearchOptions.Query.Page += 1;
@@ -361,6 +475,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 await this.FormateToCarrousel(search?.D?.Results);
             }
 
+            if (endIsBusy)
+            {
+                this.IsBusy = false;
+            }
             this.InLoadMore = false;
         }
 

@@ -42,6 +42,16 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set
             {
                 SetProperty(ref this.lateBorrowedDocuments, value);
+ 
+            }
+        }
+        private bool isLateVisibility;
+        public bool IsLateVisibility
+        {
+            get => this.isLateVisibility;
+            set
+            {
+                SetProperty(ref this.isLateVisibility, value);
             }
         }
 
@@ -121,10 +131,12 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
             if (SummaryAccount != null)
             {
-                this.TotalBorrowedDocuments = String.Format(ApplicationResource.AccountInfoCountOfLoans, SummaryAccount.LoansTotalCount);
+                this.TotalBorrowedDocuments = (this.SummaryAccount.LoansTotalCount > 1) ? String.Format(ApplicationResource.AccountInfoCountOfLoans, SummaryAccount.LoansTotalCount) 
+                : String.Format(ApplicationResource.AccountInfoCountOfLoan, SummaryAccount.LoansLateCount);
                 this.LateBorrowedDocuments =
                     (this.SummaryAccount.LoansLateCount > 1) ? String.Format(ApplicationResource.AccountInfoCountLateLoans, SummaryAccount.LoansLateCount)
                     : String.Format(ApplicationResource.AccountInfoCountLateLoan, SummaryAccount.LoansLateCount);
+                this.IsLateVisibility = this.SummaryAccount.LoansLateCount != 0;
                 if (SummaryAccount.LoansNotLateCount > 0)
                 {
                     var documents = new List<string>();
@@ -149,10 +161,9 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                         documents.Add(tmp);
                     }
                     InTimeBorrowedDocuments = documents.ToArray();
-                    Console.WriteLine(InTimeBorrowedDocuments);
                 }
-                this.TotalBookingDocuments = String.Format(ApplicationResource.AccountInfoCountOfBookings, SummaryAccount.BookingsTotalCount);
-
+                this.TotalBookingDocuments = (this.SummaryAccount.BookingsTotalCount > 1) ? String.Format(ApplicationResource.AccountInfoCountOfBookings, SummaryAccount.BookingsTotalCount) 
+                    : String.Format(ApplicationResource.AccountInfoCountOfBooking, SummaryAccount.BookingsTotalCount);
                 // Selection du label de pour les disponibilité de reservation de AccountInfo
                 switch (this.SummaryAccount.BookingsAvailableCount)
                 {

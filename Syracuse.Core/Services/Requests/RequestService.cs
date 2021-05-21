@@ -37,29 +37,43 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             };
             this.token = this.Timestamp();
         }
-
-        public String GetRedirectURL(string originalURL, string defaultURL = "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png")
+        /// <summary>
+        /// Vérifie si l'url passé en paramétre posséde une redirection ou non
+        /// </summary>
+        /// <param name="originalURL"></param>
+        /// <param name="defaultURL"></param>
+        /// <returns></returns>
+        public async Task<string> GetRedirectURL(string originalURL, string defaultURL = "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png")
         {
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(originalURL);
-            webRequest.AllowAutoRedirect = false;  // IMPORTANT
-            webRequest.Timeout = 10000;           // timeout 10s
+
+            try
+            {
+                HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(originalURL);
+                webRequest.AllowAutoRedirect = false;  // IMPORTANT
+                webRequest.Timeout = 3500;           // timeout 10s
 
             // Get the response ...
-            using (var webResponse = (HttpWebResponse)webRequest.GetResponse())
+                using (var webResponse = (HttpWebResponse)webRequest.GetResponse())
+                {
+                    // Now look to see if it's a redirect
+                    if ((int)webResponse.StatusCode >= 300 && (int)webResponse.StatusCode <= 399)
+                    {
+                        string uriString = webResponse.Headers["Location"];
+                        return uriString;
+
+                    }else if ((int)webResponse.StatusCode >= 200 && (int)webResponse.StatusCode <= 299)
+                    {
+                        return originalURL;
+                    }
+                    else
+                    {
+                        return defaultURL;
+                    }
+                }
+            }
+            catch (Exception e)
             {
-                // Now look to see if it's a redirect
-                if ((int)webResponse.StatusCode >= 300 && (int)webResponse.StatusCode <= 399)
-                {
-                    string uriString = webResponse.Headers["Location"];
-                    return uriString;
-                }else if ((int)webResponse.StatusCode >= 200 && (int)webResponse.StatusCode <= 299)
-                {
-                    return originalURL;
-                }
-                else
-                {
-                    return defaultURL;
-                }
+                return defaultURL;
             }
         }
 
@@ -177,6 +191,31 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 return null;
             }
         }
+        /// <summary>
+        /// Fournie une url possédant un token d'Authentication lorsque c'est possible
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <returns></returns>
+        public async Task<UrlWithAuthenticationStatus> GetUrlWithAuthenticationTransfert(Uri uri)
+        {
+
+            await this.InitializeHttpClient();
+
+            UrlWithAuthenticationStatus status;
+            try
+            {
+                UrlWithAuthenticationTransfertOptions transfertOptions = new UrlWithAuthenticationTransfertOptions(uri.ToString());
+                status = await this.requests.GetUrlWithAuthenticationTransfert<UrlWithAuthenticationStatus>(transfertOptions);
+                return status;
+            }
+            catch (Exception)
+            {
+                status = new UrlWithAuthenticationStatus();
+                return status;
+            }
+            
+        }
+
 
         private async Task InitializeHttpClient()
         {
@@ -275,6 +314,46 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             
         }
 
+        public async Task<CheckAvailabilityResult> CheckAvailability(CheckAvailabilityOptions options, Action<Exception> error = null)
+        {
+            if (!App.AppState.NetworkConnection)
+            {
+                Debug.WriteLine("NetworkConnection" + App.AppState.NetworkConnection);
+            }
+            await this.InitializeHttpClient();
+            if (options == null)
+                throw new ArgumentNullException(nameof(options));
+            if (options.Query.ScenarioCode == "")
+            {
+                options.Query.ScenarioCode = (await App.Database.GetActiveUser()).SearchScenarioCode;
+            }
+            try
+            {
+                var status = await this.requests.CheckAvailability<CheckAvailabilityResult>(options);
+
+                await UpdateCookies();
+
+                return status;
+            }
+            catch (Exception ex)
+            {
+                var status = new CheckAvailabilityResult();
+                status.Errors = new Error[1];
+                if (!App.AppState.NetworkConnection)
+                {
+                    status.Errors[0] = new Error(ApplicationResource.NetworkDisable);
+                }
+                else
+                {
+                    status.Errors[0] = new Error(ApplicationResource.ErrorOccurred);
+                }
+                error?.Invoke(ex);
+                return status;
+            }
+
+
+        }
+
         public async Task<SearchLibraryResult> SearchLibrary(SearchLibraryOptions options, Action<Exception> error = null)
         {
             if (!App.AppState.NetworkConnection)
@@ -310,6 +389,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             try
             {
                 var timestamp = this.Timestamp();
+                this.token = this.Timestamp();
                 var status = await this.requests.GetLoans<LoansResult>(timestamp, this.token);
 
                 await UpdateCookies();
@@ -343,6 +423,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             try
             {
                 var timestamp = this.Timestamp();
+                this.token = this.Timestamp();
                 var status = await this.requests.GetBookings<BookingResult>(timestamp, this.token);
 
                 await UpdateCookies();

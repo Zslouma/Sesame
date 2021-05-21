@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -28,10 +29,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private List<string> searchHistory;
         public SelectableObservableCollection<FacetteValue> Itemss { get; set; }
         private ObservableCollection<FacetteGroup> facetteList { get; set; } = new ObservableCollection<FacetteGroup>();
-        public ObservableCollection<FacetteGroup> FacetteList 
-        { 
+        public ObservableCollection<FacetteGroup> FacetteList
+        {
             get { return this.facetteList; }
-            set { this.facetteList = value; } 
+            set { this.facetteList = value; }
         }
         private ObservableCollection<FacetteGroup> expandedFacetteList { get; set; } = new ObservableCollection<FacetteGroup>();
         public ObservableCollection<FacetteGroup> ExpandedFacetteList
@@ -52,7 +53,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         private List<FacetteValue> selectedItems = new List<FacetteValue>();
         public List<FacetteValue> SelectedItems
-        { 
+        {
             get => this.selectedItems;
             set
             {
@@ -112,7 +113,16 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             get => this.d;
             set {
                 SetProperty(ref this.d, value);
-            } 
+            }
+        }
+        private bool isFilterable = true;
+        public bool IsFilterable
+        {
+            get => this.isFilterable;
+            set
+            {
+                SetProperty(ref this.isFilterable, value);
+            }
         }
 
         private string resultCount;
@@ -131,6 +141,18 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set
             {
                 SetProperty(ref this.resultCountInt, value);
+
+                if (value == 0)
+                {
+                    this.DisplayLoadMore = false;
+                    this.IsFilterable = false;
+                    return;
+                }
+                else
+                {
+                    this.IsFilterable = true;
+                }
+
                 if (this.Results.Count() < this.ResultCountInt)
                 {
                     this.DisplayLoadMore = true;
@@ -151,6 +173,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 SetProperty(ref this.facetCollectionList, value);
             }
         }
+
+
 
         private Result[] results;
         public Result[] Results
@@ -180,6 +204,16 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
         }
 
+        private string facetFilter;
+        public string FacetFilter
+        {
+            get => this.facetFilter;
+            set
+            {
+                SetProperty(ref this.facetFilter, value);
+            }
+        }
+
         private string sortName;
         public string SortName
         {
@@ -196,8 +230,11 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             get => this.sortNamee;
             set
             {
-                SetProperty(ref this.sortNamee, value);
-                this.SetSort(Convert.ToInt32(this.SortNamee));
+                if (Convert.ToInt32(value) >= 0)
+                {
+                    SetProperty(ref this.sortNamee, value);
+                    this.SetSort(Convert.ToInt32(this.SortNamee));
+                }
             }
         }
 
@@ -226,36 +263,41 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 return;
 
             this.filterIndex = (filter);
-
             if (this.filterIndex == 0)
+            {
+                this.SortName = null;
+                this.SortOrder = 0;
+                this.PerformSearch(null, null, false);
+            }
+            if (this.filterIndex == 1)
             {
                 this.SortName = "Title_sort";
                 this.SortOrder = 1;
-            }
-            else if (this.filterIndex == 1)
-            {
-                this.SortName = "Title_sort";
-                this.SortOrder = 0;
             }
             else if (this.filterIndex == 2)
             {
-                this.SortName = "Author_sort";
-                this.SortOrder = 1;
+                this.SortName = "Title_sort";
+                this.SortOrder = 0;
             }
             else if (this.filterIndex == 3)
             {
                 this.SortName = "Author_sort";
-                this.SortOrder = 0;
+                this.SortOrder = 1;
             }
             else if (this.filterIndex == 4)
             {
-                this.SortName = "YearOfPublication_sort";
-                this.SortOrder = 1;
+                this.SortName = "Author_sort";
+                this.SortOrder = 0;
             }
             else if (this.filterIndex == 5)
             {
                 this.SortName = "YearOfPublication_sort";
                 this.SortOrder = 0;
+            }
+            else if (this.filterIndex == 6)
+            {
+                this.SortName = "YearOfPublication_sort";
+                this.SortOrder = 1;
             }
             if (this.D == null || this.D.Results == null)
                 return;
@@ -278,7 +320,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             if (parameter.Query.QueryString != "")
             {
                 this.SearchQuery = parameter.Query.QueryString;
-                await PerformSearch(parameter.Query.QueryString);
+                PerformSearch(parameter.Query.QueryString);
             }
 
         }
@@ -308,7 +350,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         {
             this.IsBusy = true;
             var selectedIndex = this.ExpandedFacetteList.IndexOf(facetteGroupSelected);
-            if (selectedIndex<0)
+            if (selectedIndex < 0)
             {
                 this.IsBusy = false;
                 return;
@@ -335,7 +377,21 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 {
                     foreach (var facette in group)
                     {
-                        newGroup.Add(facette);
+                        bool found = false;
+                        foreach (var selectedItem in SelectedItems)
+                        {
+                            if (selectedItem.id == facette.id && selectedItem.value == facette.value && selectedItem.groupIndex == facette.groupIndex)
+                            {
+                                facette.IsSelected = true;
+                                newGroup.Add(facette);
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found){
+                            facette.IsSelected = false;
+                            newGroup.Add(facette);
+                        }
                     }
                 }
                 this.ExpandedFacetteList.Add(newGroup);
@@ -384,13 +440,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             parameter[1] = new SearchResult();
             parameter[1].D = new D();
             parameter[1].D.Results = this.Results;
-            
+
             SearchOptions searchOptions = new SearchOptions();
             searchOptions.Query = new SearchOptionsDetails()
             {
                 SortOrder = this.SortOrder,
                 SortField = this.SortName,
                 ScenarioCode = (await App.Database.GetActiveUser()).SearchScenarioCode,
+                FacetFilter = this.FacetFilter,
                 QueryString = this.SearchQuery,
                 Page = this.page
             };
@@ -410,7 +467,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.page += 1;
             Result[] res = await loadPage();
             this.Results = this.Results.Concat(res).ToArray();
-            await this.GetRedirectURL();
+            GetRedirectURL();
             this.IsBusy = false;
         }
         public bool Equals(List<FacetteValue> NewItems, List<FacetteValue> OldItem)
@@ -443,18 +500,25 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private async Task<Result[]> loadPage()
         {
             SearchOptions optionsTempo = new SearchOptions();
+
             optionsTempo.Query = new SearchOptionsDetails()
             {
                 SortOrder = this.sortOrder,
                 SortField = this.SortName,
                 ScenarioCode = (await App.Database.GetActiveUser()).SearchScenarioCode,
                 QueryString = this.SearchQuery,
+                FacetFilter = this.FacetFilter,
                 Page = this.page
             };
             SearchResult search = await this.requestService.Search(optionsTempo);
             if (search != null && !search.Success)
             {
+                this.DisplayAlert(ApplicationResource.Error, search.Errors?[0]?.Msg != null ? search.Errors?[0]?.Msg : ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
                 return new Result[0];
+            }
+            else if (search.Success && search.D != null)
+            {
+                search.D.Results = await this.CheckAvCheckAvailability(search.D.Results, this.SearchQuery);
             }
             return search?.D?.Results;
         }
@@ -462,15 +526,16 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private Dictionary<string, Func<IEnumerable<Result>, IEnumerable<Result>>> sorts =
         new Dictionary<string, Func<IEnumerable<Result>, IEnumerable<Result>>>()
         {
-                    { "A à Z (Titre)", (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.ASCENDING).Sort(x, "Title")},
-                    { "Z à A (Titre)", (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.DESCENDING).Sort(x, "Title")},
-                    { "A à Z (Auteur)", (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.ASCENDING).Sort(x, "Author")},
-                    { "Z à A (Auteur)", (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.DESCENDING).Sort(x, "Author")},
-                    { "+ récent", (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.ASCENDING).Sort(x, "Date")},
-                    { "- récent", (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.DESCENDING).Sort(x, "Date")}
+                    { ApplicationResource.SortOptionPertinence, (x) => null},
+                    { ApplicationResource.SortOptionTitleASC, (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.ASCENDING).Sort(x, "Title")},
+                    { ApplicationResource.SortOptionTitleDESC, (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.DESCENDING).Sort(x, "Title")},
+                    { ApplicationResource.SortOptionAutorASC, (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.ASCENDING).Sort(x, "Author")},
+                    { ApplicationResource.SortOptionAutorDESC, (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.DESCENDING).Sort(x, "Author")},
+                    { ApplicationResource.SortOptionTimeASC, (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.ASCENDING).Sort(x, "Date")},
+                    { ApplicationResource.SortOptionTimeDESC, (x) => SortAlgorithmFactory.GetAlgorithm(SortAlgorithm.DESCENDING).Sort(x, "Date")}
         };
 
-        public List<string> SortsName 
+        public List<string> SortsName
         {
             get => this.sorts.Keys.ToList();
         }
@@ -508,6 +573,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 {
                     list.Insert(0, search);
                 }
+                this.SearchHistory = new List<string>();
+                await RaisePropertyChanged(nameof(SearchHistory));
                 this.SearchHistory = list;
                 b.SearchValue = string.Join(",", list);
                 await App.Database.SaveItemAsync(b);
@@ -526,10 +593,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private string CheckFacetteSelected()
         {
 
-            Dictionary<int, List<string>> choiceList    = new Dictionary<int, List<string>>();
-            List<string> value                          = new List<string>();
-            SearchOptions optionsTempo                  = new SearchOptions();
-            StringBuilder facetFilter                   = new StringBuilder("");
+            Dictionary<int, List<string>> choiceList = new Dictionary<int, List<string>>();
+            List<string> value = new List<string>();
+            SearchOptions optionsTempo = new SearchOptions();
+            StringBuilder facetFilter = new StringBuilder("");
             if (this.FacetteList != null && this.SelectedItems != null)
             {
                 foreach (var choices in this.SelectedItems)
@@ -579,124 +646,189 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         public async Task PerformSearch(string search = null, string sort = null, bool resetFacette = true)
         {
-            if (App.AppState.NetworkConnection)
-            {          
-                this.IsBusy = true;
-                // Don't reset facette choices if user hasn't changed query string
-                if (search == null) resetFacette = false;
+            this.IsBusy = true;
+            if (sort == null)
+            {
+                this.SortName = null;
+                this.SortOrder = 0;
+            }
+            // Showing user search is processing
+            await RaiseAllPropertiesChanged();
+            if (search == null) resetFacette = false;
+            // Init searchHistory
+            if (search == null && this.SearchQuery != null)
+                search = this.SearchQuery;
+            await initSearchHistory(search, sort, resetFacette);
 
-                // Showing user search is processing
-                await RaisePropertyChanged();
-
-                // Init searchHistory
-                if (search == null && this.SearchQuery != null)
-                    search = this.SearchQuery;
-                await initSearchHistory(search, sort, resetFacette);
-
-                // Check if facettes are selected
-                var facetFilter = CheckFacetteSelected();
-
-                // Search Query Json
-                SearchOptions optionsTempo = new SearchOptions();
-                optionsTempo.Query = new SearchOptionsDetails()
-                {
-                    SortOrder = this.SortOrder,
-                    SortField = this.SortName,
-                    ScenarioCode = (await App.Database.GetActiveUser()).SearchScenarioCode,
-                    QueryString = search,
-                    FacetFilter = facetFilter
-                };
-
-                // HTTP Request
-                SearchResult result = await this.requestService.Search(optionsTempo);
-
-                // Result Handler
-                if (result != null && result.D != null)
-                {
-                    this.D = result.D;
-                    this.Results = result.D.Results;
-                    await this.GetRedirectURL();
-                    this.ResultCountInt = this.D?.SearchInfo?.NbResults;
-                    this.ResultCount = this.D.SearchInfo == null ? ApplicationResource.SearchViewResultNull :  (String.Format(ApplicationResource.SearchViewResultCount, this.D.SearchInfo.NbResults));
-                    this.FacetCollectionList = result.D.FacetCollectionList;
-
-                    // Avoid resetting facette on sortFilter change
-                    if (resetFacette && search != null)
-                    {
-                        this.Itemss = new SelectableObservableCollection<FacetteValue>();
-                        int groupIndex = 0;
-                        // Parsing FacetteList from ResultList
-                        foreach (var tmp in this.FacetCollectionList)
-                        {
-                            FacetteGroup facetteGroupe = new FacetteGroup(tmp.FacetLabel);
-                            foreach (var FacetListItems in tmp.FacetList)
-                            {
-                            
-                                // Adding Facette
-                                var facettetempo = new FacetteValue
-                                {
-                                    id = tmp.FacetId,
-                                    value = FacetListItems.Label,
-                                    font = FontAttributes.None,
-                                    noTitle = true,
-                                    groupIndex = groupIndex
-                                };
-                                facetteGroupe.Add(facettetempo);
-                            }
-
-                            this.FacetteList.Add(facetteGroupe);
-                            // Adding Title
-                            var tmp3 = new FacetteValue
-                            {
-                                id = 0,
-                                value = tmp.FacetLabel,
-                                font = FontAttributes.Bold,
-                                noTitle = false
-                            };
-                            this.Itemss.Add(tmp3);
-                            foreach (var tmp2 in tmp.FacetList)
-                            {
-                                // Adding Facette
-                                tmp3 = new FacetteValue
-                                {
-                                    id = tmp.FacetId,
-                                    value = tmp2.Label,
-                                    font = FontAttributes.None,
-                                    noTitle = true
-                                };
-                                this.Itemss.Add(tmp3);
-                            }
-                            groupIndex += 1;
-                        }
-                    }
-                    this.UpdateListContent();
-                }
-                else
-                {
-                    this.ResultCount = ApplicationResource.SearchViewResultNull;
-                }
-                await RaisePropertyChanged(nameof(this.Itemss));
-                await RaisePropertyChanged();
-                this.IsBusy = false;
+            // Check if facettes are selected
+            if (!resetFacette)
+            {
+                this.FacetFilter = CheckFacetteSelected();
             }
             else
             {
-                this.DisplayAlert(ApplicationResource.Warning, ApplicationResource.NetworkDisable, ApplicationResource.ButtonValidation);
+                this.SelectedItems = new List<FacetteValue>();
+                this.FacetFilter = "";
             }
+            
+
+            // Search Query Json
+            SearchOptions optionsTempo = new SearchOptions();
+            optionsTempo.Query = new SearchOptionsDetails()
+            {
+                SortOrder = this.SortOrder,
+                SortField = this.SortName,
+                ScenarioCode = (await App.Database.GetActiveUser()).SearchScenarioCode,
+                QueryString = search,
+                FacetFilter = this.FacetFilter
+            };
+
+            // HTTP Request
+            SearchResult result = await this.requestService.Search(optionsTempo);
+            
+            // Result Handler
+            if (result != null && result.D != null && result.Success)
+            {
+                this.D = result.D;
+                result.D.Results = await this.CheckAvCheckAvailability(result.D.Results, search, facetFilter);
+                this.Results = result.D.Results;
+                GetRedirectURL();
+                this.ResultCountInt = this.D?.SearchInfo?.NbResults;
+                this.ResultCount = this.ResultCountInt <= 1 ? (String.Format(ApplicationResource.SearchViewResultNull, this.D.SearchInfo.NbResults)) : (String.Format(ApplicationResource.SearchViewResultCount, this.D.SearchInfo.NbResults));
+                this.FacetCollectionList = result.D.FacetCollectionList;
+
+                // Avoid resetting facette on sortFilter change
+                if (resetFacette && search != null)
+                {
+                    this.FacetteList = new ObservableCollection<FacetteGroup>();
+                    this.Itemss = new SelectableObservableCollection<FacetteValue>();
+
+                    int groupIndex = 0;
+                    // Parsing FacetteList from ResultList
+                    foreach (var tmp in this.FacetCollectionList)
+                    {
+                        FacetteGroup facetteGroupe = new FacetteGroup(tmp.FacetLabel);
+                        foreach (var FacetListItems in tmp.FacetList)
+                        {
+
+                            // Adding Facette
+                            var facettetempo = new FacetteValue
+                            {
+                                id = tmp.FacetId,
+                                value = FacetListItems.Label,
+                                displayValue = FacetListItems.DisplayLabel ?? FacetListItems.Label,
+                                count = FacetListItems.Count.ToString(),
+                                font = FontAttributes.None,
+                                noTitle = true,
+                                groupIndex = groupIndex
+                            };
+                            facetteGroupe.Add(facettetempo);
+                        }
+
+                        this.FacetteList.Add(facetteGroupe);
+                        // Adding Title
+                        var tmp3 = new FacetteValue
+                        {
+                            id = 0,
+                            value = tmp.FacetLabel,
+                            displayValue = tmp.FacetLabel,
+                            font = FontAttributes.Bold,
+                            noTitle = false
+                        };
+                        this.Itemss.Add(tmp3);
+                        foreach (var tmp2 in tmp.FacetList)
+                        {
+                            // Adding Facette
+                            tmp3 = new FacetteValue
+                            {
+                                id = tmp.FacetId,
+                                value = tmp2.Label,
+                                displayValue = tmp2.DisplayLabel ?? tmp2.Label,
+                                count = tmp2.Count.ToString(),
+                                font = FontAttributes.None,
+                                noTitle = true
+                            };
+                            this.Itemss.Add(tmp3);
+                        }
+                        groupIndex += 1;
+                    }
+                }
+                this.UpdateListContent();
+            }
+            else
+            {
+                this.DisplayAlert(ApplicationResource.Error, (result.Errors?[0]?.Msg) ?? ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
+                this.ResultCount = ApplicationResource.SearchViewResultNull;
+            }
+            await RaisePropertyChanged(nameof(this.Itemss));
+
+            await RaiseAllPropertiesChanged();
+            this.IsBusy = false;
+        }
+
+        public async Task<Result[]> CheckAvCheckAvailability (Result[] results, string search, string facetFilter="") {
+
+            List<RecordIdArray> RecordIdArray = new List<RecordIdArray>();
+            CheckAvailabilityOptions optionsTempo = new CheckAvailabilityOptions();
+
+            foreach (var result in results)
+            {
+                RecordIdArray.Add(new RecordIdArray(result.Resource.RscBase , result.Resource.RscId , result.Resource.Frmt));
+            }
+
+            optionsTempo.Query = new SearchOptionsDetails()
+            {
+                SortOrder = this.SortOrder,
+                SortField = this.SortName,
+                ScenarioCode = (await App.Database.GetActiveUser()).SearchScenarioCode,
+                QueryString = search,
+                FacetFilter = facetFilter
+            };
+            optionsTempo.RecordIdArray = RecordIdArray;
+
+            // HTTP Request
+            CheckAvailabilityResult rslts = await this.requestService.CheckAvailability(optionsTempo);
+
+            var resultTempo = results.ToList();
+            if (rslts.Success && rslts.D != null)
+            {
+                foreach (var rslt in rslts.D)
+                {
+                    int v = resultTempo.FindIndex(x => x.Resource.RscId == rslt.Id.RscId);
+                    results[v].Resource.HtmlViewDisponibility = rslt.HtmlView;
+                }
+            }
+
+            return results;
         }
 
         private async Task GetRedirectURL()
         {
-            foreach (var search in this.Results)
+            await Task.Run(async () =>
             {
-                if (search.FieldList.ThumbMedium != null && search.FieldList.ThumbMedium[0] != null)
-                    search.FieldList.ThumbMedium[0] = new Uri(this.requestService.GetRedirectURL(search.FieldList.ThumbMedium[0].ToString()));
-                else if (search.FieldList.ThumbSmall != null && search.FieldList.ThumbSmall[0] != null)
-                    search.FieldList.ThumbSmall[0] = new Uri(this.requestService.GetRedirectURL(search.FieldList.ThumbSmall[0].ToString()));
-            }
+                foreach (var search in this.Results)
+                {
+                    if (search.FieldList.ThumbMedium != null && search.FieldList.ThumbMedium[0] != null)
+                        search.FieldList.ThumbMedium[0] = new Uri(await this.requestService.GetRedirectURL(search.FieldList.ThumbMedium[0].ToString()));
+                    else if (search.FieldList.ThumbSmall != null && search.FieldList.ThumbSmall[0] != null)
+                        search.FieldList.ThumbSmall[0] = new Uri(await this.requestService.GetRedirectURL(search.FieldList.ThumbSmall[0].ToString()));
+                    else
+                        Console.WriteLine("test");
+                    search.FieldList.HaveImage = true;
+                    await this.RaisePropertyChanged(nameof(search.FieldList.HaveImage));
+                }
+            });
+            this.ForceListUpdate();
             await this.RaiseAllPropertiesChanged();
         }
 
         #endregion search
+        private void ForceListUpdate()
+        {
+            var tempo = this.Results;
+            this.Results = new Result[0];
+            this.Results = tempo;
+        }
     }
+
 }

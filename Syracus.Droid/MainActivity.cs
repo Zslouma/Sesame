@@ -14,7 +14,7 @@ namespace Syracuse.Mobitheque.Droid
     public class MainActivity : MvxFormsAppCompatActivity<MvxFormsAndroidSetup<Mobitheque.Core.App, UI.App>, Mobitheque.Core.App, UI.App>
     {
         protected override void OnCreate(Bundle bundle)
-        {
+        {        
             Xamarin.Forms.Forms.SetFlags(new string[] { "IndicatorView_Experimental", "SwipeView_Experimental" });
             base.OnCreate(bundle);
             Xamarin.Essentials.Platform.Init(this, bundle);
@@ -22,6 +22,10 @@ namespace Syracuse.Mobitheque.Droid
             Window.SetStatusBarColor(Android.Graphics.Color.ParseColor("#6574CF"));
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
             global::Xamarin.Forms.Forms.Init(this, bundle);
+        }
+        public override void OnBackPressed()
+        {
+            Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed);
         }
         // ... And this
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)

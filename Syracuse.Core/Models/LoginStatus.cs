@@ -31,7 +31,6 @@ namespace Syracuse.Mobitheque.Core.Models
         [JsonProperty("type")]
         public string Type { get; set; }
 
-        
         public Error(string msg)
         {
             this.Msg = msg;

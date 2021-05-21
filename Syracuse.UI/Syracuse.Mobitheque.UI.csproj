@@ -58,6 +58,9 @@
     <Compile Update="Views\NetworkErrorView.xaml.cs">
       <DependentUpon>NetworkErrorView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\PopUp\SwitchOrDeleteAccountPopup.xaml.cs">
+      <DependentUpon>SwitchOrDeleteAccountPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\PinnedDocumentView.xaml.cs">
       <DependentUpon>PinnedDocumentView.xaml</DependentUpon>
     </Compile>
@@ -83,7 +86,7 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="AppResource.fr.resx">
-      <LastGenOutput>AppResource.Designer.cs</LastGenOutput>
+      <LastGenOutput>AppResource.fr.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="AppResource.resx">
@@ -117,6 +120,9 @@
     <EmbeddedResource Update="Views\PinnedDocumentView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\PopUp\SwitchOrDeleteAccountPopup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\SearchDetailsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -124,6 +130,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\SelectLibraryView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PopUp\TutorialPopup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PopUp\TutorialPopupAddAccount.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

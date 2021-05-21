@@ -19,7 +19,16 @@
         <yummy:PancakeView  x:Name="pancakeView" Margin="0,30,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
             <StackLayout>
 
-                <Label HorizontalTextAlignment="Center" Text="{x:Static core:ApplicationResource.Library}" FontAttributes="Bold" ></Label>
+                <Label HorizontalTextAlignment="Center"  Margin="0,10,0,10"  TextColor="{d:DynamicResource DarkTextColor}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span Text="&#xf66f; " FontFamily="{StaticResource FontAwesomeSolid}" FontSize = "20"/>
+                                <Span Text="{x:Static core:ApplicationResource.Library}" FontAttributes="Bold" FontSize = "20"/>
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
                 <CarouselView 
                         x:Name="carouselView" 
                         ItemsSource="{Binding ItemsSource}" 
@@ -41,6 +50,7 @@
                                     <ColumnDefinition Width="0,2*" />
                                 </Grid.ColumnDefinitions>
 
+                                
                                 <StackLayout  HorizontalOptions="Center" VerticalOptions="Center"  Grid.Row="0" Grid.Column="0">
                                     <ImageButton  VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding Path=BindingContext.HeaderVisibility, Source={x:Reference Name=pancakeView}}" Source="previous.png" BackgroundColor="Transparent" Clicked="Back_Clicked" ></ImageButton>
                                 </StackLayout>

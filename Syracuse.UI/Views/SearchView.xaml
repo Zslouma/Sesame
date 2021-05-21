@@ -8,7 +8,6 @@
                      x:TypeArguments="viewModels:SearchViewModel"
                      x:Class="Syracuse.Mobitheque.UI.Views.SearchView"
                      xmlns:local="clr-namespace:Syracuse.Mobitheque.UI"
-                    
                      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
                      xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core">
 
@@ -44,19 +43,18 @@
     <ContentPage.Content>
 
         <Grid VerticalOptions="FillAndExpand">
-            <StackLayout Orientation="Vertical"  VerticalOptions="FillAndExpand">
-                <StackLayout>
+            <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
                     <ListView x:Name="searchHistoryList"
+                          BackgroundColor="White" 
                           IsVisible="False"
-                          CachingStrategy="RecycleElement" BackgroundColor="White" ItemTapped="ListView_OnItemTapped" AbsoluteLayout.LayoutFlags="None">
+                          CachingStrategy="RecycleElement"  ItemTapped="ListView_OnItemTapped">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <TextCell Text="{Binding .}" TextColor="#FF464859"></TextCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                </StackLayout>
-                <Grid Padding="0, 0, 0, 0" VerticalOptions="Center">
+                <Grid Padding="0, 0, 0, 0" VerticalOptions="Center" IsVisible="{Binding IsFilterable}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
@@ -65,7 +63,6 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <StackLayout Grid.Row="0" Grid.Column="0" VerticalOptions="Center">
                         <Button x:Name="SortButton" Text="{x:Static local:AppResource.SortOption}"  Clicked="SortButton_Clicked" BackgroundColor="Transparent" TextColor="{DynamicResource WhiteTextColor}" FontAttributes="None" />
@@ -84,88 +81,113 @@
                         <BoxView x:Name="DeleteButtonUnderline" IsVisible="false" BackgroundColor="White" HeightRequest="1" Margin="0,-8,0,0" />
                     </StackLayout>
                 </Grid>
-                <yummy:PancakeView  Padding="15, 15, 15, 0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{DynamicResource AppSecondaryBackgroundColor}">
-                    <StackLayout>
-                    <Grid Padding="0, 0, 0, 0" Margin="0"  MinimumHeightRequest="400">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                            <ListView ItemsSource="{Binding ExpandedFacetteList}" BackgroundColor="White" IsGroupingEnabled="True" GroupDisplayBinding="{Binding Name}" x:Name="FacetteItemList" SeparatorVisibility="None"  Grid.Row="2" Grid.ColumnSpan="3">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <ViewCell>
-                                            <Grid Padding="5" VerticalOptions="Center">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="0.1*" />
-                                                    <ColumnDefinition Width="0.8*" />
-                                                    <ColumnDefinition Width="0.1*" />
-                                                </Grid.ColumnDefinitions>
-                                                <Label VerticalOptions="Center" FontSize="15" Text="{Binding value}" Grid.Column="1" />
-                                                <Image VerticalOptions="Center" Source="GreenCheck.png" WidthRequest="12" HeightRequest="12" Grid.Column="2" IsVisible="{Binding IsSelected}"/>
-                                            </Grid>
-                                        </ViewCell>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                                <ListView.GroupHeaderTemplate>
-                                    <DataTemplate>
-                                        <ViewCell >
-                                            <Grid BackgroundColor="White" VerticalOptions="Fill">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="0.1*" />
-                                                    <ColumnDefinition Width="*" />
-                                                </Grid.ColumnDefinitions>
-                                                <Label VerticalOptions="Center" Text="{Binding Name}" Grid.Column="1"/>
-                                                <ImageButton x:Name="HeaderButton" VerticalOptions="Center" Source="{Binding StateIcon}" BorderColor="Transparent" BackgroundColor="Transparent" Clicked="HeaderButton_Clicked" CommandParameter="{Binding .}" ></ImageButton>
-                                            </Grid>
-                                        </ViewCell>
-                                    </DataTemplate>
-                                </ListView.GroupHeaderTemplate>
-                            </ListView>
+                <yummy:PancakeView  Padding="15, 5, 15, 0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{DynamicResource AppSecondaryBackgroundColor}">
+                    <Grid VerticalOptions="FillAndExpand">
+                    <StackLayout VerticalOptions="FillAndExpand">
+                        <Grid Padding="0, 0, 0, 0" Margin="0">
+                                <ListView ItemsSource="{Binding ExpandedFacetteList}"  IsGroupingEnabled="True" GroupDisplayBinding="{Binding Name}" x:Name="FacetteItemList" SeparatorVisibility="None" VerticalScrollBarVisibility="Never" BackgroundColor="Transparent" Grid.ColumnSpan="3">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell >
+                                                <Grid VerticalOptions="Center">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="0.1*" />
+                                                        <ColumnDefinition Width="0.5*" />
+                                                        <ColumnDefinition Width="0.3*" />
+                                                        <ColumnDefinition Width="0.1*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Label Grid.Column="1" VerticalOptions="Center" FontSize="15" Text="{Binding displayValue}"/>
+                                                    <Label Grid.Column="2" VerticalOptions="Center" HorizontalTextAlignment="End" FontSize="15" Text="{Binding count}"/>
+                                                    <Label Grid.Column="3"  VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Fill" FontFamily="{StaticResource FontAwesomeSolid}" IsVisible="{Binding IsSelected}"  FontSize="Small" Text="&#xf00c;" TextColor="LightGreen"/>
+                                                </Grid>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                    <ListView.GroupHeaderTemplate  >
+                                        <DataTemplate>
+                                            <ViewCell >
+                                                <Grid  VerticalOptions="Fill" BackgroundColor="White">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="0.1*" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Button VerticalOptions="Center" Text="{Binding Name}" TextColor="Black" Grid.Column="1" BackgroundColor="Transparent" Clicked="HeaderButton_Clicked" CommandParameter="{Binding .}" TextTransform="None" FontAttributes="None"/>
+                                                    <ImageButton x:Name="HeaderButton" VerticalOptions="Center" Source="{Binding StateIcon}" BorderColor="Transparent" BackgroundColor="Transparent" Clicked="HeaderImageButton_Clicked" CommandParameter="{Binding .}" ></ImageButton>
+                                                </Grid>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.GroupHeaderTemplate>
 
-                    </Grid>
+                                </ListView>
+                            </Grid>
                         <Picker x:Name="SortPicker"  HorizontalOptions="FillAndExpand" Grid.Column="2" ItemsSource="{Binding SortsName}" SelectedIndex="{Binding SortNamee}" Title="{x:Static local:AppResource.SortOption}" TextColor="{DynamicResource PurpleTextColor}" TitleColor="{DynamicResource PurpleTextColor}" FontAttributes="Bold" ios:Picker.UpdateMode="WhenFinished"></Picker>
-                        <Label TextColor="Black" Text="{Binding ResultCount}" Margin="10,0,0,0" Grid.Column="3"/>
-                    <ListView x:Name="resultsList" 
-                          CachingStrategy="RecycleElement"
+                            <StackLayout IsVisible="{Binding IsFilterable}">
+                                <Label x:Name="resultCount" TextColor="Black"  Text="{Binding ResultCount}" Margin="5,0,0,5" />
+                            </StackLayout>    
+                        <ListView x:Name="resultsList" 
                           ItemsSource="{Binding Results}"
                           SeparatorVisibility="None"
                           SelectionMode="None"
-                          RowHeight="150"
+                          VerticalOptions="FillAndExpand"
                           Margin="0,0,0,20"
                           VerticalScrollBarVisibility="Never"
-                          IsPullToRefreshEnabled="False">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
+                          IsPullToRefreshEnabled="False"
+                          HasUnevenRows="True">
+                                <ListView.RowHeight>
+                                    <OnPlatform x:TypeArguments="x:Int32">
+                                        <On Platform="iOS">150</On>
+                                    </OnPlatform>
+                                </ListView.RowHeight>
+                                <ListView.ItemTemplate>
+                                <DataTemplate>
                                     <ViewCell>
-                                        <StackLayout Orientation="Horizontal" Padding="7, 0, 7, 0">
-                                            <Image VerticalOptions="Center" Source="{Binding FieldList.Image}" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent" Margin="5"/>
-                                            <StackLayout VerticalOptions="Center" Orientation="Vertical">
-                                                <Label TextColor="Black" Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="Medium"/>
-                                                <Label TextColor="Gray" Text="{Binding FieldList.shortDesc}" MaxLines="2" FontSize="Small"/>
-                                                <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal">
-                                                    <Frame VerticalOptions="Center" WidthRequest="12" HeightRequest="12"  CornerRadius="6" HasShadow="False" BorderColor="Transparent" Margin="0" Padding="0" BackgroundColor="{Binding Resource.ColorStatus}"/>
-                                                    <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="Center" FontSize="Medium" Text="{Binding Resource.TextStatus}"/>
+                                        <ViewCell.View>
+                                            <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal" Padding="7, 0, 7, 0" Margin="0,0,0,20">
+                                                    <Frame VerticalOptions="FillAndExpand" Margin="5" Padding="0" >
+                                                        <Frame.HasShadow>
+                                                            <OnPlatform x:TypeArguments="x:Boolean">
+                                                                <On Platform="iOS">false</On>
+                                                                <On Platform="Android">true</On>
+                                                            </OnPlatform>
+                                                        </Frame.HasShadow>
+                                                        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                                            <Image VerticalOptions="Start" IsVisible="{Binding FieldList.HaveImage}" Source="{Binding FieldList.Image}" Aspect="AspectFill" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent" />
+                                                            <ActivityIndicator VerticalOptions="Center" HeightRequest="120" WidthRequest="90" IsRunning="True" Color="Gray" IsVisible="{Binding FieldList.ReverseHaveImage}" />
+                                                        </StackLayout>
+                                                    </Frame>
+                                                    <StackLayout VerticalOptions="Start" Orientation="Vertical">
+                                                    <Label TextColor="Black" Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="Medium"/>
+                                                    <Label TextColor="Gray" Text="{Binding FieldList.shortDesc}" MaxLines="2" FontSize="Small"/>
+                                                    <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal" IsVisible="{Binding Resource.HasViewDisponibility}">
+                                                        <Frame VerticalOptions="Center" WidthRequest="12" HeightRequest="12"  CornerRadius="6" HasShadow="False" BorderColor="Transparent" Margin="0" Padding="0" BackgroundColor="{Binding Resource.ColorStatus}"/>
+                                                        <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="Center" FontSize="Small" Text="{Binding Resource.TextStatus}"/>
+                                                    </StackLayout>
                                                 </StackLayout>
                                             </StackLayout>
-                                        </StackLayout>
+                                        </ViewCell.View>
                                     </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                        <ListView.Footer>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.Footer>
                                 <material:MaterialButton VerticalOptions="Center" Margin="5" IsVisible="{Binding DisplayLoadMore}" BackgroundColor="{DynamicResource AppBackgroundColor}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}"></material:MaterialButton>
-                        </ListView.Footer>
-                    </ListView>
+                            </ListView.Footer>
+                        </ListView>
                     </StackLayout>
+                    <StackLayout VerticalOptions="Fill" >
+                            <Label VerticalOptions="FillAndExpand"  HorizontalTextAlignment="Center" VerticalTextAlignment="Start"  Margin="30" FontSize="Medium" Text="{x:Static local:AppResource.NoSearchResults}" />
+                        <StackLayout.Triggers>
+                            <DataTrigger TargetType="StackLayout" Binding="{Binding IsFilterable}" Value="True">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="StackLayout" Binding="{Binding IsFilterable}" Value="False">
+                                <Setter Property="IsVisible" Value="True" />
+                            </DataTrigger>
+                        </StackLayout.Triggers>
+                    </StackLayout>
+                    </Grid>
                 </yummy:PancakeView>
             </StackLayout>
-            <AbsoluteLayout IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
+            <AbsoluteLayout Grid.Row="0" IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
                 <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
             </AbsoluteLayout>
         </Grid>

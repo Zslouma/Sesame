@@ -13,7 +13,7 @@
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
 
     <ContentPage.Content>
-        <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
+        <yummy:PancakeView  x:Name="pancakeView" Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
             <Grid>
                 <StackLayout VerticalOptions="FillAndExpand" Orientation="Vertical" Padding="5, 0, 5, 0">
                     <CarouselView 
@@ -24,12 +24,13 @@
                         IsScrollAnimated ="False"
                         CurrentItemChanged="carouselView_CurrentItemChanged" 
                         PositionChanged="carouselView_PositionChanged"
+                        VerticalOptions="FillAndExpand"
                         RemainingItemsThreshold="5"
                         RemainingItemsThresholdReached="OnCarouselViewRemainingItemsThresholdReached"
                         HorizontalScrollBarVisibility="Never">
                         <CarouselView.ItemTemplate>
                             <DataTemplate >
-                                <ScrollView x:Name="scrollView"  VerticalScrollBarVisibility="Never">
+                                <ScrollView x:Name="scrollView" VerticalOptions="FillAndExpand" BindingContext="carouselView" IsVisible="{Binding Path=BindingContext.IsCarouselVisibility, Source={x:Reference Name=carouselView}}" VerticalScrollBarVisibility="Never">
                                     <Frame>
                                         <StackLayout Orientation="Vertical">
                                             <StackLayout  Orientation="Horizontal">
@@ -38,46 +39,84 @@
                                                         <RowDefinition Height="Auto" />
                                                         <RowDefinition Height="*" />
                                                     </Grid.RowDefinitions>
-                                                    
+
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="100" />
                                                         <ColumnDefinition  Width="*" />
                                                     </Grid.ColumnDefinitions>
-                                                    
-                                                    <StackLayout  Orientation="Vertical">
-                                                        <Frame HasShadow="True" BorderColor="LightGray" Grid.Row="0" Grid.Column="0" IsClippedToBounds="True" Padding="0">
-                                                            <Image Aspect="AspectFill" HeightRequest="120" WidthRequest="90" Source="{Binding FieldList.Image}"/>
+
+                                                    <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical">
+                                                        <Frame VerticalOptions="Center" BorderColor="LightGray" Grid.Row="0" Grid.Column="0" IsClippedToBounds="True" Padding="0">
+                                                            <Frame.HasShadow>
+                                                                <OnPlatform x:TypeArguments="x:Boolean">
+                                                                    <On Platform="iOS">false</On>
+                                                                    <On Platform="Android">true</On>
+                                                                </OnPlatform>
+                                                            </Frame.HasShadow>
+                                                            <Image  Aspect="AspectFill" HeightRequest="120" WidthRequest="90"  Source="{Binding FieldList.Image}"/>
                                                         </Frame>
-                                                        <Image  Grid.Row="1" Grid.Column="0"  HeightRequest="30" WidthRequest="100" Source="{Binding DisplayValues.Star}" VerticalOptions="Start"></Image>
+                                                        <Image   HeightRequest="30" WidthRequest="100" IsVisible="{Binding DisplayValues.HaveStar}" Source="{Binding DisplayValues.Star}" VerticalOptions="Start"/>
                                                     </StackLayout>
-                                                    <StackLayout Grid.Row="0" Grid.Column="1" Padding="10">
-                                                        <material:MaterialLabel FontSize="Medium" Text="{Binding FieldList.CroppedTitle}"/>
-                                                        <material:MaterialLabel FontSize="Default" Text="{Binding FieldList.shortDesc}"/>
+                                                    <StackLayout Grid.Row="0" Grid.Column="1" Padding="10,0,10,10">
+                                                        <material:MaterialLabel FontSize="Medium" FontAttributes="Bold" VerticalOptions="Start" VerticalTextAlignment="Start" Text="{Binding FieldList.Title[0]}"/>
+                                                        <material:MaterialLabel FontSize="Small" Text="{Binding FieldList.shortDesc}"/>
                                                     </StackLayout>
-                                                    <StackLayout Grid.Row="1" Grid.ColumnSpan="2"  Orientation="Vertical">
-                                                        <Label FontSize="Default" Text="{Binding DisplayValues.Desc}" TextType="Html" TextColor="Black"/>
+                                                    <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Orientation="Vertical">
+                                                        <StackLayout IsVisible="{Binding FieldList.HaveDateTime}">
+                                                            <Grid Margin="0,5,0,5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="Auto"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                    <ColumnDefinition Width="*" />
+                                                                </Grid.ColumnDefinitions>
+                                                                <Label Grid.Column="0" Grid.Row="1" Text="&#xf3c5;" FontFamily="{StaticResource FontAwesomeSolid}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Fill" FontSize="Small" TextColor="#88929D"/>
+                                                                <Label Grid.Column="1" Grid.Row="1" Text="{Binding FieldList.SubjectLocation[0]}" VerticalTextAlignment="Center" VerticalOptions="Fill" FontSize="Small" TextColor="{d:DynamicResource DarkTextColor}"></Label>
+                                                                <Label Grid.Column="0" Grid.Row="2" Text="&#xf017;" FontFamily="{StaticResource FontAwesomeRegular}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center"  FontSize="Small" TextColor="#88929D" />
+                                                                <Label Grid.Column="1" Grid.Row="2" Text="{Binding FieldList.DateTime_String}" VerticalTextAlignment="Center" VerticalOptions="Center" FontSize="Small" TextColor="{d:DynamicResource DarkTextColor}"/>
+                                                            </Grid>
+                                                        </StackLayout>
+                                                        <StackLayout IsVisible="{Binding FieldList.HasZipUrl}">
+                                                            <Button                         Text="{Binding FieldList.GetZipLabel}"
+                                                                                            TextColor="White"
+                                                                                            BackgroundColor="{d:DynamicResource AppBackgroundColor}"
+                                                                                            CommandParameter="{Binding FieldList.GetZipUri}"
+                                                                                            Clicked="OpenBrowser_OnClicked"/>
+                                                        </StackLayout>
                                                     </StackLayout>
                                                 </Grid>
                                             </StackLayout>
-                                            <StackLayout IsVisible="{Binding HasPrimaryDocs}"  BackgroundColor="#bfbfbf" Padding="10">
-                                                <material:MaterialLabel FontSize="Large" Text="{x:Static local:AppResource.DigitalDocumentLink}" TextColor="White"/>
-                                            </StackLayout>
-                                            <StackLayout IsVisible="{Binding HasPrimaryDocs}">
-                                                <StackLayout
-                                                    BindableLayout.ItemsSource="{Binding PrimaryDocs}" 
-                                                    VerticalOptions="FillAndExpand">
-                                                    <BindableLayout.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <StackLayout Padding="5"  BackgroundColor="#f0f0f0">
-                                                                <Button Text="{Binding Label}"
-                                                                                TextColor="Blue"
-                                                                                BackgroundColor="Transparent"
-                                                                                CommandParameter="{Binding Link}"
-                                                                                Clicked="OpenBrowser_OnClicked"></Button>
+                                            <Label FontSize="Default" HorizontalOptions="FillAndExpand" Text="{Binding DisplayValues.Desc}" LineHeight="1.3" TextType="Html" TextColor="Black" />
+
+
+                                            <StackLayout IsVisible="{Binding HasPrimaryDocs}" BindableLayout.ItemsSource="{Binding PrimaryDocs}" >
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackLayout>
+                                                            <StackLayout IsVisible="{Binding Haslink}" >
+                                                                <StackLayout >
+                                                                    <StackLayout VerticalOptions="FillAndExpand">
+                                                                        <StackLayout Padding="0,5" >
+                                                                            <Button         Text="{Binding Label}"
+                                                                                            TextColor="White"
+                                                                                            BackgroundColor="{d:DynamicResource AppBackgroundColor}"
+                                                                                            CommandParameter="{Binding Link}"
+                                                                                            Clicked="OpenBrowser_OnClicked"/>
+                                                                        </StackLayout>
+                                                                    </StackLayout>
+                                                                </StackLayout>
                                                             </StackLayout>
-                                                        </DataTemplate>
-                                                    </BindableLayout.ItemTemplate>
-                                                </StackLayout>
+                                                        </StackLayout>
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
+                                            </StackLayout>
+                                            <StackLayout IsVisible="{Binding HasDigitalReady}">
+                                                <!--Loading label should not render by default.-->
+                                                <Label BindingContext="carouselView" x:Name="labelLoading" HorizontalOptions="Fill" Text="{x:Static local:AppResource.Loading}" IsVisible="{Binding Path=BindingContext.AbsoluteIndicatorVisibility, Source={x:Reference Name=carouselView}}"  />
+                                                <WebView Source="{Binding FieldList.UrlViewerDR}" Navigated="WebViewNavigated" HeightRequest="400" HorizontalOptions="Fill" Navigating="WebViewNavigating"/>
                                             </StackLayout>
                                             <!--#region Holding -->
                                             
@@ -95,8 +134,6 @@
                                                                     <Grid>
                                                                         <Grid.RowDefinitions>
                                                                             <RowDefinition Height="Auto" />
-                                                                            <RowDefinition Height="*" />
-                                                                            <RowDefinition Height="*" />
                                                                         </Grid.RowDefinitions>
 
                                                                         <Grid.ColumnDefinitions>
@@ -106,9 +143,9 @@
 
                                                                         <BoxView BackgroundColor="{Binding StatusColor}" Grid.Row="0" Grid.Column="0" />
                                                                         <StackLayout  Grid.Row="0" Grid.Column="1">
-                                                                            <Label Text="{Binding DisponibilityText}"></Label>
+                                                                            <Label Text="{Binding DisponibilityText}"/>
                                                                             <Label TextColor="Gray" Text="{Binding DisplayValue}"/>
-                                                                            <Button x:Name="HoldingButton" IsVisible="{Binding isReservable}" TextColor="#59a0ec" BackgroundColor="white" Text="Réserver" BindingContext="{Binding .}" Clicked="HoldingButton_Clicked"/>
+                                                                            <Button x:Name="HoldingButton" IsVisible="{Binding isReservable}" BackgroundColor="{d:DynamicResource AppBackgroundColor}" Text="{x:Static local:AppResource.Book}" TextColor="White" BindingContext="{Binding .}" Clicked="HoldingButton_Clicked"/>
                                                                         </StackLayout>
                                                                     </Grid>
                                                                 </StackLayout>

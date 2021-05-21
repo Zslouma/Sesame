@@ -1,6 +1,7 @@
 ﻿using MvvmCross.Navigation;
 using Newtonsoft.Json;
 using Syracuse.Mobitheque.Core.Models;
+using Syracuse.Mobitheque.Core.Services.Files;
 using Syracuse.Mobitheque.Core.Services.Requests;
 using System;
 using System.Net;
@@ -13,8 +14,12 @@ namespace Syracuse.Mobitheque.Core.ViewModels
     {
         private readonly IMvxNavigationService navigationService;
         private readonly IRequestService requestService;
+        private readonly DepartmentService departmentService = new DepartmentService();
         private bool _isnetworkError = false;
+        private bool _isnetworkErrorAppend = false; 
         private string param;
+        private bool viewCreate = false;
+
         public MasterDetailViewModel(IMvxNavigationService navigationService, IRequestService requestService)
         {
             this.requestService = requestService;
@@ -24,13 +29,41 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         public override void Prepare(string parameter)
         {
             param = parameter;
+            base.Prepare();
         }
 
         public override void Start()
         {
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
-            Connectivity_test().Wait();
+            this.Connectivity_test().Wait();
+            this.JsonSynchronisation();
             base.Start();
+        }
+         public async Task JsonSynchronisation()
+        {
+            CookiesSave user = await App.Database.GetActiveUser();
+            if (user != null)
+            {
+                Library[] Alllibraries = await this.departmentService.GetLibraries(true);
+                try
+                {
+                    Library library = Array.Find(Alllibraries, element => element.Name == user.Library && element.Code == user.LibraryCode);
+                    user.LibraryUrl = library.Config.BaseUri;
+                    user.DomainUrl = library.Config.DomainUri;
+                    user.EventsScenarioCode = library.Config.EventsScenarioCode;
+                    user.SearchScenarioCode = library.Config.SearchScenarioCode;
+                    user.IsEvent = library.Config.IsEvent;
+                    user.IsKm = library.Config.IsKm;
+                    user.BuildingInfos = JsonConvert.SerializeObject(library.Config.BuildingInformations);
+                    await App.Database.SaveItemAsync(user);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+                
+            }
+           
         }
         public override void ViewDestroy(bool viewFinishing = true)
         {
@@ -39,8 +72,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         }
         public override async void ViewAppearing()
         {
-            
             base.ViewAppearing();
+            await this.Connectivity_test();
             CookiesSave user = await App.Database.GetActiveUser();
             Cookie[] cookies = JsonConvert.DeserializeObject<Cookie[]>(user.Cookies);
             bool found = false;
@@ -82,8 +115,23 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
             else
             {
-                await this.navigationService.Navigate<HomeViewModel>();
+                if (this._isnetworkError)
+                {
+                    await this.navigationService.Navigate<NetworkErrorViewModel>();
+                    this._isnetworkErrorAppend = true;
+                }
+                else
+                {
+                    if (!this.viewCreate || this._isnetworkErrorAppend)
+                    {
+                        await this.navigationService.Navigate<HomeViewModel>();
+                        this._isnetworkErrorAppend = false;
+                    }
+                }
+                
             }
+            this.viewCreate = true;
+
         }
         void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
         {
@@ -95,6 +143,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 App.AppState.NetworkConnection = false;
+                if (this.viewCreate)
+                {
+                    await this.navigationService.Navigate<NetworkErrorViewModel>();
+                }
                 this._isnetworkError = true;
             }
             else

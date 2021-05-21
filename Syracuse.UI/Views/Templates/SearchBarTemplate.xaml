@@ -2,10 +2,8 @@
 <views:MvxContentView xmlns="http://xamarin.com/schemas/2014/forms" 
                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                      xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
                      xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
-                     xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
                      x:TypeArguments="viewModels:SearchBarViewModel"
                      x:Class="Syracuse.Mobitheque.UI.Views.Templates.SearchBarTemplate"
                      xmlns:local="clr-namespace:Syracuse.Mobitheque.UI"
@@ -21,20 +19,9 @@
                         HeightRequest="35"
                         Placeholder="{x:Static local:AppResource.Search}"
                         SearchCommand="{Binding SearchCommand}" 
-                        SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}">
-                    <SearchBar.TextColor>
-                        <OnPlatform x:TypeArguments="Color">
-                            <OnPlatform.iOS>
-                                Black
-                            </OnPlatform.iOS>
-                            <OnPlatform.Android>
-                                Black
-                            </OnPlatform.Android>
-                            <OnPlatform.WinPhone>
-                                Black
-                            </OnPlatform.WinPhone>
-                        </OnPlatform>
-                    </SearchBar.TextColor>
+                        SearchCommandParameter="{Binding Text, Source={x:Reference SearchBar}}"
+                        TextColor="Black"
+                        PlaceholderColor="Black">
                 </SearchBar>
             </yummy:PancakeView>
         </StackLayout>

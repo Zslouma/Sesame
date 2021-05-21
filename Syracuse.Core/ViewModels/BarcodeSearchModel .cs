@@ -1,11 +1,12 @@
 ﻿using System;
 using MvvmCross.Navigation;
+using Syracuse.Mobitheque.Core.Models;
+using Syracuse.Mobitheque.Core.Services.Database;
 
 namespace Syracuse.Mobitheque.Core.ViewModels
 {
     public class BarcodeSearchModel : BaseViewModel
     {
-
         public string Result
         {
             get => this._result;

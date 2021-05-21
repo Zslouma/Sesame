@@ -18,6 +18,10 @@ namespace Syracuse.Mobitheque.Core.Models
     {
         [JsonProperty("baseUri")]
         public string BaseUri { get; set; }
+        [JsonProperty("domainUri")]
+        public string DomainUri { get; set; }
+        [JsonProperty("forgetMdpUri")]
+        public string ForgetMdpUri { get; set; }
         [JsonProperty("search_scenario_code")]
         public string SearchScenarioCode { get; set; }
         [JsonProperty("events_scenario_code")]
