@@ -5,15 +5,16 @@
              xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
              xmlns:common="clr-namespace:Syracuse.Mobitheque.UI.Views.Templates"
              xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
-             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
-             xmlns:local="clr-namespace:Syracuse.Mobitheque.UI" 
              x:TypeArguments="viewModels:DownloadViewModel"
              x:Class="Syracuse.Mobitheque.UI.Views.DownloadView"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+    <NavigationPage.TitleView >
+        <common:SearchBarTemplate />
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <yummy:PancakeView Margin="0,30,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
             <StackLayout>
-                <Label Text="Hello Xamarin.Forms!" />
+                <Label VerticalOptions="Center" HorizontalOptions="Center" Text="Hello Xamarin.Forms!" />
             </StackLayout>
         </yummy:PancakeView>
     </ContentPage.Content>
