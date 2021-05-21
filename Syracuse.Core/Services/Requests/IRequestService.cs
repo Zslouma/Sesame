@@ -35,10 +35,6 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
         Task<LoginStatus> Authentication(string useraccount, string password, string baseUrl, Action<Exception> error = null);
 
-        Task<LoansResult> GetLoans(Action<Exception> error = null);
-
-        Task<BookingResult> GetBookings(Action<Exception> error = null);
-
         Task<BasketResult> SearchUserBasket(BasketOptions options, Action<Exception> error = null);
         Task<UrlWithAuthenticationStatus> GetUrlWithAuthenticationTransfert(Uri uri);
 

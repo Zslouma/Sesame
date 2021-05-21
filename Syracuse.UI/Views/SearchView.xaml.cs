@@ -380,11 +380,6 @@ namespace Syracuse.Mobitheque.UI.Views
 
         }
 
-        protected override void OnBindingContextChanged()
-        {
-            (this.DataContext as SearchViewModel).OnDisplayAlert += SearchView_OnDisplayAlert;
-            base.OnBindingContextChanged();
-        }
         private void SearchViewModel_OnDisplayAlert(string title, string message, string button) => this.DisplayAlert(title, message, button);
     }
     

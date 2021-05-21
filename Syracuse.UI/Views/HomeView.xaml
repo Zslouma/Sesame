@@ -109,7 +109,7 @@
                                                 <Frame VerticalOptions="Center" WidthRequest="15" HeightRequest="15"  CornerRadius="20"   Margin="0" Padding="0" BackgroundColor="{Binding Resource.ColorStatus}"/>
                                                 <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="Center" FontSize="Medium" Text="{Binding Resource.TextStatus}"/>
                                             </StackLayout>
-                                        </Grid>
+                                        </StackLayout>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
