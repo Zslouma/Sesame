@@ -183,6 +183,9 @@
   <data name="DigitalDocumentLink" xml:space="preserve">
     <value>Consulter en ligne</value>
   </data>
+  <data name="DownloadAllFile" xml:space="preserve">
+    <value>Telecharger tous les documents</value>
+  </data>
   <data name="ErrorLibraryWebSite" xml:space="preserve">
     <value>Erreur: nous ne somme pas parvenis à contacter les informations de votre Bibliothéque</value>
   </data>
@@ -216,6 +219,9 @@
   <data name="NoSearchResults" xml:space="preserve">
     <value>Aucun résultat ne correspond à votre recherche</value>
   </data>
+  <data name="NotCurrentBasket" xml:space="preserve">
+    <value>Pas de documents épinglés pour le moment</value>
+  </data>
   <data name="NotCurrentBooking" xml:space="preserve">
     <value>Vous n'avez pas de réservation en cours</value>
   </data>
@@ -224,6 +230,9 @@
   </data>
   <data name="NotCurrentLoan" xml:space="preserve">
     <value>Vous n'avez pas de prêt en cours</value>
+  </data>
+  <data name="NotCurrentPress" xml:space="preserve">
+    <value>Aucunes revues de presses pour le moment</value>
   </data>
   <data name="OtherAccountPart2Tuto" xml:space="preserve">
     <value> Voulez-vous déclarer les différents comptes de votre famille ?</value>
@@ -248,6 +257,9 @@
   </data>
   <data name="SortOption" xml:space="preserve">
     <value>Trier</value>
+  </data>
+  <data name="String" xml:space="preserve">
+    <value>DownloadAllFile</value>
   </data>
   <data name="Submit" xml:space="preserve">
     <value>Valider</value>

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Syracuse.Mobitheque.Core.Services.Database
 {
-    class DocumentsDatabase
+    public class DocumentsDatabase
     {
         private SQLiteAsyncConnection database { get; set; }
 

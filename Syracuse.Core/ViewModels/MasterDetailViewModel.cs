@@ -54,6 +54,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     user.SearchScenarioCode = library.Config.SearchScenarioCode;
                     user.IsEvent = library.Config.IsEvent;
                     user.IsKm = library.Config.IsKm;
+                    user.DailyPressQuery = library.Config.DailyPress.Query;
+                    user.DailyPressScenarioCode = library.Config.DailyPress.PressScenarioCode;
+                    user.InternationalPressQuery = library.Config.InternationalPress.Query;
+                    user.InternationalPressScenarioCode = library.Config.InternationalPress.PressScenarioCode;
                     user.BuildingInfos = JsonConvert.SerializeObject(library.Config.BuildingInformations);
                     await App.Database.SaveItemAsync(user);
                 }

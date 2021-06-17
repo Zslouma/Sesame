@@ -257,6 +257,12 @@ L’annulation est définitive.</value>
   <data name="PinnedDocuments" xml:space="preserve">
     <value>documents épinglés</value>
   </data>
+  <data name="PressDaily" xml:space="preserve">
+    <value>Actualités du jour</value>
+  </data>
+  <data name="PressInternational" xml:space="preserve">
+    <value>Actualités Internationales</value>
+  </data>
   <data name="RenewChoice" xml:space="preserve">
     <value>Souhaitez-vous prolonger cet exemplaire :
 {0}</value>

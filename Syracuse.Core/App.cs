@@ -26,6 +26,20 @@ namespace Syracuse.Mobitheque.Core
             }
         }
 
+        static DocumentsDatabase docDatabase;
+
+        public static DocumentsDatabase DocDatabase
+        {
+            get
+            {
+                if (docDatabase == null)
+                {
+                    docDatabase = new DocumentsDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "DocumentsDatabase.db3"));
+                }
+                return docDatabase;
+            }
+        }
+
         static ApplicationState appState;
 
         public static ApplicationState AppState

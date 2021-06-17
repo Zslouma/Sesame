@@ -8,7 +8,7 @@
 		<true/>
 	</dict>
 	<key>CFBundleDisplayName</key>
-	<string>Mobithèque</string>
+	<string>Mobidoc</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -48,7 +48,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>fr</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.Archimed.Mobitheque.IOS</string>
+	<string>com.Archimed.Mobidoc.IOS</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Please allow access to data</string>
 	<key>ITSAppUsesNonExemptEncryption</key>

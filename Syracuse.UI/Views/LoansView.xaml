@@ -43,7 +43,6 @@
                           ItemsSource="{Binding Results}" 
                           SeparatorVisibility="None"
                           VerticalOptions="FillAndExpand"
-                          
                           VerticalScrollBarVisibility="Never"
                           IsPullToRefreshEnabled="False"
                           HasUnevenRows="True">

@@ -120,7 +120,7 @@
                            Grid.Row="0">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="OnDeleteClick"/>
-                            </Label.GestureRecognizers>
+                        </Label.GestureRecognizers>
                     </Label>
 
                     <Label Text="{x:Static local:AppResource.SwitchAccount}"

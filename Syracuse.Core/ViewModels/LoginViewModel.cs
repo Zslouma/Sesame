@@ -158,6 +158,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 item.Department = department.Department;
                 item.SearchScenarioCode = department.SearchScenarioCode;
                 item.EventsScenarioCode = department.EventsScenarioCode;
+                item.DailyPressQuery = department.DailyPressQuery;
+                item.DailyPressScenarioCode = department.DailyPressScenarioCode;
+                item.InternationalPressQuery = department.InternationalPressQuery;
+                item.InternationalPressScenarioCode = department.InternationalPressScenarioCode;
                 item.IsEvent = department.IsEvent;
                 item.RememberMe = department.RememberMe;
                 item.IsKm = department.IsKm;
@@ -178,6 +182,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 b.Department = department.Department;
                 b.SearchScenarioCode = department.SearchScenarioCode;
                 b.EventsScenarioCode = department.EventsScenarioCode;
+                b.DailyPressQuery = department.DailyPressQuery;
+                b.DailyPressScenarioCode = department.DailyPressScenarioCode;
+                b.InternationalPressQuery = department.InternationalPressQuery;
+                b.InternationalPressScenarioCode = department.InternationalPressScenarioCode;
                 b.IsEvent = department.IsEvent;
                 b.RememberMe = department.RememberMe;
                 b.IsKm = department.IsKm;

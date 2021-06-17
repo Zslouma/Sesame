@@ -50,7 +50,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             {
                 HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(originalURL);
                 webRequest.AllowAutoRedirect = false;  // IMPORTANT
-                webRequest.Timeout = 3500;           // timeout 10s
+                webRequest.Timeout = 3500;           // timeout 3.5s
 
             // Get the response ...
                 using (var webResponse = (HttpWebResponse)webRequest.GetResponse())
@@ -396,21 +396,21 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
                 return status;
                 }
-                catch (Exception ex)
+            catch (Exception ex)
+            {
+                var status = new LoansResult();
+                status.Errors = new Error[1];
+                if (!App.AppState.NetworkConnection)
                 {
-                    var status = new LoansResult();
-                    status.Errors = new Error[1];
-                    if (!App.AppState.NetworkConnection)
-                    {
-                        status.Errors[0] = new Error(ApplicationResource.NetworkDisable);
-                    }
-                    else
-                    {
-                        status.Errors[0] = new Error(ApplicationResource.ErrorOccurred);
-                    }
-                    error?.Invoke(ex);
-                    return status;
+                    status.Errors[0] = new Error(ApplicationResource.NetworkDisable);
                 }
+                else
+                {
+                    status.Errors[0] = new Error(ApplicationResource.ErrorOccurred);
+                }
+                error?.Invoke(ex);
+                return status;
+            }
         }
 
         public async Task<BookingResult> GetBookings(Action<Exception> error = null)
@@ -447,7 +447,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             }
         }
         /// <summary>
-        /// Permet de récupérer les paniers de l'utilisateur
+        /// Permet de récupérer le panier de l'utilisateur
         /// </summary>
         public async Task<BasketResult> SearchUserBasket(BasketOptions options, Action<Exception> error = null)
         {
@@ -456,13 +456,30 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 Debug.WriteLine("NetworkConnection" + App.AppState.NetworkConnection);
             }
             await this.InitializeHttpClient();
-            if (options == null)
-                throw new ArgumentNullException(nameof(options));
-            var status = await this.requests.SearchUserBasket<BasketResult>(options);
+            try
+            {
+                if (options == null)
+                    throw new ArgumentNullException(nameof(options));
+                var status = await this.requests.SearchUserBasket<BasketResult>(options);
 
-            await UpdateCookies();
-
-            return status;
+                await UpdateCookies();
+                return status;
+            }
+            catch (Exception ex)
+            {
+                var status = new BasketResult();
+                status.Errors = new Error[1];
+                if (!App.AppState.NetworkConnection)
+                {
+                    status.Errors[0] = new Error(ApplicationResource.NetworkDisable);
+                }
+                else
+                {
+                    status.Errors[0] = new Error(ApplicationResource.ErrorOccurred);
+                }
+                error?.Invoke(ex);
+                return status;
+            }
 
         }
 

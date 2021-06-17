@@ -8,8 +8,8 @@
                         xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
                         xmlns:core="clr-namespace:Syracuse.Mobitheque.Core;assembly=Syracuse.Mobitheque.Core"
                         xmlns:local="clr-namespace:Syracuse.Mobitheque.UI"
-                        x:TypeArguments="viewModels:PinnedDocumentViewModel"
-                        x:Class="Syracuse.Mobitheque.UI.Views.PinnedDocumentView"
+                        x:TypeArguments="viewModels:PressDailyViewModel"
+                        x:Class="Syracuse.Mobitheque.UI.Views.PressDailyView"
                         xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
     <NavigationPage.TitleView >
         <common:SearchBarTemplate />
@@ -25,17 +25,19 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <FormattedString.Spans>
-                                    <Span Text="&#xf08d; " FontFamily="{StaticResource FontAwesomeSolid}" FontSize="20"/>
-                                    <Span Text="{x:Static core:ApplicationResource.PinnedDocuments}" FontAttributes="Bold" FontSize="20"/>
+                                    <Span Text="&#xf1ea; " FontFamily="{StaticResource FontAwesomeSolid}" FontSize="20"/>
+                                    <Span Text="{x:Static core:ApplicationResource.PressDaily}" FontAttributes="Bold" FontSize="20"/>
                                 </FormattedString.Spans>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
                     <Grid>
-                        <StackLayout VerticalOptions="Center" IsVisible="{Binding NotCurrentBasket}">
-                            <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize = "20" Text="{x:Static local:AppResource.NotCurrentBasket}" />
+
+                        <StackLayout VerticalOptions="Center" IsVisible="{Binding NotCurrentPress}">
+                            <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize = "20" Text="{x:Static local:AppResource.NotCurrentPress}" />
                         </StackLayout>
-                        <StackLayout Padding="5,5" IsVisible="{Binding ReversNotCurrentBasket}">
+                        <StackLayout Padding="5,5" IsVisible="{Binding ReversNotCurrentPress}">
+                            
                             <StackLayout x:Name="DownloadBar" Margin="-15,0" BackgroundColor="#f3f5fa">
                                 <Grid Padding="10">
                                     <Grid.ColumnDefinitions>
@@ -45,11 +47,11 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
-                                    <Label  Grid.Column="0" Grid.Row="0" Text="{x:Static local:AppResource.DownloadAllFile}" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    <Label  Grid.Column="0" Grid.Row="0" Text="{x:Static local:AppResource.DownloadAllFile}" TextColor="Black" FontSize="Small" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                                     <Switch  Grid.Column="1" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" IsToggled="False" />
                                 </Grid>
                             </StackLayout>
-                            <ListView x:Name="resultsListPinnedDocument" 
+                            <ListView x:Name="resultsListDailyPress" 
                               CachingStrategy="RecycleElement"
                               ItemsSource="{Binding Results}"
                               SeparatorVisibility="None"
@@ -81,7 +83,7 @@
                                                     </Frame.HasShadow>
                                                     <Image VerticalOptions="Center" Aspect="AspectFill" Source="{Binding FieldList.Image}" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent"/>
                                                 </Frame>
-                                                <StackLayout Grid.Column="1" HorizontalOptions="Fill" VerticalOptions="Start" Orientation="Vertical">
+                                                <StackLayout Grid.Column="1" VerticalOptions="Start" Orientation="Vertical">
                                                     <Label TextColor="Black" Text="{Binding FieldList.Title[0]}" MaxLines="2" FontAttributes="Bold" FontSize="Medium"/>
                                                     <Label TextColor="Gray" Text="{Binding FieldList.shortDesc}" MaxLines="2" FontSize="Small"/>
                                                     <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal" IsVisible="{Binding Resource.HasViewDisponibility}" >
@@ -99,7 +101,6 @@
                                                     x:Name="ScannButton"
                                                     TextColor="Gray"
                                                     BackgroundColor="Transparent"/>
-
                                             </Grid>
                                         </ViewCell>
                                     </DataTemplate>

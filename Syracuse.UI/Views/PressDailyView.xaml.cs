@@ -2,35 +2,33 @@
 using MvvmCross.Forms.Views;
 using Syracuse.Mobitheque.Core.Models;
 using Syracuse.Mobitheque.Core.ViewModels;
+using System;
 using Xamarin.Forms;
 
 namespace Syracuse.Mobitheque.UI.Views
 {
-    [MvxMasterDetailPagePresentation(Position = MasterDetailPosition.Detail, NoHistory = true, Title = "Accueil")]
-    public partial class HomeView : MvxContentPage<HomeViewModel>
+    [MvxMasterDetailPagePresentation(Position = MasterDetailPosition.Detail, NoHistory = true, Title = "La presse journalière")]
+    public partial class PressDailyView : MvxContentPage<PressDailyViewModel>
     {
-
-
-        public HomeView()
+        public PressDailyView()
         {
             InitializeComponent();
         }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            this.resultsListEvent.ItemTapped += ResultsList_ItemTapped;
-            this.resultsListDocument.ItemTapped += ResultsList_ItemTapped;
+            this.resultsListDailyPress.ItemTapped += ResultsList_ItemTapped;
         }
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            this.resultsListEvent.ItemTapped -= ResultsList_ItemTapped;
-            this.resultsListDocument.ItemTapped -= ResultsList_ItemTapped;
+            this.resultsListDailyPress.ItemTapped -= ResultsList_ItemTapped;
         }
 
         protected override void OnBindingContextChanged()
         {
-            (this.DataContext as HomeViewModel).OnDisplayAlert += HomeViewModel_OnDisplayAlert;
+            (this.DataContext as PressDailyViewModel).OnDisplayAlert += PressDailyViewModel_OnDisplayAlert;
             base.OnBindingContextChanged();
         }
 
@@ -41,7 +39,10 @@ namespace Syracuse.Mobitheque.UI.Views
             await this.ViewModel.GoToDetailView(item);
         }
 
-        private void HomeViewModel_OnDisplayAlert(string title, string message, string button) => this.DisplayAlert(title, message, button);
+        private void OnDownloadClick(object sender, EventArgs args)
+        {
 
+        }
+        private void PressDailyViewModel_OnDisplayAlert(string title, string message, string button) => this.DisplayAlert(title, message, button);
     }
 }

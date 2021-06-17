@@ -566,7 +566,6 @@ namespace Syracuse.Mobitheque.Core.Models
                 }
                 catch (Exception)
                 {
-                    Debug.WriteLine("TextStatus Exception ");
                     return ApplicationResource.DisponibilityNo;
                 }
                 
@@ -583,7 +582,6 @@ namespace Syracuse.Mobitheque.Core.Models
                 }
                 catch (Exception e)
                 {
-                    Debug.WriteLine("ColorStatus Exception ");
                     return "#fdc76b";
                 }
                 

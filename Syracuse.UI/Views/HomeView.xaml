@@ -2,7 +2,6 @@
 <views:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                      xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
                      xmlns:common="clr-namespace:Syracuse.Mobitheque.UI.Views.Templates"
                      xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
@@ -18,6 +17,7 @@
     <ContentPage.Content>
         <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
             <Grid VerticalOptions="FillAndExpand">
+                
                 <StackLayout Orientation="Vertical" 
                              VerticalOptions="FillAndExpand"
                              Padding="15, 15, 15, 0"
@@ -29,6 +29,19 @@
                         <Label Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Text="{Binding Library}" FontAttributes="Bold" FontSize="Large" TextColor="{d:DynamicResource DarkTextColor}"/>
                         <Label Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="End" Text="{x:Static local:AppResource.News }" TextColor="{d:DynamicResource PurpleTextColor}" IsVisible="{Binding NotCurrentEventReverse}"/>
                     </Grid>
+                    <StackLayout x:Name="DownloadBar" Margin="-15,0" BackgroundColor="#f3f5fa">
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.8*" />
+                                <ColumnDefinition Width="0.2*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label  Grid.Column="0" Grid.Row="0" Text="{x:Static local:AppResource.DownloadAllFile}" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            <Switch  Grid.Column="1" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" IsToggled="False" />
+                        </Grid>
+                    </StackLayout>
                     <Label Margin="10" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{x:Static local:AppResource.NotCurrentEvent}" IsVisible="{Binding NotCurrentEvent}" />
                     <ListView x:Name="resultsListEvent"
                       IsVisible="{Binding IsEvent}"
@@ -92,17 +105,22 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout Orientation="Horizontal" Padding="7, 0, 7, 0" Margin="0,0,0,15">
-                                        <Frame VerticalOptions="FillAndExpand" Margin="5" Padding="0" >
+                                    <Grid  Padding="7, 0, 7, 0" Margin="0,0,0,15">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="0.1*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Frame Grid.Column="0" VerticalOptions="FillAndExpand" Margin="5" Padding="0" >
                                             <Frame.HasShadow>
                                                 <OnPlatform x:TypeArguments="x:Boolean">
                                                     <On Platform="iOS">false</On>
                                                     <On Platform="Android">true</On>
                                                 </OnPlatform>
                                             </Frame.HasShadow>
-                                            <Image VerticalOptions="Center" Source="{Binding FieldList.Image}" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent"/>
+                                            <Image VerticalOptions="Center" Source="{Binding FieldList.Image}" Aspect="AspectFill" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent"/>
                                         </Frame>
-                                        <StackLayout VerticalOptions="Center" Orientation="Vertical">
+                                        <StackLayout Grid.Column="1" VerticalOptions="Center" Orientation="Vertical">
                                             <Label TextColor="Black" Text="{Binding FieldList.Title[0]}" MaxLines="2" FontAttributes="Bold" FontSize="Medium"/>
                                             <Label TextColor="Gray" Text="{Binding FieldList.shortDesc}" MaxLines="2" FontSize="Small"/>
                                             <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal" IsVisible="{Binding Resource.HasViewDisponibility}" >
@@ -110,7 +128,17 @@
                                                 <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="Center" FontSize="Medium" Text="{Binding Resource.TextStatus}"/>
                                             </StackLayout>
                                         </StackLayout>
-                                    </StackLayout>
+                                        <Button
+                                            Grid.Column="2"
+                                            WidthRequest="30"
+                                            Text="&#xf019;"
+                                            VerticalOptions="Start"
+                                            FontSize="Large"
+                                            FontFamily="{StaticResource FontAwesomeSolid}"
+                                            x:Name="ScannButton"
+                                            TextColor="Gray"
+                                            BackgroundColor="Transparent"/>
+                                    </Grid>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>

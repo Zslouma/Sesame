@@ -257,6 +257,12 @@ Cancellation is final.</value>
   <data name="PinnedDocuments" xml:space="preserve">
     <value>Pinned documents</value>
   </data>
+  <data name="PressDaily" xml:space="preserve">
+    <value>News of the day</value>
+  </data>
+  <data name="PressInternational" xml:space="preserve">
+    <value>International News</value>
+  </data>
   <data name="RenewChoice" xml:space="preserve">
     <value>Would you like to extend this copy?
 {0}</value>

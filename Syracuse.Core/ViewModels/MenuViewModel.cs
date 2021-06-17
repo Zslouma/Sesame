@@ -123,9 +123,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                         new MenuNavigation() { Text = ApplicationResource.Account, IconFontAwesome = "\uf007" , IsEnabled = true },
                         new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconFontAwesome = "\uf0c0" },
                         new MenuNavigation() { Text = ApplicationResource.PinnedDocuments, IconFontAwesome = "\uf08d" , IsEnabled = true },
+                        new MenuNavigation() { Text = ApplicationResource.PressDaily, IconFontAwesome = "\uf1ea" , IsEnabled = true },
+                        new MenuNavigation() { Text = ApplicationResource.PressInternational, IconFontAwesome = "\uf1ea" , IsEnabled = true },
                         new MenuNavigation() { Text = ApplicationResource.Download, IconFontAwesome = "\uf0c0" , IsEnabled = true },
-                        new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconFontAwesome = "\uf0c0" , IsEnabled = true },
-                        new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf465" , IsEnabled = App.AppState.NetworkConnection },
+                        new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf02a" , IsEnabled = App.AppState.NetworkConnection },
                         new MenuNavigation() { Text = ApplicationResource.Library, IconFontAwesome = "\uf67f" , IsEnabled = App.AppState.NetworkConnection },
                         new MenuNavigation() { Text = ApplicationResource.About, IconFontAwesome = "\uf05a" , IsEnabled = true },
                         new MenuNavigation() { Text = ApplicationResource.Disconnect, IconFontAwesome = "\uf011",  IsEnabled = true  },
@@ -153,8 +154,11 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     {
                         new MenuNavigation() { Text = ApplicationResource.Home, IconFontAwesome = "\uf015" , IsSelected = true , IsEnabled = newVal },
                         new MenuNavigation() { Text = ApplicationResource.Account, IconFontAwesome = "\uf007" , IsEnabled = true },
-                        new MenuNavigation() { Text = ApplicationResource.PinnedDocuments, IconFontAwesome = "\uf08d" , IsEnabled = true },
                         new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconFontAwesome = "\uf0c0" , IsEnabled = true },
+                        new MenuNavigation() { Text = ApplicationResource.PinnedDocuments, IconFontAwesome = "\uf08d" , IsEnabled = true },
+                        new MenuNavigation() { Text = ApplicationResource.PressDaily, IconFontAwesome = "\uf1ea" , IsEnabled = true },
+                        new MenuNavigation() { Text = ApplicationResource.PressInternational, IconFontAwesome = "\uf1ea" , IsEnabled = true },
+                        new MenuNavigation() { Text = ApplicationResource.Download, IconFontAwesome = "\uf0c0" , IsEnabled = true },
                         new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf465" , IsEnabled = newVal },
                         new MenuNavigation() { Text = ApplicationResource.Library, IconFontAwesome = "\uf67f" , IsEnabled = newVal },
                         new MenuNavigation() { Text = ApplicationResource.About, IconFontAwesome = "\uf05a" , IsEnabled = true },
@@ -166,14 +170,15 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 this.menuItemList = new ObservableCollection<MenuNavigation>()
                     {
-                        new MenuNavigation() { Text = ApplicationResource.Home, IconFontAwesome = "\uf015" , IsSelected = true , IsEnabled = newVal  },
+                        new MenuNavigation() { Text = ApplicationResource.Home, IconFontAwesome = "\uf015" , IsSelected = true , IsEnabled = App.AppState.NetworkConnection  },
                         new MenuNavigation() { Text = ApplicationResource.Account, IconFontAwesome = "\uf007", IsEnabled = true },
                         new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconFontAwesome = "\uf0c0" , IsEnabled = true },
                         new MenuNavigation() { Text = ApplicationResource.PinnedDocuments, IconFontAwesome = "\uf08d", IsEnabled = true  },
-                        new MenuNavigation() { Text = ApplicationResource.Bookings, IconFontAwesome = "\uf017" , IsEnabled = newVal },
-                        new MenuNavigation() { Text = ApplicationResource.Loans, IconFontAwesome = "\uf02d" , IsEnabled = newVal },
-                        new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf02a" , IsEnabled = newVal },
-                        new MenuNavigation() { Text = ApplicationResource.Library, IconFontAwesome = "\uf67f" , IsEnabled = newVal },
+                        new MenuNavigation() { Text = ApplicationResource.Download, IconFontAwesome = "\uf019" , IsEnabled = true },
+                        new MenuNavigation() { Text = ApplicationResource.Bookings, IconFontAwesome = "\uf017" , IsEnabled = App.AppState.NetworkConnection },
+                        new MenuNavigation() { Text = ApplicationResource.Loans, IconFontAwesome = "\uf02d" , IsEnabled = App.AppState.NetworkConnection },
+                        new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf02a" , IsEnabled = App.AppState.NetworkConnection },
+                        new MenuNavigation() { Text = ApplicationResource.Library, IconFontAwesome = "\uf67f" , IsEnabled = App.AppState.NetworkConnection },
                         new MenuNavigation() { Text = ApplicationResource.About, IconFontAwesome = "\uf05a" , IsEnabled = true },
                         new MenuNavigation() { Text = ApplicationResource.Disconnect, IconFontAwesome = "\uf011" , IsEnabled = true },
                     };
@@ -215,6 +220,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     _ = this.navigationService.Navigate<HomeViewModel>();
                 else if (name == ApplicationResource.PinnedDocuments)
                     _ = this.navigationService.Navigate<PinnedDocumentViewModel>();
+                else if (name == ApplicationResource.PressInternational)
+                    _ = this.navigationService.Navigate<PressInternationalViewModel>();
+                else if (name == ApplicationResource.PressDaily)
+                    _ = this.navigationService.Navigate<PressDailyViewModel>();
                 else if (name == ApplicationResource.Download)
                     _ = this.navigationService.Navigate<DownloadViewModel>();
                 else if (name == ApplicationResource.Bookings)

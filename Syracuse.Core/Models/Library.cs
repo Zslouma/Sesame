@@ -3,6 +3,15 @@ using Newtonsoft.Json;
 
 namespace Syracuse.Mobitheque.Core.Models
 {
+    public class Press
+    {
+        [JsonProperty("query")]
+        public string Query { get; set; }
+        [JsonProperty("pressUri")]
+        public string PressUri { get; set; }
+        [JsonProperty("press_scenario_code")]
+        public string PressScenarioCode { get; set; }
+    }
 
     public class LibraryInformations
     {
@@ -32,6 +41,10 @@ namespace Syracuse.Mobitheque.Core.Models
         public bool RememberMe { get; set; }
         [JsonProperty("is_km")]
         public bool IsKm { get; set; }
+        [JsonProperty("daily_press")]
+        public Press DailyPress { get; set; }
+        [JsonProperty("international_press")]
+        public Press InternationalPress { get; set; }
         [JsonProperty("library_informations")]
         public List<LibraryInformations> BuildingInformations { get; set; }
     }
@@ -50,4 +63,5 @@ namespace Syracuse.Mobitheque.Core.Models
         [JsonProperty("config")]
         public ConfigLibrary Config { get; set; }
     }
+
 }

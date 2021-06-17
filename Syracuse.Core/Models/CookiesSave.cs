@@ -70,10 +70,19 @@ namespace Syracuse.Mobitheque.Core.Models
 
         public bool IsEvent { get; set; }
 
+        public string DailyPressQuery { get; set; }
+        
+        public string DailyPressScenarioCode { get; set; }
+
+        public string InternationalPressQuery { get; set; }
+        
+        public string InternationalPressScenarioCode { get; set; }
+
         public string BuildingInfos { get; set; }
 
         public bool IsTutorial { get; set; } = true;
 
         public bool IsTutorialAddAcount { get; set; } = true;
     }
+
 }
