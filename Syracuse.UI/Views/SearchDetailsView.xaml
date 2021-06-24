@@ -92,7 +92,7 @@
                                             <Label FontSize="Default" HorizontalOptions="FillAndExpand" Text="{Binding DisplayValues.Desc}" LineHeight="1.3" TextType="Html" TextColor="Black" />
 
 
-                                            <StackLayout IsVisible="{Binding HasPrimaryDocs}" BindableLayout.ItemsSource="{Binding PrimaryDocs}" >
+                                            <StackLayout IsVisible="{Binding HasViewerDr}" BindableLayout.ItemsSource="{Binding PrimaryDocs}" >
                                                 <BindableLayout.ItemTemplate>
                                                     <DataTemplate>
                                                         <StackLayout>
