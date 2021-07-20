@@ -1,5 +1,6 @@
 ﻿using MvvmCross.Commands;
 using MvvmCross.Navigation;
+using Newtonsoft.Json;
 using Syracuse.Mobitheque.Core.Models;
 using Syracuse.Mobitheque.Core.Services.Requests;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Syracuse.Mobitheque.Core.ViewModels
 {
-    public class PressInternationalViewModel : BaseViewModel
+    public class PressInternationalViewModel : BaseDownloadPageViewModel
     {
         private int filterIndex = 0;
         private int page = 0;
@@ -19,6 +20,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private MvxAsyncCommand<string> searchCommand;
 
         public MvxAsyncCommand<string> SearchCommand => this.searchCommand ?? (this.searchCommand = new MvxAsyncCommand<string>((text) => this.PerformSearch(text)));
+
+        private MvxAsyncCommand<Result> downloadDocumentCommand;
+        public MvxAsyncCommand<Result> DownloadDocumentCommand => this.downloadDocumentCommand ??
+            (this.downloadDocumentCommand = new MvxAsyncCommand<Result>((item) => this.DownloadDocument(item)));
 
         /// <summary>
         /// Booléen qui permet de permuté l'affichage en cas d'absence de resultat 
@@ -157,6 +162,53 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             await base.Initialize();
         }
 
+        /// <summary>
+        /// Déclenche une oppération de télecharcheement de document 
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        private async Task DownloadDocument(Result result)
+        {
+            CookiesSave user = await App.Database.GetActiveUser();
+            this.isBusy = true;
+            await RaiseAllPropertiesChanged();
+            var status = await this.requestService.GetListDigitalDocuments(result.Resource.RscId);
+            var url = user.DomainUrl;
+            var statusDownload = await this.requestService.GetDownloadDocument(status.D.Documents[0].parentDocumentId, status.D.Documents[0].documentId, status.D.Documents[0].fileName);
+            if (statusDownload.Success)
+            {
+                var json = JsonConvert.SerializeObject(result);
+                DocumentSave b = await App.DocDatabase.GetDocumentsByDocumentID(result.Resource.RscId);
+                if (b == null)
+                {
+                    b = new DocumentSave();
+                }
+                b.UserID = user.ID;
+                b.JsonValue = json;
+                b.DocumentID = result.Resource.RscId;
+                b.ImagePath = result.FieldList.Image;
+                b.DocumentPath = statusDownload.D;
+                await App.DocDatabase.SaveItemAsync(b);
+
+                foreach (var Result in this.Results)
+                {
+                    if (Result == result)
+                    {
+                        Result.CanDownload = false;
+                        Result.IsDownload = true;
+                    }
+                }
+            }
+            else
+            {
+                this.DisplayAlert(ApplicationResource.Error, statusDownload.Errors?[0]?.Msg != null ? statusDownload.Errors?[0]?.Msg : ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
+            }
+
+            this.isBusy = false;
+            this.ForceListUpdate();
+            await RaiseAllPropertiesChanged();
+        }
+
         private async Task getNextPage()
         {
             this.IsBusy = true;
@@ -189,7 +241,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     this.NbrResults = search?.D?.SearchInfo?.NbResults;
                 }
             }
-            return search?.D?.Results;
+            return await this.HaveDownloadOption(search?.D?.Results, this.requestService);
         }
 
 
@@ -260,6 +312,12 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             await this.RaiseAllPropertiesChanged();
         }
 
+        private void ForceListUpdate()
+        {
+            var tempo = this.Results;
+            this.Results = new Result[0];
+            this.Results = tempo;
+        }
 
     }
 }

@@ -26,9 +26,10 @@ namespace Syracuse.Mobitheque.UI.Views
             this.resultsListInternationalPress.ItemTapped -= ResultsList_ItemTapped;
         }
 
-        private void OnDownloadClick(object sender, EventArgs args)
+        protected override void OnBindingContextChanged()
         {
-
+            (this.DataContext as PressInternationalViewModel).OnDisplayAlert += PressInternationalViewModel_OnDisplayAlert;
+            base.OnBindingContextChanged();
         }
 
         private async void ResultsList_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -37,5 +38,7 @@ namespace Syracuse.Mobitheque.UI.Views
 
             await this.ViewModel.GoToDetailView(item);
         }
+
+        private void PressInternationalViewModel_OnDisplayAlert(string title, string message, string button) => this.DisplayAlert(title, message, button);
     }
 }

@@ -25,6 +25,10 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
         Task<string> GetRedirectURL(string originalURL, string defaultURL = "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png");
         Task<BookingResult> GetBookings(Action<Exception> error = null);
 
+        Task<InstanceResult<DigitalDocumentCollection>> GetListDigitalDocuments(string parentDocumentId, Action<Exception> error = null);
+
+        Task<InstanceResult<string>> GetDownloadDocument(string parentDocumentId , string documentId, string targetUrl, Action<Exception> error = null);
+
         Task<SearchResult> Search(SearchOptions options, Action<Exception> error = null);
 
         Task<CheckAvailabilityResult> CheckAvailability(CheckAvailabilityOptions options, Action<Exception> error = null);

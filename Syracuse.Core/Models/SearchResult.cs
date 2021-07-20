@@ -419,6 +419,43 @@ namespace Syracuse.Mobitheque.Core.Models
         [JsonProperty("HasDigitalReady")]
         public bool HasDigitalReady { get; set; }
 
+        public bool CanDownload { get; set; } = false;
+
+        public bool IsDownload { get; set; } = false;
+
+        private bool hasViewerDr { get; set; } = false;
+
+        public bool HasViewerDr
+        {
+            get
+            {
+                if (HasDigitalReady)
+                {
+                    this.hasViewerDr = true;
+                }
+                else
+                {
+                    if (FieldList.DigitalReadyIsEntryPoint != null && Convert.ToInt32(FieldList.DigitalReadyIsEntryPoint[0]) > 0)
+                    {
+                        this.hasViewerDr = true;
+                        HasDigitalReady = true;
+                    }
+                    else if (FieldList.NumberOfDigitalNotices != null && FieldList.NumberOfDigitalNotices[0] > 0)
+                    {
+                        this.hasViewerDr = true;
+                        HasDigitalReady = true;
+                    }
+                }
+                return hasViewerDr;
+            }
+            set
+            {
+                this.hasViewerDr = value;
+            }
+        }
+
+        public DownloadOptions downloadOptions { get; set; } = new DownloadOptions();
+
         [JsonProperty("HasPrimaryDocs")]
         public bool HasPrimaryDocs { get; set; }
 
@@ -447,9 +484,6 @@ namespace Syracuse.Mobitheque.Core.Models
         public FieldList FieldList { get; set; }
 
         public DisplayValues DisplayValues { get; set; } = new DisplayValues();
-
-        public bool IsDownload { get; set; } = false;
-
 
         public Result Clone()
         {
@@ -827,6 +861,15 @@ namespace Syracuse.Mobitheque.Core.Models
 
         [JsonProperty("Suggestions")]
         public Suggestions Suggestions { get; set; }
+    }
+
+    public partial class DownloadOptions
+    {
+        public string parentDocumentId { get; set; } = "";
+
+        public string documentId { get; set; } = "";
+
+        public string fileName { get; set; } = "";
     }
 }
 

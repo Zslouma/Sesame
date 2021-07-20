@@ -1,5 +1,6 @@
 ﻿using MvvmCross.Commands;
 using MvvmCross.Navigation;
+using Newtonsoft.Json;
 using Syracuse.Mobitheque.Core.Models;
 using Syracuse.Mobitheque.Core.Services.Requests;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Syracuse.Mobitheque.Core.ViewModels
 {
-    public class PressDailyViewModel : BaseViewModel
+    public class PressDailyViewModel : BaseDownloadPageViewModel
     {
         private int filterIndex = 0;
         private int page = 0;
@@ -19,6 +20,59 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private MvxAsyncCommand<string> searchCommand;
 
         public MvxAsyncCommand<string> SearchCommand => this.searchCommand ?? (this.searchCommand = new MvxAsyncCommand<string>((text) => this.PerformSearch(text)));
+
+        private MvxAsyncCommand<Result> downloadDocumentCommand;
+        public MvxAsyncCommand<Result> DownloadDocumentCommand => this.downloadDocumentCommand ??
+            (this.downloadDocumentCommand = new MvxAsyncCommand<Result>((item) => this.DownloadDocument(item)));
+
+        /// <summary>
+        /// Déclenche une oppération de télecharcheement de document 
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        private async Task DownloadDocument(Result result)
+        {
+            CookiesSave user = await App.Database.GetActiveUser();
+            this.isBusy = true;
+            await RaiseAllPropertiesChanged();
+            var url = user.DomainUrl;
+            var statusDownload = await this.requestService.GetDownloadDocument(result.downloadOptions.parentDocumentId, result.downloadOptions.documentId, result.downloadOptions.fileName);
+            if (statusDownload.Success)
+            {
+                var json = JsonConvert.SerializeObject(result);
+                DocumentSave b = await App.DocDatabase.GetDocumentsByDocumentID(result.Resource.RscId);
+                if (b == null)
+                {
+                    b = new DocumentSave();
+                }
+                b.UserID = user.ID;
+                b.JsonValue = json;
+                b.DocumentID = result.Resource.RscId;
+                b.ImagePath = result.FieldList.Image;
+                b.DocumentPath = statusDownload.D;
+                await App.DocDatabase.SaveItemAsync(b);
+
+                foreach (var Result in this.Results)
+                {
+                    if (Result == result)
+                    {
+                        Result.CanDownload = false;
+                        Result.IsDownload = true;
+                    }
+                }
+                
+            }
+            else
+            {
+                this.DisplayAlert(ApplicationResource.Error, statusDownload.Errors?[0]?.Msg != null ? statusDownload.Errors?[0]?.Msg : ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
+            }
+            this.isBusy = false;
+            this.ForceListUpdate();
+            await RaiseAllPropertiesChanged();
+
+        }
+
+
 
 
         /// <summary>
@@ -66,6 +120,19 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         }
 
         /// <summary>
+        /// variable contenant le nombres de resultats total à cette requête  
+        /// </summary>
+        private long? nbrResults;
+        public long? NbrResults
+        {
+            get => this.nbrResults;
+            set
+            {
+                SetProperty(ref this.nbrResults, value);
+            }
+        }
+
+        /// <summary>
         /// Code du scenario de recherche 
         /// </summary>
         private String dailyPressScenarioCode;
@@ -91,18 +158,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
         }
 
-        /// <summary>
-        /// variable contenant le nombres de resultats total à cette requête  
-        /// </summary>
-        private long? nbrResults;
-        public long? NbrResults
-        {
-            get => this.nbrResults;
-            set
-            {
-                SetProperty(ref this.nbrResults, value);
-            }
-        }
+
 
         /// <summary>
         /// Booléen indiquant si l'on peux charger de nouveaux elements suplémentaires ou non 
@@ -188,7 +244,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     this.NbrResults = search?.D?.SearchInfo?.NbResults;
                 }
             }
-            return search?.D?.Results;
+            return await this.HaveDownloadOption(search?.D?.Results, this.requestService);
         }
 
 
@@ -258,6 +314,12 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
             }
             await this.RaiseAllPropertiesChanged();
+        }
+        private void ForceListUpdate()
+        {
+            var tempo = this.Results;
+            this.Results = new Result[0];
+            this.Results = tempo;
         }
     }
 }

@@ -12,6 +12,14 @@ namespace Syracuse.Mobitheque.Core
 {
     public class App : MvxApplication
     {
+        private string deviceOS { get; set; }
+
+        public string DeviceOS
+        {
+            get { return deviceOS; }
+            set { deviceOS = value; }
+        }
+
         static CookiesDatabase database;
 
         public static CookiesDatabase Database

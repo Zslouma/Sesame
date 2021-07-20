@@ -1,14 +1,19 @@
 ﻿using Newtonsoft.Json;
+using Plugin.DownloadManager;
+using Plugin.DownloadManager.Abstractions;
 using Refit;
 using Syracuse.Mobitheque.Core.Models;
 using Syracuse.Mobitheque.Core.Services.Files;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace Syracuse.Mobitheque.Core.Services.Requests
 {
@@ -45,7 +50,6 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
         /// <returns></returns>
         public async Task<string> GetRedirectURL(string originalURL, string defaultURL = "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png")
         {
-
             try
             {
                 HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(originalURL);
@@ -310,7 +314,6 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 error?.Invoke(ex);
                 return status; 
             }
-
             
         }
 
@@ -323,7 +326,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             await this.InitializeHttpClient();
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
-            if (options.Query.ScenarioCode == "")
+            if (options.Query.ScenarioCode == "") 
             {
                 options.Query.ScenarioCode = (await App.Database.GetActiveUser()).SearchScenarioCode;
             }
@@ -446,6 +449,131 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 return status;
             }
         }
+
+        public async Task<InstanceResult<DigitalDocumentCollection>> GetListDigitalDocuments(string parentDocumentId, Action<Exception> error = null)
+        {
+            if (!App.AppState.NetworkConnection)
+            {
+                Debug.WriteLine("NetworkConnection" + App.AppState.NetworkConnection);
+            }
+            await this.InitializeHttpClient();
+            try
+            {
+                if (parentDocumentId == null)
+                    throw new ArgumentNullException(nameof(parentDocumentId));
+                var status = await this.requests.GetListDigitalDocuments<InstanceResult<DigitalDocumentCollection>>(parentDocumentId);
+                await UpdateCookies();
+                return status;
+
+            }
+            catch (Exception ex)
+            {
+                var status = new InstanceResult<DigitalDocumentCollection>();
+                status.Errors = new Error[1];
+                if (!App.AppState.NetworkConnection)
+                {
+                    status.Errors[0] = new Error(ApplicationResource.NetworkDisable);
+                }
+                else
+                {
+                    status.Errors[0] = new Error(ApplicationResource.ErrorOccurred);
+                }
+                error?.Invoke(ex);
+                return status;
+            }
+
+
+        }
+        /// <summary>
+        /// Permet de télécharger des documents sur ios et android 
+        /// </summary>
+        /// <param name="parentDocumentId"></param>
+        /// <param name="documentId"></param>
+        /// <param name="targetUrl"></param>
+        /// <param name="error"></param>
+        /// <returns></returns>
+        public async Task<InstanceResult<string>> GetDownloadDocument(string parentDocumentId, string documentId,string filename, Action<Exception> error = null)
+        {
+            IDownloader downloader = DependencyService.Get<IDownloader>();
+            if (!App.AppState.NetworkConnection)
+            {
+                Debug.WriteLine("NetworkConnection" + App.AppState.NetworkConnection);
+            }
+            await this.InitializeHttpClient();
+            try
+            {
+                var user = App.Database.GetActiveUser();
+                if (parentDocumentId == null)
+                    throw new ArgumentNullException(nameof(parentDocumentId));
+
+                string url = string.Format(this.httpUri + "/digitalCollection/DigitalCollectionAttachmentDownloadHandler.ashx?parentDocumentId={0}&documentId={1}&skipWatermark={2}&skipCopyright={3}", parentDocumentId, documentId, false, false);
+                if (await Permissions.CheckStatusAsync<Permissions.StorageRead>() != PermissionStatus.Granted)
+                {
+                    await Permissions.RequestAsync<Permissions.StorageRead>();
+                }
+                if (await Permissions.CheckStatusAsync<Permissions.StorageWrite>() != PermissionStatus.Granted)
+                {
+                    await Permissions.RequestAsync<Permissions.StorageWrite>();
+                }
+                HttpClient httpClient = new HttpClient(this.handler)
+                {
+                    BaseAddress = this.httpUri
+                };
+                httpClient.DefaultRequestHeaders.CacheControl = new System.Net.Http.Headers.CacheControlHeaderValue();
+                httpClient.DefaultRequestHeaders.CacheControl.NoStore = true;
+                httpClient.DefaultRequestHeaders.CacheControl.NoCache = true;
+                var path = downloader.GetPathStorage() + "/" + filename;
+                byte[] fileBytes = await httpClient.GetByteArrayAsync(new Uri(url));
+                System.IO.File.WriteAllBytes(path, fileBytes);
+                this.requests = RestService.For<IRefitRequests>(httpClient);
+                await UpdateCookies();
+                var status = new InstanceResult<string>();
+                status.Success = true;
+                status.D = path;
+                return status;
+            }
+            catch (Exception ex)
+            {
+                var status = new InstanceResult<string>();
+                status.Success = false;
+                status.Errors = new Error[1];
+                if (!App.AppState.NetworkConnection)
+                {
+                    status.Errors[0] = new Error(ApplicationResource.NetworkDisable);
+                }
+                else if (ex.Message != "" && ex.Message != null) {
+                    status.Errors[0] = new Error(ex.Message);
+                }
+                else
+                {
+                    status.Errors[0] = new Error(ApplicationResource.ErrorOccurred);
+                }
+                error?.Invoke(ex);
+                return status;
+            }
+        }
+
+        bool IsDownloading(IDownloadFile file)
+        {
+            if (file == null) return false;
+
+            switch (file.Status)
+            {
+                case DownloadFileStatus.INITIALIZED:
+                case DownloadFileStatus.PAUSED:
+                case DownloadFileStatus.PENDING:
+                case DownloadFileStatus.RUNNING:
+                    return true;
+
+                case DownloadFileStatus.COMPLETED:
+                case DownloadFileStatus.CANCELED:
+                case DownloadFileStatus.FAILED:
+                    return false;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         /// <summary>
         /// Permet de récupérer le panier de l'utilisateur
         /// </summary>

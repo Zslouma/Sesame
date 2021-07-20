@@ -60,6 +60,17 @@ namespace Syracuse.Mobitheque.Core.Services.Database
         {
             return database.Table<DocumentSave>().Where(i => i.UserID == userID).ToListAsync();
         }
+
+        /// <summary>
+        /// Récupére un document possédant un id spécifique
+        /// </summary>
+        /// <param name="documentID"></param>
+        /// <returns></returns>
+        public Task<DocumentSave> GetDocumentsByDocumentID(string documentID)
+        {
+            return database.Table<DocumentSave>().Where(i => i.DocumentID == documentID).FirstOrDefaultAsync();
+        }
+
         /// <summary>
         ///  Récupére une liste de document appartennant à un utilisateur spécifique pour un affichage spécifique
         /// </summary>

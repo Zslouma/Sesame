@@ -59,13 +59,12 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     user.InternationalPressQuery = library.Config.InternationalPress.Query;
                     user.InternationalPressScenarioCode = library.Config.InternationalPress.PressScenarioCode;
                     user.BuildingInfos = JsonConvert.SerializeObject(library.Config.BuildingInformations);
-                    await App.Database.SaveItemAsync(user);
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.ToString());
                 }
-                
+                await App.Database.SaveItemAsync(user);
             }
            
         }

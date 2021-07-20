@@ -1,6 +1,8 @@
 ﻿using Foundation;
 using MvvmCross.Forms.Platforms.Ios.Core;
+using Plugin.DownloadManager;
 using Syracuse.Mobitheque.UI;
+using System;
 using UIKit;
 
 namespace Syracuse.Mobitheque.iOS
@@ -20,6 +22,11 @@ namespace Syracuse.Mobitheque.iOS
             this.LoadApplication(new App());
             return base.FinishedLaunching(uiApplication, launchOptions);
         }
+        public override void HandleEventsForBackgroundUrl(UIApplication application, string sessionIdentifier, Action completionHandler)
+        {
+            CrossDownloadManager.BackgroundSessionCompletionHandler = completionHandler;
+        }
+
 
     }
 }

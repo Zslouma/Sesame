@@ -14,7 +14,6 @@ namespace Syracuse.Mobitheque.UI.Views
         {
             InitializeComponent();
         }
-
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -39,10 +38,6 @@ namespace Syracuse.Mobitheque.UI.Views
             await this.ViewModel.GoToDetailView(item);
         }
 
-        private void OnDownloadClick(object sender, EventArgs args)
-        {
-
-        }
         private void PressDailyViewModel_OnDisplayAlert(string title, string message, string button) => this.DisplayAlert(title, message, button);
     }
 }

@@ -47,12 +47,11 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
-                                    <Label  Grid.Column="0" Grid.Row="0" Text="{x:Static local:AppResource.DownloadAllFile}" TextColor="Black" FontSize="Small" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    <Label  Grid.Column="0" Grid.Row="0" Text="{x:Static local:AppResource.DownloadAllFile}" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                                     <Switch  Grid.Column="1" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" IsToggled="False" />
                                 </Grid>
                             </StackLayout>
                             <ListView x:Name="resultsListDailyPress" 
-                              CachingStrategy="RecycleElement"
                               ItemsSource="{Binding Results}"
                               SeparatorVisibility="None"
                               SelectionMode="None"
@@ -68,7 +67,7 @@
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell>
-                                            <Grid Padding="7, 0, 7, 0" Margin="0,0,0,15">
+                                            <Grid x:Name="Item" Padding="7, 0, 7, 0" Margin="0,0,0,15" >
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="auto"/>
                                                     <ColumnDefinition Width="*"/>
@@ -91,16 +90,23 @@
                                                         <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="Center" FontSize="Medium" Text="{Binding Resource.TextStatus}"/>
                                                     </StackLayout>
                                                 </StackLayout>
-                                                <Button
-                                                    Grid.Column="2"
-                                                    WidthRequest="30"
-                                                    Text="&#xf019;"
-                                                    VerticalOptions="Start"
-                                                    FontSize="Large"
-                                                    FontFamily="{StaticResource FontAwesomeSolid}"
-                                                    x:Name="ScannButton"
-                                                    TextColor="Gray"
-                                                    BackgroundColor="Transparent"/>
+                                                <StackLayout Grid.Column="2" VerticalOptions="Start" IsVisible="{Binding IsDownload}">
+                                                    <Label Text="&#xf00c;" FontFamily="{StaticResource FontAwesomeSolid}" WidthRequest="30" TextColor="LightGreen" VerticalOptions="Start" FontSize="Large"/>
+                                                </StackLayout>
+                                                <StackLayout Grid.Column="2" VerticalOptions="Start" IsVisible="{Binding CanDownload}">
+                                                    <Button
+                                                        x:Name="DownloadButton"
+                                                        CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                                        BindingContext="{Binding Source={x:Reference resultsListDailyPress}, Path=BindingContext}"
+                                                        Command="{Binding DownloadDocumentCommand}"
+                                                        WidthRequest="30"
+                                                        Text="&#xf019;"
+                                                        VerticalOptions="Start"
+                                                        FontSize="Large"
+                                                        FontFamily="{StaticResource FontAwesomeSolid}"
+                                                        TextColor="Gray"
+                                                        BackgroundColor="Transparent"/>
+                                                </StackLayout>
                                             </Grid>
                                         </ViewCell>
                                     </DataTemplate>

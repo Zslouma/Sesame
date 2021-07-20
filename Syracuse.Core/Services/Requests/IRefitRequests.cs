@@ -18,6 +18,18 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                               [AliasAs("code")]string code = "",
                               [AliasAs("uniqueId")]string uniqueId = "");
 
+        [Get("/DigitalCollectionService.svc/ListDigitalDocuments?parentDocumentId={parentDocumentId}&start={start}&limit={limit}&includeMetaDatas={includeMetaDatas}")]
+        Task<T> GetListDigitalDocuments<T>( [AliasAs("parentDocumentId")] string parentDocumentId,
+                                            [AliasAs("start")] int start = 0,
+                                            [AliasAs("limit")] int limit = 10,
+                                            [AliasAs("includeMetaDatas")] bool includeMetaDatas = false);
+
+        [Get("/digitalCollection/DigitalCollectionAttachmentDownloadHandler.ashx?parentDocumentId={parentDocumentId}&documentId={documentId}&skipWatermark={skipWatermark}&skipCopyright={skipCopyright}")]
+        Task<T> GetDownloadDocument<T>([AliasAs("parentDocumentId")] string parentDocumentId,
+                                    [AliasAs("documentId")] string documentId,
+                                    [AliasAs("skipWatermark")] bool skipWatermark = true,
+                                    [AliasAs("skipCopyright")] bool skipCopyright = true);
+
         [Get("/Portal/UserAccountService.svc/ListLoans?serviceCode{code}&userUniqueIdentifier={uniqueId}&token={token}&timestamp={timestamp}")]
         Task<T> GetLoans<T>([AliasAs("timestamp")] string timestamp,
                             [AliasAs("token")] string token,
@@ -56,5 +68,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
         [Post("/Portal/Services/UserAccountService.svc/CancelBookings")]
         Task<T> CancelBooking<T>([Body]BookingOptions body);
+
+
     }
 }

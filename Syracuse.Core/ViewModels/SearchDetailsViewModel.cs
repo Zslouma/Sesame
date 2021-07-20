@@ -150,6 +150,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
         }
 
+
         private bool isCarouselVisibility = false;
         public bool IsCarouselVisibility
         {
@@ -201,6 +202,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         async public override void Prepare(SearchDetailsParameters parameter)
         {
             this.IsBusy = true;
+            this.IsCarouselVisibility = false;
             await this.CanHolding();
             this.SearchOptions = parameter.searchOptions;
             this.NbrResults = parameter.nbrResults;
@@ -219,13 +221,26 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 await LoadMore(false);
             }
             this.ItemsSource[0] = this.ItemsSource[0].Clone();
+
             await this.RaisePropertyChanged(nameof(this.ItemsSource));
             await this.RaisePropertyChanged(nameof(this.CurrentItem));
             await this.RaisePropertyChanged(nameof(this.Position));
+            this.ForceListUpdate();
             await this.RaiseAllPropertiesChanged();
+            this.IsCarouselVisibility = true;
             this.IsBusy = false;
         }
 
+        private void ForceListUpdate()
+        {
+            var tempo = this.ItemsSource;
+            foreach (var item in this.ItemsSource)
+            {
+                Debug.WriteLine(item.HasViewerDr);
+            }
+            this.ItemsSource = new ObservableCollection<Result>(new Result[0]);
+            this.ItemsSource = tempo;
+        }
         public async Task FormateToCarrousel(Result[] results)
         {
             foreach (var resultTempo in results)
@@ -241,7 +256,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 {
                     resultTempo.DisplayValues.DisplayStar = true;
                 }
-                if (resultTempo.HasDigitalReady)
+                if (resultTempo.HasViewerDr)
                 {
                     if (this.user == null)
                     {
@@ -260,14 +275,19 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                         else
                         {
                             resultTempo.HasDigitalReady = false;
+                            resultTempo.HasViewerDr = false;
+                            resultTempo.FieldList.NumberOfDigitalNotices = null;
+                            resultTempo.FieldList.DigitalReadyIsEntryPoint = null;
                         }
                     }
                     catch (Exception)
                     {
                         resultTempo.HasDigitalReady = false;
+                        resultTempo.HasViewerDr = false;
+                        resultTempo.FieldList.NumberOfDigitalNotices = null;
+                        resultTempo.FieldList.DigitalReadyIsEntryPoint = null;
                     }
                     // Génération des url du Viewer DR 
-
 
                 }
                 resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
@@ -278,6 +298,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 resultTempo.DisplayValues.Library.success = resultTempo.DisplayValues.Library.success && resultTempo.DisplayValues.SeekForHoldings;
                 this.ItemsSource.Add(resultTempo);
             }
+            var result = this.ItemsSource;
+            this.ItemsSource = new ObservableCollection<Result>();
+            await this.RaisePropertyChanged(nameof(ItemsSource));
+            this.ItemsSource = result;
         }
         public async Task FormateToCarrousel(int start, int end, bool endIsBusy = true)
         {
@@ -298,7 +322,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 {
                     this.ItemsSource[i].DisplayValues.DisplayStar = true;
                 }
-                if (this.ItemsSource[i].HasDigitalReady)
+                if (this.ItemsSource[i].HasViewerDr)
                 {
                     if (this.user == null)
                     {
@@ -318,11 +342,17 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                         else
                         {
                             this.ItemsSource[i].HasDigitalReady = false;
+                            this.ItemsSource[i].HasViewerDr = false;
+                            this.ItemsSource[i].FieldList.NumberOfDigitalNotices = null;
+                            this.ItemsSource[i].FieldList.DigitalReadyIsEntryPoint = null;
                         }
                     }
                     catch (Exception)
                     {
                         this.ItemsSource[i].HasDigitalReady = false;
+                        this.ItemsSource[i].HasViewerDr = false;
+                        this.ItemsSource[i].FieldList.NumberOfDigitalNotices = null;
+                        this.ItemsSource[i].FieldList.DigitalReadyIsEntryPoint = null;
                     }
 
                 }
@@ -335,8 +365,9 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
             }
             var result = this.ItemsSource;
-            this.ItemsSource = new ObservableCollection<Result>(result);
+            this.ItemsSource = new ObservableCollection<Result>();
             await this.RaisePropertyChanged(nameof(ItemsSource));
+            this.ItemsSource = result;
             if (endIsBusy)
             {
                 this.IsBusy = false;
