@@ -241,7 +241,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 {
                     resultTempo.DisplayValues.DisplayStar = true;
                 }
-                if (resultTempo.HasDigitalReady)
+                if (resultTempo.HasViewerDr)
                 {
                     if (this.user == null)
                     {
@@ -260,14 +260,19 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                         else
                         {
                             resultTempo.HasDigitalReady = false;
+                            resultTempo.HasViewerDr = false;
+                            resultTempo.FieldList.NumberOfDigitalNotices = null;
+                            resultTempo.FieldList.DigitalReadyIsEntryPoint = null;
                         }
                     }
                     catch (Exception)
                     {
                         resultTempo.HasDigitalReady = false;
+                        resultTempo.HasViewerDr = false;
+                        resultTempo.FieldList.NumberOfDigitalNotices = null;
+                        resultTempo.FieldList.DigitalReadyIsEntryPoint = null;
                     }
                     // Génération des url du Viewer DR 
-
 
                 }
                 resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
@@ -298,7 +303,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 {
                     this.ItemsSource[i].DisplayValues.DisplayStar = true;
                 }
-                if (this.ItemsSource[i].HasDigitalReady)
+                if (this.ItemsSource[i].HasViewerDr)
                 {
                     if (this.user == null)
                     {
@@ -318,11 +323,17 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                         else
                         {
                             this.ItemsSource[i].HasDigitalReady = false;
+                            this.ItemsSource[i].HasViewerDr = false;
+                            this.ItemsSource[i].FieldList.NumberOfDigitalNotices = null;
+                            this.ItemsSource[i].FieldList.DigitalReadyIsEntryPoint = null;
                         }
                     }
                     catch (Exception)
                     {
                         this.ItemsSource[i].HasDigitalReady = false;
+                        this.ItemsSource[i].HasViewerDr = false;
+                        this.ItemsSource[i].FieldList.NumberOfDigitalNotices = null;
+                        this.ItemsSource[i].FieldList.DigitalReadyIsEntryPoint = null;
                     }
 
                 }
@@ -452,7 +463,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             UrlWithAuthenticationStatus status = await this.requestService.GetUrlWithAuthenticationTransfert(uri);
             if (status.Success)
             {
-                return status.D;
+                uri = new Uri(await this.requestService.GetRedirectURL(status.D.ToString(), uri.ToString()));
+                return uri;
             }
             else
             {

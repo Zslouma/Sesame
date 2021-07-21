@@ -421,6 +421,37 @@ namespace Syracuse.Mobitheque.Core.Models
         [JsonProperty("HasDigitalReady")]
         public bool HasDigitalReady { get; set; }
 
+        private bool hasViewerDr { get; set; } = false;
+
+        public bool HasViewerDr
+        {
+            get
+            {
+                if (HasDigitalReady)
+                {
+                    this.hasViewerDr = true;
+                }
+                else
+                {
+                    if (FieldList.DigitalReadyIsEntryPoint != null && Convert.ToInt32(FieldList.DigitalReadyIsEntryPoint[0]) > 0)
+                    {
+                        this.hasViewerDr = true;
+                        HasDigitalReady = true;
+                    }
+                    else if (FieldList.NumberOfDigitalNotices != null && FieldList.NumberOfDigitalNotices[0] > 0)
+                    {
+                        this.hasViewerDr = true;
+                        HasDigitalReady = true;
+                    }
+                }
+                return hasViewerDr;
+            }
+            set
+            {
+                this.hasViewerDr = value;
+            }
+        }
+
         [JsonProperty("HasPrimaryDocs")]
         public bool HasPrimaryDocs { get; set; }
 
