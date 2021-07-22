@@ -815,9 +815,11 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     else
                         Console.WriteLine("test");
                     search.FieldList.HaveImage = true;
+                    await this.RaisePropertyChanged(nameof(search.FieldList.ThumbMedium));
                     await this.RaisePropertyChanged(nameof(search.FieldList.HaveImage));
                 }
             });
+            await this.RaiseAllPropertiesChanged();
             this.ForceListUpdate();
             await this.RaiseAllPropertiesChanged();
         }

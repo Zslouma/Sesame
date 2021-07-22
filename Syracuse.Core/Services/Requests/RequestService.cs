@@ -48,31 +48,48 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
             try
             {
-                HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(originalURL);
-                webRequest.AllowAutoRedirect = false;  // IMPORTANT
-                webRequest.Timeout = 3500;           // timeout 10s
+                //HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(originalURL);
+                //webRequest.AllowAutoRedirect = false;  // IMPORTANT
+                //webRequest.Timeout = 3500;           // timeout 10s
+                var tempohandler = new HttpClientHandler()
+                {
+                    UseCookies = true,
+                    CookieContainer = this.cookies
 
-            // Get the response ...
-                using (var webResponse = (HttpWebResponse)webRequest.GetResponse())
+                }; 
+                tempohandler.AllowAutoRedirect = false;
+                tempohandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                HttpClient httpClient = new HttpClient(tempohandler);
+                httpClient.DefaultRequestHeaders.CacheControl = new System.Net.Http.Headers.CacheControlHeaderValue();
+                httpClient.DefaultRequestHeaders.CacheControl.NoStore = true;
+                httpClient.DefaultRequestHeaders.CacheControl.NoCache = true;
+
+                // Get the response ...
+                using (var webResponse = (HttpResponseMessage) await httpClient.GetAsync(originalURL))
                 {
                     // Now look to see if it's a redirect
                     if ((int)webResponse.StatusCode >= 300 && (int)webResponse.StatusCode <= 399)
                     {
-                        string uriString = webResponse.Headers["Location"];
+                        string uriString = webResponse.RequestMessage.RequestUri.ToString();
+                        Console.WriteLine(uriString);
                         return uriString;
 
                     }else if ((int)webResponse.StatusCode >= 200 && (int)webResponse.StatusCode <= 299)
                     {
-                        return originalURL;
+                        string uriString = webResponse.RequestMessage.RequestUri.ToString();
+                        Console.WriteLine(uriString);
+                        return uriString;
                     }
                     else
                     {
+                        Console.WriteLine(defaultURL);
                         return defaultURL;
                     }
                 }
             }
             catch (Exception e)
             {
+                Console.WriteLine(defaultURL);
                 return defaultURL;
             }
         }
