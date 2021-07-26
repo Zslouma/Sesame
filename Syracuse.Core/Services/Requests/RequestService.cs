@@ -42,6 +42,8 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             };
             this.token = this.Timestamp();
         }
+
+
         /// <summary>
         /// Vérifie si l'url passé en paramétre posséde une redirection ou non
         /// </summary>
@@ -108,6 +110,20 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             }
         }
 
+        /// <summary>
+        /// Getter de la variable cookies retourne un CookieContainer
+        /// </summary>
+        /// <returns></returns>
+        public CookieContainer GetCookie()
+        {
+            return this.cookies;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public IEnumerable<Cookie> GetCookies(string url = null)
         {
             if (!String.IsNullOrEmpty(url))
@@ -117,6 +133,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             foreach (var cookie in this.cookies.GetCookies(this.httpUri))
                 yield return cookie as Cookie;
         }
+
         public async Task UpdateCookies()
         {
             CookiesSave b = await App.Database.GetActiveUser();
@@ -212,7 +229,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 status = await this.requests.GetUrlWithAuthenticationTransfert<UrlWithAuthenticationStatus>(transfertOptions);
                 return status;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 status = new UrlWithAuthenticationStatus();
                 return status;

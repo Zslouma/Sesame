@@ -117,7 +117,7 @@
                                             <StackLayout IsVisible="{Binding HasViewerDr}">
                                                 <!--Loading label should not render by default.-->
                                                 <Label BindingContext="carouselView" x:Name="labelLoading" HorizontalOptions="Fill" Text="{x:Static local:AppResource.Loading}" IsVisible="{Binding Path=BindingContext.AbsoluteIndicatorVisibility, Source={x:Reference Name=carouselView}}"  />
-                                                <WebView MinimumHeightRequest="50" MinimumWidthRequest="50" Source="{Binding FieldList.UrlViewerDR}" Navigated="WebViewNavigated" HeightRequest="400" HorizontalOptions="Fill" Navigating="WebViewNavigating"/>
+                                                <WebView x:Name="WebViewViewerDR" MinimumHeightRequest="50" MinimumWidthRequest="50" Source="{Binding FieldList.UrlViewerDR}" Navigated="WebViewNavigated" HeightRequest="400" HorizontalOptions="Fill" Navigating="WebViewNavigating" Cookies="{Binding Path=BindingContext.Cookies, Source={x:Reference Name=carouselView}}"/>
                                             </StackLayout>
                                             <!--#region Holding -->
                                             

@@ -9,6 +9,12 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
     public interface IRequestService
     {
         /// <summary>
+        ///  Getter de la variable cookies retourne un CookieContainer
+        /// </summary>
+        /// <returns></returns>
+        CookieContainer GetCookie();
+
+        /// <summary>
         /// Get cookies of current httpClient.
         /// </summary>
         /// <returns>Current cookies</returns>

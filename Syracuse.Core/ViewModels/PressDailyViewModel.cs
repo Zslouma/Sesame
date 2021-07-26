@@ -58,6 +58,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     {
                         Result.CanDownload = false;
                         Result.IsDownload = true;
+                        break;
                     }
                 }
                 
