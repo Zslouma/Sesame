@@ -125,7 +125,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                         new MenuNavigation() { Text = ApplicationResource.PinnedDocuments, IconFontAwesome = "\uf08d" , IsEnabled = true },
                         new MenuNavigation() { Text = ApplicationResource.PressDaily, IconFontAwesome = "\uf1ea" , IsEnabled = true },
                         new MenuNavigation() { Text = ApplicationResource.PressInternational, IconFontAwesome = "\uf1ea" , IsEnabled = true },
-                        new MenuNavigation() { Text = ApplicationResource.Download, IconFontAwesome = "\uf019" , IsEnabled = true },
+                        new MenuNavigation() { Text = ApplicationResource.Download, IconFontAwesome = "\uf0c0" , IsEnabled = true },
                         new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf02a" , IsEnabled = App.AppState.NetworkConnection },
                         new MenuNavigation() { Text = ApplicationResource.Library, IconFontAwesome = "\uf67f" , IsEnabled = App.AppState.NetworkConnection },
                         new MenuNavigation() { Text = ApplicationResource.About, IconFontAwesome = "\uf05a" , IsEnabled = true },

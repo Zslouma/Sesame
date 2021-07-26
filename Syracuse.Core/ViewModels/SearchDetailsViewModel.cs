@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace Syracuse.Mobitheque.Core.ViewModels
@@ -144,6 +143,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set
             {
                 SetProperty(ref this.isPositionVisible, value);
+                //if (value)
+                //{
+                //    this.TimeVisibility(this.Position);
+                //}
             }
         }
 
@@ -171,11 +174,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         {
             get => this.absoluteIndicatorVisibility;
             set { SetProperty(ref this.absoluteIndicatorVisibility, value); }
-        }
-
-        public CookieContainer Cookies
-        {
-            get => this.requestService.GetCookie();
         }
 
         public CookiesSave user { get; set; }
@@ -268,20 +266,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     {
                         if (resultTempo.FieldList.NumberOfDigitalNotices != null && resultTempo.FieldList.NumberOfDigitalNotices.Length > 0 && resultTempo.FieldList.NumberOfDigitalNotices[0] > 0)
                         {
-                            UrlWithAuthenticationStatus status = await requestService.GetUrlWithAuthenticationTransfert(new Uri(this.user.LibraryUrl + "/digital-viewer/c-" + resultTempo.FieldList.Identifier[0]));
-                            if (status.Success)
-                            {
-                                Console.WriteLine("GetUrlWithAuthenticationTransfert: " + status.D.AbsoluteUri);
-                            }
                             resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/c-" + resultTempo.FieldList.Identifier[0];
                         }
                         else if (resultTempo.FieldList.DigitalReadyIsEntryPoint != null && resultTempo.FieldList.DigitalReadyIsEntryPoint.Length > 0 && Convert.ToInt32(resultTempo.FieldList.DigitalReadyIsEntryPoint[0]) > 0)
                         {
-                            UrlWithAuthenticationStatus status = await requestService.GetUrlWithAuthenticationTransfert(new Uri(this.user.LibraryUrl + "/digital-viewer/c-" + resultTempo.FieldList.Identifier[0]));
-                            if (status.Success)
-                            {
-                                Console.WriteLine("GetUrlWithAuthenticationTransfert: " + status.D.AbsoluteUri);
-                            }
                             resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/d-" + resultTempo.FieldList.Identifier[0];
                         }
                         else
