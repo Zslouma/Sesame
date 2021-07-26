@@ -1,14 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<views:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-             xmlns:common="clr-namespace:Syracuse.Mobitheque.UI.Views.Templates"
-             xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
-             xmlns:core="clr-namespace:Syracuse.Mobitheque.Core;assembly=Syracuse.Mobitheque.Core"
-             x:TypeArguments="viewModels:DownloadViewModel"
-             x:Class="Syracuse.Mobitheque.UI.Views.DownloadView"
-             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+<views:MvxContentPage   xmlns="http://xamarin.com/schemas/2014/forms" 
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                        xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                        xmlns:common="clr-namespace:Syracuse.Mobitheque.UI.Views.Templates"
+                        xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
+                        xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+                        xmlns:core="clr-namespace:Syracuse.Mobitheque.Core;assembly=Syracuse.Mobitheque.Core"
+                        xmlns:local="clr-namespace:Syracuse.Mobitheque.UI"
+                        x:TypeArguments="viewModels:DownloadViewModel"
+                        x:Class="Syracuse.Mobitheque.UI.Views.DownloadView"
+                        xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">  
     <NavigationPage.TitleView >
         <common:SearchBarTemplate />
     </NavigationPage.TitleView>
@@ -29,7 +31,90 @@
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
+                    <Grid>
+
+                        <StackLayout VerticalOptions="Center" IsVisible="{Binding NotCurrentDownload}">
+                            <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize = "20" Text="{x:Static local:AppResource.NotCurrentPress}" />
+                        </StackLayout>
+                        <StackLayout Padding="5,5" IsVisible="{Binding ReversNotCurrentDownload}">
+
+                            <StackLayout x:Name="DownloadBar" Margin="-15,0" BackgroundColor="#f3f5fa">
+                                <Grid Padding="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.8*" />
+                                        <ColumnDefinition Width="0.2*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label  Grid.Column="0" Grid.Row="0" Text="{x:Static local:AppResource.DownloadAllFile}" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                    <Switch  Grid.Column="1" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" IsToggled="False" />
+                                </Grid>
+                            </StackLayout>
+                            <ListView x:Name="resultsListDownloadDocument" 
+                              ItemsSource="{Binding Results}"
+                              SeparatorVisibility="None"
+                              SelectionMode="None"
+                              VerticalOptions="FillAndExpand"
+                              VerticalScrollBarVisibility="Never"
+                              IsPullToRefreshEnabled="False"
+                              HasUnevenRows="True">
+                                <ListView.RowHeight>
+                                    <OnPlatform x:TypeArguments="x:Int32">
+                                        <On Platform="iOS">160</On>
+                                    </OnPlatform>
+                                </ListView.RowHeight>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid x:Name="Item" Padding="7, 0, 7, 0" Margin="0,0,0,15" >
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="0.1*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Frame Grid.Column="0" VerticalOptions="FillAndExpand" Margin="5" Padding="0" >
+                                                    <Frame.HasShadow>
+                                                        <OnPlatform x:TypeArguments="x:Boolean">
+                                                            <On Platform="iOS">false</On>
+                                                            <On Platform="Android">true</On>
+                                                        </OnPlatform>
+                                                    </Frame.HasShadow>
+                                                    <Image VerticalOptions="Center" Aspect="AspectFill" Source="{Binding ImagePath}" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent"/>
+                                                </Frame>
+                                                <StackLayout Grid.Column="1" VerticalOptions="Start" Orientation="Vertical">
+                                                    <Label TextColor="Black" Text="{Binding Title}" MaxLines="2" FontAttributes="Bold" FontSize="Medium"/>
+                                                    <Label TextColor="Gray" Text="{Binding ShortDesc}" MaxLines="2" FontSize="Small"/>
+                                                    <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal" IsVisible="{Binding Resource.HasViewDisponibility}" >
+                                                        <Frame VerticalOptions="Center" WidthRequest="15" HeightRequest="15"  CornerRadius="20"   Margin="0" Padding="0" BackgroundColor="{Binding Resource.ColorStatus}"/>
+                                                        <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="Center" FontSize="Medium" Text="{Binding Resource.TextStatus}"/>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                                <StackLayout Grid.Column="2" VerticalOptions="Start">
+                                                    <Button
+                                                        x:Name="DownloadButton"
+                                                        CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                                        BindingContext="{Binding Source={x:Reference resultsListDownloadDocument}, Path=BindingContext}"
+                                                        Command="{Binding DeleteDocumentCommand}"
+                                                        WidthRequest="30"
+                                                        Text="&#xf00d;"
+                                                        VerticalOptions="Start"
+                                                        FontSize="Large"
+                                                        FontFamily="{StaticResource FontAwesomeSolid}"
+                                                        TextColor="Red"
+                                                        BackgroundColor="Transparent"/>
+                                                </StackLayout>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </Grid>
                 </StackLayout>
+                <AbsoluteLayout Grid.Row="0" IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
+                    <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
+                </AbsoluteLayout>
             </Grid>
         </yummy:PancakeView>
     </ContentPage.Content>

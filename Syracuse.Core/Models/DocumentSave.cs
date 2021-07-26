@@ -19,6 +19,10 @@ namespace Syracuse.Mobitheque.Core.Models
 
         public string ImagePath { get; set; }
 
+        public string Title { get; set; }
+
+        public string ShortDesc { get; set; }
+
         public string DocumentPath { get; set; }
 
         public string JsonValue { get; set; }

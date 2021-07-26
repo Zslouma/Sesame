@@ -39,29 +39,15 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             var statusDownload = await this.requestService.GetDownloadDocument(result.downloadOptions.parentDocumentId, result.downloadOptions.documentId, result.downloadOptions.fileName);
             if (statusDownload.Success)
             {
-                var json = JsonConvert.SerializeObject(result);
-                DocumentSave b = await App.DocDatabase.GetDocumentsByDocumentID(result.Resource.RscId);
-                if (b == null)
-                {
-                    b = new DocumentSave();
-                }
-                b.UserID = user.ID;
-                b.JsonValue = json;
-                b.DocumentID = result.Resource.RscId;
-                b.ImagePath = result.FieldList.Image;
-                b.DocumentPath = statusDownload.D;
-                await App.DocDatabase.SaveItemAsync(b);
-
+                SaveNewDocumentDatabaseObject(result, statusDownload.D);
                 foreach (var Result in this.Results)
                 {
                     if (Result == result)
                     {
                         Result.CanDownload = false;
                         Result.IsDownload = true;
-                        break;
                     }
                 }
-                
             }
             else
             {

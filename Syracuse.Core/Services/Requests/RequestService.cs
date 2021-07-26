@@ -499,7 +499,6 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 return status;
             }
 
-
         }
         /// <summary>
         /// Permet de télécharger des documents sur ios et android 

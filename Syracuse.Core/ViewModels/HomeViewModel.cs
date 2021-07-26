@@ -198,31 +198,19 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
 
         /// <summary>
-        /// Déclenche une oppération de télecharcheement de document 
+        /// Déclenche une oppération de télecharchement de document 
         /// </summary>
         /// <param name="result"></param>
         /// <returns></returns>
         private async Task DownloadDocument(Result result)
         {
-            CookiesSave user = await App.Database.GetActiveUser();
+            
             this.isBusy = true;
             await RaiseAllPropertiesChanged();
-            var url = user.DomainUrl;
             var statusDownload = await this.requestService.GetDownloadDocument(result.downloadOptions.parentDocumentId, result.downloadOptions.documentId, result.downloadOptions.fileName);
             if (statusDownload.Success)
             {
-                var json = JsonConvert.SerializeObject(result);
-                DocumentSave b = await App.DocDatabase.GetDocumentsByDocumentID(result.Resource.RscId);
-                if (b == null)
-                {
-                    b = new DocumentSave();
-                }
-                b.UserID = user.ID;
-                b.JsonValue = json;
-                b.DocumentID = result.Resource.RscId;
-                b.ImagePath = result.FieldList.Image;
-                b.DocumentPath = statusDownload.D;
-                await App.DocDatabase.SaveItemAsync(b);
+                SaveNewDocumentDatabaseObject(result, statusDownload.D);
                 foreach (var Result in this.Results)
                 {
                     if (Result == result)
