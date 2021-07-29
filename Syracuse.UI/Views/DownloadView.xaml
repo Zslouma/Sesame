@@ -5,7 +5,6 @@
                         xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
                         xmlns:common="clr-namespace:Syracuse.Mobitheque.UI.Views.Templates"
                         xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
-                        xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
                         xmlns:core="clr-namespace:Syracuse.Mobitheque.Core;assembly=Syracuse.Mobitheque.Core"
                         xmlns:local="clr-namespace:Syracuse.Mobitheque.UI"
                         x:TypeArguments="viewModels:DownloadViewModel"
@@ -38,19 +37,6 @@
                         </StackLayout>
                         <StackLayout Padding="5,5" IsVisible="{Binding ReversNotCurrentDownload}">
 
-                            <StackLayout x:Name="DownloadBar" Margin="-15,0" BackgroundColor="#f3f5fa">
-                                <Grid Padding="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.8*" />
-                                        <ColumnDefinition Width="0.2*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <Label  Grid.Column="0" Grid.Row="0" Text="{x:Static local:AppResource.DownloadAllFile}" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                                    <Switch  Grid.Column="1" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" IsToggled="False" />
-                                </Grid>
-                            </StackLayout>
                             <ListView x:Name="resultsListDownloadDocument" 
                               ItemsSource="{Binding Results}"
                               SeparatorVisibility="None"
