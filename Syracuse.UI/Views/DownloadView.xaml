@@ -82,6 +82,7 @@
                                                         CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                                         BindingContext="{Binding Source={x:Reference resultsListDownloadDocument}, Path=BindingContext}"
                                                         Command="{Binding DeleteDocumentCommand}"
+                                                        IsEnabled="{Binding CanDownload}"
                                                         WidthRequest="30"
                                                         Text="&#xf00d;"
                                                         VerticalOptions="Start"
