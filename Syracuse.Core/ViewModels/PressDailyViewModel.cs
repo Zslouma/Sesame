@@ -39,7 +39,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             var statusDownload = await this.requestService.GetDownloadDocument(result.downloadOptions.parentDocumentId, result.downloadOptions.documentId, result.downloadOptions.fileName);
             if (statusDownload.Success)
             {
-                SaveNewDocumentDatabaseObject(result, statusDownload.D);
+                await SaveNewDocumentDatabaseObject(result, statusDownload.D);
                 foreach (var Result in this.Results)
                 {
                     if (Result == result)
@@ -54,6 +54,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 this.DisplayAlert(ApplicationResource.Error, statusDownload.Errors?[0]?.Msg != null ? statusDownload.Errors?[0]?.Msg : ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
             }
             this.isBusy = false;
+            await RaiseAllPropertiesChanged();
             this.ForceListUpdate();
             await RaiseAllPropertiesChanged();
 
