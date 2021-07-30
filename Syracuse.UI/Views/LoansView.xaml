@@ -39,7 +39,6 @@
                     </StackLayout>
                     <StackLayout Padding="5,5" IsVisible="{Binding ReversNotCurrentLoan}">
                         <ListView x:Name="LoansList" 
-                          CachingStrategy="RecycleElement"
                           ItemsSource="{Binding Results}" 
                           SeparatorVisibility="None"
                           VerticalOptions="FillAndExpand"

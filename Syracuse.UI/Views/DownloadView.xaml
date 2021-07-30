@@ -38,13 +38,13 @@
                         <StackLayout Padding="5,5" IsVisible="{Binding ReversNotCurrentDownload}">
 
                             <ListView x:Name="resultsListDownloadDocument" 
-                              ItemsSource="{Binding Results}"
-                              SeparatorVisibility="None"
-                              SelectionMode="None"
-                              VerticalOptions="FillAndExpand"
-                              VerticalScrollBarVisibility="Never"
-                              IsPullToRefreshEnabled="False"
-                              HasUnevenRows="True">
+                                ItemsSource="{Binding Results}"
+                                SeparatorVisibility="None"
+                                SelectionMode="None"
+                                VerticalOptions="FillAndExpand"
+                                VerticalScrollBarVisibility="Never"
+                                IsPullToRefreshEnabled="False"
+                                HasUnevenRows="True">
                                 <ListView.RowHeight>
                                     <OnPlatform x:TypeArguments="x:Int32">
                                         <On Platform="iOS">160</On>

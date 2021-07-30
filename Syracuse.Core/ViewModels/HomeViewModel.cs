@@ -21,6 +21,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private readonly IRequestService requestService;
         private readonly IMvxNavigationService navigationService;
 
+
+
         private Result[] results;
         public Result[] Results
         {
@@ -99,6 +101,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 SetProperty(ref this.reverseIsEvent, value && NotCurrentEventReverse);
             }
         }
+
         /// <summary>
         /// Variable qui indique si la page est occupé 
         /// </summary>
@@ -149,7 +152,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             return this.filters.Keys.ToList();
         }
 
-        private String library;
+        private string library;
         public string Library
         {
             get => this.library;

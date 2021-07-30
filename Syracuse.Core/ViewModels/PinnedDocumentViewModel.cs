@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Syracuse.Mobitheque.Core.ViewModels
 {
-    public class PinnedDocumentViewModel : BaseViewModel
+    public class PinnedDocumentViewModel : BaseDownloadPageViewModel
     {
         private readonly IRequestService requestService;
         private readonly IMvxNavigationService navigationService;
@@ -17,6 +17,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private MvxAsyncCommand<string> searchCommand;
 
         public MvxAsyncCommand<string> SearchCommand => this.searchCommand ?? (this.searchCommand = new MvxAsyncCommand<string>((text) => this.PerformSearch(text)));
+
+        private MvxAsyncCommand<Result> downloadDocumentCommand;
+        public MvxAsyncCommand<Result> DownloadDocumentCommand => this.downloadDocumentCommand ??
+            (this.downloadDocumentCommand = new MvxAsyncCommand<Result>((item) => this.DownloadDocument(item)));
 
         public bool IsBusy { get; set; }
         public bool NotCurrentBasket { get; set; }
@@ -65,6 +69,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             Result[] res = await PerformBasketSearch();
             this.Results = this.Results.Concat(res).ToArray();
             this.IsBusy = false;
+            await RaiseAllPropertiesChanged();
             await GetRedirectURL();
         }
 
@@ -76,11 +81,48 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.requestService = requestService;
         }
 
+        /// <summary>
+        /// Déclenche une oppération de télecharcheement de document 
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        private async Task DownloadDocument(Result result)
+        {
+            CookiesSave user = await App.Database.GetActiveUser();
+            this.IsBusy = true;
+            await RaiseAllPropertiesChanged();
+            var url = user.DomainUrl;
+            var statusDownload = await this.requestService.GetDownloadDocument(result.downloadOptions.parentDocumentId, result.downloadOptions.documentId, result.downloadOptions.fileName);
+            if (statusDownload.Success)
+            {
+                await SaveNewDocumentDatabaseObject(result, statusDownload.D);
+                foreach (var Result in this.Results)
+                {
+                    if (Result == result)
+                    {
+                        Result.CanDownload = false;
+                        Result.IsDownload = true;
+                    }
+                }
+            }
+            else
+            {
+                this.DisplayAlert(ApplicationResource.Error, statusDownload.Errors?[0]?.Msg != null ? statusDownload.Errors?[0]?.Msg : ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
+            }
+            this.IsBusy = false;
+            await RaiseAllPropertiesChanged();
+            this.ForceListUpdate();
+            await RaiseAllPropertiesChanged();
+
+        }
+
+
         public override async void Prepare()
         {
             this.IsBusy = true;
             this.Results = await PerformBasketSearch();
             this.IsBusy = false;
+            await RaiseAllPropertiesChanged();
             await GetRedirectURL();
         }
 
@@ -110,7 +152,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     this.NotCurrentBasket = false;
                 }
             }
-            return basket.D.Results;
+            return await this.HaveDownloadOption(basket.D.Results, this.requestService);
 
         }
 
@@ -134,6 +176,13 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private async Task GetRedirectURL()
         {
             await this.RaiseAllPropertiesChanged();
+        }
+
+        private void ForceListUpdate()
+        {
+            var tempo = this.Results;
+            this.Results = new Result[0];
+            this.Results = tempo;
         }
     }
 }

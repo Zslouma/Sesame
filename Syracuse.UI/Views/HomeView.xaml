@@ -17,7 +17,6 @@
     <ContentPage.Content>
         <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
             <Grid VerticalOptions="FillAndExpand">
-                
                 <StackLayout Orientation="Vertical" 
                              VerticalOptions="FillAndExpand"
                              Padding="15, 15, 15, 0"
@@ -29,7 +28,7 @@
                         <Label Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Text="{Binding Library}" FontAttributes="Bold" FontSize="Large" TextColor="{d:DynamicResource DarkTextColor}"/>
                         <Label Grid.Row="0" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="End" Text="{x:Static local:AppResource.News }" TextColor="{d:DynamicResource PurpleTextColor}" IsVisible="{Binding NotCurrentEventReverse}"/>
                     </Grid>
-                    <StackLayout x:Name="DownloadBar" Margin="-15,0" BackgroundColor="#f3f5fa">
+                    <StackLayout x:Name="DownloadBar" Margin="-15,0" BackgroundColor="#f3f5fa" IsVisible="{Binding IsDownloadAllDisplay}">
                         <Grid Padding="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.8*" />
@@ -38,20 +37,20 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <Label  Grid.Column="0" Grid.Row="0" Text="{x:Static local:AppResource.DownloadAllFile}" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            <Label  Grid.Column="0" Grid.Row="0" Text="{x:Static local:AppResource.DownloadAllFile}"  TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
                             <Switch  Grid.Column="1" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" IsToggled="False" />
                         </Grid>
                     </StackLayout>
                     <Label Margin="10" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{x:Static local:AppResource.NotCurrentEvent}" IsVisible="{Binding NotCurrentEvent}" />
                     <ListView x:Name="resultsListEvent"
-                      IsVisible="{Binding IsEvent}"
-                      CachingStrategy="RecycleElement"
-                      ItemsSource="{Binding Results}" 
-                      SeparatorVisibility="Default"
-                      VerticalScrollBarVisibility="Never"
-                      VerticalOptions="FillAndExpand"
-                      IsPullToRefreshEnabled="False"
-                       HasUnevenRows="True">
+                        IsVisible="{Binding IsEvent}"
+                        CachingStrategy="RecycleElement"
+                        ItemsSource="{Binding Results}" 
+                        SeparatorVisibility="Default"
+                        VerticalScrollBarVisibility="Never"
+                        VerticalOptions="FillAndExpand"
+                        IsPullToRefreshEnabled="False"
+                        HasUnevenRows="True">
                         <ListView.RowHeight>
                             <OnPlatform x:TypeArguments="x:Int32">
                                 <On Platform="iOS">270</On>
@@ -72,7 +71,7 @@
                                                     </Grid.ColumnDefinitions>
                                                     <Label Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding FieldList.SubjectTopicFirstUpper}"  TextColor="{d:DynamicResource PurpleTextColor}" FontSize="16"/>
                                                     <Label Grid.Column="0" Grid.Row="1" Text="&#xf3c5;" FontFamily="{StaticResource FontAwesomeSolid}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Fill" FontSize="Small" TextColor="#88929D"/>
-                                                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding FieldList.SubjectLocation[0]}" VerticalTextAlignment="Center" VerticalOptions="Fill" FontSize="Small" TextColor="{d:DynamicResource DarkTextColor}"></Label>
+                                                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding FieldList.SubjectLocation[0]}" VerticalTextAlignment="Center" VerticalOptions="Fill" FontSize="Small" TextColor="{d:DynamicResource DarkTextColor}"/>
                                                     <Label Grid.Column="0" Grid.Row="2" Text="&#xf017;" FontFamily="{StaticResource FontAwesomeRegular}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center"  FontSize="Small" TextColor="#88929D" />
                                                     <Label Grid.Column="1" Grid.Row="2" Text="{Binding FieldList.DateTime_String}" VerticalTextAlignment="Center" VerticalOptions="Center" FontSize="Small" TextColor="{d:DynamicResource DarkTextColor}"/>
                                                 </Grid>
@@ -133,19 +132,19 @@
                                         </StackLayout>
                                         <StackLayout Grid.Column="2" VerticalOptions="Start" IsVisible="{Binding CanDownload}">
                                             <Button
-                                            x:Name="DownloadButton"
-                                            CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
-                                            BindingContext="{Binding Source={x:Reference resultsListDocument}, Path=BindingContext}"
-                                            Command="{Binding DownloadDocumentCommand}"
-                                            IsEnabled="{Binding CanDownload}"
-                                            Grid.Column="2"
-                                            WidthRequest="30"
-                                            Text="&#xf019;"
-                                            VerticalOptions="Start"
-                                            FontSize="Large"
-                                            FontFamily="{StaticResource FontAwesomeSolid}"
-                                            TextColor="Gray"
-                                            BackgroundColor="Transparent"/>
+                                                x:Name="DownloadButton"
+                                                CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                                BindingContext="{Binding Source={x:Reference resultsListDocument}, Path=BindingContext}"
+                                                Command="{Binding DownloadDocumentCommand}"
+                                                IsEnabled="{Binding CanDownload}"
+                                                Grid.Column="2"
+                                                WidthRequest="30"
+                                                Text="&#xf019;"
+                                                VerticalOptions="Start"
+                                                FontSize="Large"
+                                                FontFamily="{StaticResource FontAwesomeSolid}"
+                                                TextColor="Gray"
+                                                BackgroundColor="Transparent"/>
                                         </StackLayout>
                                     </Grid>
                                 </ViewCell>

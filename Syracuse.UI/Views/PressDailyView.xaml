@@ -37,8 +37,8 @@
                             <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize = "20" Text="{x:Static local:AppResource.NotCurrentPress}" />
                         </StackLayout>
                         <StackLayout Padding="5,5" IsVisible="{Binding ReversNotCurrentPress}">
-                            
-                            <StackLayout x:Name="DownloadBar" Margin="-15,0" BackgroundColor="#f3f5fa">
+
+                            <StackLayout x:Name="DownloadBar" Margin="-15,0" BackgroundColor="#f3f5fa" IsVisible="{Binding IsDownloadAllDisplay}">
                                 <Grid Padding="10">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="0.8*" />

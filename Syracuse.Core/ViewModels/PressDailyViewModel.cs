@@ -33,7 +33,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private async Task DownloadDocument(Result result)
         {
             CookiesSave user = await App.Database.GetActiveUser();
-            this.isBusy = true;
+            this.IsBusy = true;
             await RaiseAllPropertiesChanged();
             var url = user.DomainUrl;
             var statusDownload = await this.requestService.GetDownloadDocument(result.downloadOptions.parentDocumentId, result.downloadOptions.documentId, result.downloadOptions.fileName);
@@ -53,7 +53,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 this.DisplayAlert(ApplicationResource.Error, statusDownload.Errors?[0]?.Msg != null ? statusDownload.Errors?[0]?.Msg : ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
             }
-            this.isBusy = false;
+            this.IsBusy = false;
             await RaiseAllPropertiesChanged();
             this.ForceListUpdate();
             await RaiseAllPropertiesChanged();

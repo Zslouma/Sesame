@@ -11,7 +11,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
     public abstract class BaseDownloadPageViewModel : BaseViewModel
     {
 
-        
+        public bool IsDownloadAllDisplay { get; set; } = false; 
+
         internal async Task<Result[]> HaveDownloadOption(Result[] results, IRequestService requestService)
         {
             foreach (var result in results)
@@ -33,6 +34,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                                 {
                                     result.CanDownload = false;
                                     result.IsDownload = true;
+                                }
+                                if (result.CanDownload)
+                                {
+                                    this.IsDownloadAllDisplay = true;
                                 }
                             }
                         }
