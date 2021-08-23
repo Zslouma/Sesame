@@ -483,7 +483,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             UrlWithAuthenticationStatus status = await this.requestService.GetUrlWithAuthenticationTransfert(uri);
             if (status.Success)
             {
-                return status.D;
+                uri = new Uri(await this.requestService.GetRedirectURL(status.D.ToString(), uri.ToString()));
+                return uri;
             }
             else
             {
