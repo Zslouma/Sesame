@@ -151,7 +151,7 @@
                                                             </OnPlatform>
                                                         </Frame.HasShadow>
                                                         <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                                            <Image VerticalOptions="Start" IsVisible="{Binding FieldList.HaveImage}" Source="{Binding FieldList.Image}" Aspect="AspectFill" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent" />
+                                                            <Image VerticalOptions="Start" IsVisible="{Binding FieldList.HaveImage}" Source="{Binding FieldList.Image}" Aspect="AspectFill" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent"  />
                                                             <ActivityIndicator VerticalOptions="Center" HeightRequest="120" WidthRequest="90" IsRunning="True" Color="Gray" IsVisible="{Binding FieldList.ReverseHaveImage}" />
                                                         </StackLayout>
                                                     </Frame>

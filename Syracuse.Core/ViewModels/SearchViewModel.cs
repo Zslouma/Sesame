@@ -813,9 +813,11 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     else if (search.FieldList.ThumbSmall != null && search.FieldList.ThumbSmall[0] != null)
                         search.FieldList.ThumbSmall[0] = new Uri(await this.requestService.GetRedirectURL(search.FieldList.ThumbSmall[0].ToString()));
                     search.FieldList.HaveImage = true;
+                    await this.RaisePropertyChanged(nameof(search.FieldList.ThumbMedium));
                     await this.RaisePropertyChanged(nameof(search.FieldList.HaveImage));
                 }
             });
+            await this.RaiseAllPropertiesChanged();
             this.ForceListUpdate();
             await this.RaiseAllPropertiesChanged();
         }

@@ -19,9 +19,17 @@ namespace Syracuse.Mobitheque.UI.Views
 
             this.ScannButton.Pressed += async (sender, e) =>
             {
-                this.scanner = new ZxingScannerView();
-                scanner.OnScanResult += Handle_OnScanResult;
-                await this.Navigation.PushAsync(scanner);
+                if (await Permissions.CheckStatusAsync<Permissions.Camera>() != PermissionStatus.Granted)
+                {
+                    var tempo = await Permissions.CheckStatusAsync<Permissions.Camera>();
+                    await Permissions.RequestAsync<Permissions.Camera>();
+                }
+                if (await Permissions.CheckStatusAsync<Permissions.Camera>() == PermissionStatus.Granted)
+                {
+                    this.scanner = new ZxingScannerView();
+                    scanner.OnScanResult += Handle_OnScanResult;
+                    await this.Navigation.PushAsync(scanner);
+                }
             };
             UserNameInput.Focused += Handle_Focus;
             UserNameInput.Unfocused += Handle_Unfocused;

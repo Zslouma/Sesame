@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Syracuse.Mobitheque.Core.ViewModels
@@ -182,7 +183,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         public MvxAsyncCommand<string> SearchCommand => this.searchCommand ??
         (this.searchCommand = new MvxAsyncCommand<string>((text) => this.PerformSearch(text)));
 
-
+        public CookieContainer cookie { get { return this.requestService.GetCookieContainer(); } }
 
         public SearchDetailsViewModel(IMvxNavigationService navigationService, IRequestService requestService)
         {
