@@ -113,10 +113,10 @@
                                                     </DataTemplate>
                                                 </BindableLayout.ItemTemplate>
                                             </StackLayout>
-                                            <StackLayout IsVisible="{Binding HasDigitalReady}">
+                                            <StackLayout IsVisible="{Binding HasViewerDr}">
                                                 <!--Loading label should not render by default.-->
                                                 <Label BindingContext="carouselView" x:Name="labelLoading" HorizontalOptions="Fill" Text="{x:Static local:AppResource.Loading}" IsVisible="{Binding Path=BindingContext.AbsoluteIndicatorVisibility, Source={x:Reference Name=carouselView}}"  />
-                                                <WebView Source="{Binding FieldList.UrlViewerDR}" Navigated="WebViewNavigated" HeightRequest="400" HorizontalOptions="Fill" Navigating="WebViewNavigating"/>
+                                                <WebView Source="{Binding FieldList.UrlViewerDR}" Navigated="WebViewNavigated" HeightRequest="400" HorizontalOptions="Fill" Cookies="{Binding Path=BindingContext.cookie, Source={x:Reference Name=carouselView}}" Navigating="WebViewNavigating"/>
                                             </StackLayout>
                                             <!--#region Holding -->
                                             

@@ -14,6 +14,12 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
         /// <returns>Current cookies</returns>
         IEnumerable<Cookie> GetCookies(string url = null);
 
+        /// <summary>
+        /// Get cookies of current httpClient. in CookieContainer format
+        /// </summary>
+        /// <returns></returns>
+        CookieContainer GetCookieContainer();
+
         void LoadCookies(Cookie[] cookies);
 
         void ResetCookies();

@@ -121,6 +121,11 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             }
         }
 
+        public CookieContainer GetCookieContainer()
+        {
+            return this.cookies;
+        }
+
         public IEnumerable<Cookie> GetCookies(string url = null)
         {
             if (!String.IsNullOrEmpty(url))
