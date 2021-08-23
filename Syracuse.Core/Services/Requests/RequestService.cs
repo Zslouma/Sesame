@@ -50,33 +50,52 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
         /// <returns></returns>
         public async Task<string> GetRedirectURL(string originalURL, string defaultURL = "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png")
         {
+
             try
             {
-                HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(originalURL);
-                webRequest.AllowAutoRedirect = false;  // IMPORTANT
-                webRequest.Timeout = 3500;           // timeout 3.5s
+                //HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(originalURL);
+                //webRequest.AllowAutoRedirect = false;  // IMPORTANT
+                //webRequest.Timeout = 3500;           // timeout 10s
+                var tempohandler = new HttpClientHandler()
+                {
+                    UseCookies = true,
+                    CookieContainer = this.cookies
 
-            // Get the response ...
-                using (var webResponse = (HttpWebResponse)webRequest.GetResponse())
+                };
+                tempohandler.AllowAutoRedirect = false;
+                tempohandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                HttpClient httpClient = new HttpClient(tempohandler);
+                httpClient.DefaultRequestHeaders.CacheControl = new System.Net.Http.Headers.CacheControlHeaderValue();
+                httpClient.DefaultRequestHeaders.CacheControl.NoStore = true;
+                httpClient.DefaultRequestHeaders.CacheControl.NoCache = true;
+
+                // Get the response ...
+                using (var webResponse = (HttpResponseMessage)await httpClient.GetAsync(originalURL))
                 {
                     // Now look to see if it's a redirect
                     if ((int)webResponse.StatusCode >= 300 && (int)webResponse.StatusCode <= 399)
                     {
-                        string uriString = webResponse.Headers["Location"];
+                        string uriString = webResponse.RequestMessage.RequestUri.ToString();
+                        Console.WriteLine(uriString);
                         return uriString;
 
-                    }else if ((int)webResponse.StatusCode >= 200 && (int)webResponse.StatusCode <= 299)
+                    }
+                    else if ((int)webResponse.StatusCode >= 200 && (int)webResponse.StatusCode <= 299)
                     {
-                        return originalURL;
+                        string uriString = webResponse.RequestMessage.RequestUri.ToString();
+                        Console.WriteLine(uriString);
+                        return uriString;
                     }
                     else
                     {
+                        Console.WriteLine(defaultURL);
                         return defaultURL;
                     }
                 }
             }
             catch (Exception e)
             {
+                Console.WriteLine(defaultURL);
                 return defaultURL;
             }
         }
@@ -106,6 +125,11 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                     co.Expires = DateTime.Now.Subtract(TimeSpan.FromDays(1));
                 }
             }
+        }
+
+        public CookieContainer GetCookieContainer()
+        {
+            return this.cookies;
         }
 
         public IEnumerable<Cookie> GetCookies(string url = null)
