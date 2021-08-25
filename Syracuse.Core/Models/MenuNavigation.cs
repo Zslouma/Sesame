@@ -8,6 +8,8 @@ namespace Syracuse.Mobitheque.Core.Models
 
         public string IconFontAwesome { get; set; }
 
+        public string Color { get; set; } = "WhiteSmoke";
+
 
     }
 }

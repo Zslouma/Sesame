@@ -138,6 +138,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.IsBusy = true;
             var user = await App.Database.GetActiveUser();
             this.Results = await App.DocDatabase.GetItemsAsync();
+            if (this.Results.Count == 0)
+            {
+                this.NotCurrentDownload = true;
+            }
+            else
+            {
+                this.NotCurrentDownload = false;
+            }
             this.IsBusy = false;
             await base.Initialize();
         }

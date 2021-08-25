@@ -36,7 +36,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         {
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
             this.Connectivity_test().Wait();
-            this.JsonSynchronisation();
+            if (App.AppState.NetworkConnection)
+            {
+                this.JsonSynchronisation();
+            }
             base.Start();
         }
          public async Task JsonSynchronisation()
@@ -143,18 +146,27 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         private async Task Connectivity_test()
         {
+            Console.WriteLine("Connectivity_test for MasterDetail");
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
+                Console.WriteLine("test 1");
+                Console.WriteLine("App.AppState.NetworkConnection : " + App.AppState.NetworkConnection.ToString());
                 App.AppState.NetworkConnection = false;
+                Console.WriteLine("App.AppState.NetworkConnection : " + App.AppState.NetworkConnection.ToString());
+                Console.WriteLine("End test 1");
                 if (this.viewCreate)
                 {
-                    await this.navigationService.Navigate<NetworkErrorViewModel>();
+                    //await this.navigationService.Navigate<NetworkErrorViewModel>();
                 }
                 this._isnetworkError = true;
             }
             else
             {
+                Console.WriteLine("test 2");
+                Console.WriteLine("App.AppState.NetworkConnection : " + App.AppState.NetworkConnection.ToString());
                 App.AppState.NetworkConnection = true;
+                Console.WriteLine("App.AppState.NetworkConnection : " + App.AppState.NetworkConnection.ToString());
+                Console.WriteLine("End test 2");
                 if (this._isnetworkError) {
                     this._isnetworkError = false;
                 }

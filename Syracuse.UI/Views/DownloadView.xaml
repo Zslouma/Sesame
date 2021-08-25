@@ -33,7 +33,7 @@
                     <Grid>
 
                         <StackLayout VerticalOptions="Center" IsVisible="{Binding NotCurrentDownload}">
-                            <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize = "20" Text="{x:Static local:AppResource.NotCurrentPress}" />
+                            <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize = "20" Text="{x:Static local:AppResource.NotCurrentDownload}" />
                         </StackLayout>
                         <StackLayout Padding="5,5" IsVisible="{Binding ReversNotCurrentDownload}">
 

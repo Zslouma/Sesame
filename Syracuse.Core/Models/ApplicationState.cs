@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace Syracuse.Mobitheque.Core.Models
 {
     public class ApplicationState
@@ -11,9 +13,14 @@ namespace Syracuse.Mobitheque.Core.Models
             {
                 if (this.networkConnection == value) return;
                 else { this.networkConnection = value; }
-                if (OnVariableChange != null) { OnVariableChange(this.networkConnection); }
+                if (OnVariableChange != null)
+                {
+                    Console.WriteLine("OnVariableChange");
+                    OnVariableChange(this.networkConnection);
+                }
             }
         }
+
         public delegate void OnVariableChangeDelegate(bool networkConnection);
         public event OnVariableChangeDelegate OnVariableChange;
 

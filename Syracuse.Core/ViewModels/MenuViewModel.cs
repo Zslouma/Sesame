@@ -1,4 +1,5 @@
-﻿using MvvmCross.Commands;
+﻿
+using MvvmCross.Commands;
 using MvvmCross.Navigation;
 using MvvmCross.Navigation.EventArguments;
 using Syracuse.Mobitheque.Core.Models;
@@ -76,20 +77,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.navigationService = navigationService;
 
             this.navigationService.AfterNavigate += LoansNavigation;
-            this.menuItemList = new ObservableCollection<MenuNavigation>()
-            {
-                new MenuNavigation() { Text = ApplicationResource.Home, IconFontAwesome = "\uf015" , IsSelected = true , IsEnabled = App.AppState.NetworkConnection  },
-                new MenuNavigation() { Text = ApplicationResource.Account, IconFontAwesome = "\uf007", IsEnabled = true },
-                new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconFontAwesome = "\uf0c0" , IsEnabled = true },
-                new MenuNavigation() { Text = ApplicationResource.PinnedDocuments, IconFontAwesome = "\uf08d", IsEnabled = true  },
-                new MenuNavigation() { Text = ApplicationResource.Download, IconFontAwesome = "\uf019" , IsEnabled = true },
-                new MenuNavigation() { Text = ApplicationResource.Bookings, IconFontAwesome = "\uf017" , IsEnabled = App.AppState.NetworkConnection },
-                new MenuNavigation() { Text = ApplicationResource.Loans, IconFontAwesome = "\uf02d" , IsEnabled = App.AppState.NetworkConnection },
-                new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf02a" , IsEnabled = App.AppState.NetworkConnection },
-                new MenuNavigation() { Text = ApplicationResource.Library, IconFontAwesome = "\uf67f" , IsEnabled = App.AppState.NetworkConnection },
-                new MenuNavigation() { Text = ApplicationResource.About, IconFontAwesome = "\uf05a" , IsEnabled = true },
-                new MenuNavigation() { Text = ApplicationResource.Disconnect, IconFontAwesome = "\uf011" , IsEnabled = true },
-            };
+            this.MenuNavigationChange();
 
             this.requestService = requestService;
         }
@@ -115,24 +103,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 {
                     this.DisplayName = user.DisplayName;
                 }
-                if (this.IsKm)
-                {
-                    this.menuItemList = new ObservableCollection<MenuNavigation>()
-                    {
-                        new MenuNavigation() { Text = ApplicationResource.Home, IconFontAwesome = "\uf015" , IsSelected = true , IsEnabled = App.AppState.NetworkConnection  },
-                        new MenuNavigation() { Text = ApplicationResource.Account, IconFontAwesome = "\uf007" , IsEnabled = true },
-                        new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconFontAwesome = "\uf0c0" },
-                        new MenuNavigation() { Text = ApplicationResource.PinnedDocuments, IconFontAwesome = "\uf08d" , IsEnabled = true },
-                        new MenuNavigation() { Text = ApplicationResource.PressDaily, IconFontAwesome = "\uf1ea" , IsEnabled = true },
-                        new MenuNavigation() { Text = ApplicationResource.PressInternational, IconFontAwesome = "\uf1ea" , IsEnabled = true },
-                        new MenuNavigation() { Text = ApplicationResource.Download, IconFontAwesome = "\uf019" , IsEnabled = true },
-                        new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf02a" , IsEnabled = App.AppState.NetworkConnection },
-                        new MenuNavigation() { Text = ApplicationResource.Library, IconFontAwesome = "\uf67f" , IsEnabled = App.AppState.NetworkConnection },
-                        new MenuNavigation() { Text = ApplicationResource.About, IconFontAwesome = "\uf05a" , IsEnabled = true },
-                        new MenuNavigation() { Text = ApplicationResource.Disconnect, IconFontAwesome = "\uf011",  IsEnabled = true  },
-                    };
-                   
-                }
             }
             await this.RaiseAllPropertiesChanged();
             this.ShowDetailPageCommand = new MvxAsyncCommand<string>(this.ShowDetailPageAsync);
@@ -145,22 +115,21 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             base.Start();
         }
 
-        private async void VariableChangeHandler(bool newVal)
+        private void MenuNavigationChange()
         {
-            Debug.WriteLine("VariableChangeHandler " + newVal);
             if (this.IsKm)
             {
                 this.menuItemList = new ObservableCollection<MenuNavigation>()
                     {
-                        new MenuNavigation() { Text = ApplicationResource.Home, IconFontAwesome = "\uf015" , IsSelected = true , IsEnabled = newVal },
-                        new MenuNavigation() { Text = ApplicationResource.Account, IconFontAwesome = "\uf007" , IsEnabled = true },
+                        new MenuNavigation() { Text = ApplicationResource.Home, IconFontAwesome = "\uf015" , IsSelected = true , IsEnabled = App.AppState.NetworkConnection, Color=App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" },
+                        new MenuNavigation() { Text = ApplicationResource.Account, IconFontAwesome = "\uf007" , IsEnabled = App.AppState.NetworkConnection, Color=App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" },
                         new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconFontAwesome = "\uf0c0" , IsEnabled = true },
-                        new MenuNavigation() { Text = ApplicationResource.PinnedDocuments, IconFontAwesome = "\uf08d" , IsEnabled = true },
-                        new MenuNavigation() { Text = ApplicationResource.PressDaily, IconFontAwesome = "\uf1ea" , IsEnabled = true },
-                        new MenuNavigation() { Text = ApplicationResource.PressInternational, IconFontAwesome = "\uf1ea" , IsEnabled = true },
+                        new MenuNavigation() { Text = ApplicationResource.PinnedDocuments, IconFontAwesome = "\uf08d" , IsEnabled = App.AppState.NetworkConnection, Color=App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" },
+                        new MenuNavigation() { Text = ApplicationResource.PressDaily, IconFontAwesome = "\uf1ea", IsEnabled = App.AppState.NetworkConnection, Color=App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray"  },
+                        new MenuNavigation() { Text = ApplicationResource.PressInternational, IconFontAwesome = "\uf1ea", IsEnabled = App.AppState.NetworkConnection, Color=App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" },
                         new MenuNavigation() { Text = ApplicationResource.Download, IconFontAwesome = "\uf0c0" , IsEnabled = true },
-                        new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf465" , IsEnabled = newVal },
-                        new MenuNavigation() { Text = ApplicationResource.Library, IconFontAwesome = "\uf67f" , IsEnabled = newVal },
+                        new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf02a" , IsEnabled = App.AppState.NetworkConnection, Color=App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray"  },
+                        new MenuNavigation() { Text = ApplicationResource.Library, IconFontAwesome = "\uf67f" , IsEnabled = App.AppState.NetworkConnection, Color=App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray"  },
                         new MenuNavigation() { Text = ApplicationResource.About, IconFontAwesome = "\uf05a" , IsEnabled = true },
                         new MenuNavigation() { Text = ApplicationResource.Disconnect, IconFontAwesome = "\uf011",  IsEnabled = true},
                     };
@@ -170,21 +139,26 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 this.menuItemList = new ObservableCollection<MenuNavigation>()
                     {
-                        new MenuNavigation() { Text = ApplicationResource.Home, IconFontAwesome = "\uf015" , IsSelected = true , IsEnabled = App.AppState.NetworkConnection  },
-                        new MenuNavigation() { Text = ApplicationResource.Account, IconFontAwesome = "\uf007", IsEnabled = true },
+                        new MenuNavigation() { Text = ApplicationResource.Home, IconFontAwesome = "\uf015" , IsSelected = true , IsEnabled = App.AppState.NetworkConnection, Color=App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" },
+                        new MenuNavigation() { Text = ApplicationResource.Account, IconFontAwesome = "\uf007", IsEnabled = App.AppState.NetworkConnection, Color=App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" },
                         new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconFontAwesome = "\uf0c0" , IsEnabled = true },
-                        new MenuNavigation() { Text = ApplicationResource.PinnedDocuments, IconFontAwesome = "\uf08d", IsEnabled = true  },
+                        new MenuNavigation() { Text = ApplicationResource.PinnedDocuments, IconFontAwesome = "\uf08d", IsEnabled = App.AppState.NetworkConnection, Color=App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray"  },
                         new MenuNavigation() { Text = ApplicationResource.Download, IconFontAwesome = "\uf019" , IsEnabled = true },
-                        new MenuNavigation() { Text = ApplicationResource.Bookings, IconFontAwesome = "\uf017" , IsEnabled = App.AppState.NetworkConnection },
-                        new MenuNavigation() { Text = ApplicationResource.Loans, IconFontAwesome = "\uf02d" , IsEnabled = App.AppState.NetworkConnection },
-                        new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf02a" , IsEnabled = App.AppState.NetworkConnection },
-                        new MenuNavigation() { Text = ApplicationResource.Library, IconFontAwesome = "\uf67f" , IsEnabled = App.AppState.NetworkConnection },
+                        new MenuNavigation() { Text = ApplicationResource.Bookings, IconFontAwesome = "\uf017" , IsEnabled = App.AppState.NetworkConnection, Color=App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray"  },
+                        new MenuNavigation() { Text = ApplicationResource.Loans, IconFontAwesome = "\uf02d" , IsEnabled = App.AppState.NetworkConnection, Color=App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray"  },
+                        new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf02a" , IsEnabled = App.AppState.NetworkConnection, Color=App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray"  },
+                        new MenuNavigation() { Text = ApplicationResource.Library, IconFontAwesome = "\uf67f" , IsEnabled = App.AppState.NetworkConnection, Color=App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray"  },
                         new MenuNavigation() { Text = ApplicationResource.About, IconFontAwesome = "\uf05a" , IsEnabled = true },
                         new MenuNavigation() { Text = ApplicationResource.Disconnect, IconFontAwesome = "\uf011" , IsEnabled = true },
                     };
             }
-            await this.RaiseAllPropertiesChanged();
+        }
 
+        private async void VariableChangeHandler(bool newVal)
+        {
+            Debug.WriteLine("VariableChangeHandler: " + newVal.ToString());
+            this.MenuNavigationChange();
+            await this.RaiseAllPropertiesChanged();
         }
 
         public override void ViewDestroy(bool viewFinishing = true)
