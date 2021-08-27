@@ -168,7 +168,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.ManageDepartments();
             return base.Initialize();
         }
-        private async Task ManageDepartments()
+        public async Task ManageDepartments()
         {
             Department[] departments = await this.departmentService.GetDepartments();
 

@@ -33,9 +33,10 @@ namespace Syracuse.Mobitheque.UI
         {
             //Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
-       async Task Connectivity_test()
+        public async Task Connectivity_test()
         {
             Console.WriteLine("Connectivity_test for App.xaml");
+            Console.WriteLine("MainPage : " + MainPage.Title);
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 if (MainPage is NavigationPage && ((NavigationPage)MainPage).CurrentPage != networkErrorPage)
@@ -44,23 +45,25 @@ namespace Syracuse.Mobitheque.UI
                     this.page = ((NavigationPage)MainPage).CurrentPage;
                     await ((NavigationPage)MainPage).PushAsync(this.networkErrorPage);
                     this.isnetworkError = true;
-                }               
+                }
             }
-            else {
-                if (this.isnetworkError && MainPage is NavigationPage) {
-                        try
-                        {
-                            await ((NavigationPage)MainPage).PopAsync();
-                        }
-                        catch
-                        {
-                            await ((NavigationPage)MainPage).PushAsync(new SelectLibraryView());
-                        }
+            else
+            {
+                if (this.isnetworkError && MainPage is NavigationPage)
+                {
+                    try
+                    {
+                        await ((NavigationPage)MainPage).PopAsync();
+                    }
+                    catch
+                    {
+                        await ((NavigationPage)MainPage).PushAsync(new SelectLibraryView());
+                    }
                     this.isnetworkError = false;
                 }
             }
         }
-        void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        public void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
         {
             Connectivity_test().Wait();  
         }

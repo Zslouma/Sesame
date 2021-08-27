@@ -123,7 +123,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 if (this._isnetworkError)
                 {
-                    await this.navigationService.Navigate<NetworkErrorViewModel>();
+                    await this.navigationService.Navigate<HomeViewModel>();
+                    //await this.navigationService.Navigate<NetworkErrorViewModel>();
                     this._isnetworkErrorAppend = true;
                 }
                 else
