@@ -77,8 +77,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.navigationService = navigationService;
 
             this.navigationService.AfterNavigate += LoansNavigation;
-            this.MenuNavigationChange();
-
             this.requestService = requestService;
         }
 
@@ -104,6 +102,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     this.DisplayName = user.DisplayName;
                 }
             }
+            this.MenuNavigationChange();
             await this.RaiseAllPropertiesChanged();
             this.ShowDetailPageCommand = new MvxAsyncCommand<string>(this.ShowDetailPageAsync);
             

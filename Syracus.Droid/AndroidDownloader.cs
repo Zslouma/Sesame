@@ -27,33 +27,6 @@ namespace Syracuse.Mobitheque.Droid
 
         public string DownloadFile(string url, string folder)
         {
-            //string pathToNewFolder = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath);
-            //Console.WriteLine(pathToNewFolder);
-            //Console.WriteLine(Directory.Exists(pathToNewFolder));
-            //Console.WriteLine(File.Exists(pathToNewFolder));
-            //var thisActivity = Forms.Context as Activity;
-           
-            //if (ActivityCompat.CheckSelfPermission(Android.App.Application.Context, Manifest.Permission.WriteExternalStorage) != (int)Permission.Granted)
-            //{
-            //    ActivityCompat.RequestPermissions(thisActivity, new string[] { Manifest.Permission.WriteExternalStorage }, 1);
-            //}
-            //if (ActivityCompat.CheckSelfPermission(Android.App.Application.Context, Manifest.Permission.ReadExternalStorage) != (int)Permission.Granted)
-            //{
-            //    ActivityCompat.RequestPermissions(thisActivity, new string[] { Manifest.Permission.WriteExternalStorage }, 1);
-            //}
-            //try
-            //{
-            //    WebClient webClient = new WebClient();
-            //    webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
-            //    string pathToNewFile = Path.Combine(pathToNewFolder, Path.GetFileName(url));
-            //    webClient.DownloadFileAsync(new Uri(url), pathToNewFile);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine(ex.Message);
-            //    if (OnFileDownloaded != null)
-            //        OnFileDownloaded.Invoke(this, new DownloadEventArgs(false));
-            //}
             return Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryDownloads).AbsolutePath;
         }
 
@@ -74,6 +47,53 @@ namespace Syracuse.Mobitheque.Droid
                 if (OnFileDownloaded != null)
                     OnFileDownloaded.Invoke(this, new DownloadEventArgs(true));
             }
+        }
+
+        public bool OpenFileDocument(string filePath)
+        {
+            Java.IO.File file = new Java.IO.File(filePath);
+            if (!file.Exists())
+            {
+                return false;
+            }
+            file.SetReadable(true);
+            
+            string application = "";
+            string extension = Path.GetExtension(filePath);
+
+            // get mimeTye
+            switch (extension.ToLower())
+            {
+                case ".txt":
+                    application = "text/plain";
+                    break;
+                case ".doc":
+                case ".docx":
+                    application = "application/msword";
+                    break;
+                case ".pdf":
+                    application = "application/pdf";
+                    break;
+                case ".xls":
+                case ".xlsx":
+                    application = "application/vnd.ms-excel";
+                    break;
+                case ".jpg":
+                case ".jpeg":
+                case ".png":
+                    application = "image/jpeg";
+                    break;
+                default:
+                    application = "*/*";
+                    break;
+            }
+
+            Android.Net.Uri uri = Android.Net.Uri.Parse( filePath);
+            Intent intent = new Intent(Intent.ActionView);
+            intent.SetDataAndType(uri, application);
+            intent.SetFlags(ActivityFlags.ClearWhenTaskReset | ActivityFlags.NewTask);
+            Forms.Context.StartActivity(intent);
+            return true;
         }
     }
 }

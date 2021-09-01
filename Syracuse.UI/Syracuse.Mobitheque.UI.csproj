@@ -22,6 +22,7 @@
     <PackageReference Include="Xamarin.Forms.BehaviorsPack" Version="2.1.1" />
     <PackageReference Include="Xamarin.Forms.MultiSelectListView" Version="2.1.0" />
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.0.1.698" />
+    <PackageReference Include="Xamarin.Forms.SaveOpenPDFPackage" Version="1.0.0" />
     <PackageReference Include="XF.Material" Version="1.5.8" />
     <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.4.1" />
     <PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />

@@ -2,8 +2,12 @@
 using MvvmCross.Navigation;
 using Syracuse.Mobitheque.Core.Models;
 using Syracuse.Mobitheque.Core.Services.Requests;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace Syracuse.Mobitheque.Core.ViewModels
 {
@@ -11,6 +15,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
     {
         private readonly IRequestService requestService;
         private readonly IMvxNavigationService navigationService;
+
+        IDownloader downloader = DependencyService.Get<IDownloader>();
 
         private MvxAsyncCommand<string> searchCommand;
 
@@ -50,13 +56,12 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 System.IO.File.Delete(result.DocumentPath);
             }
-            App.DocDatabase.DeleteItemAsync(result);
+            await App.DocDatabase.DeleteItemAsync(result);
             this.Results = await App.DocDatabase.GetItemsAsync();
             this.isBusy = false;
             await RaiseAllPropertiesChanged();
             this.ForceListUpdate();
             await RaiseAllPropertiesChanged();
-
         }
 
         /// <summary>
@@ -124,14 +129,11 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
         }
 
-
-
         public DownloadViewModel(IRequestService requestService, IMvxNavigationService navigationService)
         {
             this.requestService = requestService;
             this.navigationService = navigationService;
         }
-        
 
         public async override Task Initialize()
         {
@@ -149,6 +151,29 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.IsBusy = false;
             await base.Initialize();
         }
+
+        ///// <summary>
+        ///// Ouverture d'un fichier appartir de l'app 
+        ///// </summary>
+        ///// <param name="item"></param>
+        ///// <returns></returns>
+        //public async Task OpenFileDocument(DocumentSave item)
+        //{
+        //    IDownloader downloader = DependencyService.Get<IDownloader>();
+            
+        //    Console.WriteLine(item.DocumentPath);
+        //    Console.WriteLine(downloader.GetPathStorage());
+            
+        //    if (System.IO.File.Exists(item.DocumentPath))
+        //    {
+        //        using (var memoryStream = new MemoryStream()) {
+        //            var stream = System.IO.File.OpenRead(item.DocumentPath);
+        //            await stream.CopyToAsync(memoryStream);
+        //            await CrossXamarinFormsSaveOpenPDFPackage.Current.SaveAndView(Guid.NewGuid() + ".pdf", "application/pdf", memoryStream, PDFOpenContext.InApp);
+        //        }
+        //    }          
+
+        //}
 
         private void ForceListUpdate()
         {
