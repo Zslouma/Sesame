@@ -38,7 +38,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Label  Grid.Column="0" Grid.Row="0" Text="{x:Static local:AppResource.DownloadAllFile}"  TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                            <Switch  Grid.Column="1" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" IsToggled="False" />
+                            <Switch  Grid.Column="1" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" Toggled="HandleSwitchToggledByUser"  IsToggled="False" />
                         </Grid>
                     </StackLayout>
                     <Label Margin="10" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{x:Static local:AppResource.NotCurrentEvent}" IsVisible="{Binding NotCurrentEvent}" />

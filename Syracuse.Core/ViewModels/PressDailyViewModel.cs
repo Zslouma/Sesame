@@ -25,6 +25,18 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         public MvxAsyncCommand<Result> DownloadDocumentCommand => this.downloadDocumentCommand ??
             (this.downloadDocumentCommand = new MvxAsyncCommand<Result>((item) => this.DownloadDocument(item)));
 
+        public async Task DownloadAllDocument(Result[] results)
+        {
+            foreach (var result in results)
+            {
+                if (result.CanDownload)
+                {
+                    this.DownloadDocument(result);
+                }
+
+            }
+        }
+
         /// <summary>
         /// Déclenche une oppération de télecharcheement de document 
         /// </summary>

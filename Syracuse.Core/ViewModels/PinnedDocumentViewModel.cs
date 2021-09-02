@@ -81,6 +81,18 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.requestService = requestService;
         }
 
+        public async Task DownloadAllDocument(Result[] results)
+        {
+            foreach (var result in results)
+            {
+                if (result.CanDownload)
+                {
+                    this.DownloadDocument(result);
+                }
+
+            }
+        }
+
         /// <summary>
         /// Déclenche une oppération de télecharcheement de document 
         /// </summary>

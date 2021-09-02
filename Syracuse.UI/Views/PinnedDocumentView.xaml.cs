@@ -39,11 +39,13 @@ namespace Syracuse.Mobitheque.UI.Views
             base.OnBindingContextChanged();
         }
 
-        private void OnDownloadClick(object sender, EventArgs args)
+        public async void HandleSwitchToggledByUser(object sender, ToggledEventArgs e)
         {
-
+            if (e.Value)
+            {
+                this.ViewModel.DownloadAllDocument(this.ViewModel.Results);
+            }
         }
-
         private void PinnedDocumentView_OnDisplayAlert(string title, string message, string button) => this.DisplayAlert(title, message, button);
     }
 }

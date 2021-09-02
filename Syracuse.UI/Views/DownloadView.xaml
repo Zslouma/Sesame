@@ -71,10 +71,6 @@
                                                 <StackLayout Grid.Column="1" VerticalOptions="Start" Orientation="Vertical">
                                                     <Label TextColor="Black" Text="{Binding Title}" MaxLines="2" FontAttributes="Bold" FontSize="Medium"/>
                                                     <Label TextColor="Gray" Text="{Binding ShortDesc}" MaxLines="2" FontSize="Small"/>
-                                                    <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal" IsVisible="{Binding Resource.HasViewDisponibility}" >
-                                                        <Frame VerticalOptions="Center" WidthRequest="15" HeightRequest="15"  CornerRadius="20"   Margin="0" Padding="0" BackgroundColor="{Binding Resource.ColorStatus}"/>
-                                                        <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="Center" FontSize="Medium" Text="{Binding Resource.TextStatus}"/>
-                                                    </StackLayout>
                                                 </StackLayout>
                                                 <StackLayout Grid.Column="2" VerticalOptions="Start">
                                                     <Button

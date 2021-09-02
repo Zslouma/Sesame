@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MvvmCross.Commands;
+using Newtonsoft.Json;
 using Syracuse.Mobitheque.Core.Models;
 using Syracuse.Mobitheque.Core.Services.Requests;
 using System;
@@ -11,7 +12,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
     public abstract class BaseDownloadPageViewModel : BaseViewModel
     {
         public CookiesSave user = null ;
-        public bool IsDownloadAllDisplay { get; set; } = false; 
+        public bool IsDownloadAllDisplay { get; set; } = false;
 
         internal async Task<Result[]> HaveDownloadOption(Result[] results, IRequestService requestService)
         {

@@ -41,6 +41,14 @@ namespace Syracuse.Mobitheque.UI.Views
             await this.ViewModel.GoToDetailView(item);
         }
 
+        public async void HandleSwitchToggledByUser(object sender, ToggledEventArgs e)
+        {
+            if (e.Value)
+            {
+                this.ViewModel.DownloadAllDocument(this.ViewModel.Results);
+            }
+        }
+
         private void HomeViewModel_OnDisplayAlert(string title, string message, string button) => this.DisplayAlert(title, message, button);
 
     }

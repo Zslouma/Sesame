@@ -161,7 +161,17 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.IsBusy = false;
             await base.Initialize();
         }
-
+        public async Task DownloadAllDocument(Result[] results)
+        {
+            foreach (var result in results)
+            {
+                if (result.CanDownload)
+                {
+                    this.DownloadDocument(result);
+                }
+                
+            }
+        }
         /// <summary>
         /// Déclenche une oppération de télecharcheement de document 
         /// </summary>
