@@ -165,6 +165,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 item.IsEvent = department.IsEvent;
                 item.RememberMe = department.RememberMe;
                 item.IsKm = department.IsKm;
+                item.CanDownload = department.CanDownload;
                 item.BuildingInfos = department.BuildingInfos;
                 await App.Database.SaveItemAsync(item);
                 this.requestService.LoadCookies(JsonConvert.DeserializeObject<Cookie[]>(item.Cookies));
@@ -189,6 +190,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 b.IsEvent = department.IsEvent;
                 b.RememberMe = department.RememberMe;
                 b.IsKm = department.IsKm;
+                b.CanDownload = department.CanDownload;
                 b.BuildingInfos = department.BuildingInfos;
                 await App.Database.SaveItemAsync(b);
                 this.requestService.LoadCookies(JsonConvert.DeserializeObject<Cookie[]>(b.Cookies));

@@ -41,6 +41,8 @@ namespace Syracuse.Mobitheque.Core.Models
         public bool RememberMe { get; set; }
         [JsonProperty("is_km")]
         public bool IsKm { get; set; }
+        [JsonProperty("can_download")]
+        public bool CanDownload { get; set; }
         [JsonProperty("daily_press")]
         public Press DailyPress { get; set; }
         [JsonProperty("international_press")]

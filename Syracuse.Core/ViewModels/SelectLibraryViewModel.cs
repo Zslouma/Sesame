@@ -91,6 +91,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             opt.IsEvent = this.librariesSelected[this.librariesPickerIndex].Config.IsEvent;
             opt.RememberMe = this.librariesSelected[this.librariesPickerIndex].Config.RememberMe;
             opt.IsKm = this.librariesSelected[this.librariesPickerIndex].Config.IsKm;
+            opt.CanDownload = this.librariesSelected[this.librariesPickerIndex].Config.CanDownload;
             opt.DailyPressQuery = this.librariesSelected[this.librariesPickerIndex].Config.DailyPress.Query;
             opt.DailyPressScenarioCode = this.librariesSelected[this.librariesPickerIndex].Config.DailyPress.PressScenarioCode;
             opt.InternationalPressQuery = this.librariesSelected[this.librariesPickerIndex].Config.InternationalPress.Query;

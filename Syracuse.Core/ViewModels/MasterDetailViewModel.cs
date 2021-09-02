@@ -57,6 +57,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     user.SearchScenarioCode = library.Config.SearchScenarioCode;
                     user.IsEvent = library.Config.IsEvent;
                     user.IsKm = library.Config.IsKm;
+                    user.CanDownload = library.Config.CanDownload;
                     user.DailyPressQuery = library.Config.DailyPress.Query;
                     user.DailyPressScenarioCode = library.Config.DailyPress.PressScenarioCode;
                     user.InternationalPressQuery = library.Config.InternationalPress.Query;

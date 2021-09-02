@@ -10,34 +10,41 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 {
     public abstract class BaseDownloadPageViewModel : BaseViewModel
     {
-
+        public CookiesSave user = null ;
         public bool IsDownloadAllDisplay { get; set; } = false; 
 
         internal async Task<Result[]> HaveDownloadOption(Result[] results, IRequestService requestService)
         {
-            foreach (var result in results)
+            if (this.user == null)
             {
-                if (result.HasViewerDr)
+                this.user = await App.Database.GetActiveUser();
+            }
+            if (this.user.CanDownload)
+            {
+                foreach (var result in results)
                 {
-                    var status = await requestService.GetListDigitalDocuments(result.Resource.RscId);
-                    if (status.Success)
-                    {
-                        if (status.D.Documents.Count >= 1)
+                    if (result.HasViewerDr)
+                    {   
+                        var status = await requestService.GetListDigitalDocuments(result.Resource.RscId);
+                        if (status.Success)
                         {
-                            if (status.D.Documents[0].canDownload)
+                            if (status.D.Documents.Count >= 1)
                             {
-                                result.CanDownload = true;
-                                result.downloadOptions.parentDocumentId = status.D.Documents[0].parentDocumentId;
-                                result.downloadOptions.documentId = status.D.Documents[0].documentId;
-                                result.downloadOptions.fileName = status.D.Documents[0].fileName;
-                                if (await App.DocDatabase.GetDocumentsByDocumentID(result.Resource.RscId) != null)
+                                if (status.D.Documents[0].canDownload)
                                 {
-                                    result.CanDownload = false;
-                                    result.IsDownload = true;
-                                }
-                                if (result.CanDownload)
-                                {
-                                    this.IsDownloadAllDisplay = true;
+                                    result.CanDownload = true;
+                                    result.downloadOptions.parentDocumentId = status.D.Documents[0].parentDocumentId;
+                                    result.downloadOptions.documentId = status.D.Documents[0].documentId;
+                                    result.downloadOptions.fileName = status.D.Documents[0].fileName;
+                                    if (await App.DocDatabase.GetDocumentsByDocumentID(result.Resource.RscId) != null)
+                                    {
+                                        result.CanDownload = false;
+                                        result.IsDownload = true;
+                                    }
+                                    if (result.CanDownload)
+                                    {
+                                        this.IsDownloadAllDisplay = true;
+                                    }
                                 }
                             }
                         }

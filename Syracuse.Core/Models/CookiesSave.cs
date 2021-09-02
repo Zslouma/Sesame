@@ -68,6 +68,8 @@ namespace Syracuse.Mobitheque.Core.Models
 
         public bool IsKm { get; set; }
 
+        public bool CanDownload { get; set; }
+
         public bool IsEvent { get; set; }
 
         public string DailyPressQuery { get; set; }
