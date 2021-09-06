@@ -52,7 +52,6 @@
                                 </Grid>
                             </StackLayout>
                             <ListView x:Name="resultsListInternationalPress" 
-                              CachingStrategy="RecycleElement"
                               ItemsSource="{Binding Results}"
                               SeparatorVisibility="None"
                               SelectionMode="None"

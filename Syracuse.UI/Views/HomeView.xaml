@@ -44,7 +44,6 @@
                     <Label Margin="10" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{x:Static local:AppResource.NotCurrentEvent}" IsVisible="{Binding NotCurrentEvent}" />
                     <ListView x:Name="resultsListEvent"
                         IsVisible="{Binding IsEvent}"
-                        CachingStrategy="RecycleElement"
                         ItemsSource="{Binding Results}" 
                         SeparatorVisibility="Default"
                         VerticalScrollBarVisibility="Never"
@@ -88,7 +87,6 @@
                     </ListView>
                     <ListView x:Name="resultsListDocument" 
                               IsVisible="{Binding ReverseIsEvent}"
-                              CachingStrategy="RecycleElement"
                               ItemsSource="{Binding Results}"
                               SeparatorVisibility="None"
                               SelectionMode="None"
