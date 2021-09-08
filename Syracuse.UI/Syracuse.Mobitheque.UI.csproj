@@ -46,6 +46,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResource.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\AccountUserDemandsChatView.xaml.cs">
+      <DependentUpon>AccountUserDemandsChatView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\LibraryView.xaml.cs">
       <DependentUpon>LibraryView.xaml</DependentUpon>
     </Compile>
@@ -89,6 +92,15 @@
     <EmbeddedResource Update="AppResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AccountUserDemandsChatView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AccountUserDemandsChatView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AccountUserDemandsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\BarcodeSearchView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

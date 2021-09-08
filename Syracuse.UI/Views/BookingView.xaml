@@ -77,10 +77,10 @@
                                                                     </OnPlatform>
                                                                 </Frame.HasShadow>
                                                                 <Image Source="{Binding ThumbnailUrl}"
-                                                                Aspect="AspectFill"
-                                                                HeightRequest="120"
-                                                                WidthRequest="90" 
-                                                                VerticalOptions="Start"/>
+                                                                    Aspect="AspectFill"
+                                                                    HeightRequest="120"
+                                                                    WidthRequest="90" 
+                                                                    VerticalOptions="Start"/>
                                                             </Frame>
                                                         </StackLayout>
                                                         <StackLayout 

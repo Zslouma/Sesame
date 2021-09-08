@@ -177,6 +177,9 @@
   <data name="DeleteAppAccount" xml:space="preserve">
     <value>Supprimer ce compte de l'application</value>
   </data>
+  <data name="DemandsUser" xml:space="preserve">
+    <value>Mes demandes</value>
+  </data>
   <data name="DepartmentTitle" xml:space="preserve">
     <value>Département</value>
   </data>

@@ -469,6 +469,40 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             }
         }
 
+        public async Task<InstanceResult<List < UserDemands >>> GetUserDemands(Action<Exception> error = null)
+        {
+            if (!App.AppState.NetworkConnection)
+            {
+                Debug.WriteLine("NetworkConnection" + App.AppState.NetworkConnection);
+            }
+            await this.InitializeHttpClient();
+            try
+            {
+                var timestamp = this.Timestamp();
+                this.token = this.Timestamp();
+                var status = await this.requests.GetUserDemands<InstanceResult< List < UserDemands >>>(timestamp, this.token);
+
+                await UpdateCookies();
+
+                return status;
+            }
+            catch (Exception ex)
+            {
+                var status = new InstanceResult<List < UserDemands >>();
+                status.Errors = new Error[1];
+                if (!App.AppState.NetworkConnection)
+                {
+                    status.Errors[0] = new Error(ApplicationResource.NetworkDisable);
+                }
+                else
+                {
+                    status.Errors[0] = new Error(ApplicationResource.ErrorOccurred);
+                }
+                error?.Invoke(ex);
+                return status;
+            }
+        }
+
         public async Task<RenewLoanResult> RenewLoans(LoanOptions options, Action<Exception> error = null)
         {
             if (!App.AppState.NetworkConnection)
