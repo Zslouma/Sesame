@@ -459,6 +459,15 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View online.
+        /// </summary>
+        public static string OnlineConsult {
+            get {
+                return ResourceManager.GetString("OnlineConsult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All my accounts.
         /// </summary>
         public static string OtherAccount {

@@ -251,6 +251,9 @@ L’annulation est définitive.</value>
   <data name="No" xml:space="preserve">
     <value>Non</value>
   </data>
+  <data name="OnlineConsult" xml:space="preserve">
+    <value>Consulter en ligne</value>
+  </data>
   <data name="OtherAccount" xml:space="preserve">
     <value>Tous mes comptes</value>
   </data>

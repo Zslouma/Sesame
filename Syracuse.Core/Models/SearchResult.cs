@@ -228,6 +228,7 @@ namespace Syracuse.Mobitheque.Core.Models
                 }
             }
         }
+        private string getZipLabel { get; set; } = "";
         public string GetZipLabel
         {
             get
@@ -236,20 +237,33 @@ namespace Syracuse.Mobitheque.Core.Models
                 {
                     if (HasZipUrl)
                     {
-                        Regex regex = new Regex("title\\s*=\\s*(?:\"(?<1>[^\"]*)\"|(?<1>\\S+))", RegexOptions.IgnoreCase);
-                        Match match = regex.Match(ZIPURL[0]);
-                        return match.Groups[1].ToString();
+                        if (getZipLabel == "")
+                        {
+                            Regex regex = new Regex("title\\s*=\\s*(?:\"(?<1>[^\"]*)\"|(?<1>\\S+))", RegexOptions.IgnoreCase);
+                            Match match = regex.Match(ZIPURL[0]);
+                            getZipLabel = match.Groups[1].ToString();
+                            return getZipLabel;
+                        }
+                        else
+                        {
+                            return getZipLabel;
+                        }
+
                     }
                     else
                     {
-                        return "";
+                        return getZipLabel;
                     }
                 }
                 catch
                 {
                     this.ZIPURL[0] = null;
-                    return "";
+                    return getZipLabel;
                 }
+            }
+            set
+            {
+                this.getZipLabel = value;
             }
         }
 
@@ -434,7 +448,7 @@ namespace Syracuse.Mobitheque.Core.Models
                 else
                 {
                     if (FieldList.DigitalReadyIsEntryPoint != null && Convert.ToInt32(FieldList.DigitalReadyIsEntryPoint[0]) > 0)
-                    {
+                    {   
                         this.hasViewerDr = true;
                         HasDigitalReady = true;
                     }

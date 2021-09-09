@@ -80,11 +80,11 @@
                                                             </Grid>
                                                         </StackLayout>
                                                         <StackLayout IsVisible="{Binding FieldList.HasZipUrl}">
-                                                            <Button                         Text="{Binding FieldList.GetZipLabel}"
-                                                                                            TextColor="White"
-                                                                                            BackgroundColor="{d:DynamicResource AppBackgroundColor}"
-                                                                                            CommandParameter="{Binding FieldList.GetZipUri}"
-                                                                                            Clicked="OpenBrowser_OnClicked"/>
+                                                            <Button Text="{Binding FieldList.GetZipLabel}"
+                                                                TextColor="White"
+                                                                BackgroundColor="{d:DynamicResource AppBackgroundColor}"
+                                                                CommandParameter="{Binding FieldList.GetZipUri}"
+                                                                Clicked="OpenBrowser_OnClicked"/>
                                                         </StackLayout>
                                                     </StackLayout>
                                                 </Grid>
@@ -119,7 +119,7 @@
                                                 <WebView Source="{Binding FieldList.UrlViewerDR}" Navigated="WebViewNavigated" HeightRequest="400" HorizontalOptions="Fill" Cookies="{Binding Path=BindingContext.cookie, Source={x:Reference Name=carouselView}}" Navigating="WebViewNavigating"/>
                                             </StackLayout>
                                             <!--#region Holding -->
-                                            
+
                                             <StackLayout   IsVisible="{Binding DisplayValues.Library.success}">
                                                 <StackLayout IsVisible="{Binding DisplayValues.Library.Dataa.IsHoldings}">
                                                     <StackLayout BackgroundColor="#bfbfbf" Padding="10">

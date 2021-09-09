@@ -277,20 +277,26 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
                 }
                 resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
-                await PerformSearch(resultTempo.FieldList.Identifier[0]);
+                await PerformSearch(resultTempo.Resource.RscId, resultTempo.Resource.RscBase);
                 this.BuildHoldingsStatements();
                 this.BuildHoldings();
                 resultTempo.DisplayValues.Library = this.Library;
                 resultTempo.DisplayValues.Library.success = resultTempo.DisplayValues.Library.success && resultTempo.DisplayValues.SeekForHoldings;
+                if (resultTempo.DisplayValues.Library.success)
+                {
+                    if (resultTempo.DisplayValues.Library.Dataa.fieldList.sys_base.Contains("DILICOM"))
+                    {
+                        resultTempo.FieldList.GetZipLabel = ApplicationResource.OnlineConsult;
+                        resultTempo.FieldList.ZIPURL = new string[] { resultTempo.FriendlyUrl.ToString() };
+                    }
+
+                }
                 this.ItemsSource.Add(resultTempo);
             }
         }
         public async Task FormateToCarrousel(int start, int end, bool endIsBusy = true)
         {
             this.IsBusy = true;
-            Debug.WriteLine("start : " +  start.ToString());
-            Debug.WriteLine("end : " + end.ToString());
-            Debug.WriteLine("position : " + this.position.ToString());
             for (int i = start; i <= end; i++)
             {
                 if (this.ItemsSource[i].Resource.Desc != null)
@@ -339,11 +345,20 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
                 }
                 this.ItemsSource[i].DisplayValues.SeekForHoldings = this.ItemsSource[i].SeekForHoldings && this.ReversIsKm;
-                await PerformSearch(this.ItemsSource[i].FieldList.Identifier[0]);
+                await PerformSearch(this.ItemsSource[i].Resource.RscId, this.ItemsSource[i].Resource.RscBase);
                 this.BuildHoldingsStatements();
                 this.BuildHoldings();
                 this.ItemsSource[i].DisplayValues.Library = this.Library;
                 this.ItemsSource[i].DisplayValues.Library.success = this.ItemsSource[i].DisplayValues.Library.success && this.ItemsSource[i].DisplayValues.SeekForHoldings;
+                if (this.ItemsSource[i].DisplayValues.Library.success)
+                {
+                    if (this.ItemsSource[i].DisplayValues.Library.Dataa.fieldList.sys_base.Contains("DILICOM"))
+                    {
+                        this.ItemsSource[i].FieldList.GetZipLabel = ApplicationResource.OnlineConsult;
+                        this.ItemsSource[i].FieldList.ZIPURL = new string[] { this.ItemsSource[i].FriendlyUrl.ToString() };
+                    }
+                   
+                }
 
             }
             var result = this.ItemsSource;
@@ -462,6 +477,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         public async Task<Uri> GetUrlTransfert(Uri uri)
         {
             UrlWithAuthenticationStatus status = await this.requestService.GetUrlWithAuthenticationTransfert(uri);
+            Debug.WriteLine(" url a analyser " + uri.ToString());
             if (status.Success)
             {
                 uri = new Uri(await this.requestService.GetRedirectURL(status.D.ToString(), uri.ToString()));
@@ -496,7 +512,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.InLoadMore = false;
         }
 
-        private async Task PerformSearch(string search = null)
+        private async Task PerformSearch(string search = null, string docbase = "SYRACUSE")
         {
             if (search == null)
             {
@@ -507,7 +523,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
             var options = new SearchLibraryOptionsDetails()
             {
-                RscId = search
+                RscId = search,
+                Docbase = docbase
             };
             var res = await this.requestService.SearchLibrary(new SearchLibraryOptions() { Record = options });
 
