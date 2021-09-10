@@ -49,7 +49,7 @@
                         VerticalScrollBarVisibility="Never"
                         VerticalOptions="FillAndExpand"
                         IsPullToRefreshEnabled="False"
-                        HasUnevenRows="True">
+                        HasUnevenRows="{OnPlatform Android=True, Default=False}">
                         <ListView.RowHeight>
                             <OnPlatform x:TypeArguments="x:Int32">
                                 <On Platform="iOS">270</On>
@@ -93,7 +93,7 @@
                               VerticalOptions="FillAndExpand"
                               VerticalScrollBarVisibility="Never"
                               IsPullToRefreshEnabled="False"
-                              HasUnevenRows="True">
+                              HasUnevenRows="{OnPlatform Android=True, Default=False}">
                         <ListView.RowHeight>
                             <OnPlatform x:TypeArguments="x:Int32">
                                 <On Platform="iOS">160</On>
