@@ -70,14 +70,17 @@ namespace Syracuse.Mobitheque.UI.Views
                 && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps))
                 {
                     uri = await this.ViewModel.GetUrlTransfert(uri);
-                    await Browser.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+                    //await Browser.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+                    this.ViewModel.OpenWebBrowser(uri.ToString());
+
 
                 }
                 else
                 {
                     uri = await this.ViewModel.RelativeUriToAbsolute(url);
                     uri = await this.ViewModel.GetUrlTransfert(uri);
-                    await Browser.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+                    this.ViewModel.OpenWebBrowser(uri.ToString());
+                    //await Browser.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
 
                 }
             }
@@ -125,5 +128,7 @@ namespace Syracuse.Mobitheque.UI.Views
             var res = this.DisplayAlert(title, message, buttonYes, buttonNo);
             return res;
         }
+
+
     }
 }

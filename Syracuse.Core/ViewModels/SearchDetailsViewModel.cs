@@ -288,6 +288,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     {
                         resultTempo.FieldList.GetZipLabel = ApplicationResource.OnlineConsult;
                         resultTempo.FieldList.ZIPURL = new string[] { resultTempo.FriendlyUrl.ToString() };
+                        resultTempo.FieldList.GetZipUri = resultTempo.FriendlyUrl.ToString();
                     }
 
                 }
@@ -356,6 +357,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     {
                         this.ItemsSource[i].FieldList.GetZipLabel = ApplicationResource.OnlineConsult;
                         this.ItemsSource[i].FieldList.ZIPURL = new string[] { this.ItemsSource[i].FriendlyUrl.ToString() };
+                        this.ItemsSource[i].FieldList.GetZipUri = this.ItemsSource[i].FriendlyUrl.ToString();
                     }
                    
                 }
@@ -556,7 +558,12 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 await PerformSearch(null);
                 this.DisplayAlert(ApplicationResource.Success, ApplicationResource.SuccessBookingRequest, ApplicationResource.ButtonValidation);
             }
-        }    
+        }
+        public void OpenWebBrowser(string parameter)
+        {
+            this.navigationService.Navigate<WebAndCookiesViewModel, string>(parameter);
+        }
+
 
     }
 }

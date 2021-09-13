@@ -21,15 +21,15 @@ namespace Syracuse.Mobitheque.Core.Services.Files
 
         #region Test
 
-        //private const string dataFileName = "data.json";
-        //private const string V = "https://syracusepp.archimed.fr/mobitheque/data.json?_s=";
+        private const string dataFileName = "data.json";
+        private const string V = "https://syracusepp.archimed.fr/mobitheque/data.json?_s=";
 
         #endregion
 
         #region Prod
 
-        private const string dataFileName = "data.json";
-        private const string V = "https://www.syracuse.cloud/mobitheque/data-prod.json?_s=";
+        //private const string dataFileName = "data.json";
+        //private const string V = "https://www.syracuse.cloud/mobitheque/data-prod.json?_s=";
 
         #endregion
 

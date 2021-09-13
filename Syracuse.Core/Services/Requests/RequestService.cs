@@ -55,7 +55,6 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 {
                     UseCookies = true,
                     CookieContainer = this.cookies
-
                 };
                 tempohandler.AllowAutoRedirect = false;
                 tempohandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
