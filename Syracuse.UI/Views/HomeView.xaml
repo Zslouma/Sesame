@@ -16,7 +16,7 @@
 
     <ContentPage.Content>
         <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
-            <Grid VerticalOptions="FillAndExpand">
+            <Grid VerticalOptions="FillAndExpand" x:Name="absLayout">
                 <StackLayout Orientation="Vertical" 
                              VerticalOptions="FillAndExpand"
                              Padding="15, 15, 15, 0"
@@ -43,6 +43,7 @@
                     </StackLayout>
                     <Label Margin="10" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{x:Static local:AppResource.NotCurrentEvent}" IsVisible="{Binding NotCurrentEvent}" />
                     <ListView x:Name="resultsListEvent"
+                        HeightRequest="{Binding Path=Height, Source={x:Reference absLayout}}"
                         IsVisible="{Binding IsEvent}"
                         ItemsSource="{Binding Results}" 
                         SeparatorVisibility="Default"
