@@ -124,7 +124,7 @@
     <BundleResource Include="Resources\FontAwesome5Solid.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
-    <BundleResource Include="Resources\splash_logo.png" />
+    <BundleResource Include="Resources\splash_logo_mobidoc.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
