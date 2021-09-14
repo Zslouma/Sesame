@@ -87,6 +87,7 @@
                         </ListView.Footer>
                     </ListView>
                     <ListView x:Name="resultsListDocument" 
+                              HeightRequest="{Binding Path=Height, Source={x:Reference absLayout}}"
                               IsVisible="{Binding ReverseIsEvent}"
                               ItemsSource="{Binding Results}"
                               SeparatorVisibility="None"
