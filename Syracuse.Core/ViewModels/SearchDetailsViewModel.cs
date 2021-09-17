@@ -144,10 +144,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set
             {
                 SetProperty(ref this.isPositionVisible, value);
-                //if (value)
-                //{
-                //    this.TimeVisibility(this.Position);
-                //}
             }
         }
 
@@ -201,7 +197,11 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         }
         async public override void Prepare(SearchDetailsParameters parameter)
         {
+            try
+            {
+
             this.IsBusy = true;
+            this.IsCarouselVisibility = false;
             await this.CanHolding();
             this.SearchOptions = parameter.searchOptions;
             this.NbrResults = parameter.nbrResults;
@@ -214,7 +214,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.CurrentItem = this.ItemsSource[tempo];
             this.Position = tempo;
             this.IsPositionVisible = true;
-            this.IsCarouselVisibility = true;
             if (tempo >= (this.ItemsSource.Count() - 5) && int.Parse(this.NbrResults) > this.ItemsSource.Count)
             {
                 await LoadMore(false);
@@ -224,7 +223,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             await this.RaisePropertyChanged(nameof(this.CurrentItem));
             await this.RaisePropertyChanged(nameof(this.Position));
             await this.RaiseAllPropertiesChanged();
+            this.IsCarouselVisibility = true;
             this.IsBusy = false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ex.Message : " + ex.Message);
+                throw;
+            }
         }
 
         public async Task FormateToCarrousel(Result[] results)
@@ -516,6 +522,11 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         private async Task PerformSearch(string search = null, string docbase = "SYRACUSE")
         {
+            Console.WriteLine("docbase = "+ docbase);
+            if (docbase != null && docbase == "")
+            {
+                docbase = "SYRACUSE";
+            }
             if (search == null)
             {
                 search = this.Query;
@@ -526,7 +537,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             var options = new SearchLibraryOptionsDetails()
             {
                 RscId = search,
-                Docbase = docbase
+                Docbase = docbase,
             };
             var res = await this.requestService.SearchLibrary(new SearchLibraryOptions() { Record = options });
 

@@ -8,7 +8,7 @@
     <ContentView>
         <ContentView.Content>
             <Grid VerticalOptions="FillAndExpand" BackgroundColor="White" HorizontalOptions="FillAndExpand">
-                <WebView x:Name="WebView" Source="{Binding Url}" Navigated="NavigatedWebView" Cookies="{Binding Cookies}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                <WebView x:Name="WebView" Source="{Binding Url}"  Cookies="{Binding Cookies}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
                 <AbsoluteLayout Grid.Row="0" IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
                     <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
                 </AbsoluteLayout>

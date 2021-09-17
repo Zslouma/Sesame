@@ -388,6 +388,22 @@ namespace Syracuse.Mobitheque.Core.Models
             } 
         }
 
+        public bool HaveLocation
+        {
+            get
+            {
+                return (SubjectLocation != null);
+            }
+        }
+
+        public bool HaveInformation
+        {
+            get
+            {
+                return HaveDateTime || HaveLocation;
+            }
+        }
+
         public Uri[] ThumbMedium { get; set; }
 
         public Uri[] ThumbLarge { get; set; }
@@ -625,7 +641,6 @@ namespace Syracuse.Mobitheque.Core.Models
                 }
                 catch (Exception)
                 {
-                    Debug.WriteLine("TextStatus Exception ");
                     return ApplicationResource.DisponibilityNo;
                 }
                 
@@ -642,7 +657,6 @@ namespace Syracuse.Mobitheque.Core.Models
                 }
                 catch (Exception e)
                 {
-                    Debug.WriteLine("ColorStatus Exception ");
                     return "#fdc76b";
                 }
                 
