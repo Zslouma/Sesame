@@ -75,7 +75,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
             }
             this.OtherAccount = cookies.ToArray(); 
-            Debug.WriteLine(sender);
         }
         public override async Task Initialize()
         {

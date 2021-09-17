@@ -44,7 +44,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         {
             this.IsBusy = true;
             this.Cookies = this.requestService.GetCookieContainer();
-            Console.WriteLine("GetCookieContainer = " + this.Cookies.Count.ToString());
             this.Url = parameter;
             this.RaiseAllPropertiesChanged();
             this.IsBusy = false;

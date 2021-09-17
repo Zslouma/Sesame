@@ -485,7 +485,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         public async Task<Uri> GetUrlTransfert(Uri uri)
         {
             UrlWithAuthenticationStatus status = await this.requestService.GetUrlWithAuthenticationTransfert(uri);
-            Debug.WriteLine(" url a analyser " + uri.ToString());
             if (status.Success)
             {
                 uri = new Uri(await this.requestService.GetRedirectURL(status.D.ToString(), uri.ToString()));
@@ -522,7 +521,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         private async Task PerformSearch(string search = null, string docbase = "SYRACUSE")
         {
-            Console.WriteLine("docbase = "+ docbase);
             if (docbase != null && docbase == "")
             {
                 docbase = "SYRACUSE";

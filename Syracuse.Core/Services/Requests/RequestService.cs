@@ -70,19 +70,16 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                     if ((int)webResponse.StatusCode >= 300 && (int)webResponse.StatusCode <= 399)
                     {
                         string uriString = webResponse.RequestMessage.RequestUri.ToString();
-                        Console.WriteLine(uriString);
                         return uriString;
 
                     }
                     else if ((int)webResponse.StatusCode >= 200 && (int)webResponse.StatusCode <= 299)
                     {
                         string uriString = webResponse.RequestMessage.RequestUri.ToString();
-                        Console.WriteLine(uriString);
                         return uriString;
                     }
                     else
                     {
-                        Console.WriteLine(defaultURL);
                         return defaultURL;
                     }
                 }
