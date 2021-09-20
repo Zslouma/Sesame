@@ -283,6 +283,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
                 }
                 resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
+                Console.WriteLine("resultTempo.Resource.RscBase : "+ resultTempo.Resource.RscBase);
                 await PerformSearch(resultTempo.Resource.RscId, resultTempo.Resource.RscBase);
                 this.BuildHoldingsStatements();
                 this.BuildHoldings();
@@ -521,7 +522,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         private async Task PerformSearch(string search = null, string docbase = "SYRACUSE")
         {
-            if (docbase != null && docbase == "")
+            if (docbase != null || docbase == "")
             {
                 docbase = "SYRACUSE";
             }

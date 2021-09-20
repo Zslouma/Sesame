@@ -15,6 +15,7 @@ namespace Syracuse.Mobitheque.UI.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SearchDetailsView : MvxContentPage<SearchDetailsViewModel>
     {
+
         public SearchDetailsView()
         {
             InitializeComponent();
@@ -26,6 +27,8 @@ namespace Syracuse.Mobitheque.UI.Views
 
         private void carouselView_PositionChanged(object sender, PositionChangedEventArgs e)
         {
+            var CurrentPosition = e.CurrentPosition;
+            this.ViewModel.RaiseAllPropertiesChanged();
             if (e.CurrentPosition > e.PreviousPosition)
             {
                 if (e.CurrentPosition+1 >= this.ViewModel.EndDataPosition && e.CurrentPosition + 1 < this.ViewModel.ItemsSource.Count )
@@ -41,7 +44,14 @@ namespace Syracuse.Mobitheque.UI.Views
                     this.ViewModel.StartDataPosition = this.ViewModel.StartDataPosition - 10 >= 0 ? this.ViewModel.StartDataPosition - 10 : 0;
                     this.ViewModel.FormateToCarrousel( this.ViewModel.StartDataPosition, e.CurrentPosition);
                 }
+                if (e.CurrentPosition < e.PreviousPosition-1 )
+                {
+                    this.carouselView.Position = e.PreviousPosition;
+                    CurrentPosition = e.PreviousPosition;
+                }
             }
+            this.ViewModel.Position = CurrentPosition;
+            Console.WriteLine("OpenBrowser_OnClicked " + e.CurrentPosition);
             this.ViewModel.IsPositionVisible = true;
         }
         private async void OnCarouselViewRemainingItemsThresholdReached(object sender, EventArgs e)
@@ -88,8 +98,6 @@ namespace Syracuse.Mobitheque.UI.Views
             {
                 await DisplayAlert(ApplicationResource.Warning, String.Format(ApplicationResource.ErrorOccurred), ApplicationResource.ButtonValidation);
             }
-
-            
             
         }
 
