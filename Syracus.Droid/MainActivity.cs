@@ -21,6 +21,7 @@ namespace Syracuse.Mobitheque.Droid
             XF.Material.Droid.Material.Init(this, bundle);
             Window.SetStatusBarColor(Android.Graphics.Color.ParseColor("#6574CF"));
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: false);
             global::Xamarin.Forms.Forms.Init(this, bundle);
         }
         public override void OnBackPressed()

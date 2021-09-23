@@ -96,6 +96,7 @@
     <BundleResource Include="Resources\GreenCheck.png" />
     <BundleResource Include="Resources\scann.gif" />
     <BundleResource Include="Resources\close_circle_button.png" />
+    <BundleResource Include="Resources\image_not_found.jpg" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Entitlements.plist" />
@@ -146,6 +147,12 @@
       <Version>1.6.292</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
+    <PackageReference Include="Xamarin.FFImageLoading">
+      <Version>2.4.11.982</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.FFImageLoading.Forms">
+      <Version>2.4.11.982</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms">
       <Version>5.0.0.2083</Version>
     </PackageReference>
