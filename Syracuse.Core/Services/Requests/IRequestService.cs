@@ -47,11 +47,10 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
         Task<InstanceResult<List < UserDemands >>> GetUserDemands(Action<Exception> error = null);
 
-        Task<LoginStatus> Authentication(string useraccount, string password, string baseUrl, Action<Exception> error = null);
 
         Task<BasketResult> SearchUserBasket(BasketOptions options, Action<Exception> error = null);
+
         Task<UrlWithAuthenticationStatus> GetUrlWithAuthenticationTransfert(Uri uri);
-        Task<CheckAvailabilityResult> CheckAvailability(CheckAvailabilityOptions options, Action<Exception> error = null);
 
         Task<SearchLibraryResult> SearchLibrary(SearchLibraryOptions options, Action<Exception> error = null);
 

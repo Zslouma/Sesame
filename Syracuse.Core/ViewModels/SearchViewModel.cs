@@ -388,7 +388,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                                 break;
                             }
                         }
-                        if (!found){
+                        if (!found) {
                             facette.IsSelected = false;
                             newGroup.Add(facette);
                         }
@@ -517,7 +517,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
             else if (search.Success && search.D != null)
             {
-                search.D.Results = await this.CheckAvCheckAvailability(search.D.Results, this.SearchQuery);
+                search.D.Results = await this.CheckAvailability(search.D.Results, this.SearchQuery);
             }
             return search?.D?.Results;
         }
@@ -669,7 +669,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 this.SelectedItems = new List<FacetteValue>();
                 this.FacetFilter = "";
             }
-            
+
 
             // Search Query Json
             SearchOptions optionsTempo = new SearchOptions();
@@ -684,12 +684,12 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
             // HTTP Request
             SearchResult result = await this.requestService.Search(optionsTempo);
-            
+
             // Result Handler
             if (result != null && result.D != null && result.Success)
             {
                 this.D = result.D;
-                result.D.Results = await this.CheckAvCheckAvailability(result.D.Results, search, facetFilter);
+                result.D.Results = await this.CheckAvailability(result.D.Results, search, facetFilter);
                 this.Results = result.D.Results;
                 this.ResultCountInt = this.D?.SearchInfo?.NbResults;
                 this.ResultCount = this.ResultCountInt <= 1 ? (String.Format(ApplicationResource.SearchViewResultNull, this.D.SearchInfo.NbResults)) : (String.Format(ApplicationResource.SearchViewResultCount, this.D.SearchInfo.NbResults));
@@ -764,14 +764,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.IsBusy = false;
         }
 
-        public async Task<Result[]> CheckAvCheckAvailability (Result[] results, string search, string facetFilter="") {
+        public async Task<Result[]> CheckAvailability(Result[] results, string search, string facetFilter = "") {
 
             List<RecordIdArray> RecordIdArray = new List<RecordIdArray>();
             CheckAvailabilityOptions optionsTempo = new CheckAvailabilityOptions();
 
             foreach (var result in results)
             {
-                RecordIdArray.Add(new RecordIdArray(result.Resource.RscBase , result.Resource.RscId , result.Resource.Frmt));
+                RecordIdArray.Add(new RecordIdArray(result.Resource.RscBase, result.Resource.RscId, result.Resource.Frmt));
             }
 
             optionsTempo.Query = new SearchOptionsDetails()
@@ -800,9 +800,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             return results;
         }
 
-        }
 
-        #endregion search
+    #endregion search
         private void ForceListUpdate()
         {
             var tempo = this.Results;
@@ -810,5 +809,4 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.Results = tempo;
         }
     }
-
 }
