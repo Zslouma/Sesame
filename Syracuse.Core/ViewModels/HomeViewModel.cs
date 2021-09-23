@@ -264,6 +264,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 options.Query = new SearchOptionsDetails()
                 {
+                    QueryString = "NumberOfDigitalNotices_int_idx:[1 TO *]",
                     ScenarioCode = this.eventsScenarioCode,
                     Page = this.page,
                     SortField = "DateStart_sort",
@@ -275,6 +276,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 options.Query = new SearchOptionsDetails()
                 {
+                    QueryString = "NumberOfDigitalNotices_int_idx:[1 TO *]",
                     ScenarioCode = this.eventsScenarioCode,
                     Page = this.page,
                 };

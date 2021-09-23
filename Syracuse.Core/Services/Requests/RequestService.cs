@@ -38,7 +38,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             {
                 UseCookies = true,
                 CookieContainer = this.cookies
-                
+
             };
             this.token = this.Timestamp();
         }
@@ -76,19 +76,16 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                     if ((int)webResponse.StatusCode >= 300 && (int)webResponse.StatusCode <= 399)
                     {
                         string uriString = webResponse.RequestMessage.RequestUri.ToString();
-                        Console.WriteLine(uriString);
                         return uriString;
 
                     }
                     else if ((int)webResponse.StatusCode >= 200 && (int)webResponse.StatusCode <= 299)
                     {
                         string uriString = webResponse.RequestMessage.RequestUri.ToString();
-                        Console.WriteLine(uriString);
                         return uriString;
                     }
                     else
                     {
-                        Console.WriteLine(defaultURL);
                         return defaultURL;
                     }
                 }
@@ -100,7 +97,8 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             }
         }
 
-        public String Timestamp() {
+        public String Timestamp()
+        {
             DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             TimeSpan diff = DateTime.Now.ToUniversalTime() - origin;
             return Math.Floor(diff.TotalSeconds).ToString();
@@ -214,7 +212,9 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                                                                               { "password", password},
                                                                               { "rememberMe", true}});
                 return status;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 error?.Invoke(ex);
                 return null;
             }
@@ -241,13 +241,13 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 status = new UrlWithAuthenticationStatus();
                 return status;
             }
-            
+
         }
 
 
         private async Task InitializeHttpClient()
         {
-            CookiesSave user =  await App.Database.GetActiveUser();
+            CookiesSave user = await App.Database.GetActiveUser();
             if (user != null)
             {
                 this.httpUri = new Uri(user.LibraryUrl);
@@ -313,7 +313,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 throw new ArgumentNullException(nameof(options));
             if (options.Query.ScenarioCode == "")
             {
-                options.Query.ScenarioCode = (await App.Database.GetActiveUser()).SearchScenarioCode; 
+                options.Query.ScenarioCode = (await App.Database.GetActiveUser()).SearchScenarioCode;
             }
             try
             {
@@ -336,7 +336,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                     status.Errors[0] = new Error(ApplicationResource.ErrorOccurred);
                 }
                 error?.Invoke(ex);
-                return status; 
+                return status;
             }
             
         }
@@ -406,7 +406,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             }
         }
 
-        public async Task<LoansResult> GetLoans(Action < Exception> error = null)
+        public async Task<LoansResult> GetLoans(Action<Exception> error = null)
         {
             if (!App.AppState.NetworkConnection)
             {
@@ -422,7 +422,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 await UpdateCookies();
 
                 return status;
-                }
+            }
             catch (Exception ex)
             {
                 var status = new LoansResult();
@@ -634,6 +634,40 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
         }
 
+        public async Task<InstanceResult<List<UserDemands>>> GetUserDemands(Action<Exception> error = null)
+        {
+            if (!App.AppState.NetworkConnection)
+            {
+                Debug.WriteLine("NetworkConnection" + App.AppState.NetworkConnection);
+            }
+            await this.InitializeHttpClient();
+            try
+            {
+                var timestamp = this.Timestamp();
+                this.token = this.Timestamp();
+                var status = await this.requests.GetUserDemands<InstanceResult<List<UserDemands>>>(timestamp, this.token);
+
+                await UpdateCookies();
+
+                return status;
+            }
+            catch (Exception ex)
+            {
+                var status = new InstanceResult<List<UserDemands>>();
+                status.Errors = new Error[1];
+                if (!App.AppState.NetworkConnection)
+                {
+                    status.Errors[0] = new Error(ApplicationResource.NetworkDisable);
+                }
+                else
+                {
+                    status.Errors[0] = new Error(ApplicationResource.ErrorOccurred);
+                }
+                error?.Invoke(ex);
+                return status;
+            }
+        }
+
         public async Task<RenewLoanResult> RenewLoans(LoanOptions options, Action<Exception> error = null)
         {
             if (!App.AppState.NetworkConnection)
@@ -705,4 +739,4 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
 
     }
-    }
+}

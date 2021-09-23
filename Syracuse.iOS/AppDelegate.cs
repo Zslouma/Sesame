@@ -18,6 +18,7 @@ namespace Syracuse.Mobitheque.iOS
             Xamarin.Forms.Forms.SetFlags(new string[] { "IndicatorView_Experimental", "SwipeView_Experimental" });
             Xamarin.Forms.Forms.Init();
             XF.Material.iOS.Material.Init();
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             ZXing.Net.Mobile.Forms.iOS.Platform.Init();
             this.LoadApplication(new App());
             return base.FinishedLaunching(uiApplication, launchOptions);

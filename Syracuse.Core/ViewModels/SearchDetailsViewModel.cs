@@ -144,10 +144,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set
             {
                 SetProperty(ref this.isPositionVisible, value);
-                //if (value)
-                //{
-                //    this.TimeVisibility(this.Position);
-                //}
             }
         }
 
@@ -202,6 +198,9 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         }
         async public override void Prepare(SearchDetailsParameters parameter)
         {
+            try
+            {
+
             this.IsBusy = true;
             this.IsCarouselVisibility = false;
             await this.CanHolding();
@@ -216,7 +215,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.CurrentItem = this.ItemsSource[tempo];
             this.Position = tempo;
             this.IsPositionVisible = true;
-            this.IsCarouselVisibility = true;
             if (tempo >= (this.ItemsSource.Count() - 5) && int.Parse(this.NbrResults) > this.ItemsSource.Count)
             {
                 await LoadMore(false);
@@ -230,6 +228,12 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             await this.RaiseAllPropertiesChanged();
             this.IsCarouselVisibility = true;
             this.IsBusy = false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ex.Message : " + ex.Message);
+                throw;
+            }
         }
 
         private void ForceListUpdate()
@@ -292,11 +296,22 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
                 }
                 resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
-                await PerformSearch(resultTempo.FieldList.Identifier[0]);
+                Console.WriteLine("resultTempo.Resource.RscBase : "+ resultTempo.Resource.RscBase);
+                await PerformSearch(resultTempo.Resource.RscId, resultTempo.Resource.RscBase);
                 this.BuildHoldingsStatements();
                 this.BuildHoldings();
                 resultTempo.DisplayValues.Library = this.Library;
                 resultTempo.DisplayValues.Library.success = resultTempo.DisplayValues.Library.success && resultTempo.DisplayValues.SeekForHoldings;
+                if (resultTempo.DisplayValues.Library.success)
+                {
+                    if (resultTempo.DisplayValues.Library.Dataa.fieldList.sys_base.Contains("DILICOM"))
+                    {
+                        resultTempo.FieldList.GetZipLabel = ApplicationResource.OnlineConsult;
+                        resultTempo.FieldList.ZIPURL = new string[] { resultTempo.FriendlyUrl.ToString() };
+                        resultTempo.FieldList.GetZipUri = resultTempo.FriendlyUrl.ToString();
+                    }
+
+                }
                 this.ItemsSource.Add(resultTempo);
             }
             var result = this.ItemsSource;
@@ -307,9 +322,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         public async Task FormateToCarrousel(int start, int end, bool endIsBusy = true)
         {
             this.IsBusy = true;
-            Debug.WriteLine("start : " +  start.ToString());
-            Debug.WriteLine("end : " + end.ToString());
-            Debug.WriteLine("position : " + this.position.ToString());
             for (int i = start; i <= end; i++)
             {
                 if (this.ItemsSource[i].Resource.Desc != null)
@@ -358,11 +370,21 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
                 }
                 this.ItemsSource[i].DisplayValues.SeekForHoldings = this.ItemsSource[i].SeekForHoldings && this.ReversIsKm;
-                await PerformSearch(this.ItemsSource[i].FieldList.Identifier[0]);
+                await PerformSearch(this.ItemsSource[i].Resource.RscId, this.ItemsSource[i].Resource.RscBase);
                 this.BuildHoldingsStatements();
                 this.BuildHoldings();
                 this.ItemsSource[i].DisplayValues.Library = this.Library;
                 this.ItemsSource[i].DisplayValues.Library.success = this.ItemsSource[i].DisplayValues.Library.success && this.ItemsSource[i].DisplayValues.SeekForHoldings;
+                if (this.ItemsSource[i].DisplayValues.Library.success)
+                {
+                    if (this.ItemsSource[i].DisplayValues.Library.Dataa.fieldList.sys_base.Contains("DILICOM"))
+                    {
+                        this.ItemsSource[i].FieldList.GetZipLabel = ApplicationResource.OnlineConsult;
+                        this.ItemsSource[i].FieldList.ZIPURL = new string[] { this.ItemsSource[i].FriendlyUrl.ToString() };
+                        this.ItemsSource[i].FieldList.GetZipUri = this.ItemsSource[i].FriendlyUrl.ToString();
+                    }
+                   
+                }
 
             }
             var result = this.ItemsSource;
@@ -516,10 +538,15 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.InLoadMore = false;
         }
 
-        private async Task PerformSearch(string search = null)
+        private async Task PerformSearch(string search = null, string docbase = "SYRACUSE")
         {
+
             if (App.AppState.NetworkConnection)
             {
+                if (docbase != null || docbase == "")
+                {
+                    docbase = "SYRACUSE";
+                }
                 if (search == null)
                 {
                     search = this.Query;
@@ -529,7 +556,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 }
                 var options = new SearchLibraryOptionsDetails()
                 {
-                    RscId = search
+                    RscId = search,
+                    Docbase = docbase,
                 };
                 var res = await this.requestService.SearchLibrary(new SearchLibraryOptions() { Record = options });
 
@@ -562,7 +590,12 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 await PerformSearch(null);
                 this.DisplayAlert(ApplicationResource.Success, ApplicationResource.SuccessBookingRequest, ApplicationResource.ButtonValidation);
             }
-        }    
+        }
+        public void OpenWebBrowser(string parameter)
+        {
+            this.navigationService.Navigate<WebAndCookiesViewModel, string>(parameter);
+        }
+
 
     }
 }

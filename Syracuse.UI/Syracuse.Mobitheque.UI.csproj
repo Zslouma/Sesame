@@ -18,7 +18,9 @@
     <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="18.1.0.42" />
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="18.1.0.42" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1687" />
+    <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
     <PackageReference Include="Xamarin.Forms.BehaviorsPack" Version="2.1.1" />
     <PackageReference Include="Xamarin.Forms.MultiSelectListView" Version="2.1.0" />
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.0.1.698" />
@@ -46,6 +48,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AccountUserDemandsChatView.xaml.cs">
+      <DependentUpon>AccountUserDemandsChatView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\LibraryView.xaml.cs">
       <DependentUpon>LibraryView.xaml</DependentUpon>
@@ -93,6 +98,15 @@
     <EmbeddedResource Update="AppResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AccountUserDemandsChatView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AccountUserDemandsChatView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AccountUserDemandsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\BarcodeSearchView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -143,6 +157,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\PopUp\TutorialPopupAddAccount.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\WebAndCookiesView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

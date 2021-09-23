@@ -64,16 +64,16 @@
                                             <Image VerticalOptions="Fill" HorizontalOptions="Fill" Aspect="AspectFill" Source="{Binding FieldList.Image}" HeightRequest="90"/>
                                             <StackLayout  Orientation="Vertical">
                                                 <Label Text="{Binding FieldList.Title[0]}" MaxLines="2" FontAttributes="Bold" FontSize="20" TextColor="{d:DynamicResource DarkTextColor}"/>
-                                                <Grid HorizontalOptions="Fill">
+                                                <Grid HorizontalOptions="Fill" IsVisible="{Binding FieldList.HaveInformation}">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="*" />
                                                     </Grid.ColumnDefinitions>
                                                     <Label Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding FieldList.SubjectTopicFirstUpper}"  TextColor="{d:DynamicResource PurpleTextColor}" FontSize="16"/>
-                                                    <Label Grid.Column="0" Grid.Row="1" Text="&#xf3c5;" FontFamily="{StaticResource FontAwesomeSolid}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Fill" FontSize="Small" TextColor="#88929D"/>
-                                                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding FieldList.SubjectLocation[0]}" VerticalTextAlignment="Center" VerticalOptions="Fill" FontSize="Small" TextColor="{d:DynamicResource DarkTextColor}"/>
-                                                    <Label Grid.Column="0" Grid.Row="2" Text="&#xf017;" FontFamily="{StaticResource FontAwesomeRegular}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center"  FontSize="Small" TextColor="#88929D" />
-                                                    <Label Grid.Column="1" Grid.Row="2" Text="{Binding FieldList.DateTime_String}" VerticalTextAlignment="Center" VerticalOptions="Center" FontSize="Small" TextColor="{d:DynamicResource DarkTextColor}"/>
+                                                    <Label Grid.Column="0" Grid.Row="1" Text="&#xf3c5;" FontFamily="{StaticResource FontAwesomeSolid}" IsVisible="{Binding FieldList.HaveLocation}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Fill" FontSize="Small" TextColor="#88929D"/>
+                                                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding FieldList.SubjectLocation[0]}" IsVisible="{Binding FieldList.HaveLocation}" VerticalTextAlignment="Center" VerticalOptions="Fill" FontSize="Small" TextColor="{d:DynamicResource DarkTextColor}"></Label>
+                                                    <Label Grid.Column="0" Grid.Row="2" Text="&#xf017;" IsVisible="{Binding FieldList.HaveDateTime}" FontFamily="{StaticResource FontAwesomeRegular}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center"  FontSize="Small" TextColor="#88929D" />
+                                                    <Label Grid.Column="1" Grid.Row="2" Text="{Binding FieldList.DateTime_String}" IsVisible="{Binding FieldList.HaveDateTime}" VerticalTextAlignment="Center" VerticalOptions="Center" FontSize="Small" TextColor="{d:DynamicResource DarkTextColor}"/>
                                                 </Grid>
                                             </StackLayout>
                                         </StackLayout>

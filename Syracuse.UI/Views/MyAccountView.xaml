@@ -54,5 +54,9 @@
             IconImageSource="barcode-solid" 
             Title="{x:Static local:AppResource.Card}" 
             BindingContext="{Binding DisplayCardViewModel}" />
+        <views1:AccountUserDemandsView 
+            IconImageSource="barcode-solid" 
+            Title="{x:Static local:AppResource.DemandsUser}" 
+            BindingContext="{Binding AccountUserDemandsViewModel}" />
     </TabbedPage.Children>
 </views:MvxTabbedPage>

@@ -241,6 +241,15 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to My demands.
+        /// </summary>
+        public static string DemandsUser {
+            get {
+                return ResourceManager.GetString("DemandsUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Department.
         /// </summary>
         public static string DepartmentTitle {

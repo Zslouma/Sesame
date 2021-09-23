@@ -204,28 +204,43 @@ namespace Syracuse.Mobitheque.Core.Models
             get { return ZIPURL != null && ZIPURL[0] != null; }
         }
 
+        private string getZipUri { get; set; } = "";
         public string GetZipUri
         {
             get {
                 try {
                     if (HasZipUrl)
                     {
-                        Regex regex = new Regex("href\\s*=\\s*(?:\"(?<1>[^\"]*)\"|(?<1>\\S+))", RegexOptions.IgnoreCase);
-                        Match match = regex.Match(ZIPURL[0]);
-                        return match.Groups[1].ToString();
+                        if (getZipUri == "")
+                        {
+                            Regex regex = new Regex("href\\s*=\\s*(?:\"(?<1>[^\"]*)\"|(?<1>\\S+))", RegexOptions.IgnoreCase);
+                            Match match = regex.Match(ZIPURL[0]);
+                            getZipUri = match.Groups[1].ToString();
+                            return getZipUri;
+                        }
+                        else
+                        {
+                            return getZipUri;
+                        }
+                        
                     }
                     else
                     {
-                        return "";
+                        return getZipUri;
                     }
                     }
                 catch
                 {
                     this.ZIPURL[0] = null ;
-                    return "";
+                    return getZipUri;
                 }
             }
+            set
+            {
+                this.getZipUri = value;
+            }
         }
+        private string getZipLabel { get; set; } = "";
         public string GetZipLabel
         {
             get
@@ -234,20 +249,33 @@ namespace Syracuse.Mobitheque.Core.Models
                 {
                     if (HasZipUrl)
                     {
-                        Regex regex = new Regex("title\\s*=\\s*(?:\"(?<1>[^\"]*)\"|(?<1>\\S+))", RegexOptions.IgnoreCase);
-                        Match match = regex.Match(ZIPURL[0]);
-                        return match.Groups[1].ToString();
+                        if (getZipLabel == "")
+                        {
+                            Regex regex = new Regex("title\\s*=\\s*(?:\"(?<1>[^\"]*)\"|(?<1>\\S+))", RegexOptions.IgnoreCase);
+                            Match match = regex.Match(ZIPURL[0]);
+                            getZipLabel = match.Groups[1].ToString();
+                            return getZipLabel;
+                        }
+                        else
+                        {
+                            return getZipLabel;
+                        }
+
                     }
                     else
                     {
-                        return "";
+                        return getZipLabel;
                     }
                 }
                 catch
                 {
                     this.ZIPURL[0] = null;
-                    return "";
+                    return getZipLabel;
                 }
+            }
+            set
+            {
+                this.getZipLabel = value;
             }
         }
 
@@ -358,6 +386,22 @@ namespace Syracuse.Mobitheque.Core.Models
             } 
         }
 
+        public bool HaveLocation
+        {
+            get
+            {
+                return (SubjectLocation != null);
+            }
+        }
+
+        public bool HaveInformation
+        {
+            get
+            {
+                return HaveDateTime || HaveLocation;
+            }
+        }
+
         public Uri[] ThumbMedium { get; set; }
 
         public Uri[] ThumbLarge { get; set; }
@@ -436,7 +480,7 @@ namespace Syracuse.Mobitheque.Core.Models
                 else
                 {
                     if (FieldList.DigitalReadyIsEntryPoint != null && Convert.ToInt32(FieldList.DigitalReadyIsEntryPoint[0]) > 0)
-                    {
+                    {   
                         this.hasViewerDr = true;
                         HasDigitalReady = true;
                     }
