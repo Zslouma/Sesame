@@ -15,7 +15,18 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private readonly IMvxNavigationService navigationService;
         private readonly IRequestService requestService;
         private readonly DepartmentService departmentService = new DepartmentService();
-        private bool _isnetworkError = false;
+        private bool __isnetworkError = false;
+        private bool _isnetworkError { 
+            get { return __isnetworkError; } 
+            set { 
+                this.__isnetworkError = value;
+                if (this.viewCreate && value)
+                {
+                    this.navigationService.Navigate<DownloadViewModel>();
+                }
+                } 
+        }
+
         private bool _isnetworkErrorAppend = false; 
         private string param;
         private bool viewCreate = false;
@@ -34,8 +45,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         public override void Start()
         {
-            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
-            this.Connectivity_test().Wait();
+            this.Connectivity_test();
             if (App.AppState.NetworkConnection)
             {
                 this.JsonSynchronisation();
@@ -79,8 +89,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         }
         public override async void ViewAppearing()
         {
-            base.ViewAppearing();
-            await this.Connectivity_test();
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
             CookiesSave user = await App.Database.GetActiveUser();
             Cookie[] cookies = JsonConvert.DeserializeObject<Cookie[]>(user.Cookies);
             bool found = false;
@@ -138,37 +147,27 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 
             }
             this.viewCreate = true;
+            base.ViewAppearing();
 
         }
         void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
         {
-            Connectivity_test().Wait();
+            Console.WriteLine("Connectivity_ConnectivityChanged Start");
+            Connectivity_test();
+            Console.WriteLine("Connectivity_ConnectivityChanged End");
         }
 
-        private async Task Connectivity_test()
+        private void Connectivity_test()
         {
-            Console.WriteLine("Connectivity_test for MasterDetail");
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
-                Console.WriteLine("test 1");
-                Console.WriteLine("App.AppState.NetworkConnection : " + App.AppState.NetworkConnection.ToString());
                 App.AppState.NetworkConnection = false;
-                Console.WriteLine("App.AppState.NetworkConnection : " + App.AppState.NetworkConnection.ToString());
-                Console.WriteLine("End test 1");
-                if (this.viewCreate)
-                {
-                    //await this.navigationService.Navigate<NetworkErrorViewModel>();
-                }
-                this._isnetworkError = true;
+                this._isnetworkError = true;                
             }
             else
             {
-                Console.WriteLine("test 2");
-                Console.WriteLine("App.AppState.NetworkConnection : " + App.AppState.NetworkConnection.ToString());
                 App.AppState.NetworkConnection = true;
-                Console.WriteLine("App.AppState.NetworkConnection : " + App.AppState.NetworkConnection.ToString());
-                Console.WriteLine("End test 2");
-                if (this._isnetworkError) {
+                if (this._isnetworkError){
                     this._isnetworkError = false;
                 }
             }
