@@ -13,7 +13,7 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
     
-
+    
     <ContentPage.Content>
         <yummy:PancakeView  x:Name="pancakeView" Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
             <Grid>
@@ -159,7 +159,7 @@
                                             <StackLayout IsVisible="{Binding HasViewerDr}">
                                                 <!--Loading label should not render by default.-->
                                                 <Label BindingContext="carouselView" x:Name="labelLoading" HorizontalOptions="Fill" Text="{x:Static local:AppResource.Loading}" IsVisible="{Binding Path=BindingContext.AbsoluteIndicatorVisibility, Source={x:Reference Name=carouselView}}"  />
-                                                <WebView MinimumHeightRequest="50" MinimumWidthRequest="50" Source="{Binding FieldList.UrlViewerDR}" Navigated="WebViewNavigated" HeightRequest="400" HorizontalOptions="Fill" Navigating="WebViewNavigating"/>
+                                                <WebView Source="{Binding FieldList.UrlViewerDR}" Navigated="WebViewNavigated" HeightRequest="400" HorizontalOptions="Fill" Cookies="{Binding Path=BindingContext.cookie, Source={x:Reference Name=carouselView}}" Navigating="WebViewNavigating"/>
                                             </StackLayout>
                                             <!--#region Holding -->
 

@@ -89,6 +89,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         }
         public override async void ViewAppearing()
         {
+            base.ViewAppearing();
+            this.Connectivity_test();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
             CookiesSave user = await App.Database.GetActiveUser();
             Cookie[] cookies = JsonConvert.DeserializeObject<Cookie[]>(user.Cookies);
@@ -147,7 +149,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 
             }
             this.viewCreate = true;
-            base.ViewAppearing();
 
         }
         void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
