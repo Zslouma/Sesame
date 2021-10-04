@@ -225,9 +225,11 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             await this.RaisePropertyChanged(nameof(this.CurrentItem));
             await this.RaisePropertyChanged(nameof(this.Position));
             this.ForceListUpdate();
-            await this.RaiseAllPropertiesChanged();
+            
             this.IsCarouselVisibility = true;
-            this.IsBusy = false;
+                await this.RaisePropertyChanged(nameof(this.IsCarouselVisibility));
+                await this.RaiseAllPropertiesChanged();
+                this.IsBusy = false;
             }
             catch (Exception ex)
             {

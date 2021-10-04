@@ -23,7 +23,6 @@
                         ItemsSource="{Binding ItemsSource}" 
                         CurrentItem="{Binding CurrentItem}"
                         Position="{Binding Position}" 
-                        IsVisible="{Binding IsCarouselVisibility}"
                         IsScrollAnimated ="False"
                         CurrentItemChanged="carouselView_CurrentItemChanged"
                         Loop="False"
