@@ -23,6 +23,18 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
         }
 
+        private bool hasDemands { get; set; } = false;
+        public bool HasDemands
+        {
+            get{
+                return this.hasDemands;
+            }
+            set
+            {
+                this.hasDemands = value;
+            }
+
+        }
 
         private ObservableCollection<UserDemands> demands;
         public ObservableCollection<UserDemands> Demands
@@ -31,6 +43,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set
             {
                 SetProperty(ref this.demands, value);
+                if (value.Count > 0)
+                {
+                    this.HasDemands = true;
+                }
+                else
+                {
+                    this.HasDemands = false;
+                }
             }
         }
 

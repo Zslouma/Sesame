@@ -14,10 +14,11 @@
             <Grid VerticalOptions="FillAndExpand">
                 <ListView
                     x:Name="DemandsList"
+                    IsVisible="{Binding HasDemands}"
                     VerticalOptions="FillAndExpand"
                     HorizontalOptions="FillAndExpand"
                     HasUnevenRows="True"
-                ItemsSource="{Binding Demands}">
+                    ItemsSource="{Binding Demands}">
                     <ListView.ItemTemplate>
                         <DataTemplate >
                             <ViewCell>
@@ -54,6 +55,17 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                    <StackLayout.Triggers>
+                        <DataTrigger TargetType="StackLayout" Binding="{Binding HasDemands}" Value="False">
+                            <Setter Property="IsVisible" Value="True"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="StackLayout" Binding="{Binding HasDemands}" Value="True">
+                            <Setter Property="IsVisible" Value="False"/>
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                    <Label VerticalOptions="Center" HorizontalOptions="Center" Text="Pas de demandes en cours"/>
+                </StackLayout>
                 <AbsoluteLayout Grid.Row="0" IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
                     <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
                 </AbsoluteLayout>
