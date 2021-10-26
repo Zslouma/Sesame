@@ -18,34 +18,53 @@ namespace Mobitheque.IOS.CustomRenderer
     public class HybridWebViewRenderer : WkWebViewRenderer
     {
         WKWebView webView;
+        public HybridWebView HybridWebView
+        {
+            get { return Element as HybridWebView; }
+        }
         public HybridWebViewRenderer()
         {
         }
         protected override void OnElementChanged(VisualElementChangedEventArgs e)
         {
             base.OnElementChanged(e);
-        }
-
-        public class CustomNavigationDelegate : WKNavigationDelegate
-        {
-            public override void DidFinishNavigation(WKWebView webView, WKNavigation navigation)
+            if (e.OldElement == null)
             {
-                webView.Configuration.WebsiteDataStore.HttpCookieStore.GetAllCookies((cookies) =>
-                {
-
-                });
+                NavigationDelegate = new CustomNavigationDelegate(HybridWebView);
             }
         }
 
-    }
-    internal class MyWeakNavigationDelegate : WKNavigationDelegate, INSUrlConnectionDataDelegate
-    {
-        private HybridWebViewRenderer customWebViewRenderer;
 
-        public MyWeakNavigationDelegate(HybridWebViewRenderer customWebViewRenderer)
+
+    }
+    public class CustomNavigationDelegate : WKNavigationDelegate
+    {
+        private readonly HybridWebView _hybridWebView;
+        internal CustomNavigationDelegate(HybridWebView cookieWebView)
         {
-            this.customWebViewRenderer = customWebViewRenderer;
+            _hybridWebView = cookieWebView;
         }
 
+        public override void DidFinishNavigation(WKWebView webView, WKNavigation navigation)
+        {
+            webView.Configuration.WebsiteDataStore.HttpCookieStore.GetAllCookies((cookies) =>
+            {
+                var cookiesCollection = new CookieCollection();
+                foreach (var cookie in cookies)
+                {
+                    cookiesCollection.Add(new Cookie
+                    {
+                        Name = cookie.Name,
+                        Value = cookie.Value,
+                        Domain = cookie.Domain,
+                    });
+                }
+                _hybridWebView.OnNavigated(new CookieNavigatedEventArgs
+                {
+                    Cookies = cookiesCollection,
+                    Url = webView.Url.ToString()
+                }) ;
+            });
+        }
     }
 }
