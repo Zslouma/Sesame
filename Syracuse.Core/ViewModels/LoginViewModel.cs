@@ -6,6 +6,7 @@ using Syracuse.Mobitheque.Core.Models;
 using Syracuse.Mobitheque.Core.Services.Files;
 using Syracuse.Mobitheque.Core.Services.Requests;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ using Xamarin.Forms.PlatformConfiguration.TizenSpecific;
 
 namespace Syracuse.Mobitheque.Core.ViewModels
 {
-    public class LoginViewModel : BaseViewModel<CookiesSave, CookiesSave>
+    public class LoginViewModel : BaseViewModel<LoginParameters, LoginParameters>
     {
         private string username;
         private string password;
@@ -36,6 +37,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 this.RaisePropertyChanged(nameof(this.UserNameIsError));
             } 
         }
+
+        public List<SSO> ListSSO { get; set;}
 
         public string Password
         {
@@ -206,15 +209,29 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             await this.RaisePropertyChanged(nameof(this.PasswordErrorString));
         }
 
-        public override void Prepare(CookiesSave parameter)
+        public override void Prepare(LoginParameters parameter)
         {
-            this.department = parameter;
+            this.department = parameter.CookiesSave;
+            this.ListSSO = parameter.ListSSO;
             this.Library = this.department.Library;
         }
 
         public void GetBarCodeResult()
         {
             // Method intentionally left empty.
+        }
+        public void OpenWebBrowser(string parameter)
+        {
+            try
+            {
+                WebAndCookiesAuthentificationParameters parameters = new WebAndCookiesAuthentificationParameters(parameter, this.department);
+                this.navigationService.Navigate<WebAndCookiesAuthentificationViewModel, WebAndCookiesAuthentificationParameters>(parameters);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("OpenWebBrowser Exception: " + e.ToString());
+            }
+
         }
     }
 }

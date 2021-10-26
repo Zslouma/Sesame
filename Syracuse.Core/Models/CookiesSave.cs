@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System.Collections.Generic;
 
 namespace Syracuse.Mobitheque.Core.Models
 {
@@ -75,5 +76,19 @@ namespace Syracuse.Mobitheque.Core.Models
         public bool IsTutorial { get; set; } = true;
 
         public bool IsTutorialAddAcount { get; set; } = true;
+
+    }
+
+    public class LoginParameters
+    {
+        public LoginParameters(List<SSO> listSSO, CookiesSave cookiesSave)
+        {
+            ListSSO = listSSO;
+            CookiesSave = cookiesSave;
+        }
+
+        public List<SSO> ListSSO { get; set; }
+
+        public CookiesSave CookiesSave { get; set; }
     }
 }

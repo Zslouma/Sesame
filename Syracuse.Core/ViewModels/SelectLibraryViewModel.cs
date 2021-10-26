@@ -29,7 +29,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             get => this.isAnyLibrarySelected;
             set => SetProperty(ref this.isAnyLibrarySelected, value);
         }
-        //
 
         private int departmentsPickerIndex = -1;
         public int DepartmentsPickerIndex
@@ -93,7 +92,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             opt.IsKm = this.librariesSelected[this.librariesPickerIndex].Config.IsKm;
             opt.BuildingInfos = JsonConvert.SerializeObject(this.librariesSelected[this.librariesPickerIndex].Config.BuildingInformations);
 
-            await this.navigationService.Navigate<LoginViewModel, CookiesSave>(opt);
+            LoginParameters loginParameters = new LoginParameters(this.librariesSelected[this.LibrariesPickerIndex].Config.ListSSO, opt);
+            await this.navigationService.Navigate<LoginViewModel, LoginParameters>(loginParameters);
         }
 
         private async Task ChangeLibraries()

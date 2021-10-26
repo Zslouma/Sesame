@@ -48,9 +48,6 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
             try
             {
-                //HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(originalURL);
-                //webRequest.AllowAutoRedirect = false;  // IMPORTANT
-                //webRequest.Timeout = 3500;           // timeout 10s
                 var tempohandler = new HttpClientHandler()
                 {
                     UseCookies = true,
@@ -124,14 +121,16 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             return this.cookies;
         }
 
-        public IEnumerable<Cookie> GetCookies(string url = null)
+        public IEnumerable<Cookie> GetCookies(string url = null, CookieContainer cookiesTempo = null)
         {
             if (!String.IsNullOrEmpty(url))
             {
                 this.InitializeHttpClient(url);
             }
-            foreach (var cookie in this.cookies.GetCookies(this.httpUri))
-                yield return cookie as Cookie;
+            foreach (Cookie cookie in cookiesTempo == null ? this.cookies.GetCookies(this.httpUri) : cookiesTempo.GetCookies(new Uri(url))){
+                Console.WriteLine("GetCookies :Name = {0} ; Value = {1} ; Domain = {2}", cookie.Name, cookie.Value, cookie.Domain);
+                yield return cookie;
+            }
         }
         public async Task UpdateCookies()
         {
@@ -168,13 +167,12 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             this.cookies = new CookieContainer();
             foreach (Cookie cookie in cookies)
             {
-                this.cookies.Add(new Cookie(cookie.Name, cookie.Value, cookie.Path, cookie.Domain));
+                this.cookies.Add(cookie);
             }
             this.handler = new HttpClientHandler()
             {
                 UseCookies = true,
                 CookieContainer = this.cookies
-
             };
         }
 
@@ -259,7 +257,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             }
         }
 
-        private void InitializeHttpClient(string url)
+        public void InitializeHttpClient(string url)
         {
             this.httpUri = new Uri(url);
 
@@ -273,20 +271,32 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             this.requests = RestService.For<IRefitRequests>(httpClient);
         }
 
-        public async Task<AccountSummary> GetSummary(Action<Exception> error = null)
+        public async Task<AccountSummary> GetSummary( string baseUrl = null, Cookie[] CookiesArray = null, Action<Exception> error = null)
         {
             if (!App.AppState.NetworkConnection)
             {
                 Debug.WriteLine("NetworkConnection" + App.AppState.NetworkConnection);
             }
-            await this.InitializeHttpClient();
+            if (baseUrl != null && CookiesArray != null)
+            {
+                this.ResetCookies();
+                                this.InitializeHttpClient(baseUrl);
+                this.LoadCookies(CookiesArray);
 
+
+            }
+            else
+            {
+                await this.InitializeHttpClient();
+            }
+            
             try
             {
                 var status = await this.requests.GetSummary<AccountSummary>(this.token);
-
-                await UpdateCookies();
-
+                if (status.Success)
+                {
+                    await UpdateCookies();
+                }
                 return status;
             }
             catch (Exception ex)
@@ -372,8 +382,6 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 error?.Invoke(ex);
                 return status;
             }
-
-
         }
 
         public async Task<SearchLibraryResult> SearchLibrary(SearchLibraryOptions options, Action<Exception> error = null)

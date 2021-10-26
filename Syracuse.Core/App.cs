@@ -39,6 +39,7 @@ namespace Syracuse.Mobitheque.Core
                 return appState;
             }
         }
+
         public override async void Initialize()
         {
             CreatableTypes()
