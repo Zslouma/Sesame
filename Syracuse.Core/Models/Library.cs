@@ -41,6 +41,8 @@ namespace Syracuse.Mobitheque.Core.Models
         public bool RememberMe { get; set; }
         [JsonProperty("is_km")]
         public bool IsKm { get; set; }
+        [JsonProperty("sso")]
+        public List<SSO> ListSSO { get; set; }
         [JsonProperty("can_download")]
         public bool CanDownload { get; set; }
         [JsonProperty("daily_press")]
@@ -66,4 +68,12 @@ namespace Syracuse.Mobitheque.Core.Models
         public ConfigLibrary Config { get; set; }
     }
 
+    public class SSO
+    {
+        [JsonProperty("label")]
+        public string Label { get; set; }
+
+        [JsonProperty("value")]
+        public string Value { get; set; }
+    }
 }

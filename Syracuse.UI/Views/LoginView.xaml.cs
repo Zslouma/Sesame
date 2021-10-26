@@ -39,14 +39,27 @@ namespace Syracuse.Mobitheque.UI.Views
             };
             UserNameInput.Focused += Handle_Focus;
             UserNameInput.Unfocused += Handle_Unfocused;
-
             PasswordInput.Focused += Handle_Focus;
             PasswordInput.Unfocused += Handle_Unfocused;
             ScannButton.FontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label)) * 2;
-            // CHECK VIEW
-            // https://devblogs.microsoft.com/xamarin/validation-xamarin-forms-enterprise-apps/
         }
-
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ListSSO.Children.Clear();
+            foreach (var item in this.ViewModel.ListSSO)
+            {
+                Button button = new Button();
+                button.Text = item.Label;
+                button.CornerRadius = 15;
+                button.BackgroundColor = Color.FromHex("#FFFFFF");
+                button.TextColor = Color.FromHex("#6574CF");
+                button.CommandParameter = item.Value;
+                button.Clicked += OpenBrowserProvider_OnClicked;
+                ListSSO.Children.Add(button);
+            }
+            ListSSO.VerticalOptions = LayoutOptions.FillAndExpand;
+        }
         public void Handle_Focus(object sender, FocusEventArgs args)
         {
             this.FormLayout.VerticalOptions = LayoutOptions.StartAndExpand;
@@ -110,6 +123,22 @@ namespace Syracuse.Mobitheque.UI.Views
                 {
                     await Browser.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
                 }
+            }
+            catch (Exception)
+            {
+                await DisplayAlert(ApplicationResource.Warning, String.Format(ApplicationResource.ErrorOccurred), ApplicationResource.ButtonValidation);
+            }
+
+        }
+
+        private async void OpenBrowserProvider_OnClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                string provider = ((Button)sender).CommandParameter as string;
+                string url = this.ViewModel.department.LibraryUrl + "/?forcelogon=" + provider;
+                Uri uri;
+                this.ViewModel.OpenWebBrowser(url);
             }
             catch (Exception)
             {

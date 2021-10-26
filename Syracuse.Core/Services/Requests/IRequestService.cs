@@ -12,7 +12,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
         /// Get cookies of current httpClient.
         /// </summary>
         /// <returns>Current cookies</returns>
-        IEnumerable<Cookie> GetCookies(string url = null);
+        IEnumerable<Cookie> GetCookies(string url = null, CookieContainer cookiesTempo = null);
 
         /// <summary>
         /// Get cookies of current httpClient. in CookieContainer format
@@ -23,6 +23,8 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
         void LoadCookies(Cookie[] cookies);
 
         void ResetCookies();
+
+        void InitializeHttpClient(string url);
 
         void clearCookies();
 
@@ -39,7 +41,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
         Task<CheckAvailabilityResult> CheckAvailability(CheckAvailabilityOptions options, Action<Exception> error = null);
 
-        Task<AccountSummary> GetSummary(Action<Exception> error = null);
+        Task<AccountSummary> GetSummary( string baseUrl = null, Cookie[] CookiesArray = null, Action<Exception> error = null);
 
         Task<LoansResult> GetLoans(Action<Exception> error = null);
 
