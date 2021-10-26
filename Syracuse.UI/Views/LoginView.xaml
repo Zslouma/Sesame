@@ -12,10 +12,10 @@
                     xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
     <ContentPage.Content>
         <ScrollView VerticalOptions="FillAndExpand">
-            <Grid Padding="20" VerticalOptions="FillAndExpand">
+            <Grid Padding="20,0" VerticalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Image Grid.Row="0" Source="logo_Syracuse" VerticalOptions="Start"></Image>
                 <StackLayout Grid.Row="1" Margin="15,0" VerticalOptions="FillAndExpand" x:Name="FormLayout" Spacing="20">
@@ -25,8 +25,9 @@
                             <ColumnDefinition Width="0.2*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            
                         </Grid.RowDefinitions>
                         <Label  Text="{Binding Library}" 
                                 Margin="0,0,0,10"
@@ -99,7 +100,6 @@
                     <Button Text="{x:Static local:AppResource.PasswordForget}"
                             TextColor="AliceBlue"
                             BackgroundColor="Transparent"
-                            FontFamily=""
                             Clicked="OpenBrowser_OnClicked"/>
                     <StackLayout x:Name="ListSSO" VerticalOptions="FillAndExpand"/>
                 </StackLayout>

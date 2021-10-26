@@ -47,6 +47,8 @@ namespace Syracuse.Mobitheque.UI.Views
         {
             base.OnAppearing();
             ListSSO.Children.Clear();
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+            Connectivity_test();
             foreach (var item in this.ViewModel.ListSSO)
             {
                 Button button = new Button();
@@ -70,15 +72,6 @@ namespace Syracuse.Mobitheque.UI.Views
             (this.DataContext as LoginViewModel).OnDisplayAlert += LoginView_OnDisplayAlert;
             base.OnBindingContextChanged();
         }
-
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
-            Connectivity_test();
-        }
-
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
