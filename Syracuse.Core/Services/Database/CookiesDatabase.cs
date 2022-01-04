@@ -12,8 +12,14 @@ namespace Syracuse.Mobitheque.Core.Services.Database
         public CookiesDatabase(string dbPath)
         {
             database = new SQLiteAsyncConnection(dbPath);
+            // cette table contient toutes les informations des utilisateur de l'app
             database.CreateTableAsync<CookiesSave>().Wait();
+            // cette table contients tout les pages suplémentaire programé par le client
+            database.CreateTableAsync<StandartViewList>().Wait();
+
         }
+        #region CookiesSave
+
 
         public Task<List<CookiesSave>> GetItemsAsync()
         {
@@ -74,5 +80,40 @@ namespace Syracuse.Mobitheque.Core.Services.Database
         {
             return database.DeleteAsync(item);
         }
+        #endregion
+        #region StandartViewList
+
+        public Task<List<StandartViewList>> GetStandartsViewsAsync()
+        {
+            return database.Table<StandartViewList>().ToListAsync();
+        }
+        public Task<List<StandartViewList>> GetActiveStandartView(CookiesSave ActiveUser)
+        {
+            return database.Table<StandartViewList>().Where(i => i.Library == ActiveUser.Library && i.Username == ActiveUser.Username ).ToListAsync(); 
+        }
+
+        public async Task<List<int>> SaveItemAsync(List<StandartViewList> items)
+        {
+
+            List<int> idList = new List<int>();
+            foreach (var item in items)
+            {
+                if (item.ID != 0)
+                {
+                    idList.Add(await database.UpdateAsync(item));
+                }
+                else
+                {
+                    idList.Add(await database.InsertAsync(item));
+                }
+            }
+            return idList;
+        }
+
+        public Task<int> DeleteItemAsync(StandartViewList item)
+        {
+            return database.DeleteAsync(item);
+        }
+        #endregion
     }
 }

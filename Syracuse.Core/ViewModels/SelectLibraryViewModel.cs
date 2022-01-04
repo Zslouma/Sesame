@@ -5,6 +5,7 @@ using Syracuse.Mobitheque.Core.Models;
 using Syracuse.Mobitheque.Core.Services.Files;
 using Syracuse.Mobitheque.Core.Services.Requests;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -101,9 +102,21 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     opt.InternationalPressScenarioCode = this.Librarie.Config.InternationalPress.PressScenarioCode;
                     opt.BuildingInfos = JsonConvert.SerializeObject(this.Librarie.Config.BuildingInformations);
                     opt.LibraryJsonUrl = url;
+                    List<StandartViewList> standartViewList = new List<StandartViewList>();
+                    foreach (var item in this.librariesSelected[this.librariesPickerIndex].Config.StandardsViews)
+                    {
+                        var tempo = new StandartViewList();
 
+                        tempo.ViewName = item.ViewName;
+                        tempo.ViewIcone = item.ViewIcone;
+                        tempo.ViewQuery = item.ViewQuery;
+                        tempo.ViewScenarioCode = item.ViewScenarioCode;
+                        tempo.Username = "";
+                        tempo.Library = opt.Library;
+                        standartViewList.Add(tempo);
+                    }
                     this.IsLoading = false;
-                    LoginParameters loginParameters = new LoginParameters(this.Librarie.Config.ListSSO, opt);
+                    LoginParameters loginParameters = new LoginParameters(this.Librarie.Config.ListSSO, opt, standartViewList);
                     await this.navigationService.Navigate<LoginViewModel, LoginParameters>(loginParameters);
                 }
                 catch (Exception ex)

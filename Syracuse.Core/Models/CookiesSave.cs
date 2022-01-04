@@ -97,15 +97,31 @@ namespace Syracuse.Mobitheque.Core.Models
 
     public class LoginParameters
     {
-        public LoginParameters(List<SSO> listSSO, CookiesSave cookiesSave)
+        public LoginParameters(List<SSO> listSSO, CookiesSave cookiesSave, List<StandartViewList> standartViewList)
         {
             ListSSO = listSSO;
             CookiesSave = cookiesSave;
+            StandartViewList = standartViewList;
         }
 
         public List<SSO> ListSSO { get; set; }
 
         public CookiesSave CookiesSave { get; set; }
+
+        public List<StandartViewList> StandartViewList { get; set; }
+    }
+
+    public class StandartViewList
+    {
+
+        [PrimaryKey, AutoIncrement]
+        public int ID { get; set; }
+        public string ViewName { get; set; }
+        public string ViewIcone { get; set; }
+        public string ViewQuery { get; set; }
+        public string ViewScenarioCode { get; set; }
+        public string Username { get; set; }
+        public string Library { get; set; }
     }
 
 }

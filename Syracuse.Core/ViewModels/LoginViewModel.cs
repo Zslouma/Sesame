@@ -86,6 +86,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         public CookiesSave department;
 
+        public List<StandartViewList> departmentStandarViewList;
+
+        public bool CanDisplayForgetMDP { get { return department.ForgetMdpUrl != ""; } }
+
         public LoginViewModel(
                               IRequestService requestService,
                               IGeolocationService geolocationService, 
@@ -156,7 +160,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 item.Cookies = JsonConvert.SerializeObject(this.requestService.GetCookies().ToArray());
                 await App.Database.SaveItemAsync(item);
                 this.requestService.LoadCookies(JsonConvert.DeserializeObject<Cookie[]>(item.Cookies));
-            }
+                item.DomainUrl = department.DomainUrl;
             else
             {
                 b = department;
@@ -166,6 +170,27 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 await App.Database.SaveItemAsync(b);
                 this.requestService.LoadCookies(JsonConvert.DeserializeObject<Cookie[]>(b.Cookies));
             }
+
+                b.Department = department.Department;
+                b.SearchScenarioCode = department.SearchScenarioCode;
+                b.EventsScenarioCode = department.EventsScenarioCode;
+                b.IsEvent = department.IsEvent;
+                b.RememberMe = department.RememberMe;
+                b.IsKm = department.IsKm;
+                b.BuildingInfos = department.BuildingInfos;
+                await App.Database.SaveItemAsync(b);
+                this.requestService.LoadCookies(JsonConvert.DeserializeObject<Cookie[]>(b.Cookies));
+            }
+            foreach (var item in this.departmentStandarViewList)
+            {
+                item.Username = this.username;
+            }
+            List<StandartViewList> removeStandardList = await App.Database.GetActiveStandartView(b);
+            foreach (var removeItem in removeStandardList)
+            {
+                await App.Database.DeleteItemAsync(removeItem);
+            }
+            var status = await this.requestService.RenderAccountWebFrame(new AccountWebFrameOptions());
             return true;
         }
 
@@ -188,6 +213,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         public override void Prepare(LoginParameters parameter)
         {
             this.department = parameter.CookiesSave;
+            this.departmentStandarViewList = parameter.StandartViewList;
             this.ListSSO = parameter.ListSSO;
             this.Library = this.department.Library;
         }

@@ -15,16 +15,6 @@ namespace Syracuse.Mobitheque.Core.Models
         public string PressName { get; set; }
     }
 
-    public class LibraryInformations
-    {
-        [JsonProperty("building_name")]
-        public string BuildingName { get; set; }
-        [JsonProperty("url")]
-        public string Url { get; set; }
-        public bool DisplayNavigationError { get; set; } = false;
-
-
-    }
     public class ConfigLibrary
     {
         [JsonProperty("baseUri")]
@@ -43,6 +33,8 @@ namespace Syracuse.Mobitheque.Core.Models
         public bool RememberMe { get; set; }
         [JsonProperty("is_km")]
         public bool IsKm { get; set; }
+        [JsonProperty("standards_views")]
+        public List<StandardsViews> StandardsViews { get; set; }
         [JsonProperty("sso")]
         public List<SSO> ListSSO { get; set; }
         [JsonProperty("can_download")]
@@ -55,6 +47,24 @@ namespace Syracuse.Mobitheque.Core.Models
         public List<LibraryInformations> BuildingInformations { get; set; }
     }
 
+    public class StandardsViews
+    {
+        [JsonProperty("view_name")]
+        public string ViewName { get; set; }
+        [JsonProperty("view_icone")]
+        public string ViewIcone { get; set; }
+        [JsonProperty("view_query")]
+        public string ViewQuery { get; set; }
+        [JsonProperty("view_scenario_code")]
+        public string ViewScenarioCode { get; set; }
+    }
+    public class SSO
+    {
+        [JsonProperty("label")]
+        public string Label { get; set; }
+        [JsonProperty("value")]
+        public string Value { get; set; }
+    }
     public class Library
     {
         [JsonProperty("department_code")]
@@ -69,13 +79,12 @@ namespace Syracuse.Mobitheque.Core.Models
         [JsonProperty("config")]
         public ConfigLibrary Config { get; set; }
     }
-
-    public class SSO
+    public class LibraryInformations
     {
-        [JsonProperty("label")]
-        public string Label { get; set; }
-
-        [JsonProperty("value")]
-        public string Value { get; set; }
+        [JsonProperty("building_name")]
+        public string BuildingName { get; set; }
+        [JsonProperty("url")]
+        public string Url { get; set; }
+        public bool DisplayNavigationError { get; set; } = false;
     }
 }

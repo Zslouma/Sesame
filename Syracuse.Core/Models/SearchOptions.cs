@@ -7,6 +7,9 @@ namespace Syracuse.Mobitheque.Core.Models
     {
         [JsonProperty("query")]
         public SearchOptionsDetails Query { get; set; } = new SearchOptionsDetails();
+
+        public string PageTitle { get; set; } = "";
+        public string PageIcone { get; set; } = "";
     }
 
     public class SearchOptionsDetails

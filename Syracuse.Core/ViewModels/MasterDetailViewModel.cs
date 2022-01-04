@@ -4,6 +4,7 @@ using Syracuse.Mobitheque.Core.Models;
 using Syracuse.Mobitheque.Core.Services.Files;
 using Syracuse.Mobitheque.Core.Services.Requests;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -37,7 +38,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.navigationService = navigationService;
         }
 
-        public override void Prepare(string parameter)
+        public async override void Prepare(string parameter)
         {
             param = parameter;
             base.Prepare();
@@ -54,6 +55,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         }
          public async Task JsonSynchronisation()
         {
+            Console.WriteLine("JsonSynchronisation");
             CookiesSave user = await App.Database.GetActiveUser();
             if (user != null)
             {
@@ -77,6 +79,27 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                         user.InternationalPressQuery = library.Config.InternationalPress.Query;
                         user.InternationalPressScenarioCode = library.Config.InternationalPress.PressScenarioCode;
                         user.BuildingInfos = JsonConvert.SerializeObject(library.Config.BuildingInformations);
+                        List<StandartViewList> standartViewList = new List<StandartViewList>();
+
+                        foreach (var item in library.Config.StandardsViews)
+                        {
+                            var tempo = new StandartViewList();
+
+                            tempo.ViewName = item.ViewName;
+                            tempo.ViewIcone = item.ViewIcone;
+                            Console.WriteLine("ViewIcone :" + item.ViewIcone);
+                            tempo.ViewQuery = item.ViewQuery;
+                            tempo.ViewScenarioCode = item.ViewScenarioCode;
+                            tempo.Username = user.Username;
+                            tempo.Library = library.Name;
+                            standartViewList.Add(tempo);
+                        }
+                        List<StandartViewList> removeStandardList = await App.Database.GetActiveStandartView(user);
+                        foreach (var removeItem in removeStandardList)
+                        {
+                            await App.Database.DeleteItemAsync(removeItem);
+                        }
+                        await App.Database.SaveItemAsync(standartViewList);
                     }
                     catch (Exception e)
                     {

@@ -28,9 +28,5 @@ namespace Syracuse.Mobitheque.UI.Views
                 await this.ViewModel.AuthenticationAndRedirect(args.Cookies);
             }
         }
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-        }
     }
 }
