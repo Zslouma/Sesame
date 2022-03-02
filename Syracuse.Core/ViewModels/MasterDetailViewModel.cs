@@ -57,10 +57,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             CookiesSave user = await App.Database.GetActiveUser();
             if (user != null)
             {
-                Library[] Alllibraries = await this.departmentService.GetLibraries(true);
+                Library Alllibraries = await this.departmentService.GetLibraries("",true);
                 try
                 {
-                    Library library = Array.Find(Alllibraries, element => element.Name == user.Library && element.Code == user.LibraryCode);
+                    Library library = Alllibraries;
                     user.LibraryUrl = library.Config.BaseUri;
                     user.DomainUrl = library.Config.DomainUri;
                     user.EventsScenarioCode = library.Config.EventsScenarioCode;

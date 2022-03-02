@@ -4,6 +4,7 @@ using Syracuse.Mobitheque.Core.Models;
 using Syracuse.Mobitheque.Core.Services.Database;
 using Syracuse.Mobitheque.Core.ViewModels;
 using Syracuse.Mobitheque.Core.ViewModels.Sorts;
+using Syracuse.Mobitheque.Core.ViewModels.Templates;
 using System;
 using System.IO;
 using System.Threading.Tasks;

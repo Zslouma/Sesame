@@ -11,33 +11,12 @@ namespace Syracuse.Mobitheque.Core.Services.Files
         private readonly Assembly assembly;
 
         public FileService() => this.assembly = IntrospectionExtensions.GetTypeInfo(this.GetType()).Assembly;
-
-        protected async Task<string> GetRootRessource(string fileName)
-        {
-            if (string.IsNullOrEmpty(fileName))
-                throw new ArgumentException(nameof(fileName));
-            try
-            {
-                var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.{fileName}");
-
-                if (stream == null)
-                    throw new Exception($"Can not read file {fileName}");
-
-                using (var reader = new StreamReader(stream, System.Text.Encoding.GetEncoding("iso-8859-1")))
-                {
-                    return await reader.ReadToEndAsync();
-                }
-            } catch (Exception) {
-                return string.Empty;
-            }
-        }
-
         /// <summary>
         /// Cette méthode récupére le fichier json contenant le departement et les library
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        protected async Task<string> GetDataRessource(string fileName , string url)
+        protected async Task<string> GetDataRessource(string url)
         {
             try
             {   
@@ -60,7 +39,7 @@ namespace Syracuse.Mobitheque.Core.Services.Files
             }
             catch
             {
-                return await GetRootRessource(fileName);
+                return null;
             }
             
         }

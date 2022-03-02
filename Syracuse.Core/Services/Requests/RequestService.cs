@@ -17,10 +17,6 @@ using Xamarin.Forms;
 
 namespace Syracuse.Mobitheque.Core.Services.Requests
 {
-    /*
-     * The aim of this service is to wrap a IRefitRequests object
-     * in order to register him as a singleton is the IoC Container.
-     */
     public class RequestService : IRequestService
     {
         private Uri httpUri;
@@ -28,11 +24,9 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
         private CookieContainer cookies;
         private HttpClientHandler handler;
         private String token;
-        private readonly IConfigService configService;
 
-        public RequestService(IConfigService configService)
+        public RequestService()
         {
-            this.configService = configService;
             this.cookies = new CookieContainer();
             this.handler = new HttpClientHandler()
             {

@@ -32,15 +32,12 @@ namespace Syracuse.Mobitheque.UI.Views
                     _tutorialPopup = new TutorialPopup(database , user);
                     await PopupNavigation.Instance.PushAsync(_tutorialPopup);
                 }
-
             }
             else
             {
                 _tutorialPopup = new TutorialPopup();
                 await PopupNavigation.Instance.PushAsync(_tutorialPopup);
-
             }
-
         }
 
         public void Handle_OnScanResult(Result result)
@@ -57,7 +54,6 @@ namespace Syracuse.Mobitheque.UI.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-
             IsScanning = false;
         }
 

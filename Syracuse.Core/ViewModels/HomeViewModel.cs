@@ -218,7 +218,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         /// <returns></returns>
         private async Task DownloadDocument(Result result)
         {
-            
             this.isBusy = true;
             await RaiseAllPropertiesChanged();
             var statusDownload = await this.requestService.GetDownloadDocument(result.downloadOptions.parentDocumentId, result.downloadOptions.documentId, result.downloadOptions.fileName);
