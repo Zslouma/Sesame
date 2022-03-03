@@ -14,16 +14,6 @@ namespace Syracuse.Mobitheque.UI.Views
         {
             InitializeComponent();
         }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            this.resultsListDailyPress.ItemTapped += ResultsList_ItemTapped;
-        }
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            this.resultsListDailyPress.ItemTapped -= ResultsList_ItemTapped;
-        }
 
         protected override void OnBindingContextChanged()
         {
@@ -31,13 +21,18 @@ namespace Syracuse.Mobitheque.UI.Views
             base.OnBindingContextChanged();
         }
 
-        private async void ResultsList_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void ResultsList_ItemTapped(object sender, SelectionChangedEventArgs e)
         {
-            var item = e.Item as Result;
-
-            await this.ViewModel.GoToDetailView(item);
+            if (e.CurrentSelection.Count > 0)
+            {
+                var item = e.CurrentSelection[0] as Result;
+                await this.ViewModel.GoToDetailView(item);
+            }
+            else
+            {
+                await this.DisplayAlert("Erreur", "Une erreur est survenue", "Ok");
+            }
         }
-
         public async void HandleSwitchToggledByUser(object sender, ToggledEventArgs e)
         {
             if (e.Value)

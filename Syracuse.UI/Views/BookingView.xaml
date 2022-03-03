@@ -37,58 +37,49 @@
                             <Label VerticalOptions="Center" HorizontalOptions="Center" FontSize = "20" Text="{x:Static local:AppResource.NotCurrentBooking}" />
                         </StackLayout>
                         <StackLayout Padding="5,5" IsVisible="{Binding ReversNotCurrentBooking}">
-                            <ListView x:Name="BookingList" 
+                            <CollectionView x:Name="BookingList" 
                                 ItemsSource="{Binding Results}" 
-                                SeparatorVisibility="None"
                                 VerticalOptions="FillAndExpand"
-                                VerticalScrollBarVisibility="Never"
-                                IsPullToRefreshEnabled="False"
-                                HasUnevenRows="{OnPlatform Android=True, Default=False}">
-                                <ListView.RowHeight>
-                                    <OnPlatform x:TypeArguments="x:Int32">
-                                        <On Platform="iOS">190</On>
-                                    </OnPlatform>
-                                </ListView.RowHeight>
-                                <ListView.ItemTemplate>
-                                    <DataTemplate >
-                                        <ViewCell>
-                                            <ViewCell.View>
-                                                <Frame  VerticalOptions="FillAndExpand"  Padding="0, 5, 0, 5">
-                                                            <Frame.HasShadow>
-                                                                <OnPlatform x:TypeArguments="x:Boolean">
-                                                                    <On Platform="iOS">false</On>
-                                                                    <On Platform="Android">true</On>
-                                                                </OnPlatform>
-                                                            </Frame.HasShadow>
-                                                    <StackLayout 
+                                VerticalScrollBarVisibility="Never">
+                                <CollectionView.ItemTemplate>
+                                <DataTemplate >
+                                    <StackLayout>
+                                        <Frame  VerticalOptions="FillAndExpand"  Padding="0, 5, 0, 5">
+                                            <Frame.HasShadow>
+                                                <OnPlatform x:TypeArguments="x:Boolean">
+                                                    <On Platform="iOS">false</On>
+                                                    <On Platform="Android">true</On>
+                                                </OnPlatform>
+                                            </Frame.HasShadow>
+                                            <StackLayout 
                                                         VerticalOptions="Start"
                                                         Orientation="Horizontal"
                                                         BackgroundColor="White"
                                                         Padding="5, 0, 5, 0"
                                                         Margin="0,0,0,20"
                                                         x:Name="Item">
-                                                        <StackLayout VerticalOptions="Start" Margin="0,0,15,0">
-                                                            <Frame VerticalOptions="FillAndExpand" Margin="0,5,0,0" Padding="0" >
-                                                                <Frame.HasShadow>
-                                                                    <OnPlatform x:TypeArguments="x:Boolean">
-                                                                        <On Platform="iOS">false</On>
-                                                                        <On Platform="Android">true</On>
-                                                                    </OnPlatform>
-                                                                </Frame.HasShadow>
-                                                                <Image Source="{Binding ThumbnailUrl}"
+                                                <StackLayout VerticalOptions="Start" Margin="0,0,15,0">
+                                                    <Frame VerticalOptions="FillAndExpand" Margin="0,5,0,0" Padding="0" >
+                                                        <Frame.HasShadow>
+                                                            <OnPlatform x:TypeArguments="x:Boolean">
+                                                                <On Platform="iOS">false</On>
+                                                                <On Platform="Android">true</On>
+                                                            </OnPlatform>
+                                                        </Frame.HasShadow>
+                                                        <Image Source="{Binding ThumbnailUrl}"
                                                                     Aspect="AspectFill"
                                                                     HeightRequest="120"
                                                                     WidthRequest="90" 
                                                                     VerticalOptions="Start"/>
-                                                            </Frame>
-                                                        </StackLayout>
-                                                        <StackLayout 
+                                                    </Frame>
+                                                </StackLayout>
+                                                <StackLayout 
                                                              Padding="0, 0, 0, 0"
                                                              Margin="0"
                                                              VerticalOptions="Start"
                                                              Orientation="Vertical"
                                                              HorizontalOptions="FillAndExpand">
-                                                            <Label TextColor="Black"
+                                                    <Label TextColor="Black"
                                                                 Margin="0"
                                                                 VerticalOptions="Start"
                                                                 VerticalTextAlignment="Start"
@@ -96,54 +87,53 @@
                                                                 MaxLines="2"
                                                                 FontAttributes="Bold"
                                                                 FontSize="Medium"/>
-                                                            <Grid HorizontalOptions="FillAndExpand" >
-                                                                <Grid.RowDefinitions>
-                                                                    <RowDefinition Height="Auto"/>
-                                                                    <RowDefinition Height="Auto"/>
-                                                                    <RowDefinition Height="Auto"/>
-                                                                </Grid.RowDefinitions>
-                                                                <Label Grid.Row="0"  FontSize="Small">
-                                                                    <Label.FormattedText>
-                                                                        <FormattedString>
-                                                                            <FormattedString.Spans>
-                                                                                <Span Text="{Binding TypeOfDocument}" />
-                                                                                <Span Text=" | "/>
-                                                                                <Span Text="{Binding BookingDateString}" />
-                                                                            </FormattedString.Spans>
-                                                                        </FormattedString>
-                                                                    </Label.FormattedText>
-                                                                </Label>
-                                                                <Label Grid.Row="1" Text="{Binding LocationLabel}" TextColor="{d:DynamicResource PurpleTextColor}"  FontSize="16"/>
+                                                    <Grid HorizontalOptions="FillAndExpand" >
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto"/>
+                                                            <RowDefinition Height="Auto"/>
+                                                            <RowDefinition Height="Auto"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Label Grid.Row="0"  FontSize="Small">
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <FormattedString.Spans>
+                                                                        <Span Text="{Binding TypeOfDocument}" />
+                                                                        <Span Text=" | "/>
+                                                                        <Span Text="{Binding BookingDateString}" />
+                                                                    </FormattedString.Spans>
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                        </Label>
+                                                        <Label Grid.Row="1" Text="{Binding LocationLabel}" TextColor="{d:DynamicResource PurpleTextColor}"  FontSize="16"/>
 
-                                                                <Label Grid.Row="2" IsVisible="{Binding IsAvailable}"  Text="{x:Static local:AppResource.BookingWait}"  TextColor="#F8CD8C" FontSize="Small" FontAttributes="Bold">
-                                                                    <Label.Triggers>
-                                                                        <DataTrigger TargetType="Label" Binding="{Binding IsAvailable}" Value="True">
-                                                                            <Setter Property="IsVisible" Value="False" />
-                                                                        </DataTrigger>
-                                                                        <DataTrigger TargetType="Label" Binding="{Binding IsAvailable}" Value="False">
-                                                                            <Setter Property="IsVisible" Value="True" />
-                                                                        </DataTrigger>
-                                                                    </Label.Triggers>
-                                                                </Label>
-                                                                <Label Grid.Row="2"  IsVisible="{Binding IsAvailable}" Text="{x:Static local:AppResource.BookingAvailable}"  TextColor="{d:DynamicResource AccountInfoTextColor}" FontSize="Small" FontAttributes="Bold"/>
-                                                            </Grid>
-                                                            <StackLayout IsVisible="{Binding CanCancel}">
-                                                                <material:MaterialButton
+                                                        <Label Grid.Row="2" IsVisible="{Binding IsAvailable}"  Text="{x:Static local:AppResource.BookingWait}"  TextColor="#F8CD8C" FontSize="Small" FontAttributes="Bold">
+                                                            <Label.Triggers>
+                                                                <DataTrigger TargetType="Label" Binding="{Binding IsAvailable}" Value="True">
+                                                                    <Setter Property="IsVisible" Value="False" />
+                                                                </DataTrigger>
+                                                                <DataTrigger TargetType="Label" Binding="{Binding IsAvailable}" Value="False">
+                                                                    <Setter Property="IsVisible" Value="True" />
+                                                                </DataTrigger>
+                                                            </Label.Triggers>
+                                                        </Label>
+                                                        <Label Grid.Row="2"  IsVisible="{Binding IsAvailable}" Text="{x:Static local:AppResource.BookingAvailable}"  TextColor="{d:DynamicResource AccountInfoTextColor}" FontSize="Small" FontAttributes="Bold"/>
+                                                    </Grid>
+                                                    <StackLayout IsVisible="{Binding CanCancel}">
+                                                        <material:MaterialButton
                                                                     Margin="-5,0,-5,0"
                                                                     Text="{x:Static local:AppResource.Cancel}"
                                                                     CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                                                     BindingContext="{Binding Source={x:Reference BookingList}, Path=BindingContext}"
                                                                     Command="{Binding CancelBookingCommand}"
                                                                     BackgroundColor="{d:DynamicResource AppBackgroundColor}"/>
-                                                            </StackLayout>
-                                                        </StackLayout>
                                                     </StackLayout>
-                                                </Frame>
-                                            </ViewCell.View>
-                                        </ViewCell>                                            
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </Frame>
+                                    </StackLayout>                                            
                                     </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
                         </StackLayout>
                     </Grid>
                 </StackLayout>

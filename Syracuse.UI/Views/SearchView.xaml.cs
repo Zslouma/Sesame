@@ -79,7 +79,7 @@ namespace Syracuse.Mobitheque.UI.Views
                     this.SearchList.Add(item);
                 setHeight();
                 searchHistoryList.ItemsSource = this.SearchList;
-                this.resultsList.ItemTapped += ResultsList_ItemTapped;
+                //this.resultsList.ItemTapped += ResultsList_ItemTapped;
                 searchHistoryList.IsVisible = false;
             }
             base.OnAppearing();
@@ -87,7 +87,7 @@ namespace Syracuse.Mobitheque.UI.Views
 
         protected override void OnDisappearing()
         {
-            this.resultsList.ItemTapped -= ResultsList_ItemTapped;
+            //this.resultsList.ItemTapped -= ResultsList_ItemTapped;
             searchHistoryList.IsVisible = false;
 
             base.OnDisappearing();
@@ -124,7 +124,7 @@ namespace Syracuse.Mobitheque.UI.Views
 
 
         // Search for Detailed view of the Item
-        private void ResultsList_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void ResultsList_ItemTapped(object sender, SelectionChangedEventArgs e)
         {
             setHeight();
             var tmp     = new SearchResult();
@@ -136,20 +136,24 @@ namespace Syracuse.Mobitheque.UI.Views
             tmp.D.Results = tmpResult;
             tmp.D.FacetCollectionList = tmpfacetCollectionList;
 
-            var iiitem = e.Item as Result;
-            var iiitemm = e.Item as FacetCollectionList;
-
-            tmp.D.Results[0]                = iiitem;
-            tmp.D.FacetCollectionList[0]    = iiitemm;
-            (this.DataContext as SearchViewModel).OpenDetailsCommand.ExecuteAsync(tmp);
+            if (e.CurrentSelection.Count > 0)
+            {
+                var iiitem = e.CurrentSelection[0] as Result;
+                var iiitemm = e.CurrentSelection[0] as FacetCollectionList;
+                tmp.D.Results[0] = iiitem;
+                tmp.D.FacetCollectionList[0] = iiitemm;
+            }
+            else
+            {
+                await this.DisplayAlert("Erreur", "Une erreur est survenue", "Ok");
+            }          
+            await (this.DataContext as SearchViewModel).OpenDetailsCommand.ExecuteAsync(tmp);
         }
 
         // Trigger every input on the searchBar
         private void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             searchHistoryList.IsVisible = true;
-            searchHistoryList.BeginRefresh();
-
             try {
                 this.SearchList.Clear();
                 var list = this.ViewModel.SearchHistory;
@@ -161,13 +165,9 @@ namespace Syracuse.Mobitheque.UI.Views
                     searchHistoryList.ItemsSource = this.SearchList;
                 }
 
-                searchHistoryList.EndRefresh();
                 setHeight();
                 if (e.NewTextValue == null || e.NewTextValue.Equals(string.Empty))
-                {
                     searchHistoryList.IsVisible = false;
-                    return;
-                }
                 return;
             }
             catch (Exception)
@@ -175,7 +175,6 @@ namespace Syracuse.Mobitheque.UI.Views
                 searchHistoryList.IsVisible = false;
                 setHeight();
             }
-            searchHistoryList.EndRefresh();
         }
 
         // Perform search
@@ -207,7 +206,7 @@ namespace Syracuse.Mobitheque.UI.Views
             await this.ViewModel.PerformSearch(listsd, null, true);
             if (this.ViewModel.Results.Count() > 0)
             {
-                resultsList.ScrollTo(this.ViewModel.Results[0], 0, true);
+                resultsList.ScrollTo(0);
             }
             SearchBar.IsEnabled = true;
             this.UpdateItemList();
@@ -244,7 +243,7 @@ namespace Syracuse.Mobitheque.UI.Views
             enableMultiSelect = true;
             if (this.ViewModel.Results.Count() > 0)
             {
-                resultsList.ScrollTo(this.ViewModel.Results[0], 0, true);
+                resultsList.ScrollTo(0);
             }
             this.UpdateItemList();
 

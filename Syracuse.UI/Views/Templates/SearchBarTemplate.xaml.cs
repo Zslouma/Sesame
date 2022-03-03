@@ -57,16 +57,18 @@ namespace Syracuse.Mobitheque.UI.Views.Templates
 
         }
 
-
-        async private void ListView_OnItemTapped(Object sender, ItemTappedEventArgs e)
+        async private void ListView_OnItemTapped(Object sender, SelectionChangedEventArgs e)
         {
 
-            String listsd = e.Item as string;
-            SearchBar.Text = listsd;
-            SearchBar.Unfocus();
-            ((ListView)sender).SelectedItem = null;
-            await this.ViewModel.PerformSearch(listsd);
-            SearchBar.IsEnabled = true;
+            if (e.CurrentSelection.Count > 0)
+            {
+                String listsd = e.CurrentSelection[0] as string;
+                SearchBar.Text = listsd;
+                SearchBar.Unfocus();
+                ((ListView)sender).SelectedItem = null;
+                await this.ViewModel.PerformSearch(listsd);
+                SearchBar.IsEnabled = true;
+            }
 
         }
     }

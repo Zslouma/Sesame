@@ -51,22 +51,15 @@
                                     <Switch  Grid.Column="1" Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" Toggled="HandleSwitchToggledByUser"  IsToggled="False" />
                                 </Grid>
                             </StackLayout>
-                            <ListView x:Name="resultsListDailyPress" 
-                              ItemsSource="{Binding Results}"
-                              SeparatorVisibility="None"
-                              SelectionMode="None"
-                              VerticalOptions="FillAndExpand"
-                              VerticalScrollBarVisibility="Never"
-                              IsPullToRefreshEnabled="False"
-                              HasUnevenRows="{OnPlatform Android=True, Default=False}">
-                                <ListView.RowHeight>
-                                    <OnPlatform x:TypeArguments="x:Int32">
-                                        <On Platform="iOS">160</On>
-                                    </OnPlatform>
-                                </ListView.RowHeight>
-                                <ListView.ItemTemplate>
+                            <CollectionView x:Name="resultsListDailyPress" 
+                                            ItemsSource="{Binding Results}"
+                                            SelectionMode="None"
+                                            SelectionChanged="ResultsList_ItemTapped"
+                                            VerticalOptions="FillAndExpand"
+                                            VerticalScrollBarVisibility="Never">
+                                <CollectionView.ItemTemplate>
                                     <DataTemplate>
-                                        <ViewCell>
+                                        <StackLayout>
                                             <Grid x:Name="Item" Padding="7, 0, 7, 0" Margin="0,0,0,15" >
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="auto"/>
@@ -109,13 +102,13 @@
                                                         BackgroundColor="Transparent"/>
                                                 </StackLayout>
                                             </Grid>
-                                        </ViewCell>
+                                        </StackLayout>
                                     </DataTemplate>
-                                </ListView.ItemTemplate>
-                                <ListView.Footer>
+                                </CollectionView.ItemTemplate>
+                                <CollectionView.Footer>
                                     <material:MaterialButton IsVisible="{Binding DisplayLoadMore}" BackgroundColor="{d:DynamicResource AppBackgroundColor}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}" />
-                                </ListView.Footer>
-                            </ListView>
+                                </CollectionView.Footer>
+                            </CollectionView>
                         </StackLayout>
                     </Grid>
                 </StackLayout>

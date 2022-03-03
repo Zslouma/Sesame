@@ -8,6 +8,7 @@
                      xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
                      xmlns:local="clr-namespace:Syracuse.Mobitheque.UI" 
                      x:TypeArguments="viewModels:HomeViewModel"
+                    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
                      x:Class="Syracuse.Mobitheque.UI.Views.HomeView"
                      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
     <NavigationPage.TitleView >
@@ -42,26 +43,37 @@
                         </Grid>
                     </StackLayout>
                     <Label Margin="10" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Text="{x:Static local:AppResource.NotCurrentEvent}" IsVisible="{Binding NotCurrentEvent}" />
-                    <ListView x:Name="resultsListEvent"
-                        HeightRequest="{Binding Path=Height, Source={x:Reference absLayout}}"
-                        IsVisible="{Binding IsEvent}"
-                        ItemsSource="{Binding Results}" 
-                        SeparatorVisibility="Default"
-                        VerticalScrollBarVisibility="Never"
+                    <CollectionView
+                        x:Name="resultsListEvent"
+                        SelectionMode="Single"
+                        SelectionChanged="ResultsList_ItemTapped"
+                        HorizontalOptions="FillAndExpand"
                         VerticalOptions="FillAndExpand"
-                        IsPullToRefreshEnabled="False"
-                        HasUnevenRows="{OnPlatform Android=True, Default=False}">
-                        <ListView.RowHeight>
-                            <OnPlatform x:TypeArguments="x:Int32">
-                                <On Platform="iOS">270</On>
-                            </OnPlatform>
-                        </ListView.RowHeight>
-                        <ListView.ItemTemplate >
+                        IsVisible="{Binding IsEvent}"
+                        ItemsSource="{Binding Results}">
+                        <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <ViewCell>
-                                    <Frame HasShadow="False" Padding="0, 20, 0, 20">
-                                        <StackLayout Orientation="Vertical" BackgroundColor="White" Padding="5, 0, 5, 0">
-                                            <Image VerticalOptions="Fill" HorizontalOptions="Fill" Aspect="AspectFill" Source="{Binding FieldList.Image}" HeightRequest="90"/>
+                                <StackLayout>
+                                    <Frame>
+                                        <StackLayout Orientation="Vertical" Padding="5, 0, 5, 0">
+                                            <Grid HeightRequest="90">
+                                                <ffimageloading:CachedImage VerticalOptions="Fill" HorizontalOptions="Fill" ErrorPlaceholder="https://graphisme-syracuse.archimed.fr/basicfilesdownload.ashx?itemGuid=05E01B10-51AE-4EDF-AEF2-64E696038A71"  Aspect="AspectFill" Source="{Binding FieldList.Image}" HeightRequest="90"/>
+                                                <AbsoluteLayout Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                                    <ActivityIndicator  Color="Gray"  AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1">
+                                                        <ActivityIndicator.Triggers >
+                                                            <DataTrigger TargetType="ActivityIndicator" Binding="{Binding Source={x:Reference image}, Path=IsLoading}" Value="True">
+                                                                <Setter Property="IsRunning" Value="True"/>
+                                                                <Setter Property="IsVisible" Value="True"/>
+                                                            </DataTrigger>
+
+                                                            <DataTrigger TargetType="ActivityIndicator" Binding="{Binding Source={x:Reference image}, Path=IsLoading}" Value="False">
+                                                                <Setter Property="IsRunning" Value="False"/>
+                                                                <Setter Property="IsVisible" Value="False"/>
+                                                            </DataTrigger>
+                                                        </ActivityIndicator.Triggers>
+                                                    </ActivityIndicator>
+                                                </AbsoluteLayout>
+                                            </Grid>
                                             <StackLayout  Orientation="Vertical">
                                                 <Label Text="{Binding FieldList.Title[0]}" MaxLines="2" FontAttributes="Bold" FontSize="20" TextColor="{d:DynamicResource DarkTextColor}"/>
                                                 <Grid HorizontalOptions="Fill" IsVisible="{Binding FieldList.HaveInformation}">
@@ -71,54 +83,71 @@
                                                     </Grid.ColumnDefinitions>
                                                     <Label Grid.ColumnSpan="2" Grid.Row="0" Text="{Binding FieldList.SubjectTopicFirstUpper}"  TextColor="{d:DynamicResource PurpleTextColor}" FontSize="16"/>
                                                     <Label Grid.Column="0" Grid.Row="1" Text="&#xf3c5;" FontFamily="{StaticResource FontAwesomeSolid}" IsVisible="{Binding FieldList.HaveLocation}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Fill" FontSize="Small" TextColor="#88929D"/>
-                                                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding FieldList.SubjectLocation[0]}" IsVisible="{Binding FieldList.HaveLocation}" VerticalTextAlignment="Center" VerticalOptions="Fill" FontSize="Small" TextColor="{d:DynamicResource DarkTextColor}"></Label>
-                                                    <Label Grid.Column="0" Grid.Row="2" Text="&#xf017;" IsVisible="{Binding FieldList.HaveDateTime}" FontFamily="{StaticResource FontAwesomeRegular}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center"  FontSize="Small" TextColor="#88929D" />
-                                                    <Label Grid.Column="1" Grid.Row="2" Text="{Binding FieldList.DateTime_String}" IsVisible="{Binding FieldList.HaveDateTime}" VerticalTextAlignment="Center" VerticalOptions="Center" FontSize="Small" TextColor="{d:DynamicResource DarkTextColor}"/>
+                                                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding FieldList.SubjectLocation[0]}" IsVisible="{Binding FieldList.HaveLocation}" VerticalTextAlignment="Center" VerticalOptions="Fill" FontSize="Small" TextColor="{d:DynamicResource DarkTextColor}"/>
                                                 </Grid>
+                                                <FlexLayout
+                                                    Direction="Column"
+                                                     x:Name="DateList"
+                                                     AutomationId="DateList"
+                                                     BindableLayout.ItemsSource="{Binding FieldList.DateDisplay}" >
+                                                    <BindableLayout.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                    <ColumnDefinition Width="*" />
+                                                                </Grid.ColumnDefinitions>
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="Auto" />
+                                                                </Grid.RowDefinitions>
+                                                                <Label Grid.Column="0"   Text="&#xf017;"  FontFamily="{StaticResource FontAwesomeRegular}" FontSize="Small" TextColor="#88929D" />
+                                                                <Label Grid.Column="1"  Text="{Binding .}" FontSize="Small" TextColor="{d:DynamicResource DarkTextColor}"/>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </BindableLayout.ItemTemplate>
+                                                </FlexLayout>
                                             </StackLayout>
                                         </StackLayout>
                                     </Frame>
-                                </ViewCell>
+                                </StackLayout>
                             </DataTemplate>
-
-                        </ListView.ItemTemplate>
-                        <ListView.Footer>
-                            <material:MaterialButton IsVisible="{Binding DisplayLoadMore}" BackgroundColor="{d:DynamicResource AppBackgroundColor}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}"/>
-                        </ListView.Footer>
-                    </ListView>
-                    <ListView x:Name="resultsListDocument" 
-                              HeightRequest="{Binding Path=Height, Source={x:Reference absLayout}}"
-                              IsVisible="{Binding ReverseIsEvent}"
-                              ItemsSource="{Binding Results}"
-                              SeparatorVisibility="None"
-                              SelectionMode="None"
-                              VerticalOptions="FillAndExpand"
-                              VerticalScrollBarVisibility="Never"
-                              IsPullToRefreshEnabled="False"
-                              HasUnevenRows="{OnPlatform Android=True, Default=False}">
-                        <ListView.RowHeight>
-                            <OnPlatform x:TypeArguments="x:Int32">
-                                <On Platform="iOS">160</On>
-                            </OnPlatform>
-                        </ListView.RowHeight>
-                        <ListView.ItemTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.Footer>
+                            <material:MaterialButton IsVisible="{Binding DisplayLoadMore}" BackgroundColor="{d:DynamicResource AppBackgroundColor}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}" />
+                        </CollectionView.Footer>
+                    </CollectionView>
+                    <CollectionView x:Name="resultsListDocument"
+                                    SelectionMode="Single"
+                                    SelectionChanged="ResultsList_ItemTapped"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand"
+                                    IsVisible="{Binding ReverseIsEvent}"
+                                    ItemsSource="{Binding Results}">
+                        <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <ViewCell>
+                                <StackLayout>
                                     <Grid x:Name="Item" Padding="7, 0, 7, 0" Margin="0,0,0,15">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="0.1*"/>
                                         </Grid.ColumnDefinitions>
-                                        <Frame Grid.Column="0" VerticalOptions="FillAndExpand" Margin="5" Padding="0" >
-                                            <Frame.HasShadow>
-                                                <OnPlatform x:TypeArguments="x:Boolean">
-                                                    <On Platform="iOS">false</On>
-                                                    <On Platform="Android">true</On>
-                                                </OnPlatform>
-                                            </Frame.HasShadow>
-                                            <Image VerticalOptions="Center" Source="{Binding FieldList.Image}" Aspect="AspectFill" HeightRequest="120" WidthRequest="90" BackgroundColor="Transparent"/>
-                                        </Frame>
+                                        <ffimageloading:CachedImage VerticalOptions="Fill" HorizontalOptions="Fill" ErrorPlaceholder="image_not_found.jpg"  Aspect="AspectFill" Source="{Binding FieldList.Image}" HeightRequest="90"/>
+                                        <AbsoluteLayout Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                            <ActivityIndicator  Color="Gray"  AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1">
+                                                <ActivityIndicator.Triggers >
+                                                    <DataTrigger TargetType="ActivityIndicator" Binding="{Binding Source={x:Reference image}, Path=IsLoading}" Value="True">
+                                                        <Setter Property="IsRunning" Value="True"/>
+                                                        <Setter Property="IsVisible" Value="True"/>
+                                                    </DataTrigger>
+
+                                                    <DataTrigger TargetType="ActivityIndicator" Binding="{Binding Source={x:Reference image}, Path=IsLoading}" Value="False">
+                                                        <Setter Property="IsRunning" Value="False"/>
+                                                        <Setter Property="IsVisible" Value="False"/>
+                                                    </DataTrigger>
+                                                </ActivityIndicator.Triggers>
+                                            </ActivityIndicator>
+                                        </AbsoluteLayout>
                                         <StackLayout Grid.Column="1" VerticalOptions="Center" Orientation="Vertical">
                                             <Label TextColor="Black" Text="{Binding FieldList.Title[0]}" MaxLines="2" FontAttributes="Bold" FontSize="Medium"/>
                                             <Label TextColor="Gray" Text="{Binding FieldList.shortDesc}" MaxLines="2" FontSize="Small"/>
@@ -147,13 +176,13 @@
                                                 BackgroundColor="Transparent"/>
                                         </StackLayout>
                                     </Grid>
-                                </ViewCell>
+                                </StackLayout>
                             </DataTemplate>
-                        </ListView.ItemTemplate>
-                        <ListView.Footer>
-                            <material:MaterialButton IsVisible="{Binding DisplayLoadMore}" BackgroundColor="{d:DynamicResource AppBackgroundColor}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}" />
-                        </ListView.Footer>
-                    </ListView>
+                        </CollectionView.ItemTemplate>
+                            <CollectionView.Footer>
+                                <material:MaterialButton IsVisible="{Binding DisplayLoadMore}" BackgroundColor="{d:DynamicResource AppBackgroundColor}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}" />
+                            </CollectionView.Footer>
+                    </CollectionView>
                 </StackLayout>
                 <AbsoluteLayout Grid.Row="0" IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
                     <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />

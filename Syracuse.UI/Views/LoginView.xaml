@@ -27,7 +27,6 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-                            
                         </Grid.RowDefinitions>
                         <Label  Text="{Binding Library}" 
                                 Margin="0,0,0,10"
@@ -48,27 +47,25 @@
                             TextColor="White"
                             BackgroundColor="Transparent">
                         </Button>
-
                         <yummy:PancakeView VerticalOptions="Center"  Grid.Column="0"
                             Grid.Row="1" CornerRadius="10" Border="{yummy:BorderMarkup Color=White, Thickness=1}">
                             <material:MaterialTextField
-                            FloatingPlaceholderColor="{DynamicResource WhiteTextColor}"
-                            PlaceholderColor="{DynamicResource WhiteTextColor}"
-                            Placeholder="{x:Static local:AppResource.AccountTitle}"
-                            InputType="Default"
-                            x:Name="UserNameInput"
-                            Text="{Binding UserName, Mode=TwoWay}"
-                            TextFontFamily="{StaticResource OpenSans}"
-                            TextFontSize="{StaticResource FontSize}"
-                            HasError="{Binding UserNameIsError}"
-                            ErrorText="{Binding UserNameErrorString}"
-                            TextColor="{DynamicResource WhiteTextColor}"
-                            TintColor="{DynamicResource WhiteTextColor}"
-                            BackgroundColor="Transparent"
-                            UnderlineColor="White"/>
+                                FloatingPlaceholderColor="{DynamicResource WhiteTextColor}"
+                                PlaceholderColor="{DynamicResource WhiteTextColor}"
+                                Placeholder="{x:Static local:AppResource.AccountTitle}"
+                                InputType="Default"
+                                x:Name="UserNameInput"
+                                Text="{Binding UserName, Mode=TwoWay}"
+                                TextFontFamily="{StaticResource OpenSans}"
+                                TextFontSize="{StaticResource FontSize}"
+                                HasError="{Binding UserNameIsError}"
+                                ErrorText="{Binding UserNameErrorString}"
+                                TextColor="{DynamicResource WhiteTextColor}"
+                                TintColor="{DynamicResource WhiteTextColor}"
+                                BackgroundColor="Transparent"
+                                UnderlineColor="White"/>
                         </yummy:PancakeView>
                     </Grid>
-
 
                     <yummy:PancakeView VerticalOptions="Center" CornerRadius="10" Border="{yummy:BorderMarkup Color=White, Thickness=1}" Margin="0, 0, 0, 12" >
                     <material:MaterialTextField 

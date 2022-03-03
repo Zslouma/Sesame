@@ -45,16 +45,18 @@
 
         <Grid VerticalOptions="FillAndExpand">
             <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
-                    <ListView x:Name="searchHistoryList"
-                          BackgroundColor="White" 
-                          IsVisible="False"
-                          CachingStrategy="RecycleElement"  ItemTapped="ListView_OnItemTapped">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextCell Text="{Binding .}" TextColor="#FF464859"></TextCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                <CollectionView x:Name="searchHistoryList"
+                                    BackgroundColor="White" 
+                                    IsVisible="False"
+                                    SelectionChanged="ListView_OnItemTapped">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Text="{Binding .}" TextColor="#FF464859"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
                 <Grid Padding="0, 0, 0, 0" VerticalOptions="Center" IsVisible="{Binding IsFilterable}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -123,78 +125,69 @@
                         <Picker x:Name="SortPicker"  HorizontalOptions="FillAndExpand" Grid.Column="2" ItemsSource="{Binding SortsName}" SelectedIndex="{Binding SortNamee}" Title="{x:Static local:AppResource.SortOption}" TextColor="{DynamicResource PurpleTextColor}" TitleColor="{DynamicResource PurpleTextColor}" FontAttributes="Bold" ios:Picker.UpdateMode="WhenFinished"></Picker>
                             <StackLayout IsVisible="{Binding IsFilterable}">
                                 <Label x:Name="resultCount" TextColor="Black"  Text="{Binding ResultCount}" Margin="5,0,0,5" />
-                            </StackLayout>    
-                        <ListView x:Name="resultsList" 
-                          ItemsSource="{Binding Results}"
-                          SeparatorVisibility="None"
-                          SelectionMode="None"
-                          VerticalOptions="FillAndExpand"
-                          Margin="0,0,0,20"
-                          VerticalScrollBarVisibility="Never"
-                          IsPullToRefreshEnabled="False"
-                          HasUnevenRows="{OnPlatform Android=True, Default=False}">
-                                <ListView.RowHeight>
-                                    <OnPlatform x:TypeArguments="x:Int32">
-                                        <On Platform="iOS">150</On>
-                                    </OnPlatform>
-                                </ListView.RowHeight>
-                                <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <ViewCell>
-                                        <ViewCell.View>
-                                            <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal" Padding="7, 0, 7, 0" Margin="0,0,0,20">
+                            </StackLayout>
+                            <CollectionView x:Name="resultsList" 
+                                            ItemsSource="{Binding Results}"
+                                            SelectionMode="Single"
+                                            SelectionChanged="ResultsList_ItemTapped"
+                                            VerticalOptions="FillAndExpand"
+                                            Margin="0,0,0,20"
+                                            VerticalScrollBarVisibility="Never">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout>
+                                        <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal" Padding="7, 0, 7, 0" Margin="0,0,0,20">
                                                     <StackLayout Margin="5" HeightRequest="120"  WidthRequest="90">
-                                                    <Frame VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0">
-                                                        <Frame.HasShadow>
-                                                            <OnPlatform x:TypeArguments="x:Boolean">
-                                                                <On Platform="iOS">false</On>
-                                                                <On Platform="Android">true</On>
-                                                            </OnPlatform>
-                                                        </Frame.HasShadow>
+                                                        <Frame VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0">
+                                                            <Frame.HasShadow>
+                                                                <OnPlatform x:TypeArguments="x:Boolean">
+                                                                    <On Platform="iOS">false</On>
+                                                                    <On Platform="Android">true</On>
+                                                                </OnPlatform>
+                                                            </Frame.HasShadow>
                                                             <Grid  HeightRequest="120"  WidthRequest="90">
-                                                            <Grid.RowDefinitions>
-                                                                <RowDefinition Height="120"/>
-                                                            </Grid.RowDefinitions>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="90"/>
-                                                            </Grid.ColumnDefinitions>
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="120"/>
+                                                                </Grid.RowDefinitions>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="90"/>
+                                                                </Grid.ColumnDefinitions>
                                                                 <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" x:Name="image" Source="{Binding FieldList.Image}" ErrorPlaceholder="image_not_found.jpg" Aspect="AspectFill" DownsampleToViewSize="True" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HeightRequest="120"  WidthRequest="90"/>
-                                                            <AbsoluteLayout Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                                                <ActivityIndicator  Color="Gray"  AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1">
-                                                                <ActivityIndicator.Triggers >
-                                                                    <DataTrigger TargetType="ActivityIndicator" Binding="{Binding Source={x:Reference image}, Path=IsLoading}" Value="True">
-                                                                        <Setter Property="IsRunning" Value="True"/>
-                                                                        <Setter Property="IsVisible" Value="True"/>
-                                                                    </DataTrigger>
+                                                                <AbsoluteLayout Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                                                    <ActivityIndicator  Color="Gray"  AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1">
+                                                                        <ActivityIndicator.Triggers >
+                                                                            <DataTrigger TargetType="ActivityIndicator" Binding="{Binding Source={x:Reference image}, Path=IsLoading}" Value="True">
+                                                                                <Setter Property="IsRunning" Value="True"/>
+                                                                                <Setter Property="IsVisible" Value="True"/>
+                                                                            </DataTrigger>
 
-                                                                    <DataTrigger TargetType="ActivityIndicator" Binding="{Binding Source={x:Reference image}, Path=IsLoading}" Value="False">
-                                                                        <Setter Property="IsRunning" Value="False"/>
-                                                                        <Setter Property="IsVisible" Value="False"/>
-                                                                    </DataTrigger>
-                                                                </ActivityIndicator.Triggers>
-                                                            </ActivityIndicator>
-                                                            </AbsoluteLayout>
-                                                        </Grid>
+                                                                            <DataTrigger TargetType="ActivityIndicator" Binding="{Binding Source={x:Reference image}, Path=IsLoading}" Value="False">
+                                                                                <Setter Property="IsRunning" Value="False"/>
+                                                                                <Setter Property="IsVisible" Value="False"/>
+                                                                            </DataTrigger>
+                                                                        </ActivityIndicator.Triggers>
+                                                                    </ActivityIndicator>
+                                                                </AbsoluteLayout>
+                                                            </Grid>
 
-                                                    </Frame>
+                                                        </Frame>
                                                     </StackLayout>
                                                     <StackLayout  VerticalOptions="Start" Orientation="Vertical">
-                                                    <Label TextColor="Black" Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="Medium"/>
-                                                    <Label TextColor="Gray" Text="{Binding FieldList.shortDesc}" MaxLines="2" FontSize="Small"/>
-                                                    <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal" IsVisible="{Binding Resource.HasViewDisponibility}">
-                                                        <Frame VerticalOptions="Center" WidthRequest="12" HeightRequest="12"  CornerRadius="6" HasShadow="False" BorderColor="Transparent" Margin="0" Padding="0" BackgroundColor="{Binding Resource.ColorStatus}"/>
-                                                        <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="Center" FontSize="Small" Text="{Binding Resource.TextStatus}"/>
+                                                        <Label TextColor="Black" Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="Medium"/>
+                                                        <Label TextColor="Gray" Text="{Binding FieldList.shortDesc}" MaxLines="2" FontSize="Small"/>
+                                                        <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal" IsVisible="{Binding Resource.HasViewDisponibility}">
+                                                            <Frame VerticalOptions="Center" WidthRequest="12" HeightRequest="12"  CornerRadius="6" HasShadow="False" BorderColor="Transparent" Margin="0" Padding="0" BackgroundColor="{Binding Resource.ColorStatus}"/>
+                                                            <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="Center" FontSize="Small" Text="{Binding Resource.TextStatus}"/>
+                                                        </StackLayout>
                                                     </StackLayout>
                                                 </StackLayout>
-                                            </StackLayout>
-                                        </ViewCell.View>
-                                    </ViewCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                            <ListView.Footer>
+                                        </StackLayout>
+                                    </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                                <CollectionView.Footer>
                                 <material:MaterialButton VerticalOptions="Center" Margin="5" IsVisible="{Binding DisplayLoadMore}" BackgroundColor="{DynamicResource AppBackgroundColor}" Text="{x:Static local:AppResource.LoadMore}" Command="{Binding LoadMore}"></material:MaterialButton>
-                            </ListView.Footer>
-                        </ListView>
+                            </CollectionView.Footer>
+                        </CollectionView>
                     </StackLayout>
                     <StackLayout VerticalOptions="Fill" >
                             <Label VerticalOptions="FillAndExpand"  HorizontalTextAlignment="Center" VerticalTextAlignment="Start"  Margin="30" FontSize="Medium" Text="{x:Static local:AppResource.NoSearchResults}" />

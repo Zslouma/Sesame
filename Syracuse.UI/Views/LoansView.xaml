@@ -12,7 +12,6 @@
                      x:TypeArguments="viewModels:LoansViewModel"
                      x:Class="Syracuse.Mobitheque.UI.Views.LoansView"
                      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
-
     <NavigationPage.TitleView >
         <common:SearchBarTemplate />
     </NavigationPage.TitleView>
@@ -38,88 +37,74 @@
                         <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize = "20" Text="{x:Static local:AppResource.NotCurrentLoan}" />
                     </StackLayout>
                     <StackLayout Padding="5,5" IsVisible="{Binding ReversNotCurrentLoan}">
-                        <ListView x:Name="LoansList" 
-                          ItemsSource="{Binding Results}" 
-                          SeparatorVisibility="None"
-                          VerticalOptions="FillAndExpand"
-                          VerticalScrollBarVisibility="Never"
-                          IsPullToRefreshEnabled="False"
-                          HasUnevenRows="{OnPlatform Android=True, Default=False}">
-                                <ListView.RowHeight>
-                                    <OnPlatform x:TypeArguments="x:Int32">
-                                        <On Platform="iOS">160</On>
-                                    </OnPlatform>
-                                </ListView.RowHeight>
-                                <ListView.ItemTemplate>
+                            <CollectionView x:Name="LoansList" 
+                              ItemsSource="{Binding Results}" 
+                              VerticalOptions="FillAndExpand"
+                              VerticalScrollBarVisibility="Never">
+                                <CollectionView.ItemTemplate>
                                 <DataTemplate >
-                                        <ViewCell>
-                                            <ViewCell.View>
-                                                <Frame VerticalOptions="FillAndExpand" Padding="0, 5, 0, 5">
-                                                             <Frame.HasShadow>
-                                                                <OnPlatform x:TypeArguments="x:Boolean">
-                                                                    <On Platform="iOS">false</On>
-                                                                    <On Platform="Android">true</On>
-                                                                </OnPlatform>
-                                                            </Frame.HasShadow>
-                                                    <StackLayout 
+                                        <StackLayout>
+                                            <Frame VerticalOptions="FillAndExpand" Padding="0, 5, 0, 5">
+                                                <Frame.HasShadow>
+                                                    <OnPlatform x:TypeArguments="x:Boolean">
+                                                        <On Platform="iOS">false</On>
+                                                        <On Platform="Android">true</On>
+                                                    </OnPlatform>
+                                                </Frame.HasShadow>
+                                                <StackLayout 
                                                          VerticalOptions="Start"
                                                          Orientation="Horizontal"
                                                          BackgroundColor="White"
                                                          Padding="5, 0, 5, 0"
                                                          Margin="0,0,0,20"
                                                          x:Name="Item">
-                                                        <StackLayout VerticalOptions="Start" Margin="0,0,15,0">
-                                                            <Frame VerticalOptions="FillAndExpand" Margin="0,5,0,0" Padding="0" >
-                                                                <Frame.HasShadow>
-                                                                    <OnPlatform x:TypeArguments="x:Boolean">
-                                                                        <On Platform="iOS">false</On>
-                                                                        <On Platform="Android">true</On>
-                                                                    </OnPlatform>
-                                                                </Frame.HasShadow>
-                                                                <Image Source="{Binding ThumbnailUrl}"
+                                                    <StackLayout VerticalOptions="Start" Margin="0,0,15,0">
+                                                        <Frame VerticalOptions="FillAndExpand" Margin="0,5,0,0" Padding="0" >
+                                                            <Frame.HasShadow>
+                                                                <OnPlatform x:TypeArguments="x:Boolean">
+                                                                    <On Platform="iOS">false</On>
+                                                                    <On Platform="Android">true</On>
+                                                                </OnPlatform>
+                                                            </Frame.HasShadow>
+                                                            <Image Source="{Binding ThumbnailUrl}"
                                                                 Aspect="AspectFill"
                                                                 HeightRequest="120"
                                                                 WidthRequest="90" 
                                                                 VerticalOptions="Start"/>
-                                                            </Frame>
-                                                        </StackLayout>
-                                                        <StackLayout Padding="0, 0, 0, 0"
+                                                        </Frame>
+                                                    </StackLayout>
+                                                    <StackLayout Padding="0, 0, 0, 0"
                                                              VerticalOptions="Start"
                                                              Orientation="Vertical"
                                                              HorizontalOptions="FillAndExpand">
-                                                            <Label MaxLines="2" 
+                                                        <Label MaxLines="2" 
                                                                 VerticalOptions="Start"
                                                                 VerticalTextAlignment="Start"
                                                                 TextColor="{d:DynamicResource DarkTextColor}"
                                                                 Text="{Binding Title}"
                                                                 FontAttributes="Bold"
                                                                 />
-                                                            <Label
+                                                        <Label
                                                                 MaxLines="1"
                                                                 TextColor="{Binding dateColor}"
                                                                 Text="{Binding WhenBack_String}"
                                                                 FontSize="Small"/>
-
-                                                            <StackLayout IsVisible="{Binding CanRenew}">
-                                                                <material:MaterialButton
+                                                        <StackLayout IsVisible="{Binding CanRenew}">
+                                                            <material:MaterialButton
                                                                   Margin="-5,0,-5,0"
                                                                   CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                                                   BindingContext="{Binding Source={x:Reference LoansList}, Path=BindingContext}"
                                                                   Command="{Binding RenewLoanCommand}"
                                                                   BackgroundColor="{d:DynamicResource AppBackgroundColor}"
                                                                   Text="{x:Static local:AppResource.Extend}"/>
-                                                            </StackLayout>
-
                                                         </StackLayout>
-
                                                     </StackLayout>
-
-                                                </Frame>
-                                            </ViewCell.View>
-                                        </ViewCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                                                </StackLayout>
+                                            </Frame>
+                                        </StackLayout>
+                                    </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                     </StackLayout>
                 </Grid>
                 </StackLayout>
