@@ -67,7 +67,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         }
 
 
-        private async Task ValidateHandler( string url)
+        public async Task ValidateHandler( string url)
         {
             this.IsLoading = true;
 
@@ -107,6 +107,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 {
                     this.IsLoading = false;
                     this.DisplayAlert("Erreur", "Une erreur est survenue lors de la recupération des données de votre établisment", "OK");
+                    this.CanSubmit = false;
                 }
 
             }
@@ -114,6 +115,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 this.IsLoading = false;
                 this.DisplayAlert("Erreur", "Veuillez selectionner un QRcode ou une url valide", "OK");
+                this.CanSubmit = false;
             }
 
 

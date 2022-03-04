@@ -88,6 +88,8 @@ namespace Syracuse.Mobitheque.UI.Views
                         Navigation.PopModalAsync(true);
                         txtBarcode.Text = result.Text;
                         this.ViewModel.CanSubmit = true;
+                        this.ViewModel.ValidateHandler(txtBarcode.Text);
+
                     });
 
                 };

@@ -9,6 +9,7 @@
             <Color x:Key="AppDarkBackgroundColor">#6569DF</Color>
             <Color x:Key="AppLigthBackgroundColor">#727fd7</Color>
             <Color x:Key="AppSecondaryBackgroundColor">#FFFFFF</Color>
+            <Color x:Key="AppSecondaryBackgroundColorTransparent">#1AFFFFFF</Color>
             <Color x:Key="ButtonColor">#6574CF</Color>
             <Color x:Key="ButtonSecondaryColor">#FFFFFF</Color>
             <Color x:Key="NavigationBarColor">#6574CF</Color>

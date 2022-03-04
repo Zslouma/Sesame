@@ -82,6 +82,7 @@
     <AppExtensionDebugBundleId />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CustomRenderer\MyEntryRenderer.cs" />
     <Compile Include="IosDownloader.cs" />
     <Compile Include="CustomRenderer\HybridWebViewRenderer.cs" />
     <Compile Include="Main.cs" />
