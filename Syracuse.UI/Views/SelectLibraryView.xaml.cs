@@ -75,7 +75,7 @@ namespace Syracuse.Mobitheque.UI.Views
 
                 var QRScanner = new ZXingScannerPage(options, overlay);
 
-                await Navigation.PushModalAsync(QRScanner);
+                await Navigation.PushAsync(QRScanner);
 
                 QRScanner.OnScanResult += (result) =>
                 {
@@ -85,7 +85,7 @@ namespace Syracuse.Mobitheque.UI.Views
                     // Pop the page and show the result
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        Navigation.PopModalAsync(true);
+                        Navigation.PopAsync(true);
                         txtBarcode.Text = result.Text;
                         this.ViewModel.CanSubmit = true;
                         this.ViewModel.ValidateHandler(txtBarcode.Text);
