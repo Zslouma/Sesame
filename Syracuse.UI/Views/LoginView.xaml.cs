@@ -46,21 +46,20 @@ namespace Syracuse.Mobitheque.UI.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            ListSSO.Children.Clear();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
             Connectivity_test();
-            foreach (var item in this.ViewModel.ListSSO)
-            {
-                Button button = new Button();
-                button.Text = item.Label;
-                button.CornerRadius = 15;
-                button.BackgroundColor = Color.FromHex("#FFFFFF");
-                button.TextColor = Color.FromHex("#6574CF");
-                button.CommandParameter = item.Value;
-                button.Clicked += OpenBrowserProvider_OnClicked;
-                ListSSO.Children.Add(button);
-            }
-            ListSSO.VerticalOptions = LayoutOptions.FillAndExpand;
+            //foreach (var item in this.ViewModel.ListSSO)
+            //{
+            //    Button button = new Button();
+            //    button.Text = item.Label;
+            //    button.CornerRadius = 15;
+            //    button.BackgroundColor = Color.FromHex("#FFFFFF");
+            //    button.TextColor = Color.FromHex("#6574CF");
+            //    button.CommandParameter = item.Value;
+            //    button.Clicked += OpenBrowserProvider_OnClicked;
+            //    ListSSO.Children.Add(button);
+            //}
+            //ListSSO.VerticalOptions = LayoutOptions.FillAndExpand;
         }
         public void Handle_Focus(object sender, FocusEventArgs args)
         {

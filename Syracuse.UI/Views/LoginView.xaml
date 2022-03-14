@@ -54,6 +54,7 @@
                                 PlaceholderColor="{DynamicResource WhiteTextColor}"
                                 Placeholder="{x:Static local:AppResource.AccountTitle}"
                                 InputType="Default"
+                                IsAutoCapitalizationEnabled="False"
                                 x:Name="UserNameInput"
                                 Text="{Binding UserName, Mode=TwoWay}"
                                 TextFontFamily="{StaticResource OpenSans}"
@@ -73,6 +74,7 @@
                         PlaceholderColor="{DynamicResource WhiteTextColor}"
                         Placeholder="{x:Static local:AppResource.Password}"
                         InputType="Password"
+                        IsAutoCapitalizationEnabled="False"
                         x:Name="PasswordInput"
                         Text="{Binding Password, Mode=TwoWay}"
                         TextFontFamily="{StaticResource OpenSans}"
@@ -98,7 +100,22 @@
                             TextColor="AliceBlue"
                             BackgroundColor="Transparent"
                             Clicked="OpenBrowser_OnClicked"/>
-                    <StackLayout x:Name="ListSSO" VerticalOptions="FillAndExpand"/>
+                    <CollectionView
+                        x:Name="ListSSO"
+                        ItemsSource="{Binding ListSSO}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Button Text="{Binding Label}"
+                                            CornerRadius="15"
+                                            BackgroundColor="#FFFFFF"
+                                            TextColor="#6574CF"
+                                            CommandParameter="{Binding Value}"
+                                            Clicked="OpenBrowser_OnClicked"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </StackLayout>
              <AbsoluteLayout Grid.RowSpan="2" Margin="-20" IsVisible="{Binding IsLoading}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
                 <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
