@@ -57,28 +57,31 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             CookiesSave user = await App.Database.GetActiveUser();
             if (user != null)
             {
-                Library Alllibraries = await this.departmentService.GetLibraries("",true);
-                try
+                Library Alllibraries = await this.departmentService.GetLibraries(user.LibraryJsonUrl,true);
+                if (!(Alllibraries is null) )
                 {
-                    Library library = Alllibraries;
-                    user.LibraryUrl = library.Config.BaseUri;
-                    user.DomainUrl = library.Config.DomainUri;
-                    user.EventsScenarioCode = library.Config.EventsScenarioCode;
-                    user.SearchScenarioCode = library.Config.SearchScenarioCode;
-                    user.IsEvent = library.Config.IsEvent;
-                    user.IsKm = library.Config.IsKm;
-                    user.CanDownload = library.Config.CanDownload;
-                    user.DailyPressName = library.Config.DailyPress.PressName;
-                    user.DailyPressQuery = library.Config.DailyPress.Query;
-                    user.DailyPressScenarioCode = library.Config.DailyPress.PressScenarioCode;
-                    user.InternationalPressName = library.Config.InternationalPress.PressName;
-                    user.InternationalPressQuery = library.Config.InternationalPress.Query;
-                    user.InternationalPressScenarioCode = library.Config.InternationalPress.PressScenarioCode;
-                    user.BuildingInfos = JsonConvert.SerializeObject(library.Config.BuildingInformations);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.ToString());
+                    try
+                    {
+                        Library library = Alllibraries;
+                        user.LibraryUrl = library.Config.BaseUri;
+                        user.DomainUrl = library.Config.DomainUri;
+                        user.EventsScenarioCode = library.Config.EventsScenarioCode;
+                        user.SearchScenarioCode = library.Config.SearchScenarioCode;
+                        user.IsEvent = library.Config.IsEvent;
+                        user.IsKm = library.Config.IsKm;
+                        user.CanDownload = library.Config.CanDownload;
+                        user.DailyPressName = library.Config.DailyPress.PressName;
+                        user.DailyPressQuery = library.Config.DailyPress.Query;
+                        user.DailyPressScenarioCode = library.Config.DailyPress.PressScenarioCode;
+                        user.InternationalPressName = library.Config.InternationalPress.PressName;
+                        user.InternationalPressQuery = library.Config.InternationalPress.Query;
+                        user.InternationalPressScenarioCode = library.Config.InternationalPress.PressScenarioCode;
+                        user.BuildingInfos = JsonConvert.SerializeObject(library.Config.BuildingInformations);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message.ToString());
+                    }
                 }
                 await App.Database.SaveItemAsync(user);
             }

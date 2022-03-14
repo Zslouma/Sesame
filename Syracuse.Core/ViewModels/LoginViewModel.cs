@@ -150,53 +150,19 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             if (b == null)
             {
                 CookiesSave item = new CookiesSave();
+                item = department;
                 item.Username = this.username;
                 item.Active = true;
                 item.Cookies = JsonConvert.SerializeObject(this.requestService.GetCookies().ToArray());
-                item.Library = department.Library;
-                item.LibraryCode = department.LibraryCode;
-                item.LibraryUrl = department.LibraryUrl;
-                item.DomainUrl = department.DomainUrl;
-                item.ForgetMdpUrl = department.ForgetMdpUrl;
-                item.Department = department.Department;
-                item.SearchScenarioCode = department.SearchScenarioCode;
-                item.EventsScenarioCode = department.EventsScenarioCode;
-                item.DailyPressName = department.DailyPressName;
-                item.DailyPressQuery = department.DailyPressQuery;
-                item.DailyPressScenarioCode = department.DailyPressScenarioCode;
-                item.InternationalPressName = department.InternationalPressName;
-                item.InternationalPressQuery = department.InternationalPressQuery;
-                item.InternationalPressScenarioCode = department.InternationalPressScenarioCode;
-                item.IsEvent = department.IsEvent;
-                item.RememberMe = department.RememberMe;
-                item.IsKm = department.IsKm;
-                item.CanDownload = department.CanDownload;
-                item.BuildingInfos = department.BuildingInfos;
                 await App.Database.SaveItemAsync(item);
                 this.requestService.LoadCookies(JsonConvert.DeserializeObject<Cookie[]>(item.Cookies));
             }
             else
             {
+                b = department;
                 b.Username = this.username;
                 b.Active = true;
                 b.Cookies = JsonConvert.SerializeObject(this.requestService.GetCookies().ToArray());
-                b.Library = department.Library;
-                b.LibraryCode = department.LibraryCode;
-                b.LibraryUrl = department.LibraryUrl;
-                b.DomainUrl = department.DomainUrl;
-                b.ForgetMdpUrl = department.ForgetMdpUrl;
-                b.Department = department.Department;
-                b.SearchScenarioCode = department.SearchScenarioCode;
-                b.EventsScenarioCode = department.EventsScenarioCode;
-                b.DailyPressQuery = department.DailyPressQuery;
-                b.DailyPressScenarioCode = department.DailyPressScenarioCode;
-                b.InternationalPressQuery = department.InternationalPressQuery;
-                b.InternationalPressScenarioCode = department.InternationalPressScenarioCode;
-                b.IsEvent = department.IsEvent;
-                b.RememberMe = department.RememberMe;
-                b.IsKm = department.IsKm;
-                b.CanDownload = department.CanDownload;
-                b.BuildingInfos = department.BuildingInfos;
                 await App.Database.SaveItemAsync(b);
                 this.requestService.LoadCookies(JsonConvert.DeserializeObject<Cookie[]>(b.Cookies));
             }

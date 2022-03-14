@@ -100,6 +100,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     opt.InternationalPressQuery = this.Librarie.Config.InternationalPress.Query;
                     opt.InternationalPressScenarioCode = this.Librarie.Config.InternationalPress.PressScenarioCode;
                     opt.BuildingInfos = JsonConvert.SerializeObject(this.Librarie.Config.BuildingInformations);
+                    opt.LibraryJsonUrl = url;
 
                     this.IsLoading = false;
                     LoginParameters loginParameters = new LoginParameters(this.Librarie.Config.ListSSO, opt);
