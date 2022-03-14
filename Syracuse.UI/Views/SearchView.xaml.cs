@@ -178,38 +178,46 @@ namespace Syracuse.Mobitheque.UI.Views
         }
 
         // Perform search
-        async private void ListView_OnItemTapped(Object sender, ItemTappedEventArgs e)
+        async private void ListView_OnItemTapped(Object sender, SelectionChangedEventArgs e)
         {
-            String listsd = e.Item as string;
-            SearchBar.Text = listsd;
-            resultsList.IsVisible = true;
-            resultCount.IsVisible = true;
-
-            FacetteItemList.IsVisible = false;
-            FacetteButton.FontAttributes = FontAttributes.None;
-            FacetteButtonUnderline.IsVisible = false;
-
-            SortPicker.IsVisible = false;
-            SortPicker.FontAttributes = FontAttributes.None;
-            SortButtonUnderline.IsVisible = false;
-
-            SearchButton.IsVisible = false;
-            DeleteButton.IsVisible = false;
-
-            DeleteButtonUnderline.IsVisible = false;
-            SearchButtonUnderline.IsVisible = false;
-
-            enableMultiSelect = true;
-            setHeight();
-            SearchBar.Unfocus();
-            ((ListView)sender).SelectedItem = null;
-            await this.ViewModel.PerformSearch(listsd, null, true);
-            if (this.ViewModel.Results.Count() > 0)
+            if (e.CurrentSelection.Count > 0)
             {
-                resultsList.ScrollTo(0);
+                var item = e.CurrentSelection[0] as string;
+                String listsd = item;
+                SearchBar.Text = listsd;
+                resultsList.IsVisible = true;
+                resultCount.IsVisible = true;
+
+                FacetteItemList.IsVisible = false;
+                FacetteButton.FontAttributes = FontAttributes.None;
+                FacetteButtonUnderline.IsVisible = false;
+
+                SortPicker.IsVisible = false;
+                SortPicker.FontAttributes = FontAttributes.None;
+                SortButtonUnderline.IsVisible = false;
+
+                SearchButton.IsVisible = false;
+                DeleteButton.IsVisible = false;
+
+                DeleteButtonUnderline.IsVisible = false;
+                SearchButtonUnderline.IsVisible = false;
+
+                enableMultiSelect = true;
+                setHeight();
+                SearchBar.Unfocus();
+                ((ListView)sender).SelectedItem = null;
+                await this.ViewModel.PerformSearch(listsd, null, true);
+                if (this.ViewModel.Results.Count() > 0)
+                {
+                    resultsList.ScrollTo(0);
+                }
+                SearchBar.IsEnabled = true;
+                this.UpdateItemList();
             }
-            SearchBar.IsEnabled = true;
-            this.UpdateItemList();
+            else
+            {
+                await this.DisplayAlert("Erreur", "Une erreur est survenue", "Ok");
+            }
         }
 
         private void SearchBar_OnFocus(Object sender, FocusEventArgs args)
