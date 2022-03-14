@@ -93,8 +93,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     opt.RememberMe = this.Librarie.Config.RememberMe;
                     opt.IsKm = this.Librarie.Config.IsKm;
                     opt.CanDownload = this.Librarie.Config.CanDownload;
+                    opt.DailyPressName = this.Librarie.Config.DailyPress.PressName;
                     opt.DailyPressQuery = this.Librarie.Config.DailyPress.Query;
                     opt.DailyPressScenarioCode = this.Librarie.Config.DailyPress.PressScenarioCode;
+                    opt.InternationalPressName = this.Librarie.Config.InternationalPress.PressName;
                     opt.InternationalPressQuery = this.Librarie.Config.InternationalPress.Query;
                     opt.InternationalPressScenarioCode = this.Librarie.Config.InternationalPress.PressScenarioCode;
                     opt.BuildingInfos = JsonConvert.SerializeObject(this.Librarie.Config.BuildingInformations);

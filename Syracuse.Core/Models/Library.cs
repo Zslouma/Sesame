@@ -11,6 +11,8 @@ namespace Syracuse.Mobitheque.Core.Models
         public string PressUri { get; set; }
         [JsonProperty("press_scenario_code")]
         public string PressScenarioCode { get; set; }
+        [JsonProperty("name")]
+        public string PressName { get; set; }
     }
 
     public class LibraryInformations

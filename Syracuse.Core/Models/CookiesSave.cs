@@ -73,9 +73,13 @@ namespace Syracuse.Mobitheque.Core.Models
 
         public bool IsEvent { get; set; }
 
+        public string DailyPressName { get; set; }
+
         public string DailyPressQuery { get; set; }
         
         public string DailyPressScenarioCode { get; set; }
+
+        public string InternationalPressName { get; set; }
 
         public string InternationalPressQuery { get; set; }
         

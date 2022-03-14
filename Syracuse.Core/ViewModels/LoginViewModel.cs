@@ -161,8 +161,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 item.Department = department.Department;
                 item.SearchScenarioCode = department.SearchScenarioCode;
                 item.EventsScenarioCode = department.EventsScenarioCode;
+                item.DailyPressName = department.DailyPressName;
                 item.DailyPressQuery = department.DailyPressQuery;
                 item.DailyPressScenarioCode = department.DailyPressScenarioCode;
+                item.InternationalPressName = department.InternationalPressName;
                 item.InternationalPressQuery = department.InternationalPressQuery;
                 item.InternationalPressScenarioCode = department.InternationalPressScenarioCode;
                 item.IsEvent = department.IsEvent;
