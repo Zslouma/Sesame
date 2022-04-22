@@ -13,8 +13,10 @@ using WebView = Xamarin.Forms.WebView;
 
 namespace Mobitheque.Droid.CustomRenderer
 {
+    [Obsolete]
     public class HybridWebViewRenderer : WebViewRenderer
     {
+
         public HybridWebView HybridWebView
         {
             get { return Element as HybridWebView; }

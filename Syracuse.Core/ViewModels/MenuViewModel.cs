@@ -127,6 +127,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
             CookiesSave user = await App.Database.GetActiveUser();
             this.StandartViewLists = await App.Database.GetActiveStandartView(user);
+            var test = await App.Database.GetStandartsViewsAsync();
             if (user != null)
             {
                 this.IsKm = user.IsKm;
@@ -144,7 +145,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 }
             }
             this.menuItemList = new ObservableCollection<MenuNavigation>() { };
-            this.menuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Home, IconFontAwesome = "\uf015", IsSelected = true,, IsSelected = true, IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
+            this.menuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Home, IconFontAwesome = "\uf015", IsSelected = true, IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
             this.menuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Account, IconFontAwesome = "\uf007", IsSelected = true, IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
             this.menuItemList.Add(new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconFontAwesome = "\uf0c0" , IsEnabled = true });
             if (!IsKm)
@@ -157,7 +158,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 this.menuItemList.Add(new MenuNavigation() { Text = ApplicationResource.PinnedDocuments, IconFontAwesome = "\uf08d", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
                 this.menuItemList.Add(new MenuNavigation() { Text = ApplicationResource.PressDaily, IconFontAwesome = "\uf1ea", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
                 this.menuItemList.Add(new MenuNavigation() { Text = ApplicationResource.PressInternational, IconFontAwesome = "\uf1ea", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
-                this.menuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Download, IconFontAwesome = "\uf0c0", IsEnabled = true },
+                this.menuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Download, IconFontAwesome = "\uf0c0", IsEnabled = true });
             }
             this.menuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf02a", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
             this.menuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Library, IconFontAwesome = "\uf66f", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
@@ -165,13 +166,9 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.menuItemList.Add(new MenuNavigation() { Text = ApplicationResource.About, IconFontAwesome = "\uf05a", IsEnabled = true });
             this.menuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Disconnect, IconFontAwesome = "\uf011", IsEnabled = true });
             await this.RaiseAllPropertiesChanged();
+            this.ShowDetailPageCommand = new MvxAsyncCommand<string>(this.ShowDetailPageAsync);
         }
 
-        public override void ViewDestroy(bool viewFinishing = true)
-        {
-            App.AppState.OnVariableChange -= VariableChangeHandler;
-            base.ViewDestroy(viewFinishing);
-        }
 
         private async Task RefreshMenuItem( string name)
         {
@@ -201,6 +198,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             else if (name == ApplicationResource.PressInternational)
                 _ = this.navigationService.Navigate<PressInternationalViewModel>();
             else if (name == ApplicationResource.PressDaily)
+                _ = this.navigationService.Navigate<PressDailyViewModel>();
             else if (name == ApplicationResource.Bookings)
                 _ = this.navigationService.Navigate<BookingViewModel>();
             else if (name == ApplicationResource.Scan)

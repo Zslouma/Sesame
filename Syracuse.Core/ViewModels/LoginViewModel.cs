@@ -153,44 +153,19 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             CookiesSave b = await App.Database.GetByUsernameAsync(this.username);
             if (b == null)
             {
-                CookiesSave item = new CookiesSave();
-                item = department;
-                item.Username = this.username;
-                item.Active = true;
-                item.Cookies = JsonConvert.SerializeObject(this.requestService.GetCookies().ToArray());
-                await App.Database.SaveItemAsync(item);
-                this.requestService.LoadCookies(JsonConvert.DeserializeObject<Cookie[]>(item.Cookies));
-                item.DomainUrl = department.DomainUrl;
-            else
-            {
-                b = department;
-                b.Username = this.username;
-                b.Active = true;
-                b.Cookies = JsonConvert.SerializeObject(this.requestService.GetCookies().ToArray());
-                await App.Database.SaveItemAsync(b);
-                this.requestService.LoadCookies(JsonConvert.DeserializeObject<Cookie[]>(b.Cookies));
+                b = new CookiesSave();
             }
-
-                b.Department = department.Department;
-                b.SearchScenarioCode = department.SearchScenarioCode;
-                b.EventsScenarioCode = department.EventsScenarioCode;
-                b.IsEvent = department.IsEvent;
-                b.RememberMe = department.RememberMe;
-                b.IsKm = department.IsKm;
-                b.BuildingInfos = department.BuildingInfos;
-                await App.Database.SaveItemAsync(b);
-                this.requestService.LoadCookies(JsonConvert.DeserializeObject<Cookie[]>(b.Cookies));
-            }
+            b = department;
+            b.Username = this.username;
+            b.Active = true;
+            b.Cookies = JsonConvert.SerializeObject(this.requestService.GetCookies().ToArray());
+            await App.Database.SaveItemAsync(b);
             foreach (var item in this.departmentStandarViewList)
             {
                 item.Username = this.username;
             }
-            List<StandartViewList> removeStandardList = await App.Database.GetActiveStandartView(b);
-            foreach (var removeItem in removeStandardList)
-            {
-                await App.Database.DeleteItemAsync(removeItem);
-            }
-            var status = await this.requestService.RenderAccountWebFrame(new AccountWebFrameOptions());
+            await App.Database.UpdateItemsAsync(this.departmentStandarViewList, b);
+            this.requestService.LoadCookies(JsonConvert.DeserializeObject<Cookie[]>(b.Cookies));
             return true;
         }
 

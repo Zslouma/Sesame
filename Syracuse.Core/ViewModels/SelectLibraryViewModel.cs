@@ -103,7 +103,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     opt.BuildingInfos = JsonConvert.SerializeObject(this.Librarie.Config.BuildingInformations);
                     opt.LibraryJsonUrl = url;
                     List<StandartViewList> standartViewList = new List<StandartViewList>();
-                    foreach (var item in this.librariesSelected[this.librariesPickerIndex].Config.StandardsViews)
+                    foreach (var item in this.Librarie.Config.StandardsViews)
                     {
                         var tempo = new StandartViewList();
 

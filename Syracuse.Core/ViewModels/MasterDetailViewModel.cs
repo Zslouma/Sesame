@@ -41,18 +41,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         public async override void Prepare(string parameter)
         {
             param = parameter;
-            base.Prepare();
-        }
-
-        public override void Start()
-        {
             this.Connectivity_test();
             if (App.AppState.NetworkConnection)
             {
-                this.JsonSynchronisation();
+                await this.JsonSynchronisation();
             }
-            base.Start();
+            base.Prepare();
         }
+
          public async Task JsonSynchronisation()
         {
             Console.WriteLine("JsonSynchronisation");
@@ -65,11 +61,16 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     try
                     {
                         Library library = Alllibraries;
+                        user.Department = library.DepartmentCode;
+                        user.Library = library.Name;
+                        user.LibraryCode = library.Code;
                         user.LibraryUrl = library.Config.BaseUri;
                         user.DomainUrl = library.Config.DomainUri;
+                        user.ForgetMdpUrl = library.Config.ForgetMdpUri;
                         user.EventsScenarioCode = library.Config.EventsScenarioCode;
                         user.SearchScenarioCode = library.Config.SearchScenarioCode;
                         user.IsEvent = library.Config.IsEvent;
+                        user.RememberMe = library.Config.RememberMe;
                         user.IsKm = library.Config.IsKm;
                         user.CanDownload = library.Config.CanDownload;
                         user.DailyPressName = library.Config.DailyPress.PressName;
@@ -80,7 +81,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                         user.InternationalPressScenarioCode = library.Config.InternationalPress.PressScenarioCode;
                         user.BuildingInfos = JsonConvert.SerializeObject(library.Config.BuildingInformations);
                         List<StandartViewList> standartViewList = new List<StandartViewList>();
-
                         foreach (var item in library.Config.StandardsViews)
                         {
                             var tempo = new StandartViewList();
@@ -91,19 +91,15 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                             tempo.ViewQuery = item.ViewQuery;
                             tempo.ViewScenarioCode = item.ViewScenarioCode;
                             tempo.Username = user.Username;
-                            tempo.Library = library.Name;
+                            tempo.Library = user.Library;
                             standartViewList.Add(tempo);
                         }
-                        List<StandartViewList> removeStandardList = await App.Database.GetActiveStandartView(user);
-                        foreach (var removeItem in removeStandardList)
-                        {
-                            await App.Database.DeleteItemAsync(removeItem);
-                        }
-                        await App.Database.SaveItemAsync(standartViewList);
+
+                        await App.Database.UpdateItemsAsync(standartViewList, user);
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e.Message.ToString());
+                        this.DisplayAlert(ApplicationResource.Error, e.ToString(), ApplicationResource.ButtonValidation);
                     }
                 }
                 await App.Database.SaveItemAsync(user);

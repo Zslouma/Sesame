@@ -1,5 +1,6 @@
 ﻿using SQLite;
 using Syracuse.Mobitheque.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -21,75 +22,75 @@ namespace Syracuse.Mobitheque.Core.Services.Database
         #region CookiesSave
 
 
-        public Task<List<CookiesSave>> GetItemsAsync()
+        public async Task<List<CookiesSave>> GetItemsAsync()
         {
-            return database.Table<CookiesSave>().ToListAsync();
+            return await database.Table<CookiesSave>().ToListAsync();
         }
 
-        public Task<CookiesSave> GetByUsernameAsync(string username)
+        public async Task<CookiesSave> GetByUsernameAsync(string username)
         {
-            return database.Table<CookiesSave>().Where(p => p.Username == username).FirstOrDefaultAsync();
+            return await database.Table<CookiesSave>().Where(p => p.Username == username).FirstOrDefaultAsync();
         }
 
-        public Task<CookiesSave> GetByIDAsync(string username = "")
+        public async Task<CookiesSave> GetByIDAsync(string username = "")
         {
-            return database.Table<CookiesSave>().Where(p => p.Active).FirstOrDefaultAsync();
+            return await database.Table<CookiesSave>().Where(p => p.Active).FirstOrDefaultAsync();
         }
 
 
-        public Task<List<CookiesSave>> GetItemsNotDoneAsync()
+        public async Task<List<CookiesSave>> GetItemsNotDoneAsync()
         {
-            return database.QueryAsync<CookiesSave>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
+            return await database.QueryAsync<CookiesSave>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
         }
 
-        public Task<CookiesSave> GetItemAsync(int id)
+        public async Task<CookiesSave> GetItemAsync(int id)
         {
-            return database.Table<CookiesSave>().Where(i => i.ID == id).FirstOrDefaultAsync();
+            return await database.Table<CookiesSave>().Where(i => i.ID == id).FirstOrDefaultAsync();
         }
 
-        public Task<CookiesSave> GetActiveUser()
+        public async Task<CookiesSave> GetActiveUser()
         {
-            return database.Table<CookiesSave>().Where(i => i.Active).FirstOrDefaultAsync();
+            return await database.Table<CookiesSave>().Where(i => i.Active).FirstOrDefaultAsync();
         }
 
-        public Task<int> AddSarchValueAsync(CookiesSave item, string searchValue)
+        public async Task<int> AddSarchValueAsync(CookiesSave item, string searchValue)
         {
             if (item.ID != 0)
             {
-                return database.UpdateAsync(item);
+                return await database.UpdateAsync(item);
             }
             else
             {
-                return database.InsertAsync(item);
+                return await database.InsertAsync(item);
             }
         }
 
-        public Task<int> SaveItemAsync(CookiesSave item)
+        public async Task<int> SaveItemAsync(CookiesSave item)
         {
             if (item.ID != 0)
             {
-                return database.UpdateAsync(item);
+                return await database.UpdateAsync(item);
             }
             else
             {
-                return database.InsertAsync(item);
+                return await database.InsertAsync(item);
             }
         }
 
-        public Task<int> DeleteItemAsync(CookiesSave item)
+        public async Task<int> DeleteItemAsync(CookiesSave item)
         {
-            return database.DeleteAsync(item);
+            return await database.DeleteAsync(item);
         }
         #endregion
         #region StandartViewList
 
-        public Task<List<StandartViewList>> GetStandartsViewsAsync()
+        public async Task<List<StandartViewList>> GetStandartsViewsAsync()
         {
-            return database.Table<StandartViewList>().ToListAsync();
+            return await database.Table<StandartViewList>().ToListAsync();
         }
-        public Task<List<StandartViewList>> GetActiveStandartView(CookiesSave ActiveUser)
+        public async Task<List<StandartViewList>> GetActiveStandartView(CookiesSave ActiveUser)
         {
-            return database.Table<StandartViewList>().Where(i => i.Library == ActiveUser.Library && i.Username == ActiveUser.Username ).ToListAsync(); 
+            return await database.Table<StandartViewList>().Where(i => i.Username == ActiveUser.Username && i.Library == ActiveUser.Library).ToListAsync(); 
         }
 
         public async Task<List<int>> SaveItemAsync(List<StandartViewList> items)
@@ -104,15 +105,38 @@ namespace Syracuse.Mobitheque.Core.Services.Database
                 }
                 else
                 {
-                    idList.Add(await database.InsertAsync(item));
+                    if (await database.Table<StandartViewList>().Where(i => i.Username == item.Username && i.Library == item.Library && i.ViewIcone == item.ViewIcone && i.ViewName == item.ViewName && i.ViewQuery == item.ViewQuery && i.ViewScenarioCode == item.ViewScenarioCode).CountAsync() <= 0)
+                    {
+                        idList.Add(await database.InsertAsync(item));
+                    }    
                 }
             }
             return idList;
         }
 
-        public Task<int> DeleteItemAsync(StandartViewList item)
+        public async Task<List<int>> DeleteItemAsync(List<StandartViewList> items)
         {
-            return database.DeleteAsync(item);
+            List<int> idList = new List<int>();
+            foreach (var item in items)
+            {
+                idList.Add(await database.DeleteAsync(item));
+            }
+            return idList;
+        }
+
+        public async Task<bool> UpdateItemsAsync(List<StandartViewList> items, CookiesSave ActiveUser)
+        {
+            try
+            {
+                List<StandartViewList> removeStandardList = await GetActiveStandartView(ActiveUser);
+                await DeleteItemAsync(removeStandardList);
+                await SaveItemAsync(items);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
         #endregion
     }
