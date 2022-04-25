@@ -241,10 +241,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private void ForceListUpdate()
         {
             var tempo = this.ItemsSource;
-            foreach (var item in this.ItemsSource)
-            {
-                Debug.WriteLine(item.HasViewerDr);
-            }
             this.ItemsSource = new ObservableCollection<Result>(new Result[0]);
             this.ItemsSource = tempo;
         }
@@ -298,7 +294,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
                 }
                 resultTempo.DisplayValues.SeekForHoldings = resultTempo.SeekForHoldings && this.ReversIsKm;
-                Console.WriteLine("resultTempo.Resource.RscBase : "+ resultTempo.Resource.RscBase);
                 await PerformSearch(resultTempo.Resource.RscId, resultTempo.Resource.RscBase);
                 this.BuildHoldingsStatements();
                 this.BuildHoldings();

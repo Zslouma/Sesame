@@ -15,7 +15,6 @@ namespace Syracuse.Mobitheque.Core.Models
                 else { this.networkConnection = value; }
                 if (OnVariableChange != null)
                 {
-                    Console.WriteLine("OnVariableChange");
                     OnVariableChange(this.networkConnection);
                 }
             }

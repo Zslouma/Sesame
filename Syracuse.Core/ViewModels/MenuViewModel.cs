@@ -155,7 +155,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         }
         private async void VariableChangeHandler(bool newVal)
         {
-            Debug.WriteLine("VariableChangeHandler: " + newVal.ToString());
             await this.CreateMenuItemList();
         }
         public override void ViewDestroy(bool viewFinishing = true)

@@ -698,7 +698,6 @@ namespace Syracuse.Mobitheque.Core.Models
                 }
                 catch (Exception e)
                 {
-                    Debug.WriteLine("HtmlViewDisponibility Exception ");
                     this.hasViewDisponibility = false;
                 }
             }

@@ -44,14 +44,9 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.Connectivity_test();
             base.Prepare();
         }
-        public async override void Start()
-        {
-            base.Start();
-        }
 
         public async Task JsonSynchronisation()
         {
-            Console.WriteLine("JsonSynchronisation");
             CookiesSave user = await App.Database.GetActiveUser();
             if (user != null)
             {
@@ -87,7 +82,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
                             tempo.ViewName = item.ViewName;
                             tempo.ViewIcone = item.ViewIcone;
-                            Console.WriteLine("ViewIcone :" + item.ViewIcone);
                             tempo.ViewQuery = item.ViewQuery;
                             tempo.ViewScenarioCode = item.ViewScenarioCode;
                             tempo.Username = user.Username;
@@ -181,9 +175,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         }
         void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
         {
-            Console.WriteLine("Connectivity_ConnectivityChanged Start");
             Connectivity_test();
-            Console.WriteLine("Connectivity_ConnectivityChanged End");
         }
 
         private void Connectivity_test()

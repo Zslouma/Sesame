@@ -53,10 +53,6 @@ namespace Syracuse.Mobitheque.UI.Views
         {
             IDownloader downloader = DependencyService.Get<IDownloader>();
 
-            Console.WriteLine(item.DocumentPath);
-            Console.WriteLine(downloader.GetPathStorage());
-
-
             if (System.IO.File.Exists(item.DocumentPath))
             {
                 string application = "";

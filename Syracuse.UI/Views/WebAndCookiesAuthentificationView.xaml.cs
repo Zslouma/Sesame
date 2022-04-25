@@ -20,11 +20,8 @@ namespace Syracuse.Mobitheque.UI.Views
 
         private async void WebViewNavigated(object sender, CookieNavigatedEventArgs args)
         {
-            Console.WriteLine("WebChanged Cookies :" + args.Cookies.Count.ToString());
-            Console.WriteLine("WebChanged Source :" + args.Url);
             if (args.Cookies.Count > 0 && args.Url.Contains(this.ViewModel.Departement.DomainUrl))
             {
-                Console.WriteLine("WebChanged Scucess");
                 await this.ViewModel.AuthenticationAndRedirect(args.Cookies);
             }
         }

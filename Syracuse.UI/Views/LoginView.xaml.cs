@@ -140,7 +140,6 @@ namespace Syracuse.Mobitheque.UI.Views
         }
         public async Task Connectivity_test()
         {
-            Console.WriteLine("Connectivity_test for App.xaml");
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 this.LoginView_OnDisplayAlert(ApplicationResource.Warning, ApplicationResource.NetworkDisable, ApplicationResource.ButtonValidation);

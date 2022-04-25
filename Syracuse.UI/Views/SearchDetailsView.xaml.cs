@@ -51,7 +51,6 @@ namespace Syracuse.Mobitheque.UI.Views
                 }
             }
             this.ViewModel.Position = CurrentPosition;
-            Console.WriteLine("OpenBrowser_OnClicked " + e.CurrentPosition);
             this.ViewModel.IsPositionVisible = true;
         }
         private async void OnCarouselViewRemainingItemsThresholdReached(object sender, EventArgs e)

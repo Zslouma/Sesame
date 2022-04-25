@@ -40,8 +40,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 if (value != null)
                 {
                     SetProperty(ref this.cookies, value);
-                    Console.WriteLine("CookieContainer change : " + value.Count.ToString());
-
                 this.RaiseAllPropertiesChanged();
                 }
 
@@ -65,7 +63,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set
             {
                 SetProperty(ref this._urlWebViewSource, value);
-                Console.WriteLine("UrlWebViewSource change : " + value);
                 this.RaiseAllPropertiesChanged();
             }
         }
@@ -112,7 +109,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         {
             foreach (Cookie cookie in cookieContainer)
             {
-                Console.WriteLine("Name = {0} ; Value = {1} ; Domain = {2}", cookie.Name, cookie.Value, cookie.Domain);
                 yield return cookie;
             }
         }
@@ -139,7 +135,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
             var username = "_";
             this.requestService.LoadCookies(cookiesArray);
-            Console.WriteLine(JsonConvert.SerializeObject(cookiesArray));
             var tempoCookiesSave = await App.Database.GetByUsernameAsync(username);
             CookiesSave item = tempoCookiesSave != null ? tempoCookiesSave : new CookiesSave();
             item.Active = true;
@@ -160,16 +155,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             await App.Database.SaveItemAsync(item);
             this.requestService.InitializeHttpClient(this.Departement.DomainUrl);
             cookiesArray = this.requestService.GetCookies().ToArray();
-            foreach (var cookie in cookiesArray)
-            {
-                Console.WriteLine("AuthenticationAndRedirect2: Name = {0} ; Value = {1} ; Domain = {2}", cookie.Name, cookie.Value, cookie.Domain);
-            }
             var data = await this.requestService.GetSummary();
             cookiesArray = this.requestService.GetCookies().ToArray();
-            foreach (var cookie in cookiesArray)
-            {
-                Console.WriteLine("AuthenticationAndRedirect3: Name = {0} ; Value = {1} ; Domain = {2}", cookie.Name, cookie.Value, cookie.Domain);
-            }
             if (data != null && data.Success)
             {
                 var b = await App.Database.GetByUsernameAsync(username);
