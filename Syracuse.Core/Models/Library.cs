@@ -39,10 +39,6 @@ namespace Syracuse.Mobitheque.Core.Models
         public List<SSO> ListSSO { get; set; }
         [JsonProperty("can_download")]
         public bool CanDownload { get; set; }
-        [JsonProperty("daily_press")]
-        public Press DailyPress { get; set; }
-        [JsonProperty("international_press")]
-        public Press InternationalPress { get; set; }
         [JsonProperty("library_informations")]
         public List<LibraryInformations> BuildingInformations { get; set; }
     }

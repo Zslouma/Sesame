@@ -68,12 +68,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                         user.RememberMe = library.Config.RememberMe;
                         user.IsKm = library.Config.IsKm;
                         user.CanDownload = library.Config.CanDownload;
-                        user.DailyPressName = library.Config.DailyPress.PressName;
-                        user.DailyPressQuery = library.Config.DailyPress.Query;
-                        user.DailyPressScenarioCode = library.Config.DailyPress.PressScenarioCode;
-                        user.InternationalPressName = library.Config.InternationalPress.PressName;
-                        user.InternationalPressQuery = library.Config.InternationalPress.Query;
-                        user.InternationalPressScenarioCode = library.Config.InternationalPress.PressScenarioCode;
                         user.BuildingInfos = JsonConvert.SerializeObject(library.Config.BuildingInformations);
                         List<StandartViewList> standartViewList = new List<StandartViewList>();
                         foreach (var item in library.Config.StandardsViews)

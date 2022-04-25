@@ -212,10 +212,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 _ = this.navigationService.Navigate<HomeViewModel>();
             else if (name == ApplicationResource.PinnedDocuments)
                 _ = this.navigationService.Navigate<PinnedDocumentViewModel>();
-            else if (name == ApplicationResource.PressInternational)
-                _ = this.navigationService.Navigate<PressInternationalViewModel>();
-            else if (name == ApplicationResource.PressDaily)
-                _ = this.navigationService.Navigate<PressDailyViewModel>();
             else if (name == ApplicationResource.Download)
                 _ = this.navigationService.Navigate<DownloadViewModel>();
             else if (name == ApplicationResource.Bookings)
