@@ -82,6 +82,13 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 SetProperty(ref this.searchScenarioCode, value);
             }
         }
+        private MvxAsyncCommand<string> searchCommand;
+        public MvxAsyncCommand<string> SearchCommand => this.searchCommand ??
+            (this.searchCommand = new MvxAsyncCommand<string>((text) => this.PerformSearch(text)));
+
+        private MvxAsyncCommand<Result> downloadDocumentCommand;
+        public MvxAsyncCommand<Result> DownloadDocumentCommand => this.downloadDocumentCommand ??
+            (this.downloadDocumentCommand = new MvxAsyncCommand<Result>((item) => this.DownloadDocument(item)));
 
         private MvxAsyncCommand<string> loadMore;
         public MvxAsyncCommand<string> LoadMore => this.loadMore ??
@@ -163,6 +170,23 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
             this.IsBusy = false;
             await RaiseAllPropertiesChanged();
+
+        }
+        private async Task PerformSearch(string search)
+        {
+            var options = new SearchOptionsDetails()
+            {
+                QueryString = search
+            };
+            SearchOptions opt = new SearchOptions() { Query = options };
+            if (App.AppState.NetworkConnection)
+            {
+                await this.navigationService.Navigate<SearchViewModel, SearchOptions>(opt);
+            }
+            else
+            {
+                this.DisplayAlert(ApplicationResource.Warning, ApplicationResource.NetworkDisable, ApplicationResource.ButtonValidation);
+            }
 
         }
 
