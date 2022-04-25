@@ -42,14 +42,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         {
             param = parameter;
             this.Connectivity_test();
-            if (App.AppState.NetworkConnection)
-            {
-                await this.JsonSynchronisation();
-            }
             base.Prepare();
         }
+        public async override void Start()
+        {
+            base.Start();
+        }
 
-         public async Task JsonSynchronisation()
+        public async Task JsonSynchronisation()
         {
             Console.WriteLine("JsonSynchronisation");
             CookiesSave user = await App.Database.GetActiveUser();
@@ -113,9 +113,12 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         }
         public override async void ViewAppearing()
         {
-            base.ViewAppearing();
             this.Connectivity_test();
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+            if (App.AppState.NetworkConnection)
+            {
+                await this.JsonSynchronisation();
+            }
             CookiesSave user = await App.Database.GetActiveUser();
             Cookie[] cookies = JsonConvert.DeserializeObject<Cookie[]>(user.Cookies);
             bool found = false;
@@ -172,6 +175,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 }
                 
             }
+            base.ViewAppearing();
             this.viewCreate = true;
 
         }

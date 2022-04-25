@@ -173,7 +173,6 @@
                                                 CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
                                                 BindingContext="{Binding Source={x:Reference resultsListDocument}, Path=BindingContext}"
                                                 Command="{Binding DownloadDocumentCommand}"
-                                                IsEnabled="{Binding CanDownload}"
                                                 Grid.Column="2"
                                                 WidthRequest="30"
                                                 Text="&#xf019;"

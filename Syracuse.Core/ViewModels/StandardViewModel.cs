@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Syracuse.Mobitheque.Core.ViewModels
 {
-    public class StandardViewModel : BaseViewModel<SearchOptions, SearchOptions>
+    public class StandardViewModel : BaseDownloadPageViewModel<SearchOptions, SearchOptions>
     {
         private readonly IRequestService requestService;
         private readonly IMvxNavigationService navigationService;
@@ -37,8 +37,34 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         }
 
         public D D { get; private set; }
-        public Result[] Results { get; private set; }
+        private Result[] results;
+        public Result[] Results
+        {
+            get => this.results;
+            set
+            {
+                SetProperty(ref this.results, value);
+                if (this.Results.Count() < this.NbrResults)
+                {
+                    this.DisplayLoadMore = true;
+                }
+                else
+                {
+                    this.DisplayLoadMore = false;
+                }
+            }
+        }
         public long? NbrResults { get; private set; }
+        private bool displayLoadMore = true;
+        public bool DisplayLoadMore
+        {
+            get => this.displayLoadMore;
+            set
+            {
+                SetProperty(ref this.displayLoadMore, value);
+            }
+        }
+
         public long? ResultCountInt { get; private set; }
         public string ResultCount { get; private set; }
         public string PageTitle { get; set; }
@@ -80,16 +106,37 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         async public override void Prepare(SearchOptions parameter)
         {
+            this.IsBusy = true;
             this.searchOptions = parameter;
             this.PageTitle = " "+parameter.PageTitle;
             this.PageIcone = parameter.PageIcone;
             this.User = await App.Database.GetActiveUser();
             this.SearchScenarioCode = parameter.Query.ScenarioCode;
-            if (parameter.Query.QueryString != "")
+            this.searchQuery = parameter.Query.QueryString;
+            this.Results = await LoadPage();
+            await RaiseAllPropertiesChanged();
+            this.IsBusy = false;
+        }
+        public async Task GoToDetailView(Result item)
+        {
+            var parameter = new SearchResult[2];
+            for (int i = 0; i < 2; i++)
             {
-                this.searchQuery = parameter.Query.QueryString;
-                await PerformSearch();
+                parameter[i] = new SearchResult();
+                parameter[i].D = new D();
             }
+            Result[] tmpResults = { new Result() };
+            parameter[0].D.Results = tmpResults;
+            parameter[0].D.Results[0] = item;
+            parameter[1].D.Results = tmpResults;
+            parameter[1].D.Results = this.Results;
+            var tempo = new SearchDetailsParameters()
+            {
+                parameter = parameter,
+                searchOptions = this.searchOptions,
+                nbrResults = this.NbrResults.ToString()
+            };
+            await this.navigationService.Navigate<SearchDetailsViewModel, SearchDetailsParameters>(tempo);
         }
         public async Task PerformSearch()
         {
@@ -153,6 +200,49 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             return results;
         }
 
+        public async Task DownloadAllDocument(Result[] results)
+        {
+            foreach (var result in results)
+            {
+                if (result.CanDownload)
+                {
+                    this.DownloadDocument(result);
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// Déclenche une oppération de télecharchement de document 
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        private async Task DownloadDocument(Result result)
+        {
+            this.isBusy = true;
+            await RaiseAllPropertiesChanged();
+            var statusDownload = await this.requestService.GetDownloadDocument(result.downloadOptions.parentDocumentId, result.downloadOptions.documentId, result.downloadOptions.fileName);
+            if (statusDownload.Success)
+            {
+                SaveNewDocumentDatabaseObject(result, statusDownload.D);
+                foreach (var Result in this.Results)
+                {
+                    if (Result == result)
+                    {
+                        Result.CanDownload = false;
+                        Result.IsDownload = true;
+                    }
+                }
+            }
+            else
+            {
+                this.DisplayAlert(ApplicationResource.Error, statusDownload.Errors?[0]?.Msg != null ? statusDownload.Errors?[0]?.Msg : ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
+            }
+            this.isBusy = false;
+            this.ForceListUpdate();
+            await RaiseAllPropertiesChanged();
+        }
+
         private async Task getNextPage()
         {
 
@@ -187,7 +277,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 #pragma warning restore S2259 // Null pointers should not be dereferenced
                 this.ResultCount = ApplicationResource.SearchViewResultNull;
             }
-            this.IsBusy = false;
+
             await RaiseAllPropertiesChanged();
             SearchOptions options = new SearchOptions();
             options.Query = new SearchOptionsDetails()
@@ -200,6 +290,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             if (search != null && !search.Success)
             {
                 this.DisplayAlert(ApplicationResource.Error, search.Errors?[0]?.Msg != null ? search.Errors?[0]?.Msg : ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
+                this.IsBusy = false;
                 return new Result[0];
             }
             else
@@ -214,7 +305,18 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 }
 
             }
-            return search?.D?.Results;
+            var tempoResult = await this.HaveDownloadOption(search?.D?.Results, this.requestService);
+            this.IsBusy = false;
+            return tempoResult;
+
+
+        }
+
+        private void ForceListUpdate()
+        {
+            var tempo = this.Results;
+            this.Results = new Result[0];
+            this.Results = tempo;
         }
     }
 }

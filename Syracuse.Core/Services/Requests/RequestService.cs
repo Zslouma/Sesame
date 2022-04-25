@@ -127,7 +127,6 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 this.InitializeHttpClient(url);
             }
             foreach (Cookie cookie in cookiesTempo == null ? this.cookies.GetCookies(this.httpUri) : cookiesTempo.GetCookies(new Uri(url))){
-                Console.WriteLine("GetCookies :Name = {0} ; Value = {1} ; Domain = {2}", cookie.Name, cookie.Value, cookie.Domain);
                 yield return cookie;
             }
         }
