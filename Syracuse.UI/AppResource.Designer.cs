@@ -484,6 +484,24 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Align the QR code within the frame.
+        /// </summary>
+        public static string QRCodeScannerBottom {
+            get {
+                return ResourceManager.GetString("QRCodeScannerBottom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please scan QR code.
+        /// </summary>
+        public static string QRCodeScannerTop {
+            get {
+                return ResourceManager.GetString("QRCodeScannerTop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search....
         /// </summary>
         public static string Search {

@@ -258,6 +258,12 @@
   <data name="PasswordForget" xml:space="preserve">
     <value>Forgot your password?</value>
   </data>
+  <data name="QRCodeScannerBottom" xml:space="preserve">
+    <value>Align the QR code within the frame</value>
+  </data>
+  <data name="QRCodeScannerTop" xml:space="preserve">
+    <value>Please scan QR code</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Search...</value>
   </data>
