@@ -178,13 +178,11 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             else
             {
                 this.MenuItemList.Add(new MenuNavigation() { Text = ApplicationResource.PinnedDocuments, IconFontAwesome = "\uf08d", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
-                this.MenuItemList.Add(new MenuNavigation() { Text = ApplicationResource.PressDaily, IconFontAwesome = "\uf1ea", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
-                this.MenuItemList.Add(new MenuNavigation() { Text = ApplicationResource.PressInternational, IconFontAwesome = "\uf1ea", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
                 this.MenuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Download, IconFontAwesome = "\uf019", IsEnabled = true });
             }
+            this.AddStandardView();
             this.MenuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf02a", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
             this.MenuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Library, IconFontAwesome = "\uf66f", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
-            this.AddStandardView();
             this.MenuItemList.Add(new MenuNavigation() { Text = ApplicationResource.About, IconFontAwesome = "\uf05a", IsEnabled = true });
             this.MenuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Disconnect, IconFontAwesome = "\uf011", IsEnabled = true });
             await this.RaiseAllPropertiesChanged();
