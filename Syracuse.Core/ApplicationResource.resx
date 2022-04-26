@@ -254,6 +254,9 @@ Cancellation is final.</value>
   <data name="OnlineConsult" xml:space="preserve">
     <value>View online</value>
   </data>
+  <data name="OpenFileError" xml:space="preserve">
+    <value>We were not able to open this file</value>
+  </data>
   <data name="OtherAccount" xml:space="preserve">
     <value>All my accounts</value>
   </data>

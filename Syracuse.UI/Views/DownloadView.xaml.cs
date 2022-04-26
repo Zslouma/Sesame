@@ -8,6 +8,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Syracuse.Mobitheque.Core;
 
 namespace Syracuse.Mobitheque.UI.Views
 {
@@ -58,43 +59,44 @@ namespace Syracuse.Mobitheque.UI.Views
                 string application = "";
                 string extension = Path.GetExtension(item.DocumentPath);
 
+                await this.TryOpen(item.DocumentPath);
                 // get mimeTye
-                switch (extension.ToLower())
-                {
-                    case ".txt":
-                        application = "text/plain";
-                        await this.TryOpen(item.DocumentPath);
-                        break;
-                    case ".doc":
-                    case ".docx":
-                        application = "application/msword";
-                        await this.TryOpen(item.DocumentPath);
-                        break;
-                    case ".pdf":
-                        application = "application/pdf";
-                        using (var memoryStream = new MemoryStream())
-                        {
-                            var stream = System.IO.File.OpenRead(item.DocumentPath);
-                            await stream.CopyToAsync(memoryStream);
-                            await CrossXamarinFormsSaveOpenPDFPackage.Current.SaveAndView(Guid.NewGuid() + ".pdf", "application/pdf", memoryStream, PDFOpenContext.InApp);
-                        }
-                        break;
-                    case ".xls":
-                    case ".xlsx":
-                        application = "application/vnd.ms-excel";
-                        await this.TryOpen(item.DocumentPath);
-                        break;
-                    case ".jpg":
-                    case ".jpeg":
-                    case ".png":
-                        application = "image/jpeg";
-                        await this.TryOpen(item.DocumentPath);
-                        break;
-                    default:
-                        application = "*/*";
-                        await this.TryOpen(item.DocumentPath);
-                        break;
-                }
+                //switch (extension.ToLower())
+                //{
+                //    case ".txt":
+                //        application = "text/plain";
+                //        await this.TryOpen(item.DocumentPath);
+                //        break;
+                //    case ".doc":
+                //    case ".docx":
+                //        application = "application/msword";
+                //        await this.TryOpen(item.DocumentPath);
+                //        break;
+                //    case ".pdf":
+                //        application = "application/pdf";
+                //        using (var memoryStream = new MemoryStream())
+                //        {
+                //            var stream = System.IO.File.OpenRead(item.DocumentPath);
+                //            await stream.CopyToAsync(memoryStream);
+                //            await CrossXamarinFormsSaveOpenPDFPackage.Current.SaveAndView(Guid.NewGuid() + ".pdf", "application/pdf", memoryStream, PDFOpenContext.InApp);
+                //        }
+                //        break;
+                //    case ".xls":
+                //    case ".xlsx":
+                //        application = "application/vnd.ms-excel";
+                //        await this.TryOpen(item.DocumentPath);
+                //        break;
+                //    case ".jpg":
+                //    case ".jpeg":
+                //    case ".png":
+                //        application = "image/jpeg";
+                //        await this.TryOpen(item.DocumentPath);
+                //        break;
+                //    default:
+                //        application = "*/*";
+                //        await this.TryOpen(item.DocumentPath);
+                //        break;
+                //}
 
             }
 
@@ -104,10 +106,14 @@ namespace Syracuse.Mobitheque.UI.Views
         {
             try
             {
-                await Launcher.TryOpenAsync(new Uri("/storage/emulated/0/Download/image.jpeg"));
+                await Launcher.OpenAsync(new OpenFileRequest
+                {
+                    File = new ReadOnlyFile(path)
+                });
             }
             catch (Exception)
             {
+                this.DownloadView_OnDisplayAlert(ApplicationResource.Warning, ApplicationResource.OpenFileError, ApplicationResource.ButtonValidation);
                 Console.WriteLine("Erreur sur l'ouverture du fichier");
             }
         }

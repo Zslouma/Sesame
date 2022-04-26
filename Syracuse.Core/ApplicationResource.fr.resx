@@ -254,6 +254,9 @@ L’annulation est définitive.</value>
   <data name="OnlineConsult" xml:space="preserve">
     <value>Consulter en ligne</value>
   </data>
+  <data name="OpenFileError" xml:space="preserve">
+    <value>Nous n'avons pas pu ouvrir ce fichier</value>
+  </data>
   <data name="OtherAccount" xml:space="preserve">
     <value>Tous mes comptes</value>
   </data>
