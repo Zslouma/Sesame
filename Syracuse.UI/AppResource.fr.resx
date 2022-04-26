@@ -187,7 +187,7 @@
     <value>Consulter en ligne</value>
   </data>
   <data name="DownloadAllFile" xml:space="preserve">
-    <value>Telecharger tous les documents</value>
+    <value>Télécharger tous les documents</value>
   </data>
   <data name="ErrorLibraryWebSite" xml:space="preserve">
     <value>Erreur: nous ne somme pas parvenis à contacter les informations de votre Bibliothéque</value>

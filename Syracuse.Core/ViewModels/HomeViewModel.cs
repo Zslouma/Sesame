@@ -195,6 +195,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
             this.IsEvent = user.IsEvent;
             await this.GetRedirectURL();
+            await this.RaiseAllPropertiesChanged();
             this.IsBusy = false;
             await base.Initialize();
         }
