@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <views:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-             xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
-             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
-             x:Class="Syracuse.Mobitheque.UI.Views.SearchDetailsView"
-             xmlns:local="clr-namespace:Syracuse.Mobitheque.UI"
-             x:TypeArguments="viewModels:SearchDetailsViewModel"
-             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
-    
-    
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      mc:Ignorable="d"
+                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                      xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
+                      xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+                      x:Class="Syracuse.Mobitheque.UI.Views.SearchDetailsView"
+                      xmlns:local="clr-namespace:Syracuse.Mobitheque.UI"
+                      x:TypeArguments="viewModels:SearchDetailsViewModel"
+                      xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+
+
     <ContentPage.Content>
         <yummy:PancakeView  x:Name="pancakeView" Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
             <Grid>
@@ -50,55 +50,42 @@
                                                     </Grid.ColumnDefinitions>
                                                     <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical">
                                                         <StackLayout HeightRequest="120"  WidthRequest="90"  Margin="5">
-                                                        <Frame VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0">
-                                                            <Frame.HasShadow>
-                                                                <OnPlatform x:TypeArguments="x:Boolean">
-                                                                    <On Platform="iOS">false</On>
-                                                                    <On Platform="Android">true</On>
-                                                                </OnPlatform>
-                                                            </Frame.HasShadow>
-                                                            <Grid  HeightRequest="120"  WidthRequest="90">
-                                                                <Grid.RowDefinitions>
-                                                                    <RowDefinition Height="120"/>
-                                                                </Grid.RowDefinitions>
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="90"/>
-                                                                </Grid.ColumnDefinitions>
-                                                                <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" x:Name="image" Source="{Binding FieldList.Image}" ErrorPlaceholder="image_not_found.jpg" Aspect="AspectFill" DownsampleToViewSize="True" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HeightRequest="120"  WidthRequest="90"/>
-                                                                <AbsoluteLayout Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                                                    <ActivityIndicator  Color="Gray"  AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1">
-                                                                        <ActivityIndicator.Triggers >
-                                                                            <DataTrigger TargetType="ActivityIndicator" Binding="{Binding Source={x:Reference image}, Path=IsLoading}" Value="True">
-                                                                                <Setter Property="IsRunning" Value="True"/>
-                                                                                <Setter Property="IsVisible" Value="True"/>
-                                                                            </DataTrigger>
+                                                            <Frame VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0">
+                                                                <Frame.HasShadow>
+                                                                    <OnPlatform x:TypeArguments="x:Boolean">
+                                                                        <On Platform="iOS">false</On>
+                                                                        <On Platform="Android">true</On>
+                                                                    </OnPlatform>
+                                                                </Frame.HasShadow>
+                                                                <Grid  HeightRequest="120"  WidthRequest="90">
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="120"/>
+                                                                    </Grid.RowDefinitions>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="90"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" x:Name="image" Source="{Binding FieldList.Image}" ErrorPlaceholder="image_not_found.jpg" Aspect="AspectFill" DownsampleToViewSize="True" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HeightRequest="120"  WidthRequest="90"/>
+                                                                    <AbsoluteLayout Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                                                        <ActivityIndicator  Color="Gray"  AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1">
+                                                                            <ActivityIndicator.Triggers >
+                                                                                <DataTrigger TargetType="ActivityIndicator" Binding="{Binding Source={x:Reference image}, Path=IsLoading}" Value="True">
+                                                                                    <Setter Property="IsRunning" Value="True"/>
+                                                                                    <Setter Property="IsVisible" Value="True"/>
+                                                                                </DataTrigger>
 
-                                                                            <DataTrigger TargetType="ActivityIndicator" Binding="{Binding Source={x:Reference image}, Path=IsLoading}" Value="False">
-                                                                                <Setter Property="IsRunning" Value="False"/>
-                                                                                <Setter Property="IsVisible" Value="False"/>
-                                                                            </DataTrigger>
-                                                                        </ActivityIndicator.Triggers>
-                                                                    </ActivityIndicator>
-                                                                </AbsoluteLayout>
-                                                            </Grid>
+                                                                                <DataTrigger TargetType="ActivityIndicator" Binding="{Binding Source={x:Reference image}, Path=IsLoading}" Value="False">
+                                                                                    <Setter Property="IsRunning" Value="False"/>
+                                                                                    <Setter Property="IsVisible" Value="False"/>
+                                                                                </DataTrigger>
+                                                                            </ActivityIndicator.Triggers>
+                                                                        </ActivityIndicator>
+                                                                    </AbsoluteLayout>
+                                                                </Grid>
 
-                                                        </Frame>
+                                                            </Frame>
                                                         </StackLayout>
                                                         <Image   HeightRequest="30" WidthRequest="100" IsVisible="{Binding DisplayValues.HaveStar}" Source="{Binding DisplayValues.Star}" VerticalOptions="Start"/>
                                                     </StackLayout>
-                                                    <!--<StackLayout Grid.Row="0" Grid.Column="0"  Orientation="Vertical">
-                                                        <Frame VerticalOptions="Center" BorderColor="LightGray" Grid.Row="0" Grid.Column="0" IsClippedToBounds="True" Padding="0">
-                                                            <Frame.HasShadow>
-                                                                <OnPlatform x:TypeArguments="x:Boolean">
-                                                                    <On Platform="iOS">false</On>
-                                                                    <On Platform="Android">true</On>
-                                                                </OnPlatform>
-                                                            </Frame.HasShadow>
-                                                            <ffimageloading:CachedImage Source="{Binding FieldList.Image}" LoadingPlaceholder="loading_gif.gif" LoadingDelay="50000"/> 
-                                                            --><!--<Image  Aspect="AspectFill" HeightRequest="120" WidthRequest="90"  Source="{Binding FieldList.Image}"/>--><!--
-                                                        </Frame>
-                                                        <Image   HeightRequest="30" WidthRequest="100" IsVisible="{Binding DisplayValues.HaveStar}" Source="{Binding DisplayValues.Star}" VerticalOptions="Start"/>
-                                                    </StackLayout>-->
                                                     <StackLayout Grid.Row="0" Grid.Column="1" Padding="10,0,10,10">
                                                         <material:MaterialLabel FontSize="Medium" FontAttributes="Bold" VerticalOptions="Start" VerticalTextAlignment="Start" Text="{Binding FieldList.Title[0]}"/>
                                                         <material:MaterialLabel FontSize="Small" Text="{Binding FieldList.shortDesc}"/>
@@ -123,10 +110,10 @@
                                                         </StackLayout>
                                                         <StackLayout IsVisible="{Binding FieldList.HasZipUrl}">
                                                             <Button Text="{Binding FieldList.GetZipLabel}"
-                                                                TextColor="White"
-                                                                BackgroundColor="{d:DynamicResource AppBackgroundColor}"
-                                                                CommandParameter="{Binding FieldList.GetZipUri}"
-                                                                Clicked="OpenBrowser_OnClicked"/>
+                                                                    TextColor="White"
+                                                                    BackgroundColor="{d:DynamicResource AppBackgroundColor}"
+                                                                    CommandParameter="{Binding FieldList.GetZipUri}"
+                                                                    Clicked="OpenBrowser_OnClicked"/>
                                                         </StackLayout>
                                                     </StackLayout>
                                                 </Grid>
@@ -219,12 +206,10 @@
 
                                                                         <BoxView BackgroundColor="{Binding StatusColor}" Grid.Row="0" Grid.Column="0" />
                                                                         <StackLayout  Grid.Row="0" Grid.Column="1">
-
                                                                             <Label HorizontalOptions="Fill" TextColor="Gray" Text="{Binding Site}" />
                                                                             <StackLayout Orientation="Horizontal">
                                                                                 <Label TextColor="Gray" Text="{Binding DisplayValue}"/>
                                                                             </StackLayout>
-
                                                                         </StackLayout>
                                                                     </Grid>
                                                                 </StackLayout>
@@ -240,7 +225,7 @@
                             </DataTemplate>
                         </CarouselView.ItemTemplate>
                     </CarouselView>
-                    <Label x:Name="IndexPage" IsVisible="{Binding IsPositionVisible}" HorizontalOptions="Center" Margin="0,0,0,15" Text="{Binding DisplayPosition}"></Label>
+                    <Label x:Name="IndexPage" IsVisible="{Binding IsPositionVisible}" HorizontalOptions="Center" Margin="0,0,0,15" Text="{Binding DisplayPosition}"/>
                 </StackLayout>
                 <AbsoluteLayout IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
                     <ActivityIndicator IsRunning="True"  AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />

@@ -39,9 +39,25 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
         }
 
-        public Task GoToDetailView(Result item)
+        public async Task GoToDetailView(Result item)
         {
-            throw new NotImplementedException();
+            var parameter = new SearchResult[2];
+            for (int i = 0; i < 2; i++)
+            {
+                parameter[i] = new SearchResult();
+                parameter[i].D = new D();
+            }
+            Result[] tmpResults = { new Result() };
+            parameter[0].D.Results = tmpResults;
+            parameter[0].D.Results[0] = item;
+            parameter[1].D.Results = tmpResults;
+            parameter[1].D.Results = this.Results;
+            var tempo = new SearchDetailsParameters()
+            {
+                parameter = parameter,
+                nbrResults = this.Results.Length.ToString()
+            };
+            await this.navigationService.Navigate<SearchDetailsViewModel, SearchDetailsParameters>(tempo);
         }
 
         private MvxAsyncCommand<string> loadMore;
@@ -125,7 +141,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             await RaiseAllPropertiesChanged();
             this.ForceListUpdate();
             await RaiseAllPropertiesChanged();
-
         }
 
 
@@ -150,7 +165,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 this.NotCurrentBasket = true;
                 this.DisplayAlert(ApplicationResource.Error, basket.Errors[0].Msg, ApplicationResource.ButtonValidation);
-                return new Result[0] ;
+                return new Result[0];
             }
             if (basket != null && basket.D != null && basket.Success)
             {

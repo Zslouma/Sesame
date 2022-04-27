@@ -15,9 +15,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
     public class SearchDetailsViewModel : BaseViewModel<SearchDetailsParameters, SearchResult>
     {
+        #region Variables
         private readonly IRequestService requestService;
 
-        private readonly IMvxNavigationService navigationService ;
+        private readonly IMvxNavigationService navigationService;
 
         private SearchLibraryResult library;
 
@@ -60,9 +61,11 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         public int Position
         {
             get => this.position;
-            set{
+            set
+            {
                 this.DisplayPosition = (value + 1).ToString() + " / " + this.NbrResults;
-                SetProperty(ref this.position, value); 
+                this.RaiseAllPropertiesChanged();
+                SetProperty(ref this.position, value);
             }
         }
 
@@ -175,6 +178,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         public CookiesSave user { get; set; }
 
+        #endregion
+
+        #region Commands
+
         private MvxAsyncCommand<string> searchCommand;
         public MvxAsyncCommand<string> SearchCommand => this.searchCommand ??
         (this.searchCommand = new MvxAsyncCommand<string>((text) => this.PerformSearch(text)));
@@ -186,10 +193,11 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.navigationService = navigationService;
             this.requestService = requestService;
         }
+        #endregion
 
         private string setStar(long star)
         {
-            if (star == 1)      return "https://upload.wikimedia.org/wikipedia/commons/d/dd/Star_rating_1_of_5.png";
+            if (star == 1) return "https://upload.wikimedia.org/wikipedia/commons/d/dd/Star_rating_1_of_5.png";
             else if (star == 2) return "https://upload.wikimedia.org/wikipedia/commons/9/95/Star_rating_2_of_5.png";
             else if (star == 3) return "https://upload.wikimedia.org/wikipedia/commons/2/2f/Star_rating_3_of_5.png";
             else if (star == 4) return "https://upload.wikimedia.org/wikipedia/commons/f/fa/Star_rating_4_of_5.png";
@@ -201,32 +209,31 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             try
             {
 
-            this.IsBusy = true;
-            this.IsCarouselVisibility = false;
-            await this.CanHolding();
-            this.SearchOptions = parameter.searchOptions;
-            this.NbrResults = parameter.nbrResults;
-            var parameterTempo = parameter.parameter;
-            this.ItemsSource = new ObservableCollection<Result>(parameterTempo[1].D.Results);
-            var tempo = parameterTempo[1].D.Results.ToList().FindIndex(x => x == parameterTempo[0].D.Results[0]);
-            this.StartDataPosition = tempo - 10 >= 0 ? tempo - 10 : 0;
-            this.EndDataPosition = tempo + 10 < parameterTempo[1].D.Results.Length ? tempo + 10 : parameterTempo[1].D.Results.Length - 1;
-            await this.FormateToCarrousel(this.StartDataPosition, this.EndDataPosition, false);
-            this.CurrentItem = this.ItemsSource[tempo];
-            this.Position = tempo;
-            this.IsPositionVisible = true;
-            if (tempo >= (this.ItemsSource.Count() - 5) && int.Parse(this.NbrResults) > this.ItemsSource.Count)
-            {
-                await LoadMore(false);
-            }
-            this.ItemsSource[0] = this.ItemsSource[0].Clone();
+                this.IsBusy = true;
+                this.IsCarouselVisibility = false;
+                await this.CanHolding();
+                this.SearchOptions = parameter.searchOptions;
+                this.NbrResults = parameter.nbrResults;
+                var parameterTempo = parameter.parameter;
+                this.ItemsSource = new ObservableCollection<Result>(parameterTempo[1].D.Results);
+                var tempo = parameterTempo[1].D.Results.ToList().FindIndex(x => x == parameterTempo[0].D.Results[0]);
+                this.StartDataPosition = tempo - 10 >= 0 ? tempo - 10 : 0;
+                this.EndDataPosition = tempo + 10 < parameterTempo[1].D.Results.Length ? tempo + 10 : parameterTempo[1].D.Results.Length - 1;
+                await this.FormateToCarrousel(this.StartDataPosition, this.EndDataPosition, false);
+                this.CurrentItem = this.ItemsSource[tempo];
+                this.Position = tempo;
+                this.IsPositionVisible = true;
+                if (tempo >= (this.ItemsSource.Count() - 5) && int.Parse(this.NbrResults) > this.ItemsSource.Count)
+                {
+                    await LoadMore(false);
+                }
+                this.ItemsSource[0] = this.ItemsSource[0].Clone();
 
-            await this.RaisePropertyChanged(nameof(this.ItemsSource));
-            await this.RaisePropertyChanged(nameof(this.CurrentItem));
-            await this.RaisePropertyChanged(nameof(this.Position));
-            this.ForceListUpdate();
-            
-            this.IsCarouselVisibility = true;
+                await this.RaisePropertyChanged(nameof(this.ItemsSource));
+                await this.RaisePropertyChanged(nameof(this.CurrentItem));
+                await this.RaisePropertyChanged(nameof(this.Position));
+                this.ForceListUpdate();
+                this.IsCarouselVisibility = true;
                 await this.RaisePropertyChanged(nameof(this.IsCarouselVisibility));
                 await this.RaiseAllPropertiesChanged();
                 this.IsBusy = false;
@@ -380,7 +387,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                         this.ItemsSource[i].FieldList.ZIPURL = new string[] { this.ItemsSource[i].FriendlyUrl.ToString() };
                         this.ItemsSource[i].FieldList.GetZipUri = this.ItemsSource[i].FriendlyUrl.ToString();
                     }
-                   
+
                 }
 
             }
@@ -445,7 +452,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                         if (value.Value)
                         {
                             var itemObject = item.GetType().GetProperty(value.Key)?.GetValue(item, null);
-                            string itemValue = itemObject != null? itemObject.ToString() : "";
+                            string itemValue = itemObject != null ? itemObject.ToString() : "";
                             if (String.IsNullOrEmpty(itemValue))
                             {
                                 DisplayHoldings.Add(value.Key, false);
@@ -510,29 +517,33 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 return uri;
             }
-            
+
         }
 
         public async Task LoadMore(bool endIsBusy = true)
         {
-            this.InLoadMore = true;
-            this.SearchOptions.Query.Page += 1;
-            SearchResult search = await this.requestService.Search(this.SearchOptions);
-            if (search != null && !search.Success)
+            if (this.SearchOptions != null)
             {
-                this.DisplayAlert(ApplicationResource.Error, search.Errors?[0]?.Msg, ApplicationResource.ButtonValidation);
-                return;
-            }
-            else
-            {
-                await this.FormateToCarrousel(search?.D?.Results);
+                this.InLoadMore = true;
+                this.SearchOptions.Query.Page += 1;
+                SearchResult search = await this.requestService.Search(this.SearchOptions);
+                if (search != null && !search.Success)
+                {
+                    this.DisplayAlert(ApplicationResource.Error, search.Errors?[0]?.Msg, ApplicationResource.ButtonValidation);
+                    return;
+                }
+                else
+                {
+                    await this.FormateToCarrousel(search?.D?.Results);
+                }
+
+                if (endIsBusy)
+                {
+                    this.IsBusy = false;
+                }
+                this.InLoadMore = false;
             }
 
-            if (endIsBusy)
-            {
-                this.IsBusy = false;
-            }
-            this.InLoadMore = false;
         }
 
         private async Task PerformSearch(string search = null, string docbase = "SYRACUSE")
@@ -547,7 +558,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 if (search == null)
                 {
                     search = this.Query;
-                } else
+                }
+                else
                 {
                     this.Query = search;
                 }
@@ -560,7 +572,6 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
                 this.Library = res;
             }
-
         }
 
         public async Task Holding(string Holdingid, string RecordId, string BaseName)
@@ -570,7 +581,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 HoldingId = Holdingid,
                 RecordId = RecordId,
                 BaseName = BaseName
-                
+
             };
 
             PlaceReservationResult res = await this.requestService.PlaceReservation(new PlaceReservationOptions() { HoldingItem = options });
