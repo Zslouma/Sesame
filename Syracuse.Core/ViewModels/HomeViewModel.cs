@@ -236,7 +236,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
             else
             {
-                this.DisplayAlert(ApplicationResource.Error, statusDownload.Errors?[0]?.Msg != null ? statusDownload.Errors?[0]?.Msg : ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
+                this.DisplayAlert(ApplicationResource.Error, statusDownload.Errors?[0]?.Msg != null ? String.Format(ApplicationResource.DownloadGetFileError, result.FieldList.Title[0], statusDownload.Errors?[0]?.Msg) : ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
             }
             this.isBusy = false;
             this.ForceListUpdate();

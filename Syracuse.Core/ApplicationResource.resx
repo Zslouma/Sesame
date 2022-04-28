@@ -203,6 +203,12 @@ Cancellation is final.</value>
   <data name="Download" xml:space="preserve">
     <value>Downloads</value>
   </data>
+  <data name="DownloadGetFileError" xml:space="preserve">
+    <value>The file {0} has not been uploaded.
+
+The error is as follows: 
+{1}</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>

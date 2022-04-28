@@ -315,6 +315,18 @@ namespace Syracuse.Mobitheque.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The file {0} has not been uploaded.
+        ///
+        ///The error is as follows: 
+        ///{1}.
+        /// </summary>
+        public static string DownloadGetFileError {
+            get {
+                return ResourceManager.GetString("DownloadGetFileError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string Error {
