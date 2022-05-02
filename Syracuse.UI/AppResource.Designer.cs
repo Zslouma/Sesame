@@ -502,6 +502,15 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Flash the QR Code.
+        /// </summary>
+        public static string ScanNow {
+            get {
+                return ResourceManager.GetString("ScanNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search....
         /// </summary>
         public static string Search {

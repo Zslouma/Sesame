@@ -42,7 +42,7 @@
                                         CommandParameter="{Binding Source={x:Reference txtBarcode}, Path=Text}">
                                     </Button>
                                     <Button 
-                                        Text="Scan Now "
+                                        Text="{x:Static local:AppResource.ScanNow}"
                                         Padding="10"
                                         CornerRadius="15"
                                         BackgroundColor="{d:DynamicResource WhiteTextColor}"

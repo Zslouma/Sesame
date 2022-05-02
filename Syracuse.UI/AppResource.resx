@@ -264,6 +264,9 @@
   <data name="QRCodeScannerTop" xml:space="preserve">
     <value>Please scan QR code</value>
   </data>
+  <data name="ScanNow" xml:space="preserve">
+    <value>Flash the QR Code</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Search...</value>
   </data>
