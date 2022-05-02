@@ -25,7 +25,13 @@
                         <StackLayout   Padding="35,0" VerticalOptions="StartAndExpand"  >
                             <StackLayout Orientation="Vertical" Spacing="20" >
                                 <Button  FontSize="Header" Clicked="btnScan_Clicked" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="10,20,10,0" Padding="10"
-                                    CornerRadius="15" BackgroundColor="Transparent" Text="&#xf029;" TextColor="{d:DynamicResource WhiteTextColor}" FontFamily="{StaticResource FontAwesomeSolid}" BorderColor="LightGray" BorderWidth="1"/>
+                                    CornerRadius="15" BackgroundColor="Transparent" Text="&#xf029;"  TextColor="{d:DynamicResource WhiteTextColor}" FontFamily="{StaticResource FontAwesomeSolid}" BorderColor="LightGray" BorderWidth="1">
+                                    <Button.FontSize>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <On Platform="iOS">70</On>
+                                        </OnPlatform>
+                                    </Button.FontSize>
+                                </Button>
                                 <StackLayout Orientation="Vertical" Spacing="20" >
                                     <Label Margin="3,0,0,-15" Text="{x:Static local:AppResource.LibraryTitle}"  FontAttributes="Bold" TextColor="{d:DynamicResource WhiteTextColor}" />
                                     <local1:MyEntry x:Name="txtBarcode" Completed="InvokeCompleted"   FontAttributes="Bold" Placeholder="URL" TextColor="{d:DynamicResource WhiteTextColor}" PlaceholderColor="{d:DynamicResource WhiteTextColor}"/>

@@ -57,7 +57,7 @@
                                     <Frame>
                                         <StackLayout Orientation="Vertical" Padding="5, 0, 5, 0">
                                             <Grid HeightRequest="90">
-                                                <ffimageloading:CachedImage VerticalOptions="Fill" HorizontalOptions="Fill" ErrorPlaceholder="https://graphisme-syracuse.archimed.fr/basicfilesdownload.ashx?itemGuid=05E01B10-51AE-4EDF-AEF2-64E696038A71"  Aspect="AspectFill" Source="{Binding FieldList.Image}" HeightRequest="90"/>
+                                                <ffimageloading:CachedImage x:Name="image" VerticalOptions="Fill" HorizontalOptions="Fill" ErrorPlaceholder="https://graphisme-syracuse.archimed.fr/basicfilesdownload.ashx?itemGuid=05E01B10-51AE-4EDF-AEF2-64E696038A71"  Aspect="AspectFill" Source="{Binding FieldList.Image}" HeightRequest="90"/>
                                                 <AbsoluteLayout Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                                                     <ActivityIndicator  Color="Gray"  AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1">
                                                         <ActivityIndicator.Triggers >

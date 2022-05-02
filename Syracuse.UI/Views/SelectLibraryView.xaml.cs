@@ -86,6 +86,7 @@ namespace Syracuse.Mobitheque.UI.Views
                     Device.BeginInvokeOnMainThread(() =>
                     {
                         Navigation.PopAsync(true);
+                        txtBarcode.Text = "";
                         txtBarcode.Text = result.Text;
                         this.ViewModel.CanSubmit = true;
                         this.ViewModel.ValidateHandler(result.Text);
