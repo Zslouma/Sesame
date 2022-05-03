@@ -16,7 +16,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         }
 
-        private CookiesSave cookiesSave;
+        private CookiesSave cookiesSave = new CookiesSave();
         public CookiesSave CookiesSave
         {
             get => this.cookiesSave;
@@ -27,13 +27,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         }
 
-        public DisplayCardViewModel(CookiesSave cookiesSave)
+        public DisplayCardViewModel()
         {
-            this.CookiesSave = cookiesSave;
+            
         }
 
         public async override Task Initialize()
         {
+            this.CookiesSave = await App.Database.GetActiveUser();
             await base.Initialize();          
         }
     }

@@ -22,6 +22,13 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set => SetProperty(ref this.displayCardViewModel, value);
         }
 
+        private AccountUserDemandsViewModel accountUserDemandsViewModel;
+        public AccountUserDemandsViewModel AccountUserDemandsViewModel
+        {
+            get => this.accountUserDemandsViewModel;
+            set => SetProperty(ref this.accountUserDemandsViewModel, value);
+        }
+
         private SummaryAccount accountSummary;
         public SummaryAccount SummaryAccount
         {
@@ -46,10 +53,9 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.requestService = requestService;
             this.navigationService = navigationService;
 
-            CookiesSave CookiesSave = App.Database.GetByIDAsync().Result;
-
             this.AccountInfoViewModel = new AccountInfoViewModel(navigationService, requestService);
-            this.DisplayCardViewModel = new DisplayCardViewModel(CookiesSave);
+            this.AccountUserDemandsViewModel = new AccountUserDemandsViewModel(navigationService, requestService);
+            this.DisplayCardViewModel = new DisplayCardViewModel();
 
         }
 
@@ -73,7 +79,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         public async override Task Initialize()
         {
-            await base.Initialize();
+
 
             var response = await this.requestService.GetSummary();
             this.SummaryAccount = response.D.AccountSummary;
@@ -84,6 +90,8 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
             await this.AccountInfoViewModel.Initialize();
             await this.DisplayCardViewModel.Initialize();
+            await this.AccountUserDemandsViewModel.Initialize();
+            await base.Initialize();
         }
     }
 }

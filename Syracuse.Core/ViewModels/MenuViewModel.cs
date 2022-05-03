@@ -30,14 +30,17 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set => SetProperty(ref this.menuItemList, value);
         }
 
+        private ObservableCollection<MenuNavigation> menuItemListTempo;
+        public ObservableCollection<MenuNavigation> MenuItemListTempo
+        {
+            get => this.menuItemListTempo;
+            set => SetProperty(ref this.menuItemListTempo, value);
+        }
+
         private Dictionary<string, string> DictionaryViewModelLabel = new Dictionary<string, string>();
 
-        private IMvxAsyncCommand<string> showDetailPageCommand;
-        public IMvxAsyncCommand<string> ShowDetailPageCommand
-        {
-            get => this.showDetailPageCommand;
-            set => SetProperty(ref this.showDetailPageCommand, value);
-        }
+        private MvxAsyncCommand<string> showDetailPageCommand;
+        public  MvxAsyncCommand<string> ShowDetailPageCommand => this.showDetailPageCommand = new MvxAsyncCommand<string>(ShowDetailPageAsync);
 
         private String displayName;
         public String DisplayName
@@ -98,13 +101,12 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             UnicodeEncoding unicode = new UnicodeEncoding();
             foreach (var item in this.StandartViewLists)
             {
-                this.menuItemList.Add(new MenuNavigation() { Text = item.ViewName, IsEnabled = App.AppState.NetworkConnection, IconFontAwesome = item.ViewIcone });
+                this.MenuItemListTempo.Add(new MenuNavigation() { Text = item.ViewName, IsEnabled = App.AppState.NetworkConnection, IconFontAwesome = item.ViewIcone });
             }
         }
 
         public async Task NavigationStandardView( string name)
         {
-            UnicodeEncoding unicode = new UnicodeEncoding();
             foreach (var item in this.StandartViewLists)
             {
                 if (name == item.ViewName)
@@ -145,7 +147,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 }
             }
             await this.CreateMenuItemList();
-            this.ShowDetailPageCommand = new MvxAsyncCommand<string>(this.ShowDetailPageAsync);
+            await this.RaiseAllPropertiesChanged();
         }
 
         public override void Start()
@@ -165,25 +167,26 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         private async Task CreateMenuItemList()
         {
-            this.MenuItemList = new ObservableCollection<MenuNavigation>() { };
-            this.MenuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Home, IconFontAwesome = "\uf015", IsSelected = true, IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
-            this.MenuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Account, IconFontAwesome = "\uf007", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
-            this.MenuItemList.Add(new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconFontAwesome = "\uf0c0" , IsEnabled = true });
+            this.MenuItemListTempo = new ObservableCollection<MenuNavigation>() { };
+            this.MenuItemListTempo.Add(new MenuNavigation() { Text = ApplicationResource.Home, IconFontAwesome = "\uf015", IsSelected = true, IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
+            this.MenuItemListTempo.Add(new MenuNavigation() { Text = ApplicationResource.Account, IconFontAwesome = "\uf007", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
+            this.MenuItemListTempo.Add(new MenuNavigation() { Text = ApplicationResource.OtherAccount, IconFontAwesome = "\uf0c0" , IsEnabled = true });
             if (!IsKm)
             {
-                this.MenuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Bookings, IconFontAwesome = "\uf017", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
-                this.MenuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Loans, IconFontAwesome = "\uf02d", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
+                this.MenuItemListTempo.Add(new MenuNavigation() { Text = ApplicationResource.Bookings, IconFontAwesome = "\uf017", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
+                this.MenuItemListTempo.Add(new MenuNavigation() { Text = ApplicationResource.Loans, IconFontAwesome = "\uf02d", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
             }
             else
             {
-                this.MenuItemList.Add(new MenuNavigation() { Text = ApplicationResource.PinnedDocuments, IconFontAwesome = "\uf08d", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
-                this.MenuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Download, IconFontAwesome = "\uf019", IsEnabled = true });
+                this.MenuItemListTempo.Add(new MenuNavigation() { Text = ApplicationResource.PinnedDocuments, IconFontAwesome = "\uf08d", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
+                this.MenuItemListTempo.Add(new MenuNavigation() { Text = ApplicationResource.Download, IconFontAwesome = "\uf019", IsEnabled = true });
             }
             this.AddStandardView();
-            this.MenuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf02a", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
-            this.MenuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Library, IconFontAwesome = "\uf1ad", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
-            this.MenuItemList.Add(new MenuNavigation() { Text = ApplicationResource.About, IconFontAwesome = "\uf05a", IsEnabled = true });
-            this.MenuItemList.Add(new MenuNavigation() { Text = ApplicationResource.Disconnect, IconFontAwesome = "\uf011", IsEnabled = true });
+            this.MenuItemListTempo.Add(new MenuNavigation() { Text = ApplicationResource.Scan, IconFontAwesome = "\uf02a", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
+            this.MenuItemListTempo.Add(new MenuNavigation() { Text = ApplicationResource.Library, IconFontAwesome = "\uf1ad", IsEnabled = App.AppState.NetworkConnection, Color = App.AppState.NetworkConnection ? "WhiteSmoke" : "LightSlateGray" });
+            this.MenuItemListTempo.Add(new MenuNavigation() { Text = ApplicationResource.About, IconFontAwesome = "\uf05a", IsEnabled = true });
+            this.MenuItemListTempo.Add(new MenuNavigation() { Text = ApplicationResource.Disconnect, IconFontAwesome = "\uf011", IsEnabled = true });
+            this.MenuItemList = MenuItemListTempo;
             await this.RaiseAllPropertiesChanged();
         }
 
@@ -201,13 +204,11 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     item.IsSelected = false;
                 }
             }
-            this.MenuItemList = new ObservableCollection<MenuNavigation>();
             this.MenuItemList = MenuItemListtempo;
             await this.RaiseAllPropertiesChanged();
         }
-        private async Task ShowDetailPageAsync(string name)
+        private async Task CheckNavigation(string name)
         {
-            await this.RefreshMenuItem(name);
             if (name == ApplicationResource.Home)
                 _ = this.navigationService.Navigate<HomeViewModel>();
             else if (name == ApplicationResource.PinnedDocuments)
@@ -215,7 +216,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             else if (name == ApplicationResource.Download)
                 _ = this.navigationService.Navigate<DownloadViewModel>();
             else if (name == ApplicationResource.Bookings)
-                _ = this.navigationService.Navigate<BookingViewModel>();
+                await this.navigationService.Navigate<BookingViewModel>();
             else if (name == ApplicationResource.Scan)
                 _ = this.navigationService.Navigate<BarcodeSearchModel>();
             else if (name == ApplicationResource.Loans)
@@ -229,21 +230,31 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 var user = await App.Database.GetActiveUser();
                 user.Active = false;
                 await App.Database.SaveItemAsync(user);
-                await this.navigationService.Navigate<SelectLibraryViewModel>();
+                _ = this.navigationService.Navigate<SelectLibraryViewModel>();
             }
             else if (name == ApplicationResource.Library)
-                await this.navigationService.Navigate<LibraryViewModel>();
+                _ = this.navigationService.Navigate<LibraryViewModel>();
             else if (name == ApplicationResource.About)
-                await this.navigationService.Navigate<AboutViewModel>();
-            await this.NavigationStandardView(name);
-            /*
-             * Close left side menu. 
-             */
-            if (Application.Current.MainPage is MasterDetailPage masterDetailPage)
-                masterDetailPage.IsPresented = false;
-            else if (Application.Current.MainPage is NavigationPage navigationPage && 
-                     navigationPage.CurrentPage is MasterDetailPage nestedMasterDetail)
-                nestedMasterDetail.IsPresented = false;
+                _ = this.navigationService.Navigate<AboutViewModel>();
+            else
+                _ = this.NavigationStandardView(name);
+            await this.RaiseAllPropertiesChanged();
+        }
+        private async Task ShowDetailPageAsync(string name)
+        {
+            await this.RefreshMenuItem(name);
+            if (MenuItemList.Single(i => i.Text == name).IsEnabled)
+            {
+                await this.CheckNavigation(name);
+                /*
+                 * Close left side menu. 
+                 */
+                if (Application.Current.MainPage is MasterDetailPage masterDetailPage)
+                    masterDetailPage.IsPresented = false;
+                else if (Application.Current.MainPage is NavigationPage navigationPage &&
+                         navigationPage.CurrentPage is MasterDetailPage nestedMasterDetail)
+                    nestedMasterDetail.IsPresented = false;
+            }
         }
 
         /// <summary>
