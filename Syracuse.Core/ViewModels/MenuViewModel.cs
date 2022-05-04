@@ -204,6 +204,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     item.IsSelected = false;
                 }
             }
+            this.MenuItemList = new ObservableCollection<MenuNavigation>();
             this.MenuItemList = MenuItemListtempo;
             await this.RaiseAllPropertiesChanged();
         }
@@ -238,6 +239,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 _ = this.navigationService.Navigate<AboutViewModel>();
             else
                 _ = this.NavigationStandardView(name);
+            await this.RefreshMenuItem(name);
             await this.RaiseAllPropertiesChanged();
         }
         private async Task ShowDetailPageAsync(string name)
