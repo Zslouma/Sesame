@@ -31,7 +31,8 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             this.handler = new HttpClientHandler()
             {
                 UseCookies = true,
-                CookieContainer = this.cookies
+                CookieContainer = this.cookies,
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
 
             };
             this.token = this.Timestamp();
@@ -49,7 +50,8 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 var tempohandler = new HttpClientHandler()
                 {
                     UseCookies = true,
-                    CookieContainer = this.cookies
+                    CookieContainer = this.cookies,
+                    ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
 
                 };
                 tempohandler.AllowAutoRedirect = false;
@@ -170,7 +172,8 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             this.handler = new HttpClientHandler()
             {
                 UseCookies = true,
-                CookieContainer = this.cookies
+                CookieContainer = this.cookies,
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
             };
         }
 
@@ -180,7 +183,8 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
             this.handler = new HttpClientHandler()
             {
                 UseCookies = true,
-                CookieContainer = this.cookies
+                CookieContainer = this.cookies,
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
 
             };
         }

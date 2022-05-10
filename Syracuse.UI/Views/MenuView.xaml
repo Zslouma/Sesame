@@ -16,13 +16,13 @@
                         Value="True" />
                 </OnPlatform>
             </StackLayout.IsVisible>
-            <!-- -->
-            <ListView x:Name="Items"
+            <CollectionView x:Name="Items"
+                      IsVisible="{Binding MenuIsVisible}"
                       ItemsSource="{Binding MenuItemList}"
-                      IsPullToRefreshEnabled="False"
-                      SeparatorVisibility="None"
+                      SelectionMode="Single"
+                      SelectionChanged="OnItemSelected"
                       BackgroundColor="{DynamicResource AppLigthBackgroundColor}">
-                <ListView.Header>
+                <CollectionView.Header>
                     <StackLayout Orientation="Vertical"  Margin="0,0,0,15">
                         <StackLayout Orientation="Vertical"
                                      HorizontalOptions="Center"
@@ -44,18 +44,18 @@
                                    FontSize="Small"></Label>
                         </StackLayout>
                     </StackLayout>
-                </ListView.Header>
-                
-                <ListView.ItemTemplate>
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell >
-                            <StackLayout HorizontalOptions="Fill" Orientation="Horizontal" Padding="5, 0, 15, 0"  >
-                                <StackLayout.GestureRecognizers>
+                        <Frame BackgroundColor="Transparent" Padding="5, 0, 15, 0" >
+                            <StackLayout  HorizontalOptions="Fill" Orientation="Horizontal" Padding="10"  >
+                                <!--<StackLayout.GestureRecognizers>
                                     <TapGestureRecognizer
                                         Command="{Binding BindingContext.DataContext.ShowDetailPageCommand, Source={x:Reference MainContent}}"
                                         CommandParameter="{Binding Text}">
                                     </TapGestureRecognizer>
-                                </StackLayout.GestureRecognizers>
+                                </StackLayout.GestureRecognizers>-->
                                 <Grid HorizontalOptions="FillAndExpand" >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="1*" />
@@ -90,10 +90,10 @@
                                 </Grid>
                             </StackLayout>
                             
-                        </ViewCell>
+                        </Frame>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </ContentPage.Content>
 </views:MvxContentPage>

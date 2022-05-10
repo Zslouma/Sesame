@@ -23,7 +23,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
 
 
-        private Result[] results;
+        private Result[] results  = new Result[0];
         public Result[] Results
         {
             get => this.results;

@@ -1,7 +1,10 @@
 ﻿using MvvmCross.Forms.Presenters.Attributes;
 using MvvmCross.Forms.Views;
+using Syracuse.Mobitheque.Core.Models;
 using Syracuse.Mobitheque.Core.ViewModels;
+using System;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
 namespace Syracuse.Mobitheque.UI.Views
@@ -17,24 +20,39 @@ namespace Syracuse.Mobitheque.UI.Views
 
         protected override void OnAppearing()
         {
-            this.Items.ItemSelected += this.OnItemSelected;
+            this.Items.SelectionChanged += this.OnItemSelected;
             base.OnAppearing();
         }
 
         protected override void OnDisappearing()
         {
-            this.Items.ItemSelected -= this.OnItemSelected;
+            this.Items.SelectionChanged -= this.OnItemSelected;
             base.OnDisappearing();
         }
 
         /*
          * Disable cell click higlight.
          */
-        private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void OnItemSelected(object sender, SelectionChangedEventArgs e)
         {
-            if (e.SelectedItem == null)
-                return;
-            ((ListView)sender).SelectedItem = null;
+            try
+            {
+            if (e.CurrentSelection.Count > 0)
+            {
+                MenuNavigation item = e.CurrentSelection[0] as MenuNavigation;
+                Console.WriteLine(item.Text);
+                await this.ViewModel.ShowDetailPageAsync(item);
+            }
+            else
+            {
+                await this.DisplayAlert("Erreur", "Une erreur est survenue", "Ok");
+            }
+            }
+            catch (Exception ex)
+            {
+                Log.Warning("Mobidoc", ex.Message);
+                throw;
+            }
         }
     }
 }

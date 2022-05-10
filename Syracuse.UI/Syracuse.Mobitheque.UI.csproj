@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
-    <PackageReference Include="MvvmCross.Forms" Version="6.4.2" />
+    <PackageReference Include="MvvmCross.Forms" Version="7.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="18.1.0.42" />
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="18.1.0.42" />
@@ -22,7 +22,7 @@
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2125" />
     <PackageReference Include="Xamarin.Forms.BehaviorsPack" Version="2.1.1" />
     <PackageReference Include="Xamarin.Forms.MultiSelectListView" Version="2.1.0" />
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.0.1.698" />

@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MvvmCross" Version="6.4.2" />
+    <PackageReference Include="MvvmCross" Version="7.0.0" />
     <PackageReference Include="Refit" Version="5.1.54" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
@@ -32,7 +32,7 @@
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2125" />
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.0.1.698" />
     <PackageReference Include="XF.Material" Version="1.5.8" />
     <PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />

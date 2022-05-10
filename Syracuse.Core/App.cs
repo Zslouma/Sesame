@@ -7,6 +7,7 @@ using Syracuse.Mobitheque.Core.ViewModels.Sorts;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Xamarin.Forms.Internals;
 
 namespace Syracuse.Mobitheque.Core
 {
@@ -61,9 +62,9 @@ namespace Syracuse.Mobitheque.Core
                 return appState;
             }
         }
-
         public override async void Initialize()
         {
+            Log.Warning("Mobidoc", "Start App");
             CreatableTypes()
                 .EndingWith("Service")
                 .AsInterfaces()
@@ -86,6 +87,7 @@ namespace Syracuse.Mobitheque.Core
             else { 
                 RegisterAppStart<SelectLibraryViewModel>();
             }
+            Log.Warning("Mobidoc", "End App");
         }
     }
 }

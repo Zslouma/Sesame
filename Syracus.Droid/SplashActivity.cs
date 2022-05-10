@@ -25,6 +25,7 @@ namespace Syracuse.Mobitheque.Droid
             StartActivity(typeof(MainActivity));
         }
 
+
         // Prevent the back button from canceling the startup process
         public override void OnBackPressed()
         {
