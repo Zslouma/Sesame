@@ -64,7 +64,7 @@
                                 ErrorText="{Binding UserNameErrorString}"
                                 TextColor="{DynamicResource WhiteTextColor}"
                                 TintColor="{DynamicResource WhiteTextColor}"
-                                BackgroundColor="Transparent"
+                                BackgroundColor="{DynamicResource AppBackgroundColor}"
                                 UnderlineColor="White"/>
                         </yummy:PancakeView>
                     </Grid>
@@ -85,7 +85,7 @@
                         ErrorText="{Binding PasswordErrorString}"
                         TextColor="{DynamicResource WhiteTextColor}"
                         TintColor="{DynamicResource WhiteTextColor}"
-                        BackgroundColor="Transparent"/>
+                        BackgroundColor="{DynamicResource AppBackgroundColor}"/>
                     </yummy:PancakeView>
                     
                     <Button 
