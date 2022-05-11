@@ -17,7 +17,7 @@
 
         <OnPlatform x:TypeArguments="Color">
             <OnPlatform.iOS>
-                <Color x:Uid="colorPrimary">#000000</Color>
+                <Color x:Uid="colorPrimary">#ffffff</Color>
             </OnPlatform.iOS>
             <OnPlatform.Android>
                 <Color x:Uid="colorPrimary">#ffffff</Color>
@@ -28,6 +28,13 @@
         </OnPlatform>
         
     </TabbedPage.BarTextColor>
+    <TabbedPage.UnselectedTabColor>
+        <OnPlatform x:TypeArguments="Color">
+            <OnPlatform.iOS>
+                <Color x:Uid="colorPrimary">#000000</Color>
+            </OnPlatform.iOS>
+        </OnPlatform>
+    </TabbedPage.UnselectedTabColor>
     <TabbedPage.SelectedItem>
         <Color x:Uid="colorPrimary">#ffffff</Color>
     </TabbedPage.SelectedItem>
