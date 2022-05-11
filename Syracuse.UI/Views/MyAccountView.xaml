@@ -34,7 +34,7 @@
     <TabbedPage.SelectedTabColor>
         <OnPlatform x:TypeArguments="Color">
             <OnPlatform.iOS>
-                <Color x:Uid="colorPrimary">#6574CF</Color>
+                <Color x:Uid="colorPrimary">#ffffff</Color>
             </OnPlatform.iOS>
             <OnPlatform.Android>
                 <Color x:Uid="colorPrimary">#6574CF</Color>
