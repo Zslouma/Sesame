@@ -104,7 +104,7 @@ namespace Syracuse.Mobitheque.Core.Models
         [JsonProperty("applicationDescription")]
         public string applicationDescription { get; set; }
         [JsonProperty("applicationId")]
-        public int applicationId { get; set; }
+        public int? applicationId { get; set; }
         [JsonProperty("applicationName")]
         public string applicationName { get; set; }
         [JsonProperty("scopeDescription")]

@@ -12,16 +12,17 @@
     <ContentPage.Content>
         <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0"  VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
             <Grid VerticalOptions="FillAndExpand">
-                <ListView
+                <CollectionView
                     x:Name="DemandsList"
+                    SelectionMode="Single"
+                    SelectionChanged="DemandList_ItemTapped"
                     IsVisible="{Binding HasDemands}"
                     VerticalOptions="FillAndExpand"
                     HorizontalOptions="FillAndExpand"
-                    HasUnevenRows="True"
                     ItemsSource="{Binding Demands}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate >
-                            <ViewCell>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout >
                                 <Frame VerticalOptions="FillAndExpand"  Margin="5">
                                     <Frame.HasShadow>
                                         <OnPlatform x:TypeArguments="x:Boolean">
@@ -46,15 +47,14 @@
                                                 TextType="Html" 
                                                 VerticalOptions="FillAndExpand"
                                                 TextColor="#503026" 
-                                                MaxLines="1"
-                                               />
+                                                MaxLines="1"/>
                                         </StackLayout>
                                     </Grid>
                                 </Frame>
-                            </ViewCell>
+                            </StackLayout>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                     <StackLayout.Triggers>
                         <DataTrigger TargetType="StackLayout" Binding="{Binding HasDemands}" Value="False">

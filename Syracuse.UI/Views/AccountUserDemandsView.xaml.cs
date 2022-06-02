@@ -19,12 +19,12 @@ namespace Syracuse.Mobitheque.UI.Views
         }
         protected override void OnAppearing()
         {
-            this.DemandsList.ItemTapped += DemandList_ItemTapped;
+            //this.DemandsList.ItemTapped += DemandList_ItemTapped;
             base.OnAppearing();
         }
         protected override void OnDisappearing()
         {
-            this.DemandsList.ItemTapped -= DemandList_ItemTapped;
+            //this.DemandsList.ItemTapped -= DemandList_ItemTapped;
             base.OnDisappearing();
         }
 
@@ -42,12 +42,17 @@ namespace Syracuse.Mobitheque.UI.Views
             this.ViewModel.HeaderTapped(facetteGroupSelected);
         }
 
-        private void DemandList_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void DemandList_ItemTapped(object sender, SelectionChangedEventArgs e)
         {
-
-            var item = e.Item as UserDemands;
-            this.ViewModel.OnClickItem(item);
+            if (e.CurrentSelection.Count > 0)
+            {
+                var item = e.CurrentSelection[0] as UserDemands;
+                this.ViewModel.OnClickItem(item);
+            }
+            else
+            {
+                await this.DisplayAlert("Erreur", "Une erreur est survenue", "Ok");
+            }
         }
-
     }
 }

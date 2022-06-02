@@ -71,8 +71,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 foreach (var item in result.D)
                 {
                     this.Demands.Add(item);
+                    this.HasDemands = true;
                 }
             }
+            await this.RaiseAllPropertiesChanged();
             this.IsBusy = false;
         }
 

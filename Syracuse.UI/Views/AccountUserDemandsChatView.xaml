@@ -12,15 +12,14 @@
     <ContentPage.Content>
         <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0"  VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
             <Grid VerticalOptions="FillAndExpand">
-                <ListView
+                <CollectionView
                     x:Name="DemandsList"
                     VerticalOptions="FillAndExpand"
                     HorizontalOptions="FillAndExpand"
-                    HasUnevenRows="True"
                     ItemsSource="{Binding Messages}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate >
-                            <ViewCell>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
                                 <Frame VerticalOptions="FillAndExpand"  Margin="5">
                                     <Frame.HasShadow>
                                         <OnPlatform x:TypeArguments="x:Boolean">
@@ -35,20 +34,19 @@
                                         </Grid.ColumnDefinitions>
                                         <Label Grid.Column="0" Text="&#xf086;" VerticalOptions="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontFamily="{StaticResource FontAwesomeSolid}" Margin="5"/>
                                         <StackLayout Grid.Column="1" VerticalOptions="FillAndExpand" Orientation="Vertical">
-                                            <material:MaterialLabel
-                                                TextType="Html"
-                                                HorizontalTextAlignment="End"
-                                                Text="{Binding MessagesDisplay}"
-                                                VerticalOptions="FillAndExpand"
-                                                TextColor="#503026" 
-                                               />
+                                            <Label Text="{Binding MessagesDisplay}"
+                                                   TextType="Html" 
+                                                   FontAttributes="Bold"
+                                                   VerticalOptions="FillAndExpand"
+                                                   TextColor="#503026" 
+                                                   HorizontalTextAlignment="End"/>
                                         </StackLayout>
                                     </Grid>
                                 </Frame>
-                            </ViewCell>
+                            </StackLayout>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
                 <AbsoluteLayout Grid.Row="0" IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
                     <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
                 </AbsoluteLayout>
