@@ -27,7 +27,7 @@
                                             <On Platform="Android">true</On>
                                         </OnPlatform>
                                     </Frame.HasShadow>
-                                    <Grid>
+                                    <Grid >
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="Auto"/>
@@ -35,17 +35,23 @@
                                         <Label Grid.Column="0" Text="&#xf086;" VerticalOptions="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontFamily="{StaticResource FontAwesomeSolid}" Margin="5"/>
                                         <StackLayout Grid.Column="1" VerticalOptions="FillAndExpand" Orientation="Vertical">
                                             <Label Text="{Binding MessagesDisplay}"
-                                                   TextType="Html" 
                                                    FontAttributes="Bold"
                                                    VerticalOptions="FillAndExpand"
                                                    TextColor="#503026" 
-                                                   HorizontalTextAlignment="End"/>
+                                                   HorizontalTextAlignment="End"
+                                                   TextType="Html" />
                                         </StackLayout>
                                     </Grid>
                                 </Frame>
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
+                    <CollectionView.Footer  VerticalOptions="FillAndExpand">
+                        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="Fill" >
+                            <Button  Margin="10"  Text="Envoyer une reponse" BackgroundColor="{DynamicResource PurpleTextColor}" CornerRadius="20" TextColor="White" TextTransform="None"/>
+                            <Button  Margin="10,0,10,10"  Text="Je suis satisfait de la réponse" BackgroundColor="White" BorderColor="Gray" BorderWidth="1"  CornerRadius="20" TextColor="Gray" IsVisible="{Binding CreatedByProfessional}" TextTransform="None"/>
+                        </StackLayout>
+                    </CollectionView.Footer>
                 </CollectionView>
                 <AbsoluteLayout Grid.Row="0" IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
                     <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />

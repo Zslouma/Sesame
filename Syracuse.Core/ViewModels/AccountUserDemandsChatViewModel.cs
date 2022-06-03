@@ -23,6 +23,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set
             {
                 SetProperty(ref this.isBusy, value);
+                RaisePropertyChanged(nameof(IsBusy));
             }
         }
 
@@ -33,6 +34,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set
             {
                 SetProperty(ref this.demands, value);
+                RaisePropertyChanged(nameof(Demands));
             }
         }
 
@@ -43,8 +45,27 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             set
             {
                 SetProperty(ref this.messages, value);
+                RaisePropertyChanged(nameof(Messages));
             }
         }
+
+        public bool CreatedByProfessional
+        {
+            get {
+                if (Messages.Count > 0)
+                {
+                    return Messages[Messages.Count - 1].createdByProfessional;
+                }
+                else
+                {
+                    return false;
+                }
+                
+            }
+
+        }
+
+
 
         public AccountUserDemandsChatViewModel(IRequestService requestService, IMvxNavigationService navigationService)
         {

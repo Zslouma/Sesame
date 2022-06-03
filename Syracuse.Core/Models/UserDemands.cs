@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Syracuse.Mobitheque.Core.Models
@@ -46,9 +47,14 @@ namespace Syracuse.Mobitheque.Core.Models
         public int demandId { get; set; }
         [JsonProperty("id")]
         public int id { get; set; }
-        [JsonProperty("message")]
+        [JsonProperty("message", NullValueHandling = NullValueHandling.Ignore)]
         public string message { get; set; }
-        public string MessagesDisplay { get { return "<p>" + message + "</p>"; } }
+        public string MessagesDisplay { get {
+                message = message.Replace("&lt;", "<");
+                message = message.Replace("&gt;", ">");
+                return message;
+            } }
+
         [JsonProperty("validated")]
         public bool validated { get; set; }
         [JsonProperty("whenCreated")]
@@ -219,5 +225,29 @@ namespace Syracuse.Mobitheque.Core.Models
                 }
             }
         }
+    }
+
+        public enum UserDemandStatus
+    {
+        /// <summary>
+        /// A traiter.
+        /// </summary>
+        [EnumMember]
+        Pending = 0,
+        /// <summary>
+        /// En cours.
+        /// </summary>
+        [EnumMember]
+        Working = 1,
+        /// <summary>
+        /// Traitée.
+        /// </summary>
+        [EnumMember]
+        Closed = 2,
+        /// <summary>
+        /// Archivée.
+        /// </summary>
+        [EnumMember]
+        Archived = 3
     }
 }
