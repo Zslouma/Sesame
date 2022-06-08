@@ -44,6 +44,8 @@ namespace Syracuse.Mobitheque.UI.Views
 
         private async void DemandList_ItemTapped(object sender, SelectionChangedEventArgs e)
         {
+            this.ViewModel.IsBusy = true;
+            await this.ViewModel.RaisePropertyChanged(nameof(this.ViewModel.IsBusy));
             if (e.CurrentSelection.Count > 0)
             {
                 var item = e.CurrentSelection[0] as UserDemands;
@@ -53,6 +55,8 @@ namespace Syracuse.Mobitheque.UI.Views
             {
                 await this.DisplayAlert("Erreur", "Une erreur est survenue", "Ok");
             }
+            this.ViewModel.IsBusy = false;
+            await this.ViewModel.RaisePropertyChanged(nameof(this.ViewModel.IsBusy));
         }
     }
 }

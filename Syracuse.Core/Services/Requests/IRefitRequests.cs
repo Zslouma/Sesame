@@ -52,8 +52,12 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 [AliasAs("code")] string code = "",
                 [AliasAs("uniqueId")] string uniqueId = "");
 
+
+        [Post("/Portal/Services/UserAccountService.svc/AnswerDemand")]
+        Task<T> AnswerDemand<T>([Body] DemandsOptions body);
+
         [Post("/Portal/Recherche/Search.svc/Search")]
-        Task<T> Search<T>([Body]SearchOptions body);
+        Task<T> Search<T>([Body] SearchOptions body);
 
         [Post("/Portal/Services/ILSClient.svc/CheckAvailability")]
         Task<T> CheckAvailability<T>([Body] CheckAvailabilityOptions body);

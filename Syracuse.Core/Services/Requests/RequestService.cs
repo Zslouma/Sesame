@@ -33,7 +33,6 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 UseCookies = true,
                 CookieContainer = this.cookies,
                 ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
-
             };
             this.token = this.Timestamp();
         }
@@ -671,8 +670,42 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 return status;
             }
         }
+        public async Task<InstanceResult<RequestAddMessageToDemands>> AnswerDemand(DemandsOptions options, Action<Exception> error = null)
+        {
+            if (!App.AppState.NetworkConnection)
+            {
+                Debug.WriteLine("NetworkConnection" + App.AppState.NetworkConnection);
+            }
+            await this.InitializeHttpClient();
+            var status = new InstanceResult<RequestAddMessageToDemands>();
+            try
+            {
+                var timestamp = this.Timestamp();
+                this.token = this.Timestamp();
+                if (options == null)
+                    throw new ArgumentNullException(nameof(options));
+                status = await this.requests.AnswerDemand<InstanceResult<RequestAddMessageToDemands>>(options);
+                await UpdateCookies();
+            }
+            catch (Exception ex)
+            {
+                status.Errors = new Error[1];
+                if (!App.AppState.NetworkConnection)
+                {
+                    status.Errors[0] = new Error(ApplicationResource.NetworkDisable);
+                }
+                else
+                {
+                    status.Errors[0] = new Error(ApplicationResource.ErrorOccurred);
+                }
+                error?.Invoke(ex);
+            }
+            return status;
 
-        public async Task<RenewLoanResult> RenewLoans(LoanOptions options, Action<Exception> error = null)
+        }
+
+
+            public async Task<RenewLoanResult> RenewLoans(LoanOptions options, Action<Exception> error = null)
         {
             if (!App.AppState.NetworkConnection)
             {

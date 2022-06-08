@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Syracuse.Mobitheque.Core.ViewModels
 {
@@ -12,6 +13,15 @@ namespace Syracuse.Mobitheque.Core.ViewModels
     {
 
         private readonly IRequestService requestService;
+
+        public IRequestService GetrequestService
+        {
+            get
+            {
+                return requestService;
+
+            }
+        }
 
         private readonly IMvxNavigationService navigationService;
 
@@ -64,6 +74,15 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
 
         }
+        public bool StatusNotClosed
+        {
+            get
+            {
+                Console.WriteLine("StatusNotClosed: "+ (!Demands.status.Equals(UserDemandStatus.Closed) && !Demands.status.Equals(UserDemandStatus.Archived) && Messages.Count > 0 && !Messages[Messages.Count - 1].validated));
+                return !Demands.status.Equals(UserDemandStatus.Closed) && !Demands.status.Equals(UserDemandStatus.Archived) && Messages.Count > 0 && !Messages[Messages.Count - 1].validated;
+            }
+
+        }
 
 
 
@@ -84,6 +103,12 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
             this.RaiseAllPropertiesChanged();
             this.IsBusy = false;
+        }
+
+        public async Task AnswerDemand()
+        {
+            DemandsOptions demandsOptions = new DemandsOptions(this.Demands.id,"je vous remercie");
+            this.requestService.AnswerDemand(demandsOptions);
         }
     }
 }

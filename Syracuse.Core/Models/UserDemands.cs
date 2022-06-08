@@ -227,7 +227,7 @@ namespace Syracuse.Mobitheque.Core.Models
         }
     }
 
-        public enum UserDemandStatus
+    public enum UserDemandStatus
     {
         /// <summary>
         /// A traiter.
@@ -249,5 +249,12 @@ namespace Syracuse.Mobitheque.Core.Models
         /// </summary>
         [EnumMember]
         Archived = 3
+    }
+
+    public class RequestAddMessageToDemands
+    {
+        public List<object> errors { get; set; }
+        public string message { get; set; }
+        public bool success { get; set; }
     }
 }
