@@ -1,4 +1,5 @@
 ﻿using Rg.Plugins.Popup.Services;
+using Syracuse.Mobitheque.Core;
 using Syracuse.Mobitheque.Core.Models;
 using Syracuse.Mobitheque.Core.Services.Requests;
 using System;
@@ -17,6 +18,9 @@ namespace Syracuse.Mobitheque.UI.Views.PopUp
     {
         private readonly IRequestService requestService;
 
+        private TaskCompletionSource<bool> taskCompletionSource;
+        public Task PopupClosedTask { get { return taskCompletionSource.Task; } }
+
         private UserDemands demands;
         public UserDemands Demands
         {
@@ -25,6 +29,17 @@ namespace Syracuse.Mobitheque.UI.Views.PopUp
             {
                 this.demands = value;
             }
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            taskCompletionSource = new TaskCompletionSource<bool>();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            taskCompletionSource.SetResult(true);
         }
 
         public AnswerDemandPopup(IRequestService requestService, UserDemands demands)
@@ -38,6 +53,7 @@ namespace Syracuse.Mobitheque.UI.Views.PopUp
             CloseAllPopup();
         }
 
+
         private async void CloseAllPopup()
         {
             await PopupNavigation.Instance.PopAllAsync();
@@ -49,15 +65,20 @@ namespace Syracuse.Mobitheque.UI.Views.PopUp
         }
         async void OnSend(object sender, EventArgs args)
         {
-            DemandsOptions demandsOptions = new DemandsOptions(this.Demands.id, "je vous remercie");
+            DemandsOptions demandsOptions = new DemandsOptions(this.Demands.id, this.EditorMessage.Text);
             var result = await this.requestService.AnswerDemand(demandsOptions);
-            if (result.Success && result.D.success)
+            if (result.Success)
             {
+
                 CloseAllPopup();
             }
             else
             {
-
+                if (!result.Success && result.Errors.Length > 0)
+                {
+                    await this.DisplayAlert(ApplicationResource.ErrorOccurred, result.Errors[0].Msg, ApplicationResource.ButtonValidation);
+                    CloseAllPopup();
+                }
             }
             
         }

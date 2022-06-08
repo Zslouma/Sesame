@@ -49,7 +49,7 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
         Task<InstanceResult<List<UserDemands>>> GetUserDemands(Action<Exception> error = null);
 
-        Task<InstanceResult<RequestAddMessageToDemands>> AnswerDemand(DemandsOptions options, Action<Exception> error = null);
+        Task<InstanceResult<object>> AnswerDemand(DemandsOptions options, Action<Exception> error = null);
 
         Task<BasketResult> SearchUserBasket(BasketOptions options, Action<Exception> error = null);
 

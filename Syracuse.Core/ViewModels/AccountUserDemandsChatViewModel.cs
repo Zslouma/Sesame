@@ -92,17 +92,59 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.navigationService = navigationService;
         }
 
-        public override void Prepare(UserDemands parameter)
+        public async override void Prepare(UserDemands parameter)
         {
             this.IsBusy = true;
+            await this.RaiseAllPropertiesChanged();
             this.Demands = parameter;
             this.Messages = new ObservableCollection<Message>();
             foreach (var item in Demands.messages)
             {
                 this.Messages.Add(item);
             }
-            this.RaiseAllPropertiesChanged();
             this.IsBusy = false;
+            await this.RaiseAllPropertiesChanged();
+        }
+
+        public override void ViewAppeared()
+        {
+            base.ViewAppeared();
+            this.Update();
+        }
+        public async void Update()
+        {
+            await this.RaiseAllPropertiesChanged();
+            this.IsBusy = true;
+            var result = await this.requestService.GetUserDemands();
+            bool HasDemands = false;
+            ObservableCollection<UserDemands> DemandsTempo = new ObservableCollection<UserDemands>(); ;
+            if (result.Success)
+            {
+                foreach (var item in result.D)
+                {
+                    DemandsTempo.Add(item);
+                    HasDemands = true;
+                }
+            }
+            if (HasDemands)
+            {
+                foreach (var demands in DemandsTempo)
+                {
+                    if (demands.id == this.Demands.id)
+                    {
+                        this.Demands = demands;
+                        break;
+                    }
+                }
+            }
+            this.Messages = new ObservableCollection<Message>();
+            foreach (var item in Demands.messages)
+            {
+                this.Messages.Add(item);
+            }
+            await this.RaiseAllPropertiesChanged();
+            this.IsBusy = false;
+
         }
 
         public async Task AnswerDemand()

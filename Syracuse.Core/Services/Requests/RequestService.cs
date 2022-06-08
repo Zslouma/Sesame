@@ -670,21 +670,21 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 return status;
             }
         }
-        public async Task<InstanceResult<RequestAddMessageToDemands>> AnswerDemand(DemandsOptions options, Action<Exception> error = null)
+        public async Task<InstanceResult<object>> AnswerDemand(DemandsOptions options, Action<Exception> error = null)
         {
             if (!App.AppState.NetworkConnection)
             {
                 Debug.WriteLine("NetworkConnection" + App.AppState.NetworkConnection);
             }
             await this.InitializeHttpClient();
-            var status = new InstanceResult<RequestAddMessageToDemands>();
+            var status = new InstanceResult<object>();
             try
             {
                 var timestamp = this.Timestamp();
                 this.token = this.Timestamp();
                 if (options == null)
                     throw new ArgumentNullException(nameof(options));
-                status = await this.requests.AnswerDemand<InstanceResult<RequestAddMessageToDemands>>(options);
+                status = await this.requests.AnswerDemand<InstanceResult<object>>(options);
                 await UpdateCookies();
             }
             catch (Exception ex)

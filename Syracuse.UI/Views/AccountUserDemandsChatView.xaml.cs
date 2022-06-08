@@ -18,8 +18,10 @@ namespace Syracuse.Mobitheque.UI.Views
 
         private async void AnswerDemand_OnClicked(object sender, EventArgs e)
         {
-            _answerDemandPopup = new AnswerDemandPopup();
+            _answerDemandPopup = new AnswerDemandPopup(this.ViewModel.GetrequestService, this.ViewModel.Demands);
             await PopupNavigation.Instance.PushAsync(_answerDemandPopup);
+            await _answerDemandPopup.PopupClosedTask;
+            this.ViewModel.Update();
             //await this.ViewModel.AnswerDemand();
         }
     }

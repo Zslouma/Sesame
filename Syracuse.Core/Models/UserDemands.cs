@@ -256,5 +256,6 @@ namespace Syracuse.Mobitheque.Core.Models
         public List<object> errors { get; set; }
         public string message { get; set; }
         public bool success { get; set; }
+
     }
 }

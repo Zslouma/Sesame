@@ -21,7 +21,7 @@
                 <StackLayout  >
                     <Label Text="Answer Demands user" FontSize="Medium" HorizontalTextAlignment="Center"/>
                 </StackLayout>
-                <Editor VerticalOptions="Fill" HorizontalOptions="FillAndExpand" Placeholder="Tape your text!" AutoSize="TextChanges" Text=""/>
+                <Editor x:Name="EditorMessage" VerticalOptions="Fill" HorizontalOptions="FillAndExpand" Placeholder="Tape your text!" AutoSize="TextChanges" Text=""/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
