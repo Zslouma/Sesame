@@ -59,14 +59,13 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.navigationService = navigationService;
             this.requestService = requestService;
         }
-        public override Task Initialize()
+        public async override Task Initialize()
         {
-            this.Update();
-            return base.Initialize();
+            await base.Initialize();
         }
-        public override void ViewAppeared()
+        public async override void ViewAppeared()
         {
-            this.Update();
+            await this.Update();
             base.ViewAppeared();
         }
         public async Task Update()
