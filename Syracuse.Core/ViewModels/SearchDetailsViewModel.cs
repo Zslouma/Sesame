@@ -276,11 +276,11 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                     {
                         if (resultTempo.FieldList.NumberOfDigitalNotices != null && resultTempo.FieldList.NumberOfDigitalNotices.Length > 0 && resultTempo.FieldList.NumberOfDigitalNotices[0] > 0)
                         {
-                            resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/c-" + resultTempo.FieldList.Identifier[0];
+                            resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "digital-viewer/c-" + resultTempo.FieldList.Identifier[0];
                         }
                         else if (resultTempo.FieldList.DigitalReadyIsEntryPoint != null && resultTempo.FieldList.DigitalReadyIsEntryPoint.Length > 0 && Convert.ToInt32(resultTempo.FieldList.DigitalReadyIsEntryPoint[0]) > 0)
                         {
-                            resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "/digital-viewer/d-" + resultTempo.FieldList.Identifier[0];
+                            resultTempo.FieldList.UrlViewerDR = this.user.LibraryUrl + "digital-viewer/d-" + resultTempo.FieldList.Identifier[0];
                         }
                         else
                         {

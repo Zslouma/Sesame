@@ -67,12 +67,27 @@ namespace Syracuse.Mobitheque.Core.Services.Database
 
         public async Task<int> SaveItemAsync(CookiesSave item)
         {
+            List<CookiesSave> ListCookies = await this.GetItemsAsync();
+            if (item.ID == 0)
+            {
+
+                foreach (CookiesSave Cookie in ListCookies)
+                {
+                    CookiesSave tempItem = (CookiesSave)item.Clone();
+                    tempItem.ID = Cookie.ID;
+                    if (tempItem == Cookie)
+                    {
+                        item.ID = Cookie.ID;
+                    }
+                }
+            }
             if (item.ID != 0)
             {
                 return await database.UpdateAsync(item);
             }
             else
             {
+
                 return await database.InsertAsync(item);
             }
         }
@@ -90,7 +105,7 @@ namespace Syracuse.Mobitheque.Core.Services.Database
         }
         public async Task<List<StandartViewList>> GetActiveStandartView(CookiesSave ActiveUser)
         {
-            return await database.Table<StandartViewList>().Where(i => i.Username == ActiveUser.Username && i.Library == ActiveUser.Library).ToListAsync(); 
+            return await database.Table<StandartViewList>().Where(i => i.Username == ActiveUser.Username && i.Library == ActiveUser.Library).ToListAsync();
         }
 
         public async Task<List<int>> SaveItemAsync(List<StandartViewList> items)
@@ -108,7 +123,7 @@ namespace Syracuse.Mobitheque.Core.Services.Database
                     if (await database.Table<StandartViewList>().Where(i => i.Username == item.Username && i.Library == item.Library && i.ViewIcone == item.ViewIcone && i.ViewName == item.ViewName && i.ViewQuery == item.ViewQuery && i.ViewScenarioCode == item.ViewScenarioCode).CountAsync() <= 0)
                     {
                         idList.Add(await database.InsertAsync(item));
-                    }    
+                    }
                 }
             }
             return idList;

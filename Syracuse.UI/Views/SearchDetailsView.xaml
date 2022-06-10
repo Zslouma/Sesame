@@ -21,8 +21,8 @@
                     <CarouselView 
                         x:Name="carouselView" 
                         ItemsSource="{Binding ItemsSource}" 
-                        CurrentItem="{Binding CurrentItem}"
-                        Position="{Binding Position}" 
+                        CurrentItem="{Binding CurrentItem, Mode=TwoWay}"
+                        Position="{Binding Position, Mode=TwoWay}" 
                         IsScrollAnimated ="False"
                         CurrentItemChanged="carouselView_CurrentItemChanged"
                         Loop="False"

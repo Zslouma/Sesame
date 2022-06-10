@@ -164,7 +164,7 @@
       <Version>2.4.11.982</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>5.0.0.2125</Version>
+      <Version>5.0.0.2478</Version>
     </PackageReference>
     <PackageReference Include="XF.Material">
       <Version>1.5.8</Version>

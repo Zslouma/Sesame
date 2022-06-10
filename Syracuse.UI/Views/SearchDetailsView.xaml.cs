@@ -27,37 +27,43 @@ namespace Syracuse.Mobitheque.UI.Views
 
         private void carouselView_PositionChanged(object sender, PositionChangedEventArgs e)
         {
-            var CurrentPosition = e.CurrentPosition;
-            this.ViewModel.RaiseAllPropertiesChanged();
-            if (e.CurrentPosition > e.PreviousPosition)
+            try
             {
-                if (e.CurrentPosition+1 >= this.ViewModel.EndDataPosition && e.CurrentPosition + 1 < this.ViewModel.ItemsSource.Count )
+                var CurrentPosition = e.CurrentPosition;
+                this.ViewModel.RaiseAllPropertiesChanged();
+                if (e.CurrentPosition > e.PreviousPosition)
                 {
-                    this.ViewModel.EndDataPosition = this.ViewModel.EndDataPosition + 10 < this.ViewModel.ItemsSource.Count ? this.ViewModel.EndDataPosition + 10 : this.ViewModel.ItemsSource.Count - 1;
-                    this.ViewModel.FormateToCarrousel(e.CurrentPosition, this.ViewModel.EndDataPosition);
+                    if (e.CurrentPosition + 1 >= this.ViewModel.EndDataPosition && e.CurrentPosition + 1 < this.ViewModel.ItemsSource.Count)
+                    {
+                        this.ViewModel.EndDataPosition = this.ViewModel.EndDataPosition + 10 < this.ViewModel.ItemsSource.Count ? this.ViewModel.EndDataPosition + 10 : this.ViewModel.ItemsSource.Count - 1;
+                        this.ViewModel.FormateToCarrousel(e.CurrentPosition, this.ViewModel.EndDataPosition);
+                    }
+                }
+                else
+                {
+                    if (e.CurrentPosition <= this.ViewModel.StartDataPosition && e.CurrentPosition > 0)
+                    {
+                        this.ViewModel.StartDataPosition = this.ViewModel.StartDataPosition - 10 >= 0 ? this.ViewModel.StartDataPosition - 10 : 0;
+                        this.ViewModel.FormateToCarrousel(this.ViewModel.StartDataPosition, e.CurrentPosition);
+                    }
+                    if (e.CurrentPosition < e.PreviousPosition - 1)
+                    {
+                        this.carouselView.Position = e.PreviousPosition;
+                        CurrentPosition = e.PreviousPosition;
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                if (e.CurrentPosition <=  this.ViewModel.StartDataPosition && e.CurrentPosition > 0 )
-                {
-                    this.ViewModel.StartDataPosition = this.ViewModel.StartDataPosition - 10 >= 0 ? this.ViewModel.StartDataPosition - 10 : 0;
-                    this.ViewModel.FormateToCarrousel( this.ViewModel.StartDataPosition, e.CurrentPosition);
-                }
-                if (e.CurrentPosition < e.PreviousPosition-1 )
-                {
-                    this.carouselView.Position = e.PreviousPosition;
-                    CurrentPosition = e.PreviousPosition;
-                }
+
             }
-            this.ViewModel.Position = CurrentPosition;
             this.ViewModel.IsPositionVisible = true;
         }
         private async void OnCarouselViewRemainingItemsThresholdReached(object sender, EventArgs e)
         {
             if (int.Parse(this.ViewModel.NbrResults) > this.ViewModel.ItemsSource.Count)
             {
-            
+
                 if (!this.ViewModel.InLoadMore)
                 {
                     await this.ViewModel.LoadMore();
@@ -97,7 +103,7 @@ namespace Syracuse.Mobitheque.UI.Views
             {
                 await DisplayAlert(ApplicationResource.Warning, String.Format(ApplicationResource.ErrorOccurred), ApplicationResource.ButtonValidation);
             }
-            
+
         }
 
         private async void HoldingButton_Clicked(object sender, EventArgs e)

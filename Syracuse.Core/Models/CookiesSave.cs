@@ -1,10 +1,40 @@
 ﻿using SQLite;
+using System;
 using System.Collections.Generic;
 
 namespace Syracuse.Mobitheque.Core.Models
 {
-    public class CookiesSave
+    public class CookiesSave : ICloneable
     {
+        public object Clone()
+        {
+            return new CookiesSave
+            {
+                ID = this.ID,
+                Active = this.Active,
+                Username = this.Username,
+                searchValue = this.searchValue,
+                DisplayName = this.DisplayName,
+                Cookies = this.Cookies,
+                Department = this.DisplayName,
+                Library = this.Library,
+                LibraryCode = this.LibraryCode,
+                LibraryUrl = this.LibraryUrl,
+                LibraryJsonUrl = this.LibraryJsonUrl,
+                DomainUrl = this.DomainUrl,
+                ForgetMdpUrl = this.ForgetMdpUrl,
+                SearchScenarioCode = this.SearchScenarioCode,
+                EventsScenarioCode = this.EventsScenarioCode,
+                RememberMe = this.RememberMe,
+                IsKm = this.IsKm,
+                CanDownload = this.CanDownload,
+                IsEvent = this.IsEvent,
+                BuildingInfos = this.BuildingInfos,
+                IsTutorial = this.IsTutorial,
+                IsTutorialAddAcount = this.IsTutorialAddAcount,
+            };
+        }
+
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
 
@@ -13,11 +43,12 @@ namespace Syracuse.Mobitheque.Core.Models
         public string Username { get; set; }
 
         private string searchValue { get; set; }
-        public string SearchValue {
+        public string SearchValue
+        {
             get { return this.searchValue; }
             set
             {
-                if (value != null && value!="")
+                if (value != null && value != "")
                 {
                     string[] val = value.Split(',');
                     if (val.Length > 20)
@@ -33,11 +64,12 @@ namespace Syracuse.Mobitheque.Core.Models
                     {
                         this.searchValue = value;
                     }
-                }else
+                }
+                else
                 {
                     this.searchValue = value;
                 }
-            } 
+            }
         }
 
         public string DisplayName { get; set; }
@@ -80,7 +112,6 @@ namespace Syracuse.Mobitheque.Core.Models
         public bool IsTutorial { get; set; } = true;
 
         public bool IsTutorialAddAcount { get; set; } = true;
-
     }
 
     public class LoginParameters
