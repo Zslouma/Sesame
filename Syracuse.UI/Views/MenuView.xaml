@@ -9,7 +9,7 @@
                       x:TypeArguments="viewModels:MenuViewModel"
                       x:Name="MainContent">
     <ContentPage.Content>
-        <StackLayout  HeightRequest="40">
+        <StackLayout BackgroundColor="{DynamicResource AppLigthBackgroundColor}"   HeightRequest="40">
             <StackLayout.IsVisible>
                 <OnPlatform x:TypeArguments="x:Boolean">
                     <On Platform="Android, iOS"
@@ -17,13 +17,14 @@
                 </OnPlatform>
             </StackLayout.IsVisible>
             <CollectionView x:Name="Items"
+                            Margin="0,20,0,0"
                       IsVisible="{Binding MenuIsVisible}"
                       ItemsSource="{Binding MenuItemList}"
                       SelectionMode="Single"
-                      SelectionChanged="OnItemSelected"
-                      BackgroundColor="{DynamicResource AppLigthBackgroundColor}">
+                      SelectionChanged="OnItemSelected"    
+                      >
                 <CollectionView.Header>
-                    <StackLayout Orientation="Vertical"  Margin="0,0,0,15">
+                    <StackLayout  Orientation="Vertical">
                         <StackLayout Orientation="Vertical"
                                      HorizontalOptions="Center"
                                      VerticalOptions="Center"
