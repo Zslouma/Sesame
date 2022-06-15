@@ -75,6 +75,7 @@ namespace Syracuse.Mobitheque.Core.Services.Database
                 {
                     CookiesSave tempItem = (CookiesSave)item.Clone();
                     tempItem.ID = Cookie.ID;
+                    tempItem.Cookies = Cookie.Cookies;
                     if (tempItem == Cookie)
                     {
                         item.ID = Cookie.ID;
