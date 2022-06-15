@@ -17,7 +17,6 @@
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="Syncfusion.Xamarin.SfAutoComplete" Version="18.1.0.42" />
     <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="18.1.0.42" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg" Version="2.4.11.982" />
@@ -27,10 +26,11 @@
     <PackageReference Include="Xamarin.Forms.MultiSelectListView" Version="2.1.0" />
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.0.1.698" />
     <PackageReference Include="Xamarin.Forms.SaveOpenPDFPackage" Version="1.0.0" />
-    <PackageReference Include="XF.Material" Version="1.8.0" />
     <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.4.1" />
     <PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
+    <PackageReference Include="XF.Material" Version="1.5.8" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -185,5 +185,9 @@
     <Reference Include="Xamarin.iOS">
       <HintPath>..\..\..\..\..\Library\Frameworks\Xamarin.iOS.framework\Versions\12.14.0.114\lib\mono\Xamarin.iOS\Xamarin.iOS.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="XF.Material" />
+    <None Remove="Xamarin.Essentials" />
   </ItemGroup>
 </Project>
