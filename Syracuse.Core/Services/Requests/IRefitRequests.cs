@@ -52,6 +52,11 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
                 [AliasAs("code")] string code = "",
                 [AliasAs("uniqueId")] string uniqueId = "");
 
+        [Get("/Portal/Services/UserAccountService.svc/SetMessageAsValidated?messageId={messageId}&token={token}")]
+        Task<T> SetMessageAsValidated<T>(
+        [AliasAs("messageId")] int messageId,
+        [AliasAs("token")] string token);
+
 
         [Post("/Portal/Services/UserAccountService.svc/AnswerDemand")]
         Task<T> AnswerDemand<T>([Body] DemandsOptions body);

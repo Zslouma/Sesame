@@ -51,6 +51,8 @@ namespace Syracuse.Mobitheque.Core.Services.Requests
 
         Task<InstanceResult<object>> AnswerDemand(DemandsOptions options, Action<Exception> error = null);
 
+        Task<InstanceResult<UserDemands>> SetMessageAsValidated(int messageId, Action<Exception> error = null);
+
         Task<BasketResult> SearchUserBasket(BasketOptions options, Action<Exception> error = null);
 
         Task<UrlWithAuthenticationStatus> GetUrlWithAuthenticationTransfert(Uri uri);

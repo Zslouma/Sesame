@@ -177,6 +177,12 @@
   <data name="DeleteAppAccount" xml:space="preserve">
     <value>Delete this account from the application</value>
   </data>
+  <data name="DemandsChatAnswerMessage" xml:space="preserve">
+    <value>Send an answer</value>
+  </data>
+  <data name="DemandsChatValidateMessage" xml:space="preserve">
+    <value>I am pleased with the response</value>
+  </data>
   <data name="DemandsUser" xml:space="preserve">
     <value>My demands</value>
   </data>
@@ -241,10 +247,10 @@
     <value>No press reviews for the moment</value>
   </data>
   <data name="OtherAccountPart2Tuto" xml:space="preserve">
-    <value> Do you want to declare the different accounts of your family? </value>
+    <value>Do you want to declare the different accounts of your family? </value>
   </data>
   <data name="OtherAccountPart3Tuto" xml:space="preserve">
-    <value> Manage your accounts here and switch quickly from one profile to another.</value>
+    <value>Manage your accounts here and switch quickly from one profile to another.</value>
   </data>
   <data name="OtherAccountPartTuto" xml:space="preserve">
     <value>Do you have several accounts in different libraries?</value>

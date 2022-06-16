@@ -15,14 +15,23 @@ namespace Syracuse.Mobitheque.UI.Views
         {
             InitializeComponent();
         }
-
+        protected override void OnBindingContextChanged()
+        {
+            (this.DataContext as AccountUserDemandsChatViewModel).OnDisplayAlert += AccountUserDemandsChatViewModel_OnDisplayAlert;
+            base.OnBindingContextChanged();
+        }
         private async void AnswerDemand_OnClicked(object sender, EventArgs e)
         {
             _answerDemandPopup = new AnswerDemandPopup(this.ViewModel.GetrequestService, this.ViewModel.Demands);
             await PopupNavigation.Instance.PushAsync(_answerDemandPopup);
             await _answerDemandPopup.PopupClosedTask;
             this.ViewModel.Update();
-            //await this.ViewModel.AnswerDemand();
         }
+        private async void MessageAsValidated_OnClicked(object sender, EventArgs e)
+        {
+            await this.ViewModel.SetMessageAsValidated();
+        }
+        private void AccountUserDemandsChatViewModel_OnDisplayAlert(string title, string message, string button) => this.DisplayAlert(title, message, button);
+
     }
 }

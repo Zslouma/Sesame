@@ -78,6 +78,9 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         {
             get
             {
+                Console.WriteLine("!Demands.status.Equals(UserDemandStatus.Closed)" + !Demands.status.Equals(UserDemandStatus.Closed)); 
+                Console.WriteLine("!Demands.status.Equals(UserDemandStatus.Archived)" + !Demands.status.Equals(UserDemandStatus.Archived));
+                Console.WriteLine("!Demands.status.Equals(UserDemandStatus.Archived)" + !Demands.status.Equals(UserDemandStatus.Archived));
                 Console.WriteLine("StatusNotClosed: "+ (!Demands.status.Equals(UserDemandStatus.Closed) && !Demands.status.Equals(UserDemandStatus.Archived) && Messages.Count > 0 && !Messages[Messages.Count - 1].validated));
                 return !Demands.status.Equals(UserDemandStatus.Closed) && !Demands.status.Equals(UserDemandStatus.Archived) && Messages.Count > 0 && !Messages[Messages.Count - 1].validated;
             }
@@ -147,10 +150,29 @@ namespace Syracuse.Mobitheque.Core.ViewModels
 
         }
 
-        public async Task AnswerDemand()
+
+        public async Task SetMessageAsValidated()
         {
-            DemandsOptions demandsOptions = new DemandsOptions(this.Demands.id,"je vous remercie");
-            this.requestService.AnswerDemand(demandsOptions);
+            Console.WriteLine("SetMessageAsValidated");
+            int messageId = this.Demands.messages[this.Demands.messages.Count - 1].id;
+            Console.WriteLine(messageId.ToString());
+            var status = await this.requestService.SetMessageAsValidated(messageId);
+            try
+            {
+            if (status.Success && status.D.messages[status.D.messages.Count -1].validated)
+            {
+                this.DisplayAlert(ApplicationResource.Warning, ApplicationResource.Success, ApplicationResource.ButtonValidation);
+                this.Update();
+            }
+            else
+            {
+                this.DisplayAlert(ApplicationResource.Warning, ApplicationResource.ErrorOccurred + "\n" + status.Message, ApplicationResource.ButtonValidation);
+            }
+            }
+            catch (Exception e)
+            {
+                this.DisplayAlert(ApplicationResource.Warning, ApplicationResource.ErrorOccurred +"\n" + e.Message , ApplicationResource.ButtonValidation);
+            }
         }
     }
 }

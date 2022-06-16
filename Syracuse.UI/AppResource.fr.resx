@@ -177,6 +177,12 @@
   <data name="DeleteAppAccount" xml:space="preserve">
     <value>Supprimer ce compte de l'application</value>
   </data>
+  <data name="DemandsChatAnswerMessage" xml:space="preserve">
+    <value>Envoyer une reponse</value>
+  </data>
+  <data name="DemandsChatValidateMessage" xml:space="preserve">
+    <value>Je suis satisfait de la réponse</value>
+  </data>
   <data name="DemandsUser" xml:space="preserve">
     <value>Mes demandes</value>
   </data>

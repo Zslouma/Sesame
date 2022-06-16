@@ -241,6 +241,24 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send an answer.
+        /// </summary>
+        public static string DemandsChatAnswerMessage {
+            get {
+                return ResourceManager.GetString("DemandsChatAnswerMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I am pleased with the response.
+        /// </summary>
+        public static string DemandsChatValidateMessage {
+            get {
+                return ResourceManager.GetString("DemandsChatValidateMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to My demands.
         /// </summary>
         public static string DemandsUser {
@@ -430,7 +448,7 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  Do you want to declare the different accounts of your family? .
+        ///   Looks up a localized string similar to Do you want to declare the different accounts of your family? .
         /// </summary>
         public static string OtherAccountPart2Tuto {
             get {
@@ -439,7 +457,7 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  Manage your accounts here and switch quickly from one profile to another..
+        ///   Looks up a localized string similar to Manage your accounts here and switch quickly from one profile to another..
         /// </summary>
         public static string OtherAccountPart3Tuto {
             get {
