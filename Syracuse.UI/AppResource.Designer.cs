@@ -502,6 +502,15 @@ namespace Syracuse.Mobitheque.UI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your items pinned on Syracuse.
+        /// </summary>
+        public static string PinnedDocumentExplained {
+            get {
+                return ResourceManager.GetString("PinnedDocumentExplained", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Align the QR code within the frame.
         /// </summary>
         public static string QRCodeScannerBottom {

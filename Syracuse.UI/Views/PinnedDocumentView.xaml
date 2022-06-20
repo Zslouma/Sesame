@@ -36,6 +36,9 @@
                             <Label HorizontalOptions="Center" VerticalOptions="Center" FontSize = "20" Text="{x:Static local:AppResource.NotCurrentBasket}" />
                         </StackLayout>
                         <StackLayout Padding="5,5" IsVisible="{Binding ReversNotCurrentBasket}">
+                            <StackLayout>
+                                <Label Text="{x:Static local:AppResource.PinnedDocumentExplained}" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                            </StackLayout>
                             <StackLayout x:Name="DownloadBar" Margin="-15,0" BackgroundColor="#f3f5fa" IsVisible="{Binding IsDownloadAllDisplay}">
                                 <Grid Padding="10">
                                     <Grid.ColumnDefinitions>

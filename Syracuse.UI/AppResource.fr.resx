@@ -264,6 +264,9 @@
   <data name="PasswordForget" xml:space="preserve">
     <value>Mot de passe oublié ?</value>
   </data>
+  <data name="PinnedDocumentExplained" xml:space="preserve">
+    <value>Vos éléments épinglés sur Syracuse</value>
+  </data>
   <data name="QRCodeScannerBottom" xml:space="preserve">
     <value>Alignez le code QR dans le cadre</value>
   </data>

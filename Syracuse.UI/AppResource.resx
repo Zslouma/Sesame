@@ -264,6 +264,9 @@
   <data name="PasswordForget" xml:space="preserve">
     <value>Forgot your password?</value>
   </data>
+  <data name="PinnedDocumentExplained" xml:space="preserve">
+    <value>Your items pinned on Syracuse</value>
+  </data>
   <data name="QRCodeScannerBottom" xml:space="preserve">
     <value>Align the QR code within the frame</value>
   </data>
