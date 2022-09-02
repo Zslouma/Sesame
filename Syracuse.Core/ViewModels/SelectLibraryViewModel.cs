@@ -68,10 +68,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         }
 
 
-        public async Task ValidateHandler( string url)
+        public async Task ValidateHandler( string url )
         {
             this.IsLoading = true;
-
+            url = "https://syracusepp.archimed.fr/mobidoc/etablissements/CNP-SESAME.json?_s=";
             try
             {
                 this.Librarie = await this.departmentService.GetLibraries(url);

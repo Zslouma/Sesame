@@ -58,49 +58,8 @@ namespace Syracuse.Mobitheque.UI.Views
         private async void btnScan_Clicked(object sender, EventArgs e)
         {
             this.ViewModel.IsLoading = true;
-            try
-            {
-                var options = new MobileBarcodeScanningOptions
-                {
-                    AutoRotate = false,
-                    UseFrontCameraIfAvailable = false,
-                    TryHarder = true
-                };
+            this.ViewModel.ValidateHandler("https://syracusepp.archimed.fr/mobidoc/etablissements/CNP-SESAME.json?_s=");
 
-                var overlay = new ZXingDefaultOverlay
-                {
-                    TopText = AppResource.QRCodeScannerTop,
-                    BottomText = AppResource.QRCodeScannerBottom
-                };
-
-                var QRScanner = new ZXingScannerPage(options, overlay);
-
-                await Navigation.PushAsync(QRScanner);
-
-                QRScanner.OnScanResult += (result) =>
-                {
-                    // Stop scanning
-                    QRScanner.IsScanning = false;
-
-                    // Pop the page and show the result
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        Navigation.PopAsync(true);
-                        txtBarcode.Text = "";
-                        txtBarcode.Text = result.Text;
-                        this.ViewModel.CanSubmit = true;
-                        this.ViewModel.ValidateHandler(result.Text);
-
-                    });
-
-                };
-
-            }
-            catch (Exception ex)
-            {
-                Navigation.PopAsync(true);
-                DisplayAlert("ERROR", ex.Message, "OK");
-            }
             this.ViewModel.IsLoading = false;
         }
 

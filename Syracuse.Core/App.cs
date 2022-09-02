@@ -81,7 +81,7 @@ namespace Syracuse.Mobitheque.Core
                 }
                 else
                 {
-                    RegisterAppStart<SelectLibraryViewModel>();
+                    RegisterAppStart<LoginViewModel>();
                 }
             }
             else { 
