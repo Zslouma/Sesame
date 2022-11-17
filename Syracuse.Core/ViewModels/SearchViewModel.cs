@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -305,7 +306,9 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 return;
 
 
-            this.PerformSearch(null, this.SortName, false);
+            //  PerformSearch(null, this.SortName, false);
+
+            await getNextPageSorted(this.SortName, this.SortOrder);
         }
         #endregion
 
@@ -469,6 +472,14 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.Results = this.Results.Concat(res).ToArray();
             this.IsBusy = false;
         }
+        private async Task getNextPageSorted(string sortName, int sortOrder)
+        {
+            this.IsBusy = true;
+          
+            Result[] res = await loadPageSort(sortName, sortOrder);
+            this.Results = this.Results.Concat(res).ToArray();
+            this.IsBusy = false;
+        }
         public bool Equals(List<FacetteValue> NewItems, List<FacetteValue> OldItem)
         {
             if (NewItems.Count != OldItem.Count)
@@ -521,6 +532,34 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             }
             return search?.D?.Results;
         }
+
+
+        private async Task<Result[]> loadPageSort(string sortName , int sortOrder)
+        {
+            SearchOptions optionsTempo = new SearchOptions();
+
+            optionsTempo.Query = new SearchOptionsDetails()
+            {
+                SortOrder = sortOrder,
+                SortField = sortName,
+                ScenarioCode = (await App.Database.GetActiveUser()).SearchScenarioCode,
+                QueryString = this.SearchQuery,
+                FacetFilter = this.FacetFilter,
+                Page = this.page
+            };
+            SearchResult search = await this.requestService.Search(optionsTempo);
+            if (search != null && !search.Success)
+            {
+                this.DisplayAlert(ApplicationResource.Error, search.Errors?[0]?.Msg != null ? search.Errors?[0]?.Msg : ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
+                return new Result[0];
+            }
+            else if (search.Success && search.D != null)
+            {
+                search.D.Results = await this.CheckAvailability(search.D.Results, this.SearchQuery);
+            }
+            return search?.D?.Results;
+        }
+
 
         private Dictionary<string, Func<IEnumerable<Result>, IEnumerable<Result>>> sorts =
         new Dictionary<string, Func<IEnumerable<Result>, IEnumerable<Result>>>()

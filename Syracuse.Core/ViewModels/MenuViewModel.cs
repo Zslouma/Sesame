@@ -322,7 +322,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             Log.Warning(tag, "End CheckNavigation");
         }
 
-        [Obsolete]
+        
         public async Task ShowDetailPageAsync(MenuNavigation item)
         {
             var name = item.Text;

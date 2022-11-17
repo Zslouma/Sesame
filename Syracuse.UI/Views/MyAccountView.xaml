@@ -17,13 +17,13 @@
 
         <OnPlatform x:TypeArguments="Color">
             <OnPlatform.iOS>
-                <Color x:Uid="colorPrimary">#ffffff</Color>
+                <Color x:Uid="colorPrimary">#F3F5FA</Color>
             </OnPlatform.iOS>
             <OnPlatform.Android>
-                <Color x:Uid="colorPrimary">#ffffff</Color>
+                <Color x:Uid="colorPrimary">#F3F5FA</Color>
             </OnPlatform.Android>
             <OnPlatform.WinPhone>
-                <Color x:Uid="colorPrimary">#ffffff</Color>
+                <Color x:Uid="colorPrimary">#F3F5FA</Color>
             </OnPlatform.WinPhone>
         </OnPlatform>
         
@@ -33,10 +33,13 @@
             <OnPlatform.iOS>
                 <Color x:Uid="colorPrimary">#000000</Color>
             </OnPlatform.iOS>
+            <OnPlatform.Android>
+                <Color x:Uid="colorPrimary">#6574CF</Color>
+            </OnPlatform.Android>
         </OnPlatform>
     </TabbedPage.UnselectedTabColor>
     <TabbedPage.SelectedItem>
-        <Color x:Uid="colorPrimary">#ffffff</Color>
+        <Color x:Uid="colorPrimary">#000000</Color>
     </TabbedPage.SelectedItem>
     <TabbedPage.SelectedTabColor>
         <OnPlatform x:TypeArguments="Color">
