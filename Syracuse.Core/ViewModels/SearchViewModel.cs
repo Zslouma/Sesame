@@ -477,7 +477,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             this.IsBusy = true;
           
             Result[] res = await loadPageSort(sortName, sortOrder);
-            this.Results = this.Results.Concat(res).ToArray();
+            this.Results = res;
             this.IsBusy = false;
         }
         public bool Equals(List<FacetteValue> NewItems, List<FacetteValue> OldItem)

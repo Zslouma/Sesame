@@ -128,7 +128,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 var response = await this.requestService.GetSummary();
                 this.SummaryAccount = response.D.AccountSummary;
+                this.SummaryAccount.DisplayName = response.D.AccountSummary.DisplayName;
             }
+           
+            
             if (SummaryAccount != null)
             {
                 this.TotalBorrowedDocuments = (this.SummaryAccount.LoansTotalCount > 1) ? String.Format(ApplicationResource.AccountInfoCountOfLoans, SummaryAccount.LoansTotalCount) 
