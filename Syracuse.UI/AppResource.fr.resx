@@ -165,6 +165,9 @@
   <data name="Connect" xml:space="preserve">
     <value>Se connecter</value>
   </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
   <data name="Copies" xml:space="preserve">
     <value>Se procurer le document</value>
   </data>

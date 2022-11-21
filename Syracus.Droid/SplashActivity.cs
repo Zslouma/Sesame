@@ -7,7 +7,7 @@ using Android.Util;
 
 namespace Syracuse.Mobitheque.Droid
 {
-    [Activity(Theme = "@style/MyTheme.Splash", MainLauncher = true, Icon = "@drawable/logo", NoHistory = true)]
+    [Activity(Theme = "@style/MyTheme.Splash", MainLauncher = true, Icon = "@drawable/logo_sesame", NoHistory = true)]
     public class SplashActivity : AppCompatActivity
     {
         static readonly string TAG = "X:" + typeof(SplashActivity).Name;

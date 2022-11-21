@@ -49,7 +49,7 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame BackgroundColor="Transparent" Padding="5, 0, 15, 0" >
+                        <Frame BackgroundColor="{DynamicResource AppLigthBackgroundColor}" Padding="5, 0, 15, 0" >
                             <StackLayout  HorizontalOptions="Fill" Orientation="Horizontal" Padding="10"  >
                                 <!--<StackLayout.GestureRecognizers>
                                     <TapGestureRecognizer
@@ -62,7 +62,9 @@
                                         <ColumnDefinition Width="1*" />
                                         <ColumnDefinition  Width="5*" />
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" HorizontalTextAlignment="Center" VerticalOptions="Center" Text="{Binding IconFontAwesome}" FontFamily="{StaticResource FontAwesomeSolid}" FontSize="Title" TextColor="{Binding Color}"/>
+                                    <Label Grid.Column="0" HorizontalTextAlignment="Center" VerticalOptions="Center" Text="{Binding IconFontAwesome}" 
+                                           FontFamily="{StaticResource FontAwesomeSolid}" FontSize="Title" 
+                                           TextColor="{Binding Color}"/>
                                     <StackLayout Grid.Column="1" VerticalOptions="Center" >
                                     <material:MaterialLabel 
                                         VerticalOptions="Center"
@@ -86,7 +88,9 @@
                                         FontSize="{DynamicResource FontSize}"
                                         FontFamily="{DynamicResource OpenSans}" 
                                         TextDecorations="Underline"
-                                        TextColor="{Binding Color}"/>
+                                        TextColor="{Binding Color}"
+                                        BackgroundColor="{DynamicResource AppLigthBackgroundColor}"
+                                    />
                                     </StackLayout>
                                 </Grid>
                             </StackLayout>

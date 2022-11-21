@@ -46,7 +46,7 @@ namespace Syracuse.Mobitheque.UI.Views
         }
         public async void InvokeCompleted(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtBarcode.Text) && !this.isnetworkError)
+            if (!this.isnetworkError)
             {
                 this.ViewModel.CanSubmit = true;
             }
@@ -77,7 +77,7 @@ namespace Syracuse.Mobitheque.UI.Views
                     this.isnetworkError = false;
                 }
             }
-            if (!string.IsNullOrEmpty(txtBarcode.Text) && !this.isnetworkError)
+            if ( !this.isnetworkError)
             {
                 this.ViewModel.CanSubmit = true;
             }
