@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                      xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
+                      xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
+                      xmlns:local="clr-namespace:Syracuse.Mobitheque.UI" 
+                      xmlns:core="clr-namespace:Syracuse.Mobitheque.Core;assembly=Syracuse.Mobitheque.Core"
+                      xmlns:common="clr-namespace:Syracuse.Mobitheque.UI.Views.Templates"
+                      x:TypeArguments="viewModels:OtherAccountViewModel"
+                      x:Class="Syracuse.Mobitheque.UI.Views.OtherAccountView"
+                      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+    <NavigationPage.TitleView >
+        <common:SearchBarTemplate />
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
+            <StackLayout VerticalOptions="FillAndExpand">
+                <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  Margin="0,10,0,10"  TextColor="{d:DynamicResource DarkTextColor}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span Text="&#xf0c0; " FontFamily="{StaticResource FontAwesomeSolid}" FontSize="20"/>
+                                <Span Text="{x:Static core:ApplicationResource.OtherAccount}" FontAttributes="Bold" FontSize="20"/>
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <StackLayout>
+                    <Label Text="{x:Static local:AppResource.OtherAccountTitleTuto}" FontAttributes="Bold" FontSize="Small" HorizontalTextAlignment="Center"/>
+                    <Label HorizontalTextAlignment="Center" FontSize="Small">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans >
+                                    <Span Text="{x:Static local:AppResource.OtherAccountPartTuto}"    />
+                                    <Span Text="{x:Static local:AppResource.OtherAccountPart2Tuto}"  />
+                                    <Span Text="{x:Static local:AppResource.OtherAccountPart3Tuto}" />
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    
+                </StackLayout>
+                <ListView x:Name="otherAccountList" 
+                          CachingStrategy="RecycleElement"
+                          ItemsSource="{Binding OtherAccount}"
+                          SeparatorVisibility="None"
+                          RowHeight="100"
+                          VerticalOptions="FillAndExpand"
+                          VerticalScrollBarVisibility="Never"
+                          Margin="25,15"
+                          IsPullToRefreshEnabled="False" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame HasShadow="False" Padding="0, 5, 0, 5" >
+                                    <Frame.HasShadow>
+                                        <OnPlatform x:TypeArguments="x:Boolean">
+                                            <On Platform="iOS">false</On>
+                                            <On Platform="Android">true</On>
+                                        </OnPlatform>
+                                    </Frame.HasShadow>
+                                    <StackLayout   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Horizontal">
+
+                                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="1*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label 
+                                                    Grid.Column="0" 
+                                                    Grid.Row="0" 
+                                                    Text="&#xf007;" 
+                                                    IsVisible="{Binding HaveDisplayName}"
+                                                    FontFamily="{StaticResource FontAwesomeRegular}" 
+                                                    VerticalTextAlignment="Center" 
+                                                    HorizontalTextAlignment="Center" 
+                                                    VerticalOptions="Fill" 
+                                                    FontSize="Small" 
+                                                     TextColor="Black" />
+                                            <Label
+                                                    Grid.Column="1" Grid.Row="0"
+                                                    HorizontalTextAlignment="Start"
+                                                    TextColor="Black" 
+                                                    Text="{Binding DisplayName}"
+                                                    FontSize="20"/>
+                                            <Label
+                                                    Grid.Column="0" Grid.Row="1"
+                                                    HorizontalTextAlignment="Start"
+                                                    Text="ID"
+                                                    TextColor="{d:DynamicResource PurpleTextColor}"
+                                                    FontAttributes="None" 
+                                                    FontSize="16"/>
+                                            <Label
+                                                    Grid.Column="1" Grid.Row="1"
+                                                    HorizontalTextAlignment="Start"
+                                                    TextColor="{d:DynamicResource PurpleTextColor}"
+                                                    Text="{Binding Username}"
+                                                    FontAttributes="None" 
+                                                    FontSize="16"/>
+                                            <Label 
+                                                    Grid.Column="0" 
+                                                    Grid.Row="2" 
+                                                    Text="&#xf3c5;" 
+                                                    FontFamily="{StaticResource FontAwesomeSolid}" 
+                                                    VerticalTextAlignment="Center" 
+                                                    HorizontalTextAlignment="Center" 
+                                                    VerticalOptions="Fill" 
+                                                    FontSize="Small" 
+                                                    TextColor="#88929D"/>
+                                            <Label
+                                                    Grid.Column="1" Grid.Row="2"
+                                                    HorizontalTextAlignment="Start"
+                                                    Text="{Binding Library}"
+                                                    FontAttributes="None" 
+                                                    FontSize="Default"/>
+
+                                        </Grid>
+                                        <Label 
+                                            Text="&#xf054;" 
+                                            FontFamily="{StaticResource FontAwesomeSolid}" 
+                                            VerticalTextAlignment="Center" 
+                                            HorizontalTextAlignment="Center" 
+                                            HorizontalOptions="End"
+                                            VerticalOptions="Fill" 
+                                            FontSize="Medium" 
+                                            TextColor="#88929D"/>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <StackLayout VerticalOptions="End" Padding="15,10" HorizontalOptions="FillAndExpand">
+
+                    <Button HorizontalOptions="Fill" VerticalOptions="CenterAndExpand" FontSize="Large" TextColor="White"  Text="&#xf234;" FontFamily="{StaticResource FontAwesomeSolid}" BackgroundColor="{d:DynamicResource PurpleTextColor}" Clicked="AddAccount_Clicked"></Button>
+
+                </StackLayout>
+            </StackLayout>
+
+        </yummy:PancakeView>
+    </ContentPage.Content>
+</views:MvxContentPage>

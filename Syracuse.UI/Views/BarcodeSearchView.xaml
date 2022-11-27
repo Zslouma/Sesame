@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxNavigationPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+             xmlns:views1="clr-namespace:Syracuse.Mobitheque.UI.Views;assembly=Syracuse.Mobitheque.UI"
+             xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
+             x:TypeArguments="viewModels:BarcodeSearchModel"
+             x:Class="Syracuse.Mobitheque.UI.Views.BarcodeSearchView">
+</views:MvxNavigationPage>

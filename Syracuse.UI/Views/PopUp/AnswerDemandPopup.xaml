@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage  xmlns="http://xamarin.com/schemas/2014/forms" 
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+            xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+            xmlns:local="clr-namespace:Syracuse.Mobitheque.UI" 
+            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+            xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+            x:Class="Syracuse.Mobitheque.UI.Views.PopUp.AnswerDemandPopup">
+    <AbsoluteLayout
+            Padding="20"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill">
+        <Frame
+            x:Name="FrameContainer"
+            Margin="15"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            BackgroundColor="White">
+            <StackLayout HorizontalOptions="FillAndExpand">
+                <StackLayout  >
+                    <Label Text="Answer Demands user" FontSize="Medium" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+                <Editor x:Name="EditorMessage" VerticalOptions="Fill" HorizontalOptions="FillAndExpand" Placeholder="Tape your text!" AutoSize="TextChanges" Text=""/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button 
+                        Grid.Column="0" 
+                        Text="Send"
+                        TextColor="{DynamicResource AppLigthBackgroundColor}"
+                        FontSize="Small"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        BackgroundColor="Transparent"
+                        Clicked="OnSend" />
+                    <Button 
+                        Grid.Column="1" 
+                        x:Name="Close"
+                        Text="Close"
+                        TextColor="Red"
+                        FontSize="Small"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        BackgroundColor="Transparent"
+                        Clicked="OnClose" />
+                </Grid>
+            </StackLayout>
+            
+        </Frame>
+        <ContentView
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            AbsoluteLayout.LayoutBounds="1, 0, -1, -1"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center">
+            <ContentView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnCloseButtonTapped"/>
+            </ContentView.GestureRecognizers>
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Label 
+                    Text="&#xf057;"
+                    FontFamily="{StaticResource FontAwesomeSolid}"
+                    VerticalOptions="Fill" 
+                    HorizontalOptions="Fill"
+                    FontSize="Medium"
+                    TextColor="Red"
+                    BackgroundColor="Transparent"/>
+            </StackLayout>
+        </ContentView>
+    </AbsoluteLayout>
+</pages:PopupPage>

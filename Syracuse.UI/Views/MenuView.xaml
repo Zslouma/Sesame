@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage IconImageSource="hamburger.png"
+                      xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                      xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
+                      xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
+                      x:Class="Syracuse.Mobitheque.UI.Views.MenuView"
+                      x:TypeArguments="viewModels:MenuViewModel"
+                      x:Name="MainContent">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="{DynamicResource AppLigthBackgroundColor}"   HeightRequest="40">
+            <StackLayout.IsVisible>
+                <OnPlatform x:TypeArguments="x:Boolean">
+                    <On Platform="Android, iOS"
+                        Value="True" />
+                </OnPlatform>
+            </StackLayout.IsVisible>
+            <CollectionView x:Name="Items"
+                            Margin="0,20,0,0"
+                      IsVisible="{Binding MenuIsVisible}"
+                      ItemsSource="{Binding MenuItemList}"
+                      SelectionMode="Single"
+                      SelectionChanged="OnItemSelected"    
+                      >
+                <CollectionView.Header>
+                    <StackLayout  Orientation="Vertical">
+                        <StackLayout Orientation="Vertical"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Center"
+                                     MinimumHeightRequest="30"
+                                     Margin="5,5,5,20">
+                            <material:MaterialLabel 
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                Text="{Binding DisplayName}"
+                                FontSize="{DynamicResource FontSizeTitle}"
+                                FontFamily="{DynamicResource OpenSans}"
+                                HorizontalTextAlignment="Center" 
+                                FontAttributes="Bold"
+                                TextColor="White"/>
+                            <Label Text="{Binding Library}" 
+                                   HorizontalTextAlignment="Center" 
+                                   TextColor="White" 
+                                   FontSize="Small"></Label>
+                        </StackLayout>
+                    </StackLayout>
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="{DynamicResource AppLigthBackgroundColor}" Padding="5, 0, 15, 0" >
+                            <StackLayout  HorizontalOptions="Fill" Orientation="Horizontal" Padding="10"  >
+                                <!--<StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding BindingContext.DataContext.ShowDetailPageCommand, Source={x:Reference MainContent}}"
+                                        CommandParameter="{Binding Text}">
+                                    </TapGestureRecognizer>
+                                </StackLayout.GestureRecognizers>-->
+                                <Grid HorizontalOptions="FillAndExpand" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition  Width="5*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" HorizontalTextAlignment="Center" VerticalOptions="Center" Text="{Binding IconFontAwesome}" 
+                                           FontFamily="{StaticResource FontAwesomeSolid}" FontSize="Title" 
+                                           TextColor="{Binding Color}"/>
+                                    <StackLayout Grid.Column="1" VerticalOptions="Center" >
+                                    <material:MaterialLabel 
+                                        VerticalOptions="Center"
+                                        Text="{Binding Text}"
+                                        FontSize="{DynamicResource FontSize}"
+                                        FontFamily="{DynamicResource OpenSans}"
+                                        TextColor="{Binding Color}">
+                                    <material:MaterialLabel.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="False">
+                                            <Setter Property="IsVisible" Value="True" />
+                                        </DataTrigger>
+                                        <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
+                                            <Setter Property="IsVisible" Value="False" />
+                                        </DataTrigger>
+                                    </material:MaterialLabel.Triggers>
+                                </material:MaterialLabel>
+                                <material:MaterialLabel 
+                                        VerticalOptions="Center"
+                                        IsVisible="{Binding IsSelected}"
+                                        Text="{Binding Text}"
+                                        FontSize="{DynamicResource FontSize}"
+                                        FontFamily="{DynamicResource OpenSans}" 
+                                        TextDecorations="Underline"
+                                        TextColor="{Binding Color}"
+                                        BackgroundColor="{DynamicResource AppLigthBackgroundColor}"
+                                    />
+                                    </StackLayout>
+                                </Grid>
+                            </StackLayout>
+                            
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</views:MvxContentPage>

@@ -1,0 +1,44 @@
+{
+  "department_code": "99",
+  "code": "CNP",
+  "name": "S�same by CNP",
+  "config": {
+    "baseUri": "https://integ01-cnp1.archimed.fr/Default/",
+    "domainUri": "https://integ01-cnp1.archimed.fr",
+    "forgetMdpUri": "https://integ01-cnp1.archimed.fr/Default/resetpassword.aspx",
+    "search_scenario_code": "CNP",
+    "events_scenario_code": "CNP",
+    "is_event": false,
+    "remember_me": true,
+    "can_download": true,
+    "is_km": true,
+    "daily_press": {
+      "press_scenario_code": "CNP",
+      "query": "DateOfInsertion_idx:[TODAY]"
+    },
+    "international_press": {
+      "press_scenario_code": "ContinentEurope",
+      "query": "Continent_idx:\"Europe\""
+    },
+    "standards_views": [],
+    "sso": [],
+    "library_informations": [
+
+      {
+        "building_name": "M�diath�que Falala",
+        "url": "https://publiclibrary-diy.syracuse.cloud/mobitheque-bibliotheque-falala.aspx?popup=true"
+      },
+      {
+        "building_name": "Bibliotheque Carnegie",
+        "url": "https://publiclibrary-diy.syracuse.cloud/default/bibliotheque-carnegie.aspx?popup=true"
+      },
+      {
+        "building_name": "bibliobus",
+        "url": "https://publiclibrary-diy.syracuse.cloud/default/bibliobus.aspx?popup=true"
+      }
+
+
+
+    ]
+
+  }

@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Syracuse.Mobitheque.UI.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="CustomBlue">#59a0ec</Color>
+            <Color x:Key="AppBackgroundColor">#6574CF</Color>
+            <Color x:Key="AppDarkBackgroundColor">#6569DF</Color>
+            <Color x:Key="AppLigthBackgroundColor">#727fd7</Color>
+            <Color x:Key="AppSecondaryBackgroundColor">#FFFFFF</Color>
+            <Color x:Key="AppSecondaryBackgroundColorTransparent">#1AFFFFFF</Color>
+            <Color x:Key="ButtonColor">#6574CF</Color>
+            <Color x:Key="ButtonSecondaryColor">#FFFFFF</Color>
+            <Color x:Key="NavigationBarColor">#6574CF</Color>
+            <Color x:Key="NavigationBarTextColor">#FFFFFF</Color>
+            <Color x:Key="DarkTextColor">#000000</Color>
+            <Color x:Key="PurpleTextColor">#6574CF</Color>
+            <Color x:Key="PurpleTextColorTransparente">#B2B9E7</Color>
+            <Color x:Key="GreyTextColor">#8F9BB3</Color>
+            <Color x:Key="AccountInfoTextColor">#4FBFC3</Color>
+            <Color x:Key="LigthGreyTextColor">#8f9bb3</Color>
+            <Color x:Key="WhiteTextColor">#FFFFFF</Color>
+            <Color x:Key="ActivityIndicatorColor">#FFFFFF</Color>
+
+            <OnPlatform x:Key="OpenSans"
+                 x:TypeArguments="x:String">
+                <On Platform="iOS, Android">OpenSans</On>
+                <On Platform="UWP">OpenSans</On>
+            </OnPlatform>
+            
+            <OnPlatform x:Key="FontSize"
+            x:TypeArguments="x:Double">
+                <On Platform="iOS">18</On>
+                <On Platform="Android, UWP">20</On>
+            </OnPlatform>
+
+            <OnPlatform x:Key="FontSizeTitle"
+            x:TypeArguments="x:Double">
+                <On Platform="iOS">22</On>
+                <On Platform="Android, UWP">24</On>
+            </OnPlatform>
+
+            <!--#region FontAwesome -->
+            <OnPlatform x:TypeArguments="x:String" 
+                x:Key="FontAwesomeBrands">
+                <On Platform="Android" 
+          Value="FontAwesome5Brands.otf#Regular" />
+                <On Platform="iOS" 
+          Value="FontAwesome5Brands-Regular" />
+                <On Platform="UWP" 
+          Value="/Assets/FontAwesome5Brands.otf#Font Awesome 5 Brands" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" 
+                x:Key="FontAwesomeSolid">
+                <On Platform="Android" 
+          Value="FontAwesome5Solid.otf#Regular" />
+                <On Platform="iOS" 
+          Value="FontAwesome5Free-Solid" />
+                <On Platform="UWP" 
+          Value="/Assets/FontAwesome5Solid.otf#Font Awesome 5 Free" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" 
+                x:Key="FontAwesomeRegular">
+                <On Platform="Android" 
+          Value="FontAwesome5Regular.otf#Regular" />
+                <On Platform="iOS" 
+          Value="FontAwesome5Free-Regular" />
+                <On Platform="UWP" 
+          Value="/Assets/FontAwesome5Regular.otf#Font Awesome 5 Free" />
+            </OnPlatform>
+
+            <!--#endregion-->
+
+            <Style TargetType="{x:Type NavigationPage}">
+                <Setter Property="BarBackgroundColor"
+                    Value="{StaticResource NavigationBarColor}" />
+                <Setter Property="BackgroundColor"
+                    Value="{StaticResource NavigationBarColor}" />
+                <Setter Property="BarTextColor"
+                    Value="{StaticResource NavigationBarTextColor}" />
+            </Style>
+
+            <Style TargetType="{x:Type ContentPage}"
+               ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor"
+                    Value="{StaticResource AppBackgroundColor}" />
+            </Style>
+            
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
+                <Setter Property="FontSize" Value="{StaticResource FontSize}"/>
+            </Style>
+
+            <Style TargetType="{x:Type Picker}">
+                <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
+                <Setter Property="FontSize" Value="{StaticResource FontSize}"/>
+            </Style>
+
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
+                <Setter Property="FontSize" Value="{StaticResource FontSize}"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

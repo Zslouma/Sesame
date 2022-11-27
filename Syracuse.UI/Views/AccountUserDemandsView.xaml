@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<views:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                      xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
+                      xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
+                      x:TypeArguments="viewModels:AccountUserDemandsViewModel"
+                      x:Class="Syracuse.Mobitheque.UI.Views.AccountUserDemandsView"
+                      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+    <ContentPage.Content>
+        <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0"  VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
+            <Grid VerticalOptions="FillAndExpand">
+                <CollectionView
+                    x:Name="DemandsList"
+                    BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}"
+                    SelectionMode="Single"
+                    SelectionChanged="DemandList_ItemTapped"
+                    IsVisible="{Binding HasDemands}"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding Demands}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout  BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}" >
+                                <Frame VerticalOptions="FillAndExpand"  Margin="5">
+                                    <Frame.HasShadow>
+                                        <OnPlatform x:TypeArguments="x:Boolean">
+                                            <On Platform="iOS">false</On>
+                                            <On Platform="Android">true</On>
+                                        </OnPlatform>
+                                    </Frame.HasShadow>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="0" Text="&#xf086;" VerticalOptions="Center" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontFamily="{StaticResource FontAwesomeSolid}" Margin="5"/>
+                                        <StackLayout Grid.Column="1" VerticalOptions="FillAndExpand" Orientation="Vertical">
+                                            <Label Text="{Binding reasonLabel}"
+                                                   TextType="Html" 
+                                                   FontAttributes="Bold"
+                                                   VerticalOptions="FillAndExpand"
+                                                   TextColor="#503026" 
+                                                   MaxLines="1"/>
+                                            <Label Text="{Binding messagesText}"
+                                                TextType="Html" 
+                                                VerticalOptions="FillAndExpand"
+                                                TextColor="#503026" 
+                                                MaxLines="1"/>
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                    <StackLayout.Triggers>
+                        <DataTrigger TargetType="StackLayout" Binding="{Binding HasDemands}" Value="False">
+                            <Setter Property="IsVisible" Value="True"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="StackLayout" Binding="{Binding HasDemands}" Value="True">
+                            <Setter Property="IsVisible" Value="False"/>
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                    <Label VerticalOptions="Center" HorizontalOptions="Center" Text="Pas de demandes en cours"/>
+                </StackLayout>
+                <AbsoluteLayout Grid.Row="0" IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
+                    <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
+                </AbsoluteLayout>
+            </Grid>
+        </yummy:PancakeView>
+    </ContentPage.Content>
+</views:MvxContentPage>

@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:local="clr-namespace:Syracuse.Mobitheque.UI" 
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    x:Class="Syracuse.Mobitheque.UI.Views.SwitchOrDeleteAccountPopup"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+    <!--You can set an animation in the xaml file or in the csharp code behind-->
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>
+    <!--You can use any elements here which are extended from Xamarin.Forms.View-->
+
+    <AbsoluteLayout Padding="20"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center">
+        <Frame
+            x:Name="FrameSwitchDeleteContainer"
+            Margin="15"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center"
+            BackgroundColor="White">
+            <StackLayout HorizontalOptions="Fill">
+                <StackLayout >
+                    <Label Text="{x:Static local:AppResource.SwitchDeleteAccountPopupTitle}" FontSize="Medium" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+                <yummy:PancakeView  Margin="15,15" Padding="5" CornerRadius="10" Border="{yummy:BorderMarkup Color=LightGray, Thickness=1}">
+
+                    <StackLayout>
+                        <Label  
+                            Text="&#xf2bd;" 
+                            FontFamily="{StaticResource FontAwesomeRegular}" 
+                            VerticalTextAlignment="Center" 
+                            HorizontalTextAlignment="Center" 
+                            HorizontalOptions="Center" 
+                            FontSize="Large" 
+                            TextColor="{DynamicResource AppLigthBackgroundColor}"/>
+                        <Grid Margin="15,0" HorizontalOptions="Center"  VerticalOptions="FillAndExpand" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label 
+                                Grid.Column="0" 
+                                Grid.Row="0" 
+                                Text="&#xf007;" 
+                                IsVisible="{Binding OtherAccount.HaveDisplayName}"
+                                FontFamily="{StaticResource FontAwesomeRegular}" 
+                                VerticalTextAlignment="Center" 
+                                HorizontalTextAlignment="Center" 
+                                VerticalOptions="Fill" 
+                                FontSize="Small" 
+                                TextColor="Black" />
+                            <Label
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalTextAlignment="Start"
+                                TextColor="Black" 
+                                Text="{Binding OtherAccount.DisplayName}"
+                                FontSize="Medium"/>
+                            <Label
+                                Grid.Column="0" Grid.Row="1"
+                                HorizontalTextAlignment="Start"
+                                Text="ID"
+                                FontAttributes="None" 
+                                FontSize="Small"/>
+                            <Label
+                                Grid.Column="1" Grid.Row="1"
+                                HorizontalTextAlignment="Start"
+                                Text="{Binding OtherAccount.Username}"
+                                FontAttributes="None" 
+                                FontSize="Small"/>
+                            <Label 
+                                Grid.Column="0" 
+                                Grid.Row="2" 
+                                Text="&#xf3c5;" 
+                                FontFamily="{StaticResource FontAwesomeSolid}" 
+                                VerticalTextAlignment="Center" 
+                                HorizontalTextAlignment="Center" 
+                                VerticalOptions="Fill" 
+                                FontSize="Small" 
+                                TextColor="#88929D"/>
+                            <Label
+                                Grid.Column="1" Grid.Row="2"
+                                HorizontalTextAlignment="Start"
+                                Text="{Binding OtherAccount.Library}"
+                                FontAttributes="None" 
+                                FontSize="Small"/>
+
+                    </Grid>
+                    </StackLayout>
+                </yummy:PancakeView>
+                <StackLayout>
+                <Grid Margin="15" >
+
+                    <Label Text="{x:Static local:AppResource.DeleteAppAccount}"
+                           HorizontalTextAlignment="Center"
+                           FontSize="Small"
+                     
+                           FontAttributes="None"
+                           TextColor="Red"
+                           Grid.Column="0"
+                           Grid.Row="0">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnDeleteClick"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Label Text="{x:Static local:AppResource.SwitchAccount}"
+                           HorizontalTextAlignment="Center"
+                           FontSize="Small"
+                           FontAttributes="None"
+                           TextColor="{DynamicResource AppLigthBackgroundColor}"
+                           Grid.Column="1"
+                           Grid.Row="0">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnSwitchAccountClick"/>
+                            </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+                    </StackLayout>
+            </StackLayout>
+        </Frame>
+        <ContentView
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                AbsoluteLayout.LayoutBounds="1, 0, -1, -1">
+            <ContentView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnCloseButtonTapped"/>
+            </ContentView.GestureRecognizers>
+            <Label 
+                Text="&#xf057;"
+                FontFamily="{StaticResource FontAwesomeSolid}"
+                VerticalOptions="End" 
+                HorizontalOptions="Start"
+                FontSize="Medium"
+                TextColor="Red"
+                BackgroundColor="Transparent"
+/>
+        </ContentView>
+
+    </AbsoluteLayout>
+
+
+
+</pages:PopupPage>

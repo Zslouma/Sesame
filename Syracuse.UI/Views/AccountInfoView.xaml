@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                      xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
+                      xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
+                      xmlns:core="clr-namespace:Syracuse.Mobitheque.Core;assembly=Syracuse.Mobitheque.Core"
+                      x:TypeArguments="viewModels:AccountInfoViewModel"
+                      x:Class="Syracuse.Mobitheque.UI.Views.AccountInfoView"
+                      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+
+    <ContentPage.Content>
+        <yummy:PancakeView Margin="0,15,0,0" CornerRadius="32,32,0,0" VerticalOptions="FillAndExpand" BackgroundColor="{d:DynamicResource AppSecondaryBackgroundColor}">
+            <ScrollView>
+            <Grid>
+                    <StackLayout>
+                        <Label VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Margin="0,10,0,10"  TextColor="{d:DynamicResource DarkTextColor}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <FormattedString.Spans>
+                                        <Span Text="&#xf007; " FontFamily="{StaticResource FontAwesomeSolid}" FontSize = "20"/>
+                                        <Span Text="{x:Static core:ApplicationResource.Account}" FontSize = "20" FontAttributes="Bold"/>
+                                    </FormattedString.Spans>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Grid>
+                        <Grid.RowDefinitions>
+                                <RowDefinition  Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                        <Label Text="{Binding SummaryAccount.DisplayName}"
+                            TextColor="{d:DynamicResource PurpleTextColor}"
+                            FontSize="18"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center"
+                            Margin="0,0,0,20"
+                            Grid.Row="0"
+                            Grid.Column="0" />
+                        <StackLayout
+                            Grid.Row="1"
+                            Grid.Column="0">
+                                <yummy:PancakeView VerticalOptions="FillAndExpand" Margin="15,5" Padding="10" CornerRadius="10" Border="{yummy:BorderMarkup Color=LightGray, Thickness=1}">
+                                <StackLayout 
+                                            HorizontalOptions="Start"
+                                            Padding="15,0,0,0"
+                                            x:Name="InfoList">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapBorrowedCommand}"/>
+                                    </StackLayout.GestureRecognizers>
+                                        <Label Margin="0, 0, 0, 5" FontSize="18" TextColor="{d:DynamicResource DarkTextColor}"  Text="{Binding TotalBorrowedDocuments}" ></Label>
+                                        <Label Margin="10, 0, 0, 5" FontSize="18" TextColor="Red" IsVisible="{Binding IsLateVisibility}" Text="{Binding LateBorrowedDocuments}"></Label>
+                                </StackLayout>
+                            </yummy:PancakeView>
+                            <yummy:PancakeView VerticalOptions="FillAndExpand" Margin="15,5" Padding="10" CornerRadius="10" Border="{yummy:BorderMarkup Color=LightGray, Thickness=1}">
+                                <StackLayout 
+                                            HorizontalOptions="Start" 
+                                            Padding="15,0,0,0">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding TapBookingCommand}"/>
+                                    </StackLayout.GestureRecognizers>
+                                        <Label Margin="0, 0, 0, 5" FontSize="18" TextColor="{d:DynamicResource DarkTextColor}" Text="{Binding TotalBookingDocuments}"></Label>
+                                        <Label Margin="10, 0, 0, 5" FontSize="18" TextColor="{d:DynamicResource AccountInfoTextColor}" Text="{Binding AvailableBookingDocuments}"></Label>
+                                </StackLayout>
+                            </yummy:PancakeView>
+                        </StackLayout>
+
+                    </Grid>
+                </StackLayout>
+                <AbsoluteLayout IsVisible="{Binding IsBusy}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
+                    <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
+                </AbsoluteLayout>
+            </Grid>
+                </ScrollView>
+        </yummy:PancakeView>
+    </ContentPage.Content>
+
+</views:MvxContentPage>

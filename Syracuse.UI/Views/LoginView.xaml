@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                    xmlns:viewModels="clr-namespace:Syracuse.Mobitheque.Core.ViewModels;assembly=Syracuse.Mobitheque.Core"
+                    xmlns:local="clr-namespace:Syracuse.Mobitheque.UI" 
+                    xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+                    x:TypeArguments="viewModels:LoginViewModel"
+                    x:Class="Syracuse.Mobitheque.UI.Views.LoginView"
+                    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+    <ContentPage.Content>
+        <ScrollView VerticalOptions="FillAndExpand">
+            <Grid Padding="20,0" VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Source="logo_sesame" HeightRequest="200" VerticalOptions="Start"></Image>
+                <StackLayout Grid.Row="1" Margin="15,0" VerticalOptions="FillAndExpand" x:Name="FormLayout" Spacing="20">
+                    <Grid Margin="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.8*" />
+                            <ColumnDefinition Width="0.2*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label  Text="{Binding Library}" 
+                                Margin="0,0,0,10"
+                                HorizontalTextAlignment="Center" 
+                                TextColor="White"
+                                FontSize="Large"
+                                Grid.ColumnSpan="2"
+                                Grid.Row="0"/>
+                        <Button
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Fill"
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            Text="&#xf02a;"
+                            FontSize="Large"
+                            FontFamily="{StaticResource FontAwesomeSolid}"
+                            x:Name="ScannButton"
+                            TextColor="White"
+                            BackgroundColor="Transparent">
+                        </Button>
+                        <yummy:PancakeView VerticalOptions="Center"  Grid.Column="0"
+                            Grid.Row="1" CornerRadius="10" Border="{yummy:BorderMarkup Color=White, Thickness=1}">
+                            <material:MaterialTextField
+                                FloatingPlaceholderColor="{DynamicResource WhiteTextColor}"
+                                PlaceholderColor="{DynamicResource WhiteTextColor}"
+                                Placeholder="{x:Static local:AppResource.AccountTitle}"
+                                InputType="Default"
+                                IsAutoCapitalizationEnabled="False"
+                                IsTextAllCaps="False"
+                                x:Name="UserNameInput"
+                                Text="{Binding UserName, Mode=TwoWay}"
+                                TextFontFamily="{StaticResource OpenSans}"
+                                TextFontSize="{StaticResource FontSize}"
+                                HasError="{Binding UserNameIsError}"
+                                ErrorText="{Binding UserNameErrorString}"
+                                TextColor="{DynamicResource WhiteTextColor}"
+                                TintColor="{DynamicResource WhiteTextColor}"
+                                BackgroundColor="{DynamicResource AppBackgroundColor}"
+                                UnderlineColor="White"/>
+                        </yummy:PancakeView>
+                    </Grid>
+
+                    <yummy:PancakeView VerticalOptions="Center" CornerRadius="10" Border="{yummy:BorderMarkup Color=White, Thickness=1}" Margin="0, 0, 0, 12" >
+                    <material:MaterialTextField 
+                        FloatingPlaceholderColor="{DynamicResource WhiteTextColor}"
+                        PlaceholderColor="{DynamicResource WhiteTextColor}"
+                        Placeholder="{x:Static local:AppResource.Password}"
+                        InputType="Password"
+                        IsAutoCapitalizationEnabled="False"
+                        IsTextAllCaps="False"
+                        x:Name="PasswordInput"
+                        Text="{Binding Password, Mode=TwoWay}"
+                        TextFontFamily="{StaticResource OpenSans}"
+                        TextFontSize="{StaticResource FontSize}"
+                        HasError="{Binding PasswordIsError}"
+                        ErrorText="{Binding PasswordErrorString}"
+                        TextColor="{DynamicResource WhiteTextColor}"
+                        TintColor="{DynamicResource WhiteTextColor}"
+                        BackgroundColor="{DynamicResource AppBackgroundColor}"/>
+                    </yummy:PancakeView>
+                    
+                    <Button 
+                        HorizontalOptions="FillAndExpand"
+                        Text="{x:Static local:AppResource.Connect}"
+                        Padding="0"
+                        Command="{Binding ConnectCommand}"
+                        CornerRadius="15"
+                        BackgroundColor="{DynamicResource WhiteTextColor}"
+                        TextColor="{DynamicResource PurpleTextColor}"
+                    />
+
+                    <Button Text="{x:Static local:AppResource.PasswordForget}"
+                            TextColor="AliceBlue"
+                            BackgroundColor="Transparent"
+                            Clicked="OpenBrowser_OnClicked"/>
+                    <CollectionView
+                        x:Name="ListSSO"
+                        ItemsSource="{Binding ListSSO}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Button Text="{Binding Label}"
+                                            CornerRadius="15"
+                                            BackgroundColor="#FFFFFF"
+                                            TextColor="#6574CF"
+                                            CommandParameter="{Binding Value}"
+                                            Clicked="OpenBrowser_OnClicked"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+             <AbsoluteLayout Grid.RowSpan="2" Margin="-20" IsVisible="{Binding IsLoading}" VerticalOptions="FillAndExpand" Opacity="0.6" BackgroundColor="Gray" >
+                <ActivityIndicator IsRunning="True" AbsoluteLayout.LayoutFlags="PositionProportional" Color="White" AbsoluteLayout.LayoutBounds=".5,.5,-1,-1" />
+            </AbsoluteLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</views:MvxContentPage>
