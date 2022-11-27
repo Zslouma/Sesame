@@ -38,7 +38,7 @@
                                     <Frame>
                                         <StackLayout Orientation="Vertical">
                                             <StackLayout  Orientation="Horizontal">
-                                                <Grid>
+                                                <Grid x:Name="Item">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="Auto" />
                                                         <RowDefinition Height="*" />
@@ -87,6 +87,25 @@
                                                         <Image   HeightRequest="30" WidthRequest="100" IsVisible="{Binding DisplayValues.HaveStar}" Source="{Binding DisplayValues.Star}" VerticalOptions="Start"/>
                                                     </StackLayout>
                                                     <StackLayout Grid.Row="0" Grid.Column="1" Padding="10,0,10,10">
+                                                        <StackLayout VerticalOptions="Start" IsVisible="{Binding IsDownload}">
+                                                            <Label Text="&#xf00c;" FontFamily="{StaticResource FontAwesomeSolid}" WidthRequest="30" TextColor="LightGreen" VerticalOptions="Start" FontSize="Large"/>
+                                                        </StackLayout>
+                                                        <StackLayout  VerticalOptions="Start" IsVisible="{Binding CanDownload}">
+                                                            <Button
+                                                        x:Name="DownloadButton"
+                                                         CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
+                                                        BindingContext="{Binding Source={x:Reference scrollView}, Path=BindingContext}"
+                                                        Command="{Binding DownloadDocumentCommand}"
+                                                        IsEnabled="{Binding CanDownload}"
+                                                        WidthRequest="30"
+                                                        Text="&#xf019;"
+                                                        VerticalOptions="Start"
+                                                        FontSize="Large"
+                                                        FontFamily="{StaticResource FontAwesomeSolid}"
+                                                        TextColor="Gray"
+                                                        BackgroundColor="Transparent"/>
+                                                        </StackLayout>
+
                                                         <material:MaterialLabel FontSize="Medium" FontAttributes="Bold" VerticalOptions="Start" VerticalTextAlignment="Start" Text="{Binding FieldList.Title[0]}"/>
                                                         <material:MaterialLabel FontSize="Small" Text="{Binding FieldList.shortDesc}"/>
                                                     </StackLayout>
@@ -101,11 +120,13 @@
                                                                 <Grid.ColumnDefinitions>
                                                                     <ColumnDefinition Width="Auto"/>
                                                                     <ColumnDefinition Width="*" />
+                                                                    <ColumnDefinition Width="*" />
                                                                 </Grid.ColumnDefinitions>
-                                                                <Label Grid.Column="0" Grid.Row="1" Text="&#xf3c5;" FontFamily="{StaticResource FontAwesomeSolid}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Fill" FontSize="Small" TextColor="#88929D"/>
+                                                                <Label  Text="&#xf3c5;" FontFamily="{StaticResource FontAwesomeSolid}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Fill" FontSize="Small" TextColor="#88929D"/>
                                                                 <Label Grid.Column="1" Grid.Row="1" Text="{Binding FieldList.SubjectLocation[0]}" VerticalTextAlignment="Center" VerticalOptions="Fill" FontSize="Small" TextColor="{d:DynamicResource DarkTextColor}"></Label>
                                                                 <Label Grid.Column="0" Grid.Row="2" Text="&#xf017;" FontFamily="{StaticResource FontAwesomeRegular}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center"  FontSize="Small" TextColor="#88929D" />
                                                                 <Label Grid.Column="1" Grid.Row="2" Text="{Binding FieldList.DateTime_String}" VerticalTextAlignment="Center" VerticalOptions="Center" FontSize="Small" TextColor="{d:DynamicResource DarkTextColor}"/>
+                                                               
                                                             </Grid>
                                                         </StackLayout>
                                                         <StackLayout IsVisible="{Binding FieldList.HasZipUrl}">

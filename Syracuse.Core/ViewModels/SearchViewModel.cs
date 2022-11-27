@@ -338,6 +338,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private MvxAsyncCommand<string> searchCommand;
         public MvxAsyncCommand<string> SearchCommand => this.searchCommand ??
             (this.searchCommand = new MvxAsyncCommand<string>((text) => this.PerformSearch(text)));
+        private MvxAsyncCommand<Result> downloadDocumentCommand;
+        public MvxAsyncCommand<Result> DownloadDocumentCommand => this.downloadDocumentCommand ??
+            (this.downloadDocumentCommand = new MvxAsyncCommand<Result>((item) => this.DownloadDocument(item)));
+
 
         private MvxAsyncCommand<string> loadMore;
         public MvxAsyncCommand<string> LoadMore => this.loadMore ??
@@ -573,7 +577,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 search.D.Results = await this.CheckAvailability(search.D.Results, this.SearchQuery);
             }
-            return search?.D?.Results;
+           // return search?.D?.Results;
+            var tempoResult = await this.HaveDownloadOption(search?.D?.Results, this.requestService);
+            this.IsBusy = false;
+            return tempoResult;
         }
 
 
@@ -600,7 +607,7 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 search.D.Results = await this.CheckAvailability(search.D.Results, this.SearchQuery);
             }
-            /* ena zedtha hedhi m standard*/
+           
             var tempoResult = await this.HaveDownloadOption(search?.D?.Results, this.requestService);
             this.IsBusy = false;
             return tempoResult;
@@ -629,8 +636,16 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         {
             this.navigationService = navigationService;
             this.requestService = requestService;
+            Task.Run(async () => await fillHistory());
         }
-
+        public async Task fillHistory()
+        {
+            CookiesSave b = await App.Database.GetActiveUser();
+            if (b.SearchValue != null)
+                this.SearchHistory = b.SearchValue.Split(',').ToList();
+            else
+                this.SearchHistory = new List<string>();
+        }
         #region search
 
         // Get history search from SQLite Database
@@ -776,7 +791,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
             {
                 this.D = result.D;
                 result.D.Results = await this.CheckAvailability(result.D.Results, search, facetFilter);
-                this.Results = result.D.Results;
+                var tempoResult = await this.HaveDownloadOption(result?.D?.Results, this.requestService);
+                this.IsBusy = true;
+               // return tempoResult;
+                this.Results = tempoResult;
                 this.ResultCountInt = this.D?.SearchInfo?.NbResults;
                 this.ResultCount = this.ResultCountInt <= 1 ? (String.Format(ApplicationResource.SearchViewResultNull, this.D.SearchInfo.NbResults)) : (String.Format(ApplicationResource.SearchViewResultCount, this.D.SearchInfo.NbResults));
                 this.FacetCollectionList = result.D.FacetCollectionList;

@@ -52,7 +52,13 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout>
-                                <Label Text="{Binding .}" TextColor="#FF464859"/>
+                                <Label Text="{Binding .}" TextColor="#FF464859">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer
+                Tapped="SearchHistory_Tapped"
+                 />
+                                    </Label.GestureRecognizers>
+                                </Label>
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
@@ -136,7 +142,7 @@
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <StackLayout>
-                                        <StackLayout VerticalOptions="FillAndExpand" Orientation="Horizontal" Padding="7, 0, 7, 0" Margin="0,0,0,20">
+                                            <StackLayout x:Name="Item" VerticalOptions="FillAndExpand" Orientation="Horizontal" Padding="7, 0, 7, 0" Margin="0,0,0,20">
                                                     <StackLayout Margin="5" HeightRequest="120"  WidthRequest="90">
                                                         <Frame VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0">
                                                             <Frame.HasShadow>
@@ -175,13 +181,6 @@
                                                         </Frame>
                                                     </StackLayout>
                                                     <StackLayout  VerticalOptions="Start" Orientation="Vertical">
-                                                        <Label TextColor="Black" Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="Medium"/>
-                                                        <Label TextColor="Gray" Text="{Binding FieldList.shortDesc}" MaxLines="2" FontSize="Small"/>
-                                                        <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal" IsVisible="{Binding Resource.HasViewDisponibility}">
-                                                            <Frame VerticalOptions="Center" WidthRequest="12" HeightRequest="12"  CornerRadius="6" HasShadow="False" BorderColor="Transparent" Margin="0" Padding="0" BackgroundColor="{Binding Resource.ColorStatus}"/>
-                                                            <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="Center" FontSize="Small" Text="{Binding Resource.TextStatus}"/>
-                                                       
-                                                        </StackLayout>
                                                     <StackLayout Grid.Column="2" VerticalOptions="Start" IsVisible="{Binding IsDownload}">
                                                         <Label Text="&#xf00c;" FontFamily="{StaticResource FontAwesomeSolid}" WidthRequest="30" TextColor="LightGreen" VerticalOptions="Start" FontSize="Large"/>
                                                     </StackLayout>
@@ -189,7 +188,7 @@
                                                         <Button
                                                         x:Name="DownloadButton"
                                                         CommandParameter="{Binding Source={x:Reference Item}, Path=BindingContext}"
-                                                        BindingContext="{Binding Source={x:Reference resultsListPinnedDocument}, Path=BindingContext}"
+                                                        BindingContext="{Binding Source={x:Reference resultsList}, Path=BindingContext}"
                                                         Command="{Binding DownloadDocumentCommand}"
                                                         IsEnabled="{Binding CanDownload}"
                                                         WidthRequest="30"
@@ -200,6 +199,14 @@
                                                         TextColor="Gray"
                                                         BackgroundColor="Transparent"/>
                                                     </StackLayout>
+                                                    <Label TextColor="Black" Text="{Binding FieldList.CroppedTitle}" FontAttributes="Bold" FontSize="Medium"/>
+                                                        <Label TextColor="Gray" Text="{Binding FieldList.shortDesc}" MaxLines="2" FontSize="Small"/>
+                                                        <StackLayout VerticalOptions="CenterAndExpand" Orientation="Horizontal" IsVisible="{Binding Resource.HasViewDisponibility}">
+                                                            <Frame VerticalOptions="Center" WidthRequest="12" HeightRequest="12"  CornerRadius="6" HasShadow="False" BorderColor="Transparent" Margin="0" Padding="0" BackgroundColor="{Binding Resource.ColorStatus}"/>
+                                                            <Label TextColor="Gray" FontAttributes="Bold" VerticalOptions="Center" FontSize="Small" Text="{Binding Resource.TextStatus}"/>
+                                                       
+                                                        </StackLayout>
+                                                   
 
                                                 </StackLayout>
                                                 </StackLayout>

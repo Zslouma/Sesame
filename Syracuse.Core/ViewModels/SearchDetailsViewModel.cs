@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Syracuse.Mobitheque.Core.ViewModels
 {
 
-    public class SearchDetailsViewModel : BaseViewModel<SearchDetailsParameters, SearchResult>
+    public class SearchDetailsViewModel : BaseDownloadPageViewModel<SearchDetailsParameters, SearchResult>
     {
         #region Variables
         private readonly IRequestService requestService;
@@ -185,6 +185,10 @@ namespace Syracuse.Mobitheque.Core.ViewModels
         private MvxAsyncCommand<string> searchCommand;
         public MvxAsyncCommand<string> SearchCommand => this.searchCommand ??
         (this.searchCommand = new MvxAsyncCommand<string>((text) => this.PerformSearch(text)));
+        private MvxAsyncCommand<Result> downloadDocumentCommand;
+        public MvxAsyncCommand<Result> DownloadDocumentCommand => this.downloadDocumentCommand ??
+           (this.downloadDocumentCommand = new MvxAsyncCommand<Result>((item) => this.DownloadDocument(item)));
+
 
         public CookieContainer cookie { get { return this.requestService.GetCookieContainer(); } }
 
@@ -215,7 +219,9 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 this.SearchOptions = parameter.searchOptions;
                 this.NbrResults = parameter.nbrResults;
                 var parameterTempo = parameter.parameter;
-                this.ItemsSource = new ObservableCollection<Result>(parameterTempo[1].D.Results);
+                var tempoResult = await this.HaveDownloadOption(parameterTempo[1].D.Results, this.requestService);
+
+                this.ItemsSource = new ObservableCollection<Result>(tempoResult);
                 var tempo = parameterTempo[1].D.Results.ToList().FindIndex(x => x == parameterTempo[0].D.Results[0]);
                 this.StartDataPosition = tempo - 10 >= 0 ? tempo - 10 : 0;
                 this.EndDataPosition = tempo + 10 < parameterTempo[1].D.Results.Length ? tempo + 10 : parameterTempo[1].D.Results.Length - 1;
@@ -244,7 +250,46 @@ namespace Syracuse.Mobitheque.Core.ViewModels
                 throw;
             }
         }
+        private async Task DownloadDocument(Result result)
+        {
+            CookiesSave user = await App.Database.GetActiveUser();
+            this.IsBusy = true;
+            await RaiseAllPropertiesChanged();
+            var url = user.DomainUrl;
+            var statusDownload = await this.requestService.GetDownloadDocument(result.downloadOptions.parentDocumentId, result.downloadOptions.documentId, result.downloadOptions.fileName);
+            if (statusDownload.Success)
+            {
+                await SaveNewDocumentDatabaseObject(result, statusDownload.D);
+                foreach (var Result in this.ItemsSource)
+                {
+                    if (Result == result)
+                    {
+                        Result.CanDownload = false;
+                        Result.IsDownload = true;
+                    }
+                }
+            }
+            else
+            {
+                this.DisplayAlert(ApplicationResource.Error, statusDownload.Errors?[0]?.Msg != null ? String.Format(ApplicationResource.DownloadGetFileError, result.FieldList.Title[0], statusDownload.Errors?[0]?.Msg) : ApplicationResource.ErrorOccurred, ApplicationResource.ButtonValidation);
+            }
+            this.IsBusy = false;
+            await RaiseAllPropertiesChanged();
+            this.ForceListUpdate();
+            await RaiseAllPropertiesChanged();
+        }
 
+        public async Task DownloadAllDocument(Result[] results)
+        {
+            foreach (var result in this.ItemsSource)
+            {
+                if (result.CanDownload)
+                {
+                    this.DownloadDocument(result);
+                }
+
+            }
+        }
         private void ForceListUpdate()
         {
             var tempo = this.ItemsSource;

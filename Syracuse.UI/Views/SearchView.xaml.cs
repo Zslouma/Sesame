@@ -388,6 +388,34 @@ namespace Syracuse.Mobitheque.UI.Views
         }
 
         private void SearchViewModel_OnDisplayAlert(string title, string message, string button) => this.DisplayAlert(title, message, button);
+
+        private void SearchHistory_Tapped(object sender, EventArgs e)
+        {
+            var labelText = (sender as Label).Text;
+            searchHistoryList.IsVisible = false;
+            SearchBar.Text = labelText;
+            FacetteItemList.IsVisible = false;
+            resultsList.IsVisible = true;
+            resultCount.IsVisible = true;
+            DeleteButton.IsVisible = false;
+            SearchButton.IsVisible = false;
+            Task.Run(async () => await this.ViewModel.PerformSearch(labelText));
+            FacetteButton.FontAttributes = FontAttributes.None;
+            FacetteButtonUnderline.IsVisible = false;
+            if (SearchButton.FontAttributes == FontAttributes.Bold)
+            {
+                SearchButton.FontAttributes = FontAttributes.None;
+                SearchButtonUnderline.IsVisible = false;
+            }
+            else
+            {
+                SearchButtonUnderline.IsVisible = true;
+                SearchButton.FontAttributes = FontAttributes.Bold;
+            }
+            this.ViewModel.OldSelectedItems = new List<FacetteValue>(this.ViewModel.SelectedItems);
+            this.UpdateItemList();
+
+        }
     }
     
 }
